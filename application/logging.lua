@@ -6,7 +6,9 @@ Log.detailLevel = Log.detailLevel or {}
 local Users = {
 	"Steff",
 	"Robin",
-	"Valentinas"
+	"Valentinas",
+	"Gerben",
+	"Weikie"
 }
 
 local logFunc = print
@@ -103,5 +105,34 @@ function Log.tinas(text, detail, subject)
 		end
 	else
 		Log.log(Users.Valentinas, "[Valentinas]: " .. "bah, humbug", detail, subject, 216, 243, 255, 93, 66, 54 )
+	end
+end
+
+
+function Log.gwebl(text, detail, subject)
+	if (text ~= nil) then
+		if (isEnumValue(text)) then
+			Log.printEnum(Users.Gerben, text, detail, subject, 216, 243, 255, 93, 66, 54)
+		elseif (type(text) == "table") then
+			Log.printTable(Users.Gerben, text, detail, subject, 216, 243, 255, 93, 66, 54)
+		else
+			Log.log(Users.Gerben, "[Gerben]: "..tostring(text), detail, subject, 216, 243, 255, 93, 66, 54)
+		end
+	else
+		Log.log(Users.Gerben, "[Gerben]: " .. "king pleb", detail, subject, 216, 243, 255, 93, 66, 54 )
+	end
+end
+
+function Log.waka(text, detail, subject)
+	if (text ~= nil) then
+		if (isEnumValue(text)) then
+			Log.printEnum(Users.Weikie, text, detail, subject, 216, 243, 255, 93, 66, 54)
+		elseif (type(text) == "table") then
+			Log.printTable(Users.Weikie, text, detail, subject, 216, 243, 255, 93, 66, 54)
+		else
+			Log.log(Users.Weikie, "[Weikie]: "..tostring(text), detail, subject, 216, 243, 255, 93, 66, 54)
+		end
+	else
+		Log.log(Users.Weikie, "[Weikie]: " .. "chocobo", detail, subject, 216, 243, 255, 93, 66, 54 )
 	end
 end
