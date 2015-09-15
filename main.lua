@@ -7,15 +7,19 @@ Game = Game or {}
 
 
 function Game.main()
+	Log.steb("Game.main called")
 
 end
 
-function Game.update()
+function Game.update(dt)
+	Log.steb("update the game at dt: " .. tostring(dt))
 
 end
+
+
 
 function Game.onShutdown()
-
+	Log.steb("Shutting down the game")
 end
 
 
