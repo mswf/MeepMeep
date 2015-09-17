@@ -59,16 +59,12 @@ local tween = Tween()
 --
 -- Log.steb(v1)
 
+--[[
 local cooks = require "application/credits"
-
 print("CREDITS:")
-
 for i=1, #cooks do
 	print("")
 	print(cooks[i][1])
 	print(string.upper(cooks[i][2]))
-
 end
-
-
--- Log.steb(ffi)
+]]--
