@@ -1,6 +1,6 @@
 
-require "base/base"
-require "application/logging"
+require "lua/base/base"
+require "lua/application/logging"
 
 
 Game = Game or {}
@@ -52,7 +52,7 @@ end
 local tween = Tween()
 --
 
--- local Vector3 = require "base/math/vector3"
+-- local Vector3 = require "lua/base/math/vector3"
 -- Log.steb("Got the library")
 --
 -- local v1 = Vector3(3,3,3)
@@ -60,7 +60,7 @@ local tween = Tween()
 -- Log.steb(v1)
 
 --[[
-local cooks = require "application/credits"
+local cooks = require "lua/application/credits"
 print("CREDITS:")
 for i=1, #cooks do
 	print("")

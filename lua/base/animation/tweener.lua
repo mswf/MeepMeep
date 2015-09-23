@@ -1,6 +1,6 @@
 
-TweenTypes = require("base/animation/tweentypes")
-require "base/animation/tween"
+TweenTypes = require("lua/base/animation/tweentypes")
+require "lua/base/animation/tween"
 
 Tweener = class(Tweener, function(self)
 	Tweener.instance = self

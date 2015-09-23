@@ -1,7 +1,5 @@
 local ffi = require("ffi")
 
-Log.steb(ffi)
-
 local function make_vec3_kind(ct)
     local vec3_kind = ffi.typeof("struct {$ x; $ y; $ z;}", ct, ct, ct);
     local ptrType = ffi.typeof("$ *", ct);
