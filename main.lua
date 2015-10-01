@@ -2,6 +2,11 @@
 require "lua/base/base"
 require "lua/application/logging"
 
+-- require "lua/Carbon/init"
+
+local Carbon = require("lua/Carbon/init")
+Log.steb("Running Carbon Version " .. Carbon.VersionString)
+Log.steb(Carbon.Support:Report())
 
 Game = Game or {}
 
@@ -49,7 +54,7 @@ end
 -- Log.steb(test)
 --
 --
-local tween = Tween()
+-- local tween = Tween()
 --
 
 -- local Vector3 = require "lua/base/math/vector3"
