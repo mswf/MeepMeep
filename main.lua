@@ -11,6 +11,22 @@ Log.steb(Carbon.Support:Report())
 Game = Game or {}
 
 
+local Vector3 = Carbon.Math.Vector3
+
+local mesh = MeshBuilder()
+
+mesh:addVertex(Vector3(-1,-1,0))
+mesh:addVertex(Vector3(-1, 1,0))
+mesh:addVertex(Vector3( 1,-1,0))
+mesh:addVertex(Vector3( 1, 1,0))
+
+mesh:addTriangle(1,2,3)
+mesh:addTriangle(2,3,4)
+
+mesh:build()
+
+
+
 function Game.main()
 	Log.steb("Game.main called")
 
