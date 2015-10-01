@@ -1,31 +1,19 @@
 
+function script_path()
+    return debug.getinfo(2, "S").source:sub(2):sub(0,-10):gsub("\\", "/")
+end
+ABS_PATH = script_path()
+
+
 require "lua/base/base"
 require "lua/application/logging"
 
--- require "lua/Carbon/init"
-
 local Carbon = require("lua/Carbon/init")
+
 Log.steb("Running Carbon Version " .. Carbon.VersionString)
 Log.steb(Carbon.Support:Report())
 
 Game = Game or {}
-
-
-local Vector3 = Carbon.Math.Vector3
-
-local mesh = MeshBuilder()
-
-mesh:addVertex(Vector3(-1,-1,0))
-mesh:addVertex(Vector3(-1, 1,0))
-mesh:addVertex(Vector3( 1,-1,0))
-mesh:addVertex(Vector3( 1, 1,0))
-
-mesh:addTriangle(1,2,3)
-mesh:addTriangle(2,3,4)
-
-mesh:build()
-
-
 
 function Game.main()
 	Log.steb("Game.main called")
@@ -52,7 +40,25 @@ function Game.onFocusGained()
 end
 
 
+function Game.testMesh()
+	local Vector3 = Carbon.Math.Vector3
+	local mesh = MeshBuilder()
 
+	mesh:addVertex(Vector3(-1, 0,-1))
+	mesh:addVertex(Vector3(-1, 0, 1))
+	mesh:addVertex(Vector3( 1, 0,-1))
+	mesh:addVertex(Vector3( 1, 0, 1))
+
+	for i=1, 4 do
+		mesh:addNormal(Vector3( 0, 1, 0))
+	end
+
+	mesh:addTriangle(1,2,3)
+	mesh:addTriangle(2,4,3)
+
+	mesh:saveToFile("plane")
+end
+ Game.testMesh()
 --When logging 'nil' there's a fallback string that gets printed
 -- Log.steb()
 -- Log.bobn()
