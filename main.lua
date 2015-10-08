@@ -8,10 +8,10 @@ ABS_PATH = script_path()
 require "lua/base/base"
 require "lua/application/logging"
 
-local Carbon = require("lua/Carbon/init")
+--local Carbon = require("lua/Carbon/init")
 
-Log.steb("Running Carbon Version " .. Carbon.VersionString)
-Log.steb(Carbon.Support:Report())
+--Log.steb("Running Carbon Version " .. Carbon.VersionString)
+--Log.steb(Carbon.Support:Report())
 
 Game = Game or {}
 
@@ -58,7 +58,7 @@ function Game.testMesh()
 
 	mesh:saveToFile("plane")
 end
- Game.testMesh()
+-- Game.testMesh()
 --When logging 'nil' there's a fallback string that gets printed
 -- Log.steb()
 -- Log.bobn()
