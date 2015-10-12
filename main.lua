@@ -1,4 +1,6 @@
 
+math.randomseed(os.time())
+
 function script_path()
     return debug.getinfo(2, "S").source:sub(2):sub(0,-10):gsub("\\", "/")
 end
@@ -27,7 +29,8 @@ function Game.main()
 		Log.gwebl()
 	end
 
-	--Log.steb('<iframe width=1600 height=900 src="http://games.tinglygames.com/generic/dungeondescender"></iframe>')
+	Game.game()
+
 end
 
 function Game.update(dt)
@@ -68,6 +71,32 @@ function Game.testMesh()
 
 	mesh:saveToFile("plane")
 end
+
+function Game.game()
+	gameTable = {}
+	local width,height = 1600/2, 900/2
+
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/dungeondescender"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/zombiepop"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/tinglysmagicsolitaire"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/tinglypyramidsolitaire"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/mysticalbirdlink"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/sircoinsalot2"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/duostropicallink"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/andysgolf2"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/atlantris"></iframe>')
+	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/binarybears"></iframe>')
+
+	Log.steb("Pls wat is happnin")
+	local number = math.random(1, #gameTable)
+
+	Log.steb(number)
+	Log.steb(gameTable[number])
+
+	--Log.steb()
+
+end
+
 -- Game.testMesh()
 --When logging 'nil' there's a fallback string that gets printed
 -- Log.steb()
