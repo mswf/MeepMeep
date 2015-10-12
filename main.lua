@@ -16,8 +16,16 @@ require "lua/application/logging"
 Game = Game or {}
 
 function Game.main()
+
 	--Log.steb("Game.main called")
-    Engine.Log("oh joy!","#ff0000","#0000ff")
+
+	for i=1,1 do
+		Log.steb()
+		Log.bobn()
+		Log.tinas()
+		Log.waka()
+		Log.gwebl()
+	end
 end
 
 function Game.update(dt)
