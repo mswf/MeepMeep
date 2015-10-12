@@ -29,7 +29,7 @@ function Game.main()
 		Log.gwebl()
 	end
 
-	Game.game()
+	--Game.game()
 
 end
 
@@ -87,14 +87,8 @@ function Game.game()
 	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/atlantris"></iframe>')
 	table.insert(gameTable, '<iframe width='..tostring(width)..' height='..tostring(height)..' src="http://games.tinglygames.com/generic/binarybears"></iframe>')
 
-	Log.steb("Pls wat is happnin")
 	local number = math.random(1, #gameTable)
-
-	Log.steb(number)
 	Log.steb(gameTable[number])
-
-	--Log.steb()
-
 end
 
 -- Game.testMesh()
