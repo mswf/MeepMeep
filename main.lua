@@ -16,12 +16,12 @@ require "lua/application/logging"
 Game = Game or {}
 
 function Game.main()
-	Log.steb("Game.main called")
-
+	--Log.steb("Game.main called")
+    Engine.Log("oh joy!","#ff0000","#0000ff")
 end
 
 function Game.update(dt)
-	Log.steb("update the game at dt: " .. tostring(dt))
+	--Log.steb("update the game at dt: " .. tostring(dt))
 
 end
 
