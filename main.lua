@@ -26,6 +26,8 @@ function Game.main()
 		Log.waka()
 		Log.gwebl()
 	end
+
+	--Log.steb('<iframe width=1600 height=900 src="http://games.tinglygames.com/generic/dungeondescender"></iframe>')
 end
 
 function Game.update(dt)
