@@ -159,6 +159,6 @@ function Log.gwebl(text, detail, subject)
 			end
 		end
 	else
-		Log.log(Users.Gerben, "[Gerben]: " .. "king pleb", detail, subject, BG, FG)
+		Log.log(Users.Gerben, "[Gerben]: " .. "\n   (   )\n (   ) (\n  ) _   )\n   ( \\_\n _(_\\ \\)__\n(____\\___))", detail, subject, BG, FG)
 	end
 end
