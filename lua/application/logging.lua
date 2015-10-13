@@ -11,8 +11,8 @@ local Users = {
 	"Weikie"
 }
 
-local logFunc = Engine.Log
-local logFuncColor = function(text, ...) Engine.Log(text, ...) end
+local logFunc = Engine.log
+local logFuncColor = function(text, ...) Engine.log(text, ...) end
 
 function Log.log(user, text, detailLevel, subject, ...)
 	if (Log.isEnabled(user,detailLevel,subject)) then
@@ -145,7 +145,7 @@ end
 
 function Log.gwebl(text, detail, subject)
 	local BG, FG = "rgba(73,15,1,0.8)", "#ffffff"
-	
+
 	if (text ~= nil) then
 		if (isEnumValue(text)) then
 			Log.printEnum(Users.Gerben, text, detail, subject, BG, FG)
