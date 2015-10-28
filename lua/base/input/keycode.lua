@@ -1,3 +1,5 @@
+--https://wiki.libsdl.org/SDLKeycodeLookup
+
 KeyCode = {
  UNKNOWN  = 0,
  BACKSPACE  = 8,
