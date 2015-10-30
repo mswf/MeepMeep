@@ -1,0 +1,24 @@
+
+testTable = {1,2,3}
+
+setmetatable(testTable, {
+	__index = function(self, k) return 0 end,
+	__newindex = function(self, key) end
+})
+
+
+
+ENTITY_CLASS_DEFINITION
+DEFAULT_ENTITY_METATABLE
+
+__ENTITY_DEFINITIONS = __ENTITY_DEFINITIONS or {}
+
+if (not __ENTITY_DEFINITIONS[ENTITY_CLASS_DEFINITION]) then
+	__ENTITY_DEFINITIONS[ENTITY_CLASS_DEFINITION] = setmetatable(ENTITY_CLASS_DEFINITION, {
+		__index = DEFAULT_ENTITY_METATABLE
+	})
+end
+
+newEntity = setmetatable({}, __ENTITY_DEFINITIONS[ENTITY_CLASS_DEFINITION])
+
+return newEntity

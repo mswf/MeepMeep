@@ -1,0 +1,205 @@
+Manipulate[
+ If[swpaintold != swpaint,
+  If[swpaint, swtetrad = False];
+  swpaintold = swpaint
+  ];
+
+ If[swtetrad,
+  swpaint = False;
+  pol1 = {{0, 0}, {1, -e}, {2, 0}, {3, e} , {3, 2 - e} , {2,
+     2}, {2 + e, 3}, {4 - e, 3},
+    {4, 4}, {3, 4 + e}, {3, 6 - e}, {4, 6}, {4 - e, 7}, {2 + e,
+     7}, {2, 8}, {1, 8 - e},
+    {0, 8}, {-e, 7}, {0, 6}, {1, 6 + e}, {2, 6}, {2 - e, 5}, {2,
+     4}, {1, 4 - e},
+    {1, 2 + e}, {0, 2}, {e, 1}, {0, 0}};
+
+  pol2 = {{0, 0}, {1, e}, {2, 0}, {2 + e, 1} , {2, 2} , {1,
+     2 - e}, {0, 2}, {e, 3},
+    {0, 4}, {1, 4 + e}, {1, 6 - e}, {2, 6}, {2 - e, 7}, {2, 8}, {1,
+     8 + e}, {0, 8},
+    {-1, 8 - e}, {-1, 6 + e}, {0, 6}, {-e, 5}, {-2 + e, 5}, {-2,
+     4}, {-1, 4 - e}, {-1, 2 + e},
+    {-2, 2}, {-2 + e, 1}, {-e, 1}, {0, 0}};
+
+  pol3 = {{0, 0}, {1, -e}, {2, 0}, {2 - e, 1} , {2, 2} , {3,
+     2 - e}, {4, 2}, {4 + e, 1},
+    {6 - e, 1}, {6, 0}, {7, e}, {8, 0}, {8 + e, 1}, {8, 2}, {8 - e,
+     3}, {6 + e, 3},
+    {6, 2}, {5, 2 + e}, {5, 4 - e}, {4, 4}, {4 - e, 3}, {2 + e,
+     3}, {2, 4}, {1, 4 - e},
+    {1, 2 + e}, {0, 2}, {e, 1}, {0, 0}};
+  ];
+
+ Graphics[{
+   EdgeForm[{Black}],
+
+   col2,
+   Thickness[thick2], (* basket weave *)
+   Opacity[op2],
+   Table[{
+     Translate[
+      Line[{{0, 0}, {1, 0}, {2, 0}, {2, 1} , {0, 1} , {0, 0}}], {i*4,
+       j*4}],
+     Translate[
+      Line[{{0, 1} , {0, 2}, {1, 2}, {2, 2}, {2, 1}}], {i*4, j*4}],
+     Translate[
+      Line[{{0, 2}, {0, 3}, {0, 4}, {1, 4} , {1, 2} }], {i*4, j*4}],
+     Translate[
+      Line[{ {1, 4}  , {2, 4}, {2, 3}, {2, 2}, {3, 2}, {3, 0}, {2,
+         0}}], {i*4, j*4}],
+     Translate[
+      Line[{{3, 0}, {4, 0}, {4, 1}, {4, 2} , {3, 2} }], {i*4, j*4}],
+     Translate[
+      Line[{{4, 2}, {4, 3}, {2, 3}, {2, 4}, {3, 4}, {4, 4}, {4,
+         3}}], {i*4, j*4}]
+     }, {i, 0, n}, {j, 0, n}
+    ],
+   
+   col1,
+   Thickness[thick1], (* cairo tiling *)
+   Opacity[op1],
+   Table[{
+     Translate[
+      Line[{{0, 0}, {1, -e}, {2, 0}, {2 - e, 1} , {e, 1} , {0,
+         0}}], {i*4, j*4}],
+     Translate[
+      Line[{{e, 1} , {0, 2}, {1, 2 + e}, {2, 2}, {2 - e, 1}, {e,
+         1}}], {i*4, j*4}],
+     Translate[
+      Line[{{0, 2}, {-e, 3}, {0, 4}, {1, 4 - e} , {1, 2 + e}, {0,
+         2} }], {i*4, j*4}],
+     Translate[
+      Line[{ {1, 4 - e}  , {2, 4}, {2 + e, 3}, {2, 2}, {1, 2 + e}, {1,
+          4 - e}}], {i*4, j*4}],
+
+     Translate[
+      Line[{{2, 0}, {3, e}, {3, 2 - e}, {2, 2} , {2 - e, 1} , {2,
+         0}} ], {i*4, j*4}],
+     Translate[
+      Line[{{3, e} , {3, 2 - e}, {4, 2}, {4 + e, 1}, {4, 0}, {3,
+         e}}], {i*4, j*4}],
+     Translate[
+      Line[{{3, 2 - e}, {2, 2}, {2 + e, 3}, {4 - e, 3} , {4, 2}, {3,
+         2 - e}}], {i*4, j*4}],
+     Translate[
+      Line[{ {2 + e, 3}  , {4 - e, 3}, {4, 4}, {3, 4 + e}, {2,
+         4}, {2 + e, 3} }], {i*4, j*4}]
+     }, {i, 0, n}, {j, 0, n}
+    ],
+
+   If[swpaint, {
+     Table[{
+       Red,
+       Translate[
+        Polygon[{{0, 0}, {1, -e}, {2, 0}, {2 - e, 1} , {e, 1} , {0,
+           0}}], {i*4, j*4}],
+       Blue,
+       Translate[
+        Polygon[{{e, 1} , {0, 2}, {1, 2 + e}, {2, 2}, {2 - e, 1}, {e,
+           1}}], {i*4, j*4}],
+       Green,
+       Translate[
+        Polygon[{{0, 2}, {-e, 3}, {0, 4}, {1, 4 - e} , {1, 2 + e}, {0,
+            2} }], {i*4, j*4}],
+       Orange,
+       Translate[
+        Polygon[{ {1, 4 - e}  , {2, 4}, {2 + e, 3}, {2, 2}, {1,
+           2 + e}, {1, 4 - e}}], {i*4, j*4}],
+       Purple,
+       Translate[
+        Polygon[{{2, 0}, {3, e}, {3, 2 - e}, {2, 2} , {2 - e, 1} , {2,
+            0}} ], {i*4, j*4}],
+       Yellow,
+       Translate[
+        Polygon[{{3, e} , {3, 2 - e}, {4, 2}, {4 + e, 1}, {4, 0}, {3,
+           e}}], {i*4, j*4}],
+       Brown,
+       Translate[
+        Polygon[{{3, 2 - e}, {2, 2}, {2 + e, 3}, {4 - e, 3} , {4,
+           2}, {3, 2 - e}}],
+        {i*4, j*4}],
+       Cyan,
+       Translate[
+        Polygon[{ {2 + e, 3}  , {4 - e, 3}, {4, 4}, {3, 4 + e}, {2,
+           4}, {2 + e, 3} }], {i*4, j*4}]
+       }, {i, 0, n}, {j, 0, n}
+      ]
+     }],
+
+   If[swtetrad, {
+     Red, Translate[Polygon[{pol1}], {6, 6}],
+     Blue, Translate[Polygon[{pol2}] , {10, 4}],
+     Green, Translate[Polygon[{pol2}] , {6, 4}],
+     Yellow, Translate[Polygon[{pol3}] , {4, 12}]
+     }]
+
+   },
+  PlotRange -> {{-1, 21}, {-1, 21}}, ImageSize -> {400, 400}
+  ], (* end Graphics *)
+
+
+ {{e, .5, "morph"}, 0, 1, ImageSize -> Small},
+
+ (*  here we list the variants :  *)(* \n = linefeed *)
+ (*{{ch,1,"tetrad"},Range[chmax], ControlType\[Rule]PopupMenu},*)
+
+ Delimiter,
+ Style["Cairo tiling:"],
+ {{col1, Red, "outline"}, Red, ColorSlider, ImageSize -> Small,
+  AppearanceElements -> "Swatch"},
+ {{op1, 1, "opacity"}, 0, 1, ImageSize -> Small},
+ {{thick1, .005, "thickness"}, 0.001, .02, ImageSize -> Small},
+ {{swpaint, False, "color tiles"}, {True, False}},
+ {{swtetrad, True, "polycairo tetrad"}, {True, False}},
+
+ Delimiter,
+ Style["basketweave:"],
+ {{col2, Blue, "outline"}, Blue, ColorSlider, ImageSize -> Small,
+  AppearanceElements -> "Swatch"},
+ {{op2, 1, "opacity"}, 0, 1, ImageSize -> Small},
+ {{thick2, .001, "thickness"}, 0.001, .02, ImageSize -> Small},
+
+ Delimiter,
+ (*{{swprint,False,"print"},{True,False}},*)
+
+ {{swtetradold, True}, ControlType -> None},
+ {{swpaintold, False}, ControlType -> None},
+
+
+ {{tile1, {{0, 0}, {1, -e}, {2, 0}, {2 - e, 1} , {e, 1} , {0, 0}} },
+  ControlType -> None},
+ {{tile2, {{e, 1} , {0, 2}, {1, 2 + e}, {2, 2}, {2 - e, 1}, {e, 1}} },
+   ControlType -> None},
+ {{tile3, {{0, 2}, {-e, 3}, {0, 4}, {1, 4 - e} , {1, 2 + e}, {0,
+     2}} }, ControlType -> None},
+ {{tile4, { {1, 4 - e}  , {2, 4}, {2 + e, 3}, {2, 2}, {1, 2 + e}, {1,
+     4 - e}}}, ControlType -> None},
+
+ {{tile5, {{2, 0}, {3, e}, {3, 2 - e}, {2, 2} , {2 - e, 1} , {2,
+     0}} }, ControlType -> None},
+ {{tile6, {{3, e} , {3, 2 - e}, {4, 2}, {4 + e, 1}, {4, 0}, {3, e}} },
+   ControlType -> None},
+ {{tile7, {{3, 2 - e}, {2, 2}, {2 + e, 3}, {4 - e, 3} , {4, 2}, {3,
+     2 - e}} }, ControlType -> None},
+ {{tile8, { {2 + e, 3}  , {4 - e, 3}, {4, 4}, {3, 4 + e}, {2,
+     4}, {2 + e, 3} }}, ControlType -> None},
+
+ {{r1, 0}, ControlType -> None},
+ {{r2, 0}, ControlType -> None},
+ {{r3, 0}, ControlType -> None},
+
+ {{pol1, {}}, ControlType -> None},
+ {{pol2, {}}, ControlType -> None},
+ {{pol3, {}}, ControlType -> None},
+
+ {{e, .5}, ControlType -> None},
+ {{n, 4}, ControlType -> None},
+
+ {{cols, Array[Red &, {4, 4}]}, ControlType -> None},
+
+ ControlPlacement -> Left,
+ AutorunSequencing -> {1},
+ TrackedSymbols :> {e, op1, thick1, op2, thick2, gs, swpaint,
+   swtetrad, col1, col2}
+ ]

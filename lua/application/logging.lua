@@ -11,8 +11,18 @@ local Users = {
 	"Weikie"
 }
 
-local logFunc = Engine.log
-local logFuncColor = function(text, ...) Engine.log(text, ...) end
+
+local logFunc
+local logFuncColor
+
+if (love) then
+	logFunc = print
+	logFuncColor = function(text, ...) print(text) end
+else
+	logFunc = Engine.log
+	logFuncColor = function(text, ...) Engine.log(text, ...) end
+end
+
 
 function Log.log(user, text, detailLevel, subject, ...)
 	if (Log.isEnabled(user,detailLevel,subject)) then
@@ -104,7 +114,7 @@ end
 
 
 function Log.tinas(text, detail, subject)
-	local BG, FG = "rgba(24,97,51,0.8)", "#ffffff"
+	local BG, FG = "rgba(24,97,51,0.8)", "#ffff	ff"
 
 	if (text ~= nil) then
 		if (isEnumValue(text)) then
