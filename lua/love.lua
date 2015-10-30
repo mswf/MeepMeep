@@ -5,7 +5,7 @@ function love.load()
 	LoveGame.nodes = {}
 
 	GlobalTree = CairoTree(0,0)
-	GlobalTree:setSize(20)
+	GlobalTree:setSize(40)
 
 	for x=1,10 do
 		for y=1,10 do
@@ -21,7 +21,14 @@ function love.update(dt)
 	GlobalTree:registerInput()
 end
 
+CAMOFFSET = {}
+CAMOFFSET.X = 0
+CAMOFFSET.Y = 0
+
+
 function love.draw()
+	love.graphics.translate(CAMOFFSET.X, CAMOFFSET.Y)
+
 	love.graphics.setColor(255,255,255)
 
   love.graphics.print("GwebSux", 400, 300)
@@ -31,7 +38,22 @@ function love.draw()
 end
 
 function love.keypressed(k)
+	local keyMagnitude = 10
+	if (k == "w") then
+		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
+	end
 
+	if (k == "s") then
+		CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
+	end
+
+	if (k == "a") then
+		CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
+	end
+
+	if (k == "d") then
+		CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
+	end
 end
 
 function love.focus(getFocus)
@@ -92,6 +114,10 @@ end)
 
 function CairoTree:registerInput()
 	local mouseX, mouseY = love.mouse.getPosition()
+
+	mouseX = mouseX - CAMOFFSET.X
+	mouseY = mouseY - CAMOFFSET.Y
+
 
 	mouseX = mouseX/self.size*.5
 	mouseY = mouseY/self.size*.5
