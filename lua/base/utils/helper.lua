@@ -4,6 +4,11 @@ function table.pack(...)
 	return {...}
 end
 
+function math.round(num, idp)
+	local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
 --... is used for color information
 function printTableValues(table, prefix, logFunc,...)
 	prefix = prefix or ""
