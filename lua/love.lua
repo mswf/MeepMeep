@@ -10,15 +10,33 @@ function love.load()
 	for x=1,10 do
 		for y=1,10 do
 			local node = CairoPentagon(GlobalTree)
-			node:setPosition(x,y,1)
+			node:setPosition(x-5,y-5,1)
 			local node = CairoPentagon(GlobalTree)
-			node:setPosition(x,y,2)
+			node:setPosition(x-5,y-5,2)
 		end
 	end
 end
 
 function love.update(dt)
 	GlobalTree:registerInput()
+
+	local keyMagnitude = 10
+
+	if (INPUTS["w"]) then
+		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
+	end
+
+	if (INPUTS["s"]) then
+		CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
+	end
+
+	if (INPUTS["a"]) then
+		CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
+	end
+
+	if (INPUTS["d"]) then
+		CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
+	end
 end
 
 CAMOFFSET = {}
@@ -37,23 +55,32 @@ function love.draw()
 
 end
 
+INPUTS = {}
+
 function love.keypressed(k)
-	local keyMagnitude = 10
-	if (k == "w") then
-		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
-	end
+	INPUTS[k] = true
 
-	if (k == "s") then
-		CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
-	end
+	-- local keyMagnitude = 10
+	-- if (k == "w") then
+	-- 	CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
+	-- end
+	--
+	-- if (k == "s") then
+	-- 	CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
+	-- end
+	--
+	-- if (k == "a") then
+	-- 	CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
+	-- end
+	--
+	-- if (k == "d") then
+	-- 	CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
+	-- end
+end
 
-	if (k == "a") then
-		CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
-	end
+function love.keyreleased(key)
+	INPUTS[key] = nil
 
-	if (k == "d") then
-		CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
-	end
 end
 
 function love.focus(getFocus)
@@ -220,8 +247,8 @@ function Node:draw()
 
 			love.graphics.line(unpack(edges[i]))
 
-			love.graphics.setColor(unpack(self._RANDCOLOR))
-			love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
+			-- love.graphics.setColor(unpack(self._RANDCOLOR))
+			-- love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
 		end
 
 		-- love.graphics.polygon('fill', self._vertices)
@@ -267,6 +294,7 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 	local startX = (gridX-1) *2 *scale
 	local startY = (gridY-1) *2 *scale
 
+	local e = 0.5
 
 	if (isVertical) then
 		if (gridZ == 1) then
