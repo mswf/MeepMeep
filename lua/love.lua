@@ -294,7 +294,7 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 	local startX = (gridX-1) *2 *scale
 	local startY = (gridY-1) *2 *scale
 
-	local e = 0.5
+	local offset = scale*((math.sqrt(3)-1)*0.5)
 
 	if (isVertical) then
 		if (gridZ == 1) then
@@ -302,22 +302,22 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 			-- if DEBUGSKIPDRAW then return end
 
 			self:setVertices({
-				{startX +scale,													startY +scale*2		- scale*((math.sqrt(3)-1)/2)},
-				{startX,																startY +scale*2},
-				{startX - scale*((math.sqrt(3)-1)/2),		startY +scale},
-				{startX,																startY },
-				{startX +scale,													startY 						+ scale*((math.sqrt(3)-1)/2)},
+				{startX +scale,					startY +scale*2		- offset},
+				{startX,								startY +scale*2},
+				{startX - offset,				startY +scale},
+				{startX,								startY },
+				{startX +scale,					startY 						+ offset},
 
 			})
 		else
 			-- B
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({
-				{startX+scale,													startY 						+ scale*((math.sqrt(3)-1)/2)},
-				{startX+scale*2,											startY },
-				{startX+scale*2+ scale*((math.sqrt(3)-1)/2),										startY + scale },
-				{startX+scale*2,										startY +scale*2},
-				{startX+scale,													startY +scale*2		- scale*((math.sqrt(3)-1)/2)},
+				{startX+scale,					startY 						+ offset},
+				{startX+scale*2,				startY },
+				{startX+scale*2+offset,	startY + scale },
+				{startX+scale*2,				startY +scale*2},
+				{startX+scale,					startY +scale*2		- offset},
 			})
 		end
 	else
@@ -326,21 +326,21 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 			-- if DEBUGSKIPDRAW then return end
 
 			self:setVertices({
-				{startX+ scale*((math.sqrt(3)-1)/2),					startY+scale},
-				{startX,																			startY},
-				{startX+scale,																startY- scale*((math.sqrt(3)-1)/2)},
-				{startX+scale*2,															startY},
-				{startX+scale*2- scale*((math.sqrt(3)-1)/2),	startY+scale},
+				{startX+ offset,				startY+scale},
+				{startX,								startY},
+				{startX+scale,					startY- offset},
+				{startX+scale*2,				startY},
+				{startX+scale*2-offset,	startY+scale},
 			})
 		else
 			-- D
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({
-				{startX+scale*2- scale*((math.sqrt(3)-1)/2),	startY+scale},
-				{startX+scale*2,															startY+scale+scale},
-				{startX+scale,																startY+scale+scale+ scale*((math.sqrt(3)-1)/2)},
-				{startX,																			startY+scale+scale},
-				{startX+ scale*((math.sqrt(3)-1)/2),					startY+scale},
+				{startX+scale*2-offset,	startY+scale},
+				{startX+scale*2,				startY+scale+scale},
+				{startX+scale,					startY+scale+scale +offset},
+				{startX,								startY+scale+scale},
+				{startX + offset,				startY+scale},
 
 			})
 		end
