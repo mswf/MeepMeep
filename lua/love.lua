@@ -1,18 +1,20 @@
 
 
-LoveGame = LoveGame or {}
-function love.load()
+local generateTiles = function()
 	LoveGame.nodes = {}
 
 	GlobalTree = CairoTree(0,0)
 	GlobalTree:setSize(40)
-	GlobalTree:initialzeToDimensions(10,10)
+	GlobalTree:initialzeToDimensions(40,40)
+end
+
+LoveGame = LoveGame or {}
+function love.load()
+	generateTiles()
 end
 
 function love.update(dt)
-	GlobalTree:registerInput()
-
-	local keyMagnitude = 10
+	local keyMagnitude = 10 / math.sqrt(CAMOFFSET.ZOOM)
 
 	if (INPUTS["w"]) then
 		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
@@ -30,17 +32,32 @@ function love.update(dt)
 		CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
 	end
 
-	if (INPUTS["q"]) then
-		if (CAMOFFSET.ZOOM > 0.1) then
-			CAMOFFSET.ZOOM = CAMOFFSET.ZOOM - 0.05
+	local changeZoom = function(amount)
+		if (amount < 0 or CAMOFFSET.ZOOM > 0.01)
+			and (amount > 0 or CAMOFFSET.ZOOM < 2) then
+
+			CAMOFFSET.ZOOM = CAMOFFSET.ZOOM - amount
+
+			-- CAMOFFSET.X = CAMOFFSET.X - amount*CAMOFFSET.X
+			-- CAMOFFSET.Y = CAMOFFSET.Y - amount*CAMOFFSET.Y
 		end
 	end
 
-	if (INPUTS["e"]) then
-		if (CAMOFFSET.ZOOM < 2) then
-			CAMOFFSET.ZOOM = CAMOFFSET.ZOOM + 0.05
-		end
+	if (INPUTS["q"]) then
+			changeZoom(- 0.05* math.sqrt(CAMOFFSET.ZOOM))
 	end
+
+	if (INPUTS["e"]) then
+			changeZoom(0.05 * math.sqrt(CAMOFFSET.ZOOM))
+	end
+
+	if (GlobalTree) then
+		GlobalTree:registerInput()
+	end
+
+
+
+
 end
 
 CAMOFFSET = {}
@@ -50,15 +67,16 @@ CAMOFFSET.Y = 0
 CAMOFFSET.ZOOM = 1
 
 function love.draw()
+
 	love.graphics.translate(CAMOFFSET.X, CAMOFFSET.Y)
 	love.graphics.scale(CAMOFFSET.ZOOM, CAMOFFSET.ZOOM)
 
-
 	love.graphics.setColor(255,255,255)
-
   love.graphics.print("GwebSwag", 400, 300)
 
-	GlobalTree:draw()
+	if (GlobalTree) then
+		GlobalTree:draw()
+	end
 
 end
 
@@ -66,6 +84,11 @@ INPUTS = {}
 
 function love.keypressed(k)
 	INPUTS[k] = true
+
+	if (k == "r") then
+		generateTiles()
+
+	end
 
 	-- local keyMagnitude = 10
 	-- if (k == "w") then
@@ -116,13 +139,15 @@ function Tree:setSize(newSize)
 end
 
 function Tree:draw()
+	if (self._currentHovered) then
+		self._currentHovered:drawHovered()
+	end
+
 	for k,v in pairs(self._nodes) do
 		v:draw()
 	end
 
-	if (self._currentHovered) then
-		self._currentHovered:drawHovered()
-	end
+
 end
 
 function Tree:registerInput()
@@ -158,18 +183,75 @@ function CairoTree:initialzeToDimensions(width, height)
 		for y=1, height do
 			self._grid[x][y] = {}
 
-			local node = cairoConstructor(GlobalTree)
-			node:setPosition(x,y,1)
-			local node = cairoConstructor(GlobalTree)
-			node:setPosition(x,y,2)
+			local node1 = cairoConstructor(GlobalTree)
+			node1:setPosition(x,y,1)
+			local node2 = cairoConstructor(GlobalTree)
+			node2:setPosition(x,y,2)
 		end
 	end
+
+	local grid = self._grid
+
+	for x=1, width do
+		for y=1, height do
+			local isVertical = ((x + y) % 2 == 0)
+
+			if (isVertical) then
+				local node1 = grid[x][y][1]
+				-- top
+				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				-- right
+				node1:addNeighbour(self:getNodeAt(x,y,2))
+				-- bottom
+				node1:addNeighbour(self:getNodeAt(x,y+1,1))
+				-- left
+				node1:addNeighbour(self:getNodeAt(x-1,y,1))
+				node1:addNeighbour(self:getNodeAt(x-1,y,2))
+
+				local node2 = grid[x][y][2]
+				-- top
+				node2:addNeighbour(self:getNodeAt(x,y-1,2))
+				-- right
+				node2:addNeighbour(self:getNodeAt(x+1,y,1))
+				node2:addNeighbour(self:getNodeAt(x+1,y,2))
+				-- bottom
+				node2:addNeighbour(self:getNodeAt(x,y+1,1))
+				-- left
+				node2:addNeighbour(self:getNodeAt(x,y,1))
+			else
+				local node1 = grid[x][y][1]
+				-- top
+				node1:addNeighbour(self:getNodeAt(x,y-1,1))
+				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				-- right
+				node1:addNeighbour(self:getNodeAt(x+1,y,1))
+				-- bottom
+				node1:addNeighbour(self:getNodeAt(x,y,2))
+				-- left
+				node1:addNeighbour(self:getNodeAt(x-1,y,2))
+
+				local node2 = grid[x][y][2]
+				-- top
+				node2:addNeighbour(self:getNodeAt(x,y,1))
+				-- right
+				node2:addNeighbour(self:getNodeAt(x+1,y,1))
+				-- bottom
+				node2:addNeighbour(self:getNodeAt(x,y+1,1))
+				node2:addNeighbour(self:getNodeAt(x,y+1,2))
+				-- left
+				node2:addNeighbour(self:getNodeAt(x-1,y,2))
+			end
+		end
+	end
+
+
 
 	self._width = width
 	self._height = height
 end
 
 function CairoTree:registerInput()
+	--#TODO:0 refactor this input the moment this is moved to the engine side
 	local mouseX, mouseY = love.mouse.getPosition()
 
 	local worldX = (mouseX - CAMOFFSET.X) / CAMOFFSET.ZOOM
@@ -207,6 +289,20 @@ function CairoTree:addToGrid(cairoPentagon,x,y,z)
 	self._grid[x][y][z] = cairoPentagon
 end
 
+function CairoTree:getNodeAt(x,y,z)
+	local grid = self._grid
+
+	if (grid[x]) then
+		if (grid[x][y]) then
+			if (grid[x][y][z]) then
+				return grid[x][y][z]
+			end
+		end
+	end
+
+	return nil
+end
+
 
 ------------------------------------------------------------------------------------------------------
 Node = class(Node, function(self, tree)
@@ -214,6 +310,7 @@ Node = class(Node, function(self, tree)
 	self._edges = nil
 
 	self._tree = tree
+	self._neighbours = {}
 	tree:addNode(self)
 
 	self._RANDCOLOR = {}
@@ -226,6 +323,19 @@ Node = class(Node, function(self, tree)
 	self._RANDCOLORLINE[2] = math.random()*205 +50
 	self._RANDCOLORLINE[3] = math.random()*205 +50
 end)
+
+function Node:addNeighbour(neighbour)
+	if (not neighbour) then
+		return
+	end
+
+	if (not self._neighbours[neighbour]) then
+		self._neighbours[neighbour] = neighbour
+		neighbour:addNeighbour(self)
+	end
+
+	-- table.insert(self._neighbours, neighbour)
+end
 
 function Node:setVertices(vertices)
 	local newVertices = {}
@@ -253,7 +363,7 @@ function Node:draw()
 	if (self._vertices) then
 
 		local edges = self._edges
-		for i=1, #self._edges do
+		for i=1, #edges do
 			love.graphics.setColor(unpack(self._RANDCOLORLINE))
 
 
@@ -268,8 +378,20 @@ function Node:draw()
 end
 
 function Node:drawHovered()
+	for _, value in pairs(self._neighbours) do
+		value:drawNeighbour()
+	end
+
 	if (self._vertices) then
 		love.graphics.setColor(unpack(self._RANDCOLORLINE))
+
+		love.graphics.polygon('fill', self._vertices)
+	end
+end
+
+function Node:drawNeighbour()
+	if (self._vertices) then
+		love.graphics.setColor(110,110,110)
 
 		love.graphics.polygon('fill', self._vertices)
 	end
@@ -322,7 +444,6 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 				{startX - offset,				startY +scale},
 				{startX,								startY },
 				{startX +scale,					startY 						+ offset},
-
 			})
 		else
 			-- B
