@@ -5,7 +5,7 @@ local generateTiles = function()
 
 	GlobalTree = CairoTree(0,0)
 	GlobalTree:setSize(40)
-	GlobalTree:initialzeToDimensions(40,40)
+	GlobalTree:initialzeToDimensions(10,10)
 end
 
 LoveGame = LoveGame or {}
@@ -16,19 +16,19 @@ end
 function love.update(dt)
 	local keyMagnitude = 10 / math.sqrt(CAMOFFSET.ZOOM)
 
-	if (INPUTS["w"]) then
+	if (INPUTS.key["w"]) then
 		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
 	end
 
-	if (INPUTS["s"]) then
+	if (INPUTS.key["s"]) then
 		CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
 	end
 
-	if (INPUTS["a"]) then
+	if (INPUTS.key["a"]) then
 		CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
 	end
 
-	if (INPUTS["d"]) then
+	if (INPUTS.key["d"]) then
 		CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
 	end
 
@@ -43,11 +43,11 @@ function love.update(dt)
 		end
 	end
 
-	if (INPUTS["q"]) then
+	if (INPUTS.key["q"]) then
 			changeZoom(- 0.05* math.sqrt(CAMOFFSET.ZOOM))
 	end
 
-	if (INPUTS["e"]) then
+	if (INPUTS.key["e"]) then
 			changeZoom(0.05 * math.sqrt(CAMOFFSET.ZOOM))
 	end
 
@@ -81,37 +81,31 @@ function love.draw()
 end
 
 INPUTS = {}
+INPUTS.key = {}
+INPUTS.mouse = {}
 
 function love.keypressed(k)
-	INPUTS[k] = true
+	INPUTS.key[k] = true
 
 	if (k == "r") then
 		generateTiles()
 
 	end
-
-	-- local keyMagnitude = 10
-	-- if (k == "w") then
-	-- 	CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
-	-- end
-	--
-	-- if (k == "s") then
-	-- 	CAMOFFSET.Y =  CAMOFFSET.Y - keyMagnitude
-	-- end
-	--
-	-- if (k == "a") then
-	-- 	CAMOFFSET.X =  CAMOFFSET.X + keyMagnitude
-	-- end
-	--
-	-- if (k == "d") then
-	-- 	CAMOFFSET.X =  CAMOFFSET.X - keyMagnitude
-	-- end
 end
 
 function love.keyreleased(key)
-	INPUTS[key] = nil
-
+	INPUTS.key[key] = nil
 end
+
+function love.mousepressed(x, y, button)
+	INPUTS.mouse[button] = {x, y}
+end
+
+function love.mousereleased(x, y, button)
+	INPUTS.mouse[button] = nil
+end
+
+
 
 function love.focus(getFocus)
 	if (not getFocus) then
@@ -119,8 +113,10 @@ function love.focus(getFocus)
 	end
 end
 
+
+
 ------------------------------------------------------------------------------------------------------
-Tree = class(Tree, function(self, rootX, rootY)
+Tree = class(function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -129,6 +125,9 @@ Tree = class(Tree, function(self, rootX, rootY)
 	self.size = 1
 
 	self._currentHovered = nil
+	self._currentSelected = nil
+
+	self._currentPath = {}
 
 	self._grid = {}
 
@@ -139,6 +138,12 @@ function Tree:setSize(newSize)
 end
 
 function Tree:draw()
+
+
+	if (self._currentSelected) then
+		self._currentSelected:drawSelected()
+	end
+
 	if (self._currentHovered) then
 		self._currentHovered:drawHovered()
 	end
@@ -147,7 +152,25 @@ function Tree:draw()
 		v:draw()
 	end
 
+	local curPath = self._currentPath
+	for i=1, #curPath do
 
+
+		local x, y = curPath[i]:getWorldCenter()
+		love.graphics.setColor(255,100,100,255)
+
+		love.graphics.circle("fill",x,y , self.size/5, 6)
+
+		if (curPath[i+1]) then
+			local x1, y1 = curPath[i]:getWorldCenter()
+			local x2, y2 = curPath[i+1]:getWorldCenter()
+			love.graphics.setColor(255,100,100,100)
+
+			love.graphics.line(x1, y1, x2, y2)
+		end
+
+
+	end
 end
 
 function Tree:registerInput()
@@ -157,8 +180,70 @@ end
 function Tree:addNode(node)
 	table.insert(self._nodes, node)
 end
+
+function Tree:setHovered(newHovered)
+	if (self._currentHovered == newHovered) then
+		return
+	end
+
+	if (self._currentHovered) then
+
+	end
+
+	if (newHovered) then
+		self._currentHovered = newHovered
+	else
+		self._currentHovered = nil
+	end
+end
+
+function Tree:setSelected(newSelected)
+	if (self._currentSelected == newSelected) then
+		return
+	end
+
+	if (self._currentSelected) then
+
+	end
+
+	if (newSelected) then
+		self._currentSelected = newSelected
+	else
+		self._currentSelected = nil
+	end
+end
+
+function Tree:findPath(fromNode, toNode)
+	local frontier = Queue()
+	frontier:push(fromNode)
+	local came_from = {}
+	came_from[fromNode] = fromNode
+
+	while (not frontier:isEmpty()) do
+		local current = frontier:pop()
+
+		for _, neighbour in pairs(current.neighbours) do
+			if (not came_from[neighbour]) then
+				frontier:push(neighbour)
+				came_from[neighbour] = current
+			end
+		end
+	end
+
+	local path = {}
+	local current = toNode
+	table.insert(path, current)
+
+	while (current ~= fromNode) do
+		current = came_from[current]
+		table.insert(path, current)
+	end
+
+	return path
+end
+
 ------------------------------------------------------------------------------------------------------
-CairoTree = class(Tree, CairoTree, function(self, rootX, rootY)
+CairoTree = class(Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -170,6 +255,8 @@ CairoTree = class(Tree, CairoTree, function(self, rootX, rootY)
 	self._height = 0
 
 	self._currentHovered = nil
+
+	self._currentPath = {}
 
 	self._grid = {}
 end)
@@ -265,7 +352,11 @@ function CairoTree:registerInput()
 
 	if  (gridX < 1 or gridX > self._width
 		or gridY < 1 or gridY > self._height) then
-		self._currentHovered = nil
+
+		self:setHovered(nil)
+		if (INPUTS.mouse["l"]) then
+			self:setSelected(nil)
+		end
 		return
 	end
 
@@ -282,7 +373,19 @@ function CairoTree:registerInput()
 		end
 	end
 
-	self._currentHovered = self._grid[gridX][gridY][zOffset]
+	self:setHovered(self._grid[gridX][gridY][zOffset])
+
+	if (INPUTS.mouse["l"]) then
+		self:setSelected(self._grid[gridX][gridY][zOffset])
+	end
+
+	if (INPUTS.key["p"]) then
+		self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
+	end
+
+	-- if (self._currentHovered and self._currentSelected) then
+	-- 	self._path = self:getPathFro
+	-- end
 end
 
 function CairoTree:addToGrid(cairoPentagon,x,y,z)
@@ -305,23 +408,27 @@ end
 
 
 ------------------------------------------------------------------------------------------------------
-Node = class(Node, function(self, tree)
+Node = class(function(self, tree)
 	self._vertices = nil
 	self._edges = nil
 
 	self._tree = tree
-	self._neighbours = {}
+	self.neighbours = {}
+
 	tree:addNode(self)
 
 	self._RANDCOLOR = {}
 	self._RANDCOLOR[1] = math.random()*205 +50
 	self._RANDCOLOR[2] = math.random()*205 +50
 	self._RANDCOLOR[3] = math.random()*205 +50
+	self._RANDCOLOR[4] = 128
 
 	self._RANDCOLORLINE = {}
 	self._RANDCOLORLINE[1] = math.random()*205 +50
 	self._RANDCOLORLINE[2] = math.random()*205 +50
 	self._RANDCOLORLINE[3] = math.random()*205 +50
+	self._RANDCOLORLINE[4] = 50
+
 end)
 
 function Node:addNeighbour(neighbour)
@@ -329,12 +436,10 @@ function Node:addNeighbour(neighbour)
 		return
 	end
 
-	if (not self._neighbours[neighbour]) then
-		self._neighbours[neighbour] = neighbour
+	if (not self.neighbours[neighbour]) then
+		self.neighbours[neighbour] = neighbour
 		neighbour:addNeighbour(self)
 	end
-
-	-- table.insert(self._neighbours, neighbour)
 end
 
 function Node:setVertices(vertices)
@@ -378,10 +483,6 @@ function Node:draw()
 end
 
 function Node:drawHovered()
-	for _, value in pairs(self._neighbours) do
-		value:drawNeighbour()
-	end
-
 	if (self._vertices) then
 		love.graphics.setColor(unpack(self._RANDCOLORLINE))
 
@@ -389,20 +490,80 @@ function Node:drawHovered()
 	end
 end
 
+function Node:drawSelected()
+	for _, value in pairs(self.neighbours) do
+		value:drawNeighbour()
+	end
+
+	if (self._vertices) then
+		love.graphics.setColor(255,255,255,128)
+
+		love.graphics.polygon('fill', self._vertices)
+	end
+end
+
 function Node:drawNeighbour()
 	if (self._vertices) then
-		love.graphics.setColor(110,110,110)
+		love.graphics.setColor(100,100,100,128)
 
 		love.graphics.polygon('fill', self._vertices)
 	end
 end
 
 ------------------------------------------------------------------------------------------------------
-CairoPentagon = class(Node, CairoPentagon, function(self, tree)
+CairoPentagon = class(Node, function(self, tree)
+
+	self._vertices = nil
+	self._edges = nil
 
 	self._tree = tree
+	self.neighbours = {}
+
 	tree:addNode(self)
+
+	self._RANDCOLOR = {}
+	self._RANDCOLOR[1] = math.random()*205 +50
+	self._RANDCOLOR[2] = math.random()*205 +50
+	self._RANDCOLOR[3] = math.random()*205 +50
+
+	self._RANDCOLORLINE = {}
+	self._RANDCOLORLINE[1] = math.random()*205 +50
+	self._RANDCOLORLINE[2] = math.random()*205 +50
+	self._RANDCOLORLINE[3] = math.random()*205 +50
 end)
+
+function CairoPentagon:setWorldCenter()
+	local scale = self._tree.size
+	local isVertical = ((self.gridX + self.gridY) % 2 == 0)
+
+	local x, y = 0,0
+
+	x = (self.gridX-1) * scale * 2
+	y = (self.gridY-1) * scale * 2
+
+	if (isVertical) then
+		y = y + scale
+		if (self.gridZ == 1) then
+			x = x + scale*.5
+		else
+			x = x + scale* 1.5
+		end
+	else
+		x = x + scale
+		if (self.gridZ == 1) then
+			y = y + scale *.5
+		else
+			y = y + scale * 1.5
+		end
+	end
+
+	self.worldX = x
+	self.worldY = y
+end
+
+function CairoPentagon:getWorldCenter()
+	return self.worldX, self.worldY
+end
 
 --|----|----|---------|
 --|    |    |    C    |
@@ -420,6 +581,8 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 	self.gridX = gridX
 	self.gridY = gridY
 	self.gridZ = gridZ
+
+	self:setWorldCenter()
 
 	self._tree:addToGrid(self, gridX, gridY, gridZ)
 

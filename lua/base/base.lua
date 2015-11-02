@@ -3,6 +3,8 @@
 require "lua/base/class"
 require "lua/base/enum"
 require "lua/base/utils/helper"
+require "lua/base/utils/queue"
+
 
 require "lua/base/animation/tweener"
 
