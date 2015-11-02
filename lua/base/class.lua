@@ -22,6 +22,11 @@ function class(base, init)
 	mt.__call = function(class_tbl, ...)
 		local obj = {}
 		setmetatable(obj,c)
+
+		if(base and base.__engineInit) then
+			base.__engineInit(obj)
+		end
+
 		if init then
 			init(obj,...)
 		else
