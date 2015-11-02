@@ -5,7 +5,7 @@ local generateTiles = function()
 
 	GlobalTree = CairoTree(0,0)
 	GlobalTree:setSize(40)
-	GlobalTree:initialzeToDimensions(10,10)
+	GlobalTree:initialzeToDimensions(30, 30)
 end
 
 LoveGame = LoveGame or {}
@@ -51,11 +51,23 @@ function love.update(dt)
 			changeZoom(0.05 * math.sqrt(CAMOFFSET.ZOOM))
 	end
 
+	if (INPUTS.mouse["wu"]) then
+		changeZoom(- 0.05* math.sqrt(CAMOFFSET.ZOOM))
+
+	end
+
+	if (INPUTS.mouse["wd"]) then
+		changeZoom(0.05 * math.sqrt(CAMOFFSET.ZOOM))
+	end
+
+
 	if (GlobalTree) then
 		GlobalTree:registerInput()
 	end
 
 
+	INPUTS.mouse["wd"] = nil
+	INPUTS.mouse["wu"] = nil
 
 
 end
@@ -222,10 +234,15 @@ function Tree:findPath(fromNode, toNode)
 	while (not frontier:isEmpty()) do
 		local current = frontier:pop()
 
+		if (current == toNode) then
+			break
+		end
+
 		for _, neighbour in pairs(current.neighbours) do
 			if (not came_from[neighbour]) then
 				frontier:push(neighbour)
 				came_from[neighbour] = current
+
 			end
 		end
 	end
@@ -292,8 +309,8 @@ function CairoTree:initialzeToDimensions(width, height)
 				-- bottom
 				node1:addNeighbour(self:getNodeAt(x,y+1,1))
 				-- left
-				node1:addNeighbour(self:getNodeAt(x-1,y,1))
 				node1:addNeighbour(self:getNodeAt(x-1,y,2))
+				node1:addNeighbour(self:getNodeAt(x-1,y,1))
 
 				local node2 = grid[x][y][2]
 				-- top
@@ -338,6 +355,13 @@ function CairoTree:initialzeToDimensions(width, height)
 end
 
 function CairoTree:registerInput()
+
+	local nodes = self._nodes
+	local value = (math.sin(love.timer.getTime())+1) /4
+	for i=1, #nodes do
+		nodes[i]:generateVertices(value)
+	end
+
 	--#TODO:0 refactor this input the moment this is moved to the engine side
 	local mouseX, mouseY = love.mouse.getPosition()
 
@@ -379,8 +403,12 @@ function CairoTree:registerInput()
 		self:setSelected(self._grid[gridX][gridY][zOffset])
 	end
 
-	if (INPUTS.key["p"]) then
-		self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
+	if (INPUTS.key["p"] or INPUTS.mouse["r"]) then
+		if (self._currentSelected and self._currentHovered) then
+			self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
+		else
+			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
+		end
 	end
 
 	-- if (self._currentHovered and self._currentSelected) then
@@ -414,6 +442,8 @@ Node = class(function(self, tree)
 
 	self._tree = tree
 	self.neighbours = {}
+	self.hasNeighbour = {}
+
 
 	tree:addNode(self)
 
@@ -436,8 +466,9 @@ function Node:addNeighbour(neighbour)
 		return
 	end
 
-	if (not self.neighbours[neighbour]) then
-		self.neighbours[neighbour] = neighbour
+	if (not self.hasNeighbour[neighbour]) then
+		table.insert(self.neighbours, neighbour)
+		self.hasNeighbour[neighbour] = true
 		neighbour:addNeighbour(self)
 	end
 end
@@ -491,8 +522,10 @@ function Node:drawHovered()
 end
 
 function Node:drawSelected()
-	for _, value in pairs(self.neighbours) do
-		value:drawNeighbour()
+	local neighbours = self.neighbours
+
+	for i=1, #neighbours do
+		neighbours[i]:drawNeighbour()
 	end
 
 	if (self._vertices) then
@@ -518,6 +551,7 @@ CairoPentagon = class(Node, function(self, tree)
 
 	self._tree = tree
 	self.neighbours = {}
+	self.hasNeighbour = {}
 
 	tree:addNode(self)
 
@@ -544,16 +578,16 @@ function CairoPentagon:setWorldCenter()
 	if (isVertical) then
 		y = y + scale
 		if (self.gridZ == 1) then
-			x = x + scale*.5
+			x = x + scale*.5 - self.offset/2
 		else
-			x = x + scale* 1.5
+			x = x + scale* 1.5 + self.offset/2
 		end
 	else
 		x = x + scale
 		if (self.gridZ == 1) then
-			y = y + scale *.5
+			y = y + scale *.5 - self.offset/2
 		else
-			y = y + scale * 1.5
+			y = y + scale * 1.5 + self.offset/2
 		end
 	end
 
@@ -582,23 +616,40 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 	self.gridY = gridY
 	self.gridZ = gridZ
 
-	self:setWorldCenter()
+	-- self:setWorldCenter()
 
 	self._tree:addToGrid(self, gridX, gridY, gridZ)
 
+	self:generateVertices(0.5)
+end
+
+function CairoPentagon:generateVertices(e)
 	local scale = self._tree.size
 
-	local isVertical = ((gridX + gridY) % 2 == 0)
+	local isVertical = ((self.gridX + self.gridY) % 2 == 0)
 
-	local startX = (gridX-1) *2 *scale
-	local startY = (gridY-1) *2 *scale
+	local startX = (self.gridX-1) *2 *scale
+	local startY = (self.gridY-1) *2 *scale
+
+
+	local offset = 0
+	if (e < 0.5) then
+		offset = math.lerp(0, scale*((math.sqrt(3)-1)*0.5), e*2)
+	elseif (e > 0.5) then
+		offset = math.lerp(scale*((math.sqrt(3)-1)*0.5), scale, (e-.5)*2)
+	else
+		offset = scale*((math.sqrt(3)-1)*0.5)
+	end
+	self.offset = offset
+
+	self:setWorldCenter()
 
 	-- local offset = 0
-	local offset = scale*((math.sqrt(3)-1)*0.5)
+	-- local offset = scale*((math.sqrt(3)-1)*0.5)
 	-- local offset = scale
 
 	if (isVertical) then
-		if (gridZ == 1) then
+		if (self.gridZ == 1) then
 			-- A
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({
@@ -620,7 +671,7 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 			})
 		end
 	else
-		if (gridZ == 1) then
+		if (self.gridZ == 1) then
 			-- C
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({
@@ -639,9 +690,7 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 				{startX+scale,					startY+scale+scale +offset},
 				{startX,								startY+scale+scale},
 				{startX + offset,				startY+scale},
-
 			})
 		end
 	end
-
 end
