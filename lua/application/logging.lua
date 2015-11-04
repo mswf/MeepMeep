@@ -8,7 +8,8 @@ local Users = {
 	"Robin",
 	"Valentinas",
 	"Gerben",
-	"Weikie"
+	"Weikie",
+	"Warning"
 }
 
 
@@ -170,5 +171,28 @@ function Log.gwebl(text, detail, subject)
 		end
 	else
 		Log.log(Users.Gerben, "[Gerben]: " .. "\n   (   )\n (   ) (\n  ) _   )\n   ( \\_\n _(_\\ \\)__\n(____\\___))", detail, subject, BG, FG)
+	end
+end
+
+function Log.warning(text, detail, subject)
+--	local BG, FG = "#663399", "#FF22AA"
+	local BG, FG = "rgba(255, 153, 0,0.8)", "#FFFFFF"
+	local USER = Users.Warning
+	local USERSTRING = "[Warning]: "
+
+	if (text ~= nil) then
+		if (isEnumValue(text)) then
+			Log.printEnum(USER, text, detail, subject, BG, FG)
+		elseif (type(text) == "table") then
+			Log.printTable(USER, text, detail, subject, BG, FG)
+		else
+			if (text == "-") then
+				Log.log(USER, USERSTRING .. "-------------------------------------------------", detail, subject, BG, FG)
+			else
+				Log.log(USER, USERSTRING .. tostring(text), detail, subject, BG, FG)
+			end
+		end
+	else
+		Log.log(USER, USERSTRING .. "nil", detail, subject, BG, FG)
 	end
 end

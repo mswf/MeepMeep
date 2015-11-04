@@ -10,6 +10,8 @@ end
 
 LoveGame = LoveGame or {}
 function love.load()
+	GlobalBroadcaster = Broadcaster()
+
 	generateTiles()
 end
 
@@ -260,6 +262,8 @@ function Tree:findPath(fromNode, toNode)
 end
 
 ------------------------------------------------------------------------------------------------------
+
+GLOBALCOUNT = GLOBALCOUNT or 1
 CairoTree = class(Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
@@ -276,6 +280,12 @@ CairoTree = class(Tree, function(self, rootX, rootY)
 	self._currentPath = {}
 
 	self._grid = {}
+
+	local num = GLOBALCOUNT
+	GlobalBroadcaster:register(self, "ON_MOUSE_PRESS", function(self, params) Log.steb(num) end)
+	GLOBALCOUNT = GLOBALCOUNT + 1
+
+
 end)
 
 function CairoTree:initialzeToDimensions(width, height)

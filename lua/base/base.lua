@@ -2,6 +2,8 @@
 
 require "lua/base/class"
 require "lua/base/enum"
+require "lua/base/broadcaster"
+
 require "lua/base/utils/helper"
 require "lua/base/utils/queue"
 
