@@ -5,7 +5,7 @@ local generateTiles = function()
 
 	GlobalTree = CairoTree(0,0)
 	GlobalTree:setSize(40)
-	GlobalTree:initialzeToDimensions(30, 30)
+	GlobalTree:initialzeToDimensions(10, 10)
 end
 
 LoveGame = LoveGame or {}
@@ -14,7 +14,7 @@ function love.load()
 end
 
 function love.update(dt)
-	local keyMagnitude = 10 / math.sqrt(CAMOFFSET.ZOOM)
+	local keyMagnitude = 10 * math.sqrt(CAMOFFSET.ZOOM)
 
 	if (INPUTS.key["w"]) then
 		CAMOFFSET.Y =  CAMOFFSET.Y + keyMagnitude
@@ -356,11 +356,11 @@ end
 
 function CairoTree:registerInput()
 
-	local nodes = self._nodes
-	local value = (math.sin(love.timer.getTime())+1) /4
-	for i=1, #nodes do
-		nodes[i]:generateVertices(value)
-	end
+	-- local nodes = self._nodes
+	-- local value = (math.sin(love.timer.getTime())+1) /4
+	-- for i=1, #nodes do
+	-- 	nodes[i]:generateVertices(value)
+	-- end
 
 	--#TODO:0 refactor this input the moment this is moved to the engine side
 	local mouseX, mouseY = love.mouse.getPosition()
