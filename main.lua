@@ -25,16 +25,46 @@ function Game.main()
 
 	--Log.steb("Game.main called")
 
-	for i=1,1 do
-		Log.steb()
-		Log.bobn()
-		Log.tinas()
-		Log.waka()
-		Log.gwebl()
-	end
-
 	--Game.game()
 
+    local window = UiWindow.create("pls", 200, 200);
+    Log.bobn(window)
+    Log.bobn(window.__coreProperties__)
+
+
+    window.resizable = false;
+    window.collapsable = false;
+    window.closable = false;
+    window.movable = false;
+    window.x = 200;
+    window.y = 400;
+    window.title = "Herro"
+
+    window.someVar = 3;
+    window:addText("lorum ipsum dolor sit amet")
+    window:addButton();
+
+    --[[
+    labelA = window.addText("lorum ipsum")
+    labelA:setLabel("oh wow")
+
+    buttonA = window.addButton("do a lua function", function()
+        Log.bobn("yay")
+        window.close()
+    end)
+    buttonA:setLabel("do a thing")
+    buttonA:setCallback(function() Log.bobn("pls") end)
+
+    window = setmetatable({}, {
+        __newindex = function(table, key, value)
+            if (needForEngineMagic(key)) then
+
+            else
+                table[key] = value
+            end
+        end
+    })
+    ]]--
 end
 
 function Game.update(dt)
