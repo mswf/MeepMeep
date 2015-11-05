@@ -29,7 +29,7 @@ function Game.main()
 
 	UITweener = Tweener()
 
-    local window = UiWindow.create("pls", 200, 200)
+    local window = UiWindow.create("y", 200, 400)
     -- Log.bobn(window)
     -- Log.bobn(window.__coreProperties__)
 
@@ -40,11 +40,26 @@ function Game.main()
     window.movable = false;
     window.x = 100;
     window.y = 400;
-    window.title = "Herro"
+    window.title = "StebDaBes"
 
     window.someVar = 3
-    window:addText("lorum ipsum dolor sit amet")
-    window:addButton("wiip wipp")
+    window:addText(Parser.getString("TESTKEY"))
+    window:addButton("Continue")
+
+		window:addButton("New Game")
+		for i=1,100 do
+			-- window:addButton("Options")
+
+			-- body...
+		end
+
+
+
+
+
+		-- UITweener:new(8, window, {y = 10}):setEasing(EasingFunctions.outBounce)
+
+		UITweener:new(8, window, {y = 10}):setEasing(EasingFunctions.outBounce)
 
 
 
@@ -81,9 +96,8 @@ end
 
 function Game.update(dt)
 	--Log.steb("update the game at dt: " .. tostring(dt))
-
 	dt = dt / 1000
-	UITweener:update(1/60)
+	UITweener:update(dt)
 end
 
 
