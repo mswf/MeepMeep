@@ -27,22 +27,34 @@ function Game.main()
 
 	--Game.game()
 
-    local window = UiWindow.create("pls", 200, 200);
-    Log.bobn(window)
-    Log.bobn(window.__coreProperties__)
+	UITweener = Tweener()
+
+    local window = UiWindow.create("pls", 200, 200)
+    -- Log.bobn(window)
+    -- Log.bobn(window.__coreProperties__)
 
 
     window.resizable = false;
     window.collapsable = false;
     window.closable = false;
     window.movable = false;
-    window.x = 200;
+    window.x = 100;
     window.y = 400;
     window.title = "Herro"
 
-    window.someVar = 3;
+    window.someVar = 3
     window:addText("lorum ipsum dolor sit amet")
-    window:addButton();
+    window:addButton("wiip wipp")
+
+
+
+		UITweener:new(2, window, {x = 500}):addOnComplete(function(uiElement)
+				UITweener:new(2, window, {x = 100}):addOnComplete(function(_)
+					UITweener:new(2, window, {x = 500}):setEasing("outBounce"):addOnComplete(function(uiElement)
+							UITweener:new(2, window, {x = 100}):setEasing("inBounce")
+						end)
+					end)
+				end)
 
     --[[
     labelA = window.addText("lorum ipsum")
@@ -70,6 +82,8 @@ end
 function Game.update(dt)
 	--Log.steb("update the game at dt: " .. tostring(dt))
 
+	dt = dt / 1000
+	UITweener:update(1/60)
 end
 
 
