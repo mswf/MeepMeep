@@ -132,7 +132,7 @@ function Game.onFileChanged(path)
 		path = string.gsub(path, "\\", "/")
 	end
 
-	-- Log.steb("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
+	Log.warning("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
 
 	if (type == "lua") then
 		if (package.loaded[path]) then
@@ -140,8 +140,7 @@ function Game.onFileChanged(path)
 			package.loaded[path] = nil
 			require(path)
 		else
-			-- Log.steb("Package was not loaded")
-
+			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
 		end
 	end
 
