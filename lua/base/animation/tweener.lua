@@ -47,3 +47,9 @@ function Tweener:removeActiveTween(tweenToRemove)
 
 	return false
 end
+
+function Tweener:clear()
+	self._activeTweens = {}
+	self._pausedTweens = {}
+
+end

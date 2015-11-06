@@ -1,5 +1,5 @@
 
 
-ParsingContext = class(function(self, owner)
+ParsingContext = class(ParsingContext, function(self, owner)
 	self.owner = owner
 end)

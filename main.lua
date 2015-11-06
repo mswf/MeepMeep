@@ -28,9 +28,14 @@ function Game.main()
 
 	--Game.game()
 
-	UITweener = Tweener()
+	if (UITweener) then
+		UITweener:clear()
+	else
+		UITweener = Tweener()
+	end
 
-    local window = UiWindow.create("y", 200, 400)
+
+    window = window or UiWindow.create("y", 200, 400)
     -- Log.bobn(window)
     -- Log.bobn(window.__coreProperties__)
 
@@ -115,14 +120,28 @@ end
 function Game.onFocusGained()
 end
 
-function Game.onFileChanged(path, type)
+function Game.onFileChanged(path)
+	local type = nil
 
-	Log.steb("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
+	do
+		local stringLength = string.len(path)
+
+		type = string.sub(path, stringLength-2)
+		path = string.sub(path, 1, stringLength - 4)
+
+		path = string.gsub(path, "\\", "/")
+	end
+
+	-- Log.steb("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
 
 	if (type == "lua") then
 		if (package.loaded[path]) then
+			Log.warning("Reloaded lua file: " .. tostring(path))
 			package.loaded[path] = nil
 			require(path)
+		else
+			-- Log.steb("Package was not loaded")
+
 		end
 	end
 

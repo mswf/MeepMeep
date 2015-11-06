@@ -1,4 +1,4 @@
-Broadcaster = class(function(self)
+Broadcaster = class(Broadcaster, function(self)
 	self._events = {}
 
 end)
