@@ -117,6 +117,8 @@ end
 
 function Game.onFileChanged(path, type)
 
+	Log.steb("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
+
 	-- if (type == "lua") then
 		if (package.loaded[path]) then
 			package.loaded[path] = nil
