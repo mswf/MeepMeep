@@ -7,8 +7,9 @@ end
 ABS_PATH = script_path()
 
 
-require "lua/base/base"
 require "lua/application/logging"
+
+require "lua/base/base"
 
 --local Carbon = require("lua/Carbon/init")
 
@@ -114,6 +115,16 @@ end
 function Game.onFocusGained()
 end
 
+function Game.onFileChanged(path, type)
+
+	-- if (type == "lua") then
+		if (package.loaded[path]) then
+			package.loaded[path] = nil
+			require(path)
+		end
+	-- end
+
+end
 
 function Game.testMesh()
 	local Vector3 = Carbon.Math.Vector3
