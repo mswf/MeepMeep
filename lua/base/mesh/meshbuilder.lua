@@ -1,6 +1,31 @@
 --local IO = require("lua/Carbon/init").IO
 
 
+-- function script_path()
+--     return debug.getinfo(2, "S").source:sub(2):sub(0,-10):gsub("\\", "/")
+-- end
+-- ABS_PATH = script_path()
+
+-- function Game.testMesh()
+-- 	local Vector3 = Carbon.Math.Vector3
+-- 	local mesh = MeshBuilder()
+--
+-- 	mesh:addVertex(Vector3(-1, 0,-1))
+-- 	mesh:addVertex(Vector3(-1, 0, 1))
+-- 	mesh:addVertex(Vector3( 1, 0,-1))
+-- 	mesh:addVertex(Vector3( 1, 0, 1))
+--
+-- 	for i=1, 4 do
+-- 		mesh:addNormal(Vector3( 0, 1, 0))
+-- 	end
+--
+-- 	mesh:addTriangle(1,2,3)
+-- 	mesh:addTriangle(2,4,3)
+--
+-- 	mesh:saveToFile("plane")
+-- end
+
+
 MeshBuilder = class(MeshBuilder, function(self)
 	self._vertices = {}
 	self._normals = {}
