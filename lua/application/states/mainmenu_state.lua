@@ -39,19 +39,31 @@ function MainMenuState:enter(transitionType)
 		window:addText(string.upper(cooks[i][2]))
 	end
 
+	TestAnim.UITweener = self.UITweener
 
 	-- UITweener:new(8, window, {y = 10}):setEasing(EasingFunctions.outBounce)
 
-	self.UITweener:new(8, window, {y = 10}):setEasing(EasingFunctions.outBounce)
+	self.UITweener:new(4, window, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
 
 
 
-	self.UITweener:new(2, window, {x = 500}):addOnComplete(function(uiElement)
-			self.UITweener:new(2, window, {x = 100}):addOnComplete(function(_)
-				self.UITweener:new(2, window, {x = 500}):setEasing("outBounce"):addOnComplete(function(uiElement)
-						self.UITweener:new(2, window, {x = 100}):setEasing("inBounce")
-					end)
-				end)
-			end)
 
+	-- self.UITweener:new(2, window, {x = 500}):addOnComplete(function(uiElement)
+	-- 		self.UITweener:new(2, window, {x = 100}):addOnComplete(function(_)
+	-- 			self.UITweener:new(2, window, {x = 500}):setEasing("outBounce"):addOnComplete(function(uiElement)
+	-- 					self.UITweener:new(2, window, {x = 100}):setEasing("inBounce")
+	-- 				end)
+	-- 			end)
+	-- 		end)
+
+end
+
+TestAnim = TestAnim or {}
+
+TestAnim.moveUp = function(previousTween)
+	TestAnim.UITweener:new(4, previousTween.subject, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(TestAnim.moveDown)
+end
+
+TestAnim.moveDown = function(previousTween)
+	TestAnim.UITweener:new(4, previousTween.subject, {y = 400}):setEasing(EasingFunctions.outBounce):addOnComplete(TestAnim.moveUp)
 end
