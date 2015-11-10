@@ -11,13 +11,13 @@ uniform mat4 projection;
 uniform float time;
 //in vec4 Color;
 
-//out vec2 Frag_UV;
+out vec2 uv;
 //out vec4 Frag_Color;
 out vec3 Frag_Normal;
 
 void main()
 {
-	//Frag_UV = UV;
+	uv = texcoord;
 	//Frag_Color = Color;
 	gl_PointSize = 10.0;
 	Frag_Normal = normalize( vec3(view * model * vec4( normal, 0.0 ) ) );
