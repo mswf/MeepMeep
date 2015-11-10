@@ -2,10 +2,12 @@
 -- Compatible with Lua 5.1 (not 5.0).
 function class(c, base, init)
 	if (c) then
-		if (c._onReload) then
+		if (c.__onReload) then
 			local classInstances = c.__instances
+
+			Log.warning("[".. retrieveVariableName(c) .. "] calling __onReload on its " .. #classInstances .. " instances")
 			for i=1, #classInstances do
-				classInstances[i]:_onReload()
+				classInstances[i]:__onReload()
 			end
 		end
 		-- class already exists, assuming we're hotreloading
