@@ -74,15 +74,18 @@ function Game.onFileChanged(path)
 		type = string.sub(path, dotPosition+1)
 		path = string.sub(path, 1, dotPosition-1)
 
+		-- Windows path fixing step
 		path = string.gsub(path, "\\", "/")
 
-		local projectStart, projectEnd = string.find(path, "HonkHonk/") or string.find(path, "MeepMeep/")
-		-- Mac returns the full filepath
-		if (projectStart) then
-			Log.steb(projectStart .. " ||| " .. projectEnd)
-			Log.steb(projectStart .. " ||| " .. projectEnd)
+		-- Mac returns the full filepath, this step strips away the first part
+		-- You're now left with only the reletive path
+		local projectStart, projectEnd = string.find(path, "MeepMeep/")
+		if (not projectStart) then
+			projectStart, projectEnd = string.find(path, "HonkHonk/")
+		end
 
-			path = string.sub(path, projectEnd)
+		if (projectStart) then
+			path = string.sub(path, projectEnd + 1)
 		end
 	end
 
