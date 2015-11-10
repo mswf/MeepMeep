@@ -75,6 +75,15 @@ function Game.onFileChanged(path)
 		path = string.sub(path, 1, dotPosition-1)
 
 		path = string.gsub(path, "\\", "/")
+
+		local projectStart, projectEnd = string.find(path, "HonkHonk/") or string.find(path, "MeepMeep/")
+		-- Mac returns the full filepath
+		if (projectStart) then
+			Log.steb(projectStart .. " ||| " .. projectEnd)
+			Log.steb(projectStart .. " ||| " .. projectEnd)
+
+			path = string.sub(path, projectEnd)
+		end
 	end
 
 	Log.warning("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
