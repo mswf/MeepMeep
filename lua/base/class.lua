@@ -1,7 +1,18 @@
 -- class.lua
 -- Compatible with Lua 5.1 (not 5.0).
 function class(c, base, init)
-	c = c or {}		-- a new class instance
+	if (c) then
+		if (c._onReload) then
+			local classInstances = c.__instances
+			for i=1, #classInstances do
+				classInstances[i]:_onReload()
+			end
+		end
+		-- class already exists, assuming we're hotreloading
+	else
+		c = {} -- a new class instance
+	end
+
 	if not init and type(base) == 'function' then
 		init = base
 		base = nil
@@ -16,6 +27,7 @@ function class(c, base, init)
 	-- the class will be the metatable for all its objects,
 	-- and they will look up their methods in it.
 	c.__index = c
+	c.__instances = setmetatable({}, {__mode = "v"})
 
 	-- expose a constructor which can be called by <classname>(<args>)
 	local mt = {}
@@ -35,6 +47,9 @@ function class(c, base, init)
 				base.init(obj, ...)
 			end
 		end
+
+		table.insert(c.__instances, obj)
+
 		return obj
 	end
 	c.init = init

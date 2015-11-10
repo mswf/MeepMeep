@@ -22,6 +22,13 @@ function Game.main()
 	GlobalStateManager = ApplicationStateManager()
 
 
+	GLOBTAB = {}
+	Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
+		function(self, params)
+			Log.steb("woop")
+			Log.steb(params)
+		end)
+
 
     --[[
     labelA = window.addText("lorum ipsum")
@@ -62,6 +69,8 @@ end
 function Game.onFocusGained()
 end
 
+Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
+
 function Game.onFileChanged(path)
 	local type = nil
 
@@ -90,19 +99,25 @@ function Game.onFileChanged(path)
 
 	Log.warning("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
 
+	local isSucces = false
+
 	if (type == "lua") then
 		if (package.loaded[path]) then
 			Log.warning("Reloaded lua file: " .. tostring(path))
 			package.loaded[path] = nil
 			require(path)
-			return true
+			isSucces = true
 		else
 			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
-			return false
+			isSucces = false
 		end
 	else
-		return false
+		isSucces = false
 	end
+
+	Debug_FileChangedBroadcaster:broadcast(path, {path = path, type = type})
+
+	return isSucces
 end
 
 function Game.game()
