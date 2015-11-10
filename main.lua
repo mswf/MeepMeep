@@ -15,8 +15,14 @@ if (love) then
 	require "lua/love"
 end
 
+function Game.crash()
+	noTable["yes"] = 500
+end
+
 function Game.main()
 	GlobalStateManager = ApplicationStateManager()
+
+
 
     --[[
     labelA = window.addText("lorum ipsum")
@@ -63,8 +69,10 @@ function Game.onFileChanged(path)
 	do
 		local stringLength = string.len(path)
 
-		type = string.sub(path, stringLength-2)
-		path = string.sub(path, 1, stringLength - 4)
+		dotPosition  = string.find(path, "%.")
+
+		type = string.sub(path, dotPosition+1)
+		path = string.sub(path, 1, dotPosition-1)
 
 		path = string.gsub(path, "\\", "/")
 	end
@@ -76,9 +84,13 @@ function Game.onFileChanged(path)
 			Log.warning("Reloaded lua file: " .. tostring(path))
 			package.loaded[path] = nil
 			require(path)
+			return true
 		else
 			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
+			return false
 		end
+	else
+		return false
 	end
 end
 
