@@ -8,7 +8,8 @@ i18n = {
 function i18n:get(key)
 	local stringValue = self[key]
 	if (not stringValue) then
-		Log.warning("[i18n] <marquee behavior='alternate' width='150'>Can't find ".. tostring(key) .."</marquee>")
+		local width = 200 + string.len( tostring(key))*12
+		Log.warning("[i18n] <marquee behavior='alternate' width='".. width .."'>Can't find ".. tostring(key) .."</marquee>")
 		stringValue = "__missing__"
 	end
 
