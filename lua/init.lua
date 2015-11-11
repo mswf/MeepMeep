@@ -21,13 +21,13 @@ end
 function Game.main()
 	GlobalStateManager = ApplicationStateManager()
 
-
-	GLOBTAB = {}
-	Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
-		function(self, params)
-			Log.steb("woop")
-			Log.steb(params)
-		end)
+	--
+	-- GLOBTAB = {}
+	-- Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
+	-- 	function(self, params)
+	-- 		Log.steb("woop")
+	-- 		Log.steb(params)
+	-- 	end)
 
 
     --[[
@@ -106,6 +106,9 @@ function Game.onFileChanged(path)
 			Log.warning("Reloaded lua file: " .. tostring(path))
 			package.loaded[path] = nil
 			require(path)
+
+			class:__hotReloadClasses()
+
 			isSucces = true
 		else
 			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")

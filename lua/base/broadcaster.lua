@@ -16,7 +16,8 @@ function Broadcaster:register(owner, event, callback)
 end
 
 function Broadcaster:__onReload()
-	-- Log.steb("Broadcaster reloaded")
+	Log.steb("Broadcaster reloaded")
+	-- Log.steb("changed broadcaster reload")
 end
 
 function Broadcaster:unregister(owner, event)
