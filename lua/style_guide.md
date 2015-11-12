@@ -54,6 +54,19 @@ function ExampleClass._stringColorToColor(stringColor)
 end
 
 ```
+***
+
+## Functionality unique to VroomVroom
+You can register a callback for when files are reloaded. Register under the path to the global Broadcaster 'Debug_FileChangedBroadcaster' with a callback that will be called with 2 params; the path + filetype.
+
+### Reserved Functions
+The "VroomVroom" engine uses several reserved functions in class definitions. Like Lua metatable keys, these always start with ' __ ' + function.
+
+##### __ engineInit
+This function is declared by the baseclass of any classes supplied by the engine to register/initialize itself in the engine.
+
+##### __ onReload
+Declaring this function will cause all instances of the class (and those that inherited from it) to have this function called whenever the file with the class definition is hot-reloaded.
 
 ***
 ### Optimization Guide

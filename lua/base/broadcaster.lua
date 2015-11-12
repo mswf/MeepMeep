@@ -15,6 +15,10 @@ function Broadcaster:register(owner, event, callback)
 	self._events[event][owner] = callback
 end
 
+function Broadcaster:__onReload()
+	Log.steb("Broadcaster reloaded")
+	-- Log.steb("changed broadcaster reload")
+end
 
 function Broadcaster:unregister(owner, event)
 	if (not self._events[event]) then
