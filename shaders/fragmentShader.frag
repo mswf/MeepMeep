@@ -5,34 +5,30 @@ uniform sampler2D normalMap;
 uniform vec3 lightPos;
 uniform float time;
 
-in vec3 T;
-in vec3 B;
-in vec3 N;
-in vec3 VertexPositionCameraSpace;
-in vec3 EyeDirectionCameraSpace;
+//in vec3 T;
+//in vec3 B;
+//in vec3 N;
+//in vec3 VertexPositionCameraSpace;
+//in vec3 EyeDirectionCameraSpace;
 in vec2 uv;
 
 out vec4 Out_Color;
 
 void main()
 {
-	mat3 TBN = mat3( T, B, N );
+	//mat3 TBN = mat3( T, B, N );
 	
-	vec3 lightPosition = lightPos;
-	float moveValue = sin(time*0.001)*2-1;
-	lightPosition.x = moveValue;
-	lightPosition.y = moveValue;
-	lightPosition.z = moveValue;
-	
-	vec3 l = lightPosition - VertexPositionCameraSpace;
-	l *= TBN;
-	l = normalize(l);
+	vec3 l = lightPos;// - VertexPositionCameraSpace;
+	//l *= TBN;
+	//l = normalize(l);
 	
 	vec3 n = texture( normalMap, uv ).rgb * 2.0 - 1.0 ;
 	n = normalize(n);
 	//n.y = -n.y;
 	
 	float NdotL = max( dot( n, l ), 0 );
+	
+	/*
 	float specularCoefficient = 0.0;
 	if (NdotL > 0)
 	{
@@ -44,8 +40,9 @@ void main()
 		specularCoefficient = pow(cosAngle, materialShininess);
 	}
 	vec4 specular = vec4( specularCoefficient );
+	 */
 	vec4 diffuse = vec4( texture( colorMap, uv ).rgb * NdotL, 1.0);
-	vec4 finalColor = diffuse + specular;
+	vec4 finalColor = diffuse;
 	
 	Out_Color = finalColor;
 	//Out_Color = vec4( n, 1.0); // DEBUGGING NORMALS

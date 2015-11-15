@@ -13,20 +13,20 @@ uniform mat3 normalMatrix;
 uniform mat4 projection;
 uniform float time;
 
-out vec3 T;
-out vec3 B;
-out vec3 N;
-out vec3 VertexPositionCameraSpace;
-out vec3 EyeDirectionCameraSpace;
+//out vec3 T;
+//out vec3 B;
+//out vec3 N;
+//out vec3 VertexPositionCameraSpace;
+//out vec3 EyeDirectionCameraSpace;
 out vec2 uv;
 
 void main()
 {
-	T = normalize( normalMatrix * tangent );
-	B = normalize( normalMatrix * bitangent );
-	N = normalize( normalMatrix * normal );
-	VertexPositionCameraSpace = vec3( mvMatrix * position );
-	EyeDirectionCameraSpace = normalize( -VertexPositionCameraSpace );
+	//T = normalize( normalMatrix * tangent );
+	//B = normalize( normalMatrix * bitangent );
+	//N = normalize( normalMatrix * normal );
+	//VertexPositionCameraSpace = vec3( mvMatrix * position );
+	//EyeDirectionCameraSpace = normalize( -VertexPositionCameraSpace );
 
 	uv = texcoord;
 	gl_Position = projection * view * model * vec4( position, 1.0 );
