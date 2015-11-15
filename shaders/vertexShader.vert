@@ -3,24 +3,31 @@
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
 layout(location = 2) in vec2 texcoord;
+layout(location = 3) in vec3 tangent;
+layout(location = 4) in vec3 bitangent;
 
-uniform mat4 ProjectionMatrix;
 uniform mat4 model;
 uniform mat4 view;
+uniform mat3 mvMatrix;
+uniform mat3 normalMatrix;
 uniform mat4 projection;
 uniform float time;
-//in vec4 Color;
 
+out vec3 T;
+out vec3 B;
+out vec3 N;
+out vec3 VertexPositionCameraSpace;
+out vec3 EyeDirectionCameraSpace;
 out vec2 uv;
-//out vec4 Frag_Color;
-out vec3 Frag_Normal;
 
 void main()
 {
+	T = normalize( normalMatrix * tangent );
+	B = normalize( normalMatrix * bitangent );
+	N = normalize( normalMatrix * normal );
+	VertexPositionCameraSpace = vec3( mvMatrix * position );
+	EyeDirectionCameraSpace = normalize( -VertexPositionCameraSpace );
+
 	uv = texcoord;
-	//Frag_Color = Color;
-	gl_PointSize = 10.0;
-	Frag_Normal = normalize( vec3(view * model * vec4( normal, 0.0 ) ) );
-  	gl_Position = projection * view * model * vec4( position, 1.0 );
-	//gl_Position = vec4( position.xyz + sin(time)*2-1, 1 );
+	gl_Position = projection * view * model * vec4( position, 1.0 );
 }
