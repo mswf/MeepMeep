@@ -1,0 +1,47 @@
+# Blender v2.75 (sub 0) OBJ File: 'ObjectGroupTest.blend'
+# www.blender.org
+mtllib MasterCubeTest.mtl
+o MasterCube_Object_MasterCube_Mesh
+v -1.000000 -1.000000 1.000000
+v -1.000000 1.000000 1.000000
+v -1.000000 -1.000000 -1.000000
+v -1.000000 1.000000 -1.000000
+v 1.000000 -1.000000 1.000000
+v 1.000000 1.000000 1.000000
+v 1.000000 -1.000000 -1.000000
+v 1.000000 1.000000 -1.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 1.000000
+vt 0.000000 0.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 0.000000 1.000000
+vn 0.000000 -1.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn 1.000000 0.000000 0.000000
+g MasterCube_Object_MasterCube_Mesh_Material.001
+usemtl Material.001
+s off
+f 8/1/1 7/2/1 3/3/1
+f 4/4/1 8/1/1 3/3/1
+g MasterCube_Object_MasterCube_Mesh_Material.002
+usemtl Material.002
+f 8/1/2 4/2/2 2/3/2
+f 6/4/2 8/1/2 2/3/2
+g MasterCube_Object_MasterCube_Mesh_Material.003
+usemtl Material.003
+f 2/1/3 1/2/3 5/3/3
+f 6/4/3 2/1/3 5/3/3
+g MasterCube_Object_MasterCube_Mesh_Material.004
+usemtl Material.004
+f 3/1/4 7/2/4 5/3/4
+f 1/4/4 3/1/4 5/3/4
+g MasterCube_Object_MasterCube_Mesh_Material.005
+usemtl Material.005
+f 4/1/5 3/2/5 1/3/5
+f 2/4/5 4/1/5 1/3/5
+g MasterCube_Object_MasterCube_Mesh_Material.006
+usemtl Material.006
+f 6/1/6 5/2/6 7/3/6
+f 8/4/6 6/1/6 7/3/6
