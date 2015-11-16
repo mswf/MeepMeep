@@ -32,12 +32,19 @@ function MainMenuState:enter(transitionType)
 	window:addButton("New Game")
 
 	local cooks = require "lua/application/credits"
+
+	-- local creditString = ""
+	-- creditString = creditString .. "\n" .. "CREDITS:"
 	window:addText("CREDITS:")
 	for i=1, #cooks do
+		-- creditString = creditString .. "\n\n" .. cooks[i][1] .. "\n" .. string.upper(cooks[i][2])
+
 		window:addText("")
 		window:addText(cooks[i][1])
 		window:addText(string.upper(cooks[i][2]))
 	end
+
+	-- window:addText(creditString)
 
 	TestAnim.UITweener = self.UITweener
 

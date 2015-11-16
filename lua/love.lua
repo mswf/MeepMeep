@@ -130,7 +130,7 @@ end
 
 
 ------------------------------------------------------------------------------------------------------
-Tree = class(function(self, rootX, rootY)
+Tree = class(Tree ,function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -264,7 +264,7 @@ end
 ------------------------------------------------------------------------------------------------------
 
 GLOBALCOUNT = GLOBALCOUNT or 1
-CairoTree = class(Tree, function(self, rootX, rootY)
+CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -446,7 +446,7 @@ end
 
 
 ------------------------------------------------------------------------------------------------------
-Node = class(function(self, tree)
+Node = class(Node, function(self, tree)
 	self._vertices = nil
 	self._edges = nil
 
@@ -554,7 +554,7 @@ function Node:drawNeighbour()
 end
 
 ------------------------------------------------------------------------------------------------------
-CairoPentagon = class(Node, function(self, tree)
+CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 
 	self._vertices = nil
 	self._edges = nil
