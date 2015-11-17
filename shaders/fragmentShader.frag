@@ -7,7 +7,7 @@ uniform float time;
 
 //in vec3 T;
 //in vec3 B;
-//in vec3 N;
+in vec3 N;
 //in vec3 VertexPositionCameraSpace;
 //in vec3 EyeDirectionCameraSpace;
 in vec2 uv;
@@ -17,17 +17,19 @@ out vec4 Out_Color;
 void main()
 {
 	//mat3 TBN = mat3( T, B, N );
-	
-	vec3 l = lightPos;// - VertexPositionCameraSpace;
+
+	//vec3 l = lightPos;// - VertexPositionCameraSpace;
+	vec3 l = vec3(1);//hardcoded lightpos
+
 	//l *= TBN;
 	//l = normalize(l);
-	
+
 	vec3 n = texture( normalMap, uv ).rgb * 2.0 - 1.0 ;
 	n = normalize(n);
 	//n.y = -n.y;
-	
-	float NdotL = max( dot( n, l ), 0 );
-	
+
+	float NdotL = max( dot( normalize(N), l ), 0 );
+
 	/*
 	float specularCoefficient = 0.0;
 	if (NdotL > 0)
@@ -43,7 +45,7 @@ void main()
 	 */
 	vec4 diffuse = vec4( texture( colorMap, uv ).rgb * NdotL, 1.0);
 	vec4 finalColor = diffuse;
-	
+
 	Out_Color = finalColor;
 	//Out_Color = vec4( n, 1.0); // DEBUGGING NORMALS
 }

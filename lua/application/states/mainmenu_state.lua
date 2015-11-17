@@ -9,6 +9,14 @@ function MainMenuState:update(dt)
 
 end
 
+function MainMenuState:__onReload()
+	Log.steb("MainMenuState reloaded")
+
+	self.window.title = "Anything"
+
+	-- Log.steb("changed broadcaster reload")
+end
+
 
 function MainMenuState:enter(transitionType)
 
@@ -53,7 +61,7 @@ function MainMenuState:enter(transitionType)
 	self.UITweener:new(4, window, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
 
 
-
+	self.window = window
 
 	-- self.UITweener:new(2, window, {x = 500}):addOnComplete(function(uiElement)
 	-- 		self.UITweener:new(2, window, {x = 100}):addOnComplete(function(_)
