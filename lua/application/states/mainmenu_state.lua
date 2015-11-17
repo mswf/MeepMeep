@@ -6,7 +6,9 @@ end)
 
 function MainMenuState:update(dt)
 	-- Log.steb("updating the MainMenuState")
-
+	if globalLabel ~= nil then
+		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y
+	end
 end
 
 function MainMenuState:__onReload()
@@ -20,56 +22,29 @@ end
 
 function MainMenuState:enter(transitionType)
 
-	local window = UiWindow.create("y", 200, 400)
-	-- Log.bobn(window)
-	-- Log.bobn(window.__coreProperties__)
+	local testWindow = UiWindow.create()
+	testWindow.x = 400
+	testWindow.y = 400
+	testWindow.height = 200
+	testWindow.width = 200
+	testWindow.resizable = true
 
+	globalLabel = testWindow:addText("pls")
 
-	window.resizable = false;
-	window.collapsable = false;
-	window.closable = false;
-	window.movable = false;
-	window.x = 100;
-	window.y = 400;
-	window.title = "StebDaBes"
-
-	window.someVar = 3
-	window:addText(Parser.getString("TESTKEY"))
-	window:addButton("Continue")
-
-	window:addButton("New Game")
-
-	local cooks = require "lua/application/credits"
-
-	-- local creditString = ""
-	-- creditString = creditString .. "\n" .. "CREDITS:"
-	window:addText("CREDITS:")
-	for i=1, #cooks do
-		-- creditString = creditString .. "\n\n" .. cooks[i][1] .. "\n" .. string.upper(cooks[i][2])
-
-		window:addText("")
-		window:addText(cooks[i][1])
-		window:addText(string.upper(cooks[i][2]))
-	end
-
-	-- window:addText(creditString)
+	testWindow:addButton("close", function()
+		testWindow:close()
+	end)
 
 	TestAnim.UITweener = self.UITweener
 
-	-- UITweener:new(8, window, {y = 10}):setEasing(EasingFunctions.outBounce)
+	testWindow.onClose = function()
+		globalLabel = nil
+		local pls = UiWindow.create()
+		pls.closable = false;
+		pls:addText("can't close this")
 
-	self.UITweener:new(4, window, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
-
-
-	self.window = window
-
-	-- self.UITweener:new(2, window, {x = 500}):addOnComplete(function(uiElement)
-	-- 		self.UITweener:new(2, window, {x = 100}):addOnComplete(function(_)
-	-- 			self.UITweener:new(2, window, {x = 500}):setEasing("outBounce"):addOnComplete(function(uiElement)
-	-- 					self.UITweener:new(2, window, {x = 100}):setEasing("inBounce")
-	-- 				end)
-	-- 			end)
-	-- 		end)
+		self.UITweener:new(4, pls, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
+	end
 
 end
 
