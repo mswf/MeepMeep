@@ -32,8 +32,18 @@ function MainMenuState:enter(transitionType)
 	globalLabel = testWindow:addText("pls")
 
 	testWindow:addButton("close", function()
+		Log.bobn("pls")
 		testWindow:close()
 	end)
+
+	testTree = testWindow:addTree("some tree")
+	testTree:addText("Text in the tree")
+	testTree:addButton("TreeButton")
+
+	testTestTree = testTree:addTree("more trees")
+	testTestTree:addText("More text in the trees")
+
+	testWindow:addTree("another Tree")
 
 	TestAnim.UITweener = self.UITweener
 
