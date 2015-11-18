@@ -7,7 +7,11 @@ end)
 function MainMenuState:update(dt)
 	-- Log.steb("updating the MainMenuState")
 	if globalLabel ~= nil then
-		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text
+		local bobBes = "Bobn is not da bes"
+		if checkbox.checked then
+			bobBes = "Bobn is da best!";
+		end
+		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text.."\n"..bobBes
 	end
 end
 
@@ -25,9 +29,9 @@ function MainMenuState:enter(transitionType)
 	local testWindow = UiWindow.create()
 	testWindow.x = 400
 	testWindow.y = 400
-	testWindow.height = 200
-	testWindow.width = 200
-	testWindow.resizable = true
+	testWindow.height = 400
+	testWindow.width = 300
+	testWindow.resizable = false
 
 	globalLabel = testWindow:addText("pls")
 
@@ -40,7 +44,7 @@ function MainMenuState:enter(transitionType)
 
 	testTree = testWindow:addTree("some tree")
 	local treeText = testTree:addText("Text in the tree")
-	testTree:addButton("TreeButton")
+	local treeButton = testTree:addButton("TreeButton")
 
 	testTree.tooltip = "This is a tree"
 	treeText.tooltip = "even on text"
@@ -49,8 +53,17 @@ function MainMenuState:enter(transitionType)
 	treeText = testTestTree:addText("More text in the trees")
 
 	inputLabel = testTestTree:addInputText("nerts", "pls")
+	checkbox = testWindow:addCheckbox("Is bob da bes?", true)
+	checkbox.tooltip = "The answer is yes"
 
 	treeText.tooltip = "even on more text"
+
+	treeButton.callback = function()
+		checkbox.checked = true
+		checkbox.visible = false;
+	end
+
+	--testWindow.visible = false
 
 	testWindow:addTree("another Tree")
 
