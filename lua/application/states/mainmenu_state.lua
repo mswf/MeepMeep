@@ -11,7 +11,7 @@ function MainMenuState:update(dt)
 		if checkbox.checked then
 			bobBes = "Bobn is da best!";
 		end
-		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text.."\n"..bobBes
+		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text.."\n"..bobBes.."\n"..(sliderA.value + sliderB.value).." cows"
 	end
 end
 
@@ -65,7 +65,19 @@ function MainMenuState:enter(transitionType)
 
 	--testWindow.visible = false
 
-	testWindow:addTree("another Tree")
+	local otherTree = testWindow:addTree("another Tree")
+
+	sliderA = otherTree:addSlider("floats")
+	sliderA.minValue = 50
+	sliderA.maxValue = 150
+	sliderA.format = "cows: %.2f"
+
+	sliderB = otherTree:addSlider("ints")
+	sliderB.minValue = -10
+	sliderB.maxValue = 10
+	sliderB.rounded = true
+	sliderB.format = "%.0f cows"
+	sliderB.value = 0
 
 	TestAnim.UITweener = self.UITweener
 
