@@ -31,17 +31,24 @@ function MainMenuState:enter(transitionType)
 
 	globalLabel = testWindow:addText("pls")
 
-	testWindow:addButton("close", function()
+	local closeButton = testWindow:addButton("close", function()
 		Log.bobn("pls")
 		testWindow:close()
 	end)
 
+	closeButton.tooltip = "This closes the window"
+
 	testTree = testWindow:addTree("some tree")
-	testTree:addText("Text in the tree")
+	local treeText = testTree:addText("Text in the tree")
 	testTree:addButton("TreeButton")
 
+	testTree.tooltip = "This is a tree"
+	treeText.tooltip = "even on text"
+
 	testTestTree = testTree:addTree("more trees")
-	testTestTree:addText("More text in the trees")
+	treeText = testTestTree:addText("More text in the trees")
+
+	treeText.tooltip = "even on more text"
 
 	testWindow:addTree("another Tree")
 
