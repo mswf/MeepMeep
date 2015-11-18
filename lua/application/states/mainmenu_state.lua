@@ -7,7 +7,7 @@ end)
 function MainMenuState:update(dt)
 	-- Log.steb("updating the MainMenuState")
 	if globalLabel ~= nil then
-		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y
+		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text
 	end
 end
 
@@ -47,6 +47,8 @@ function MainMenuState:enter(transitionType)
 
 	testTestTree = testTree:addTree("more trees")
 	treeText = testTestTree:addText("More text in the trees")
+
+	inputLabel = testTestTree:addInputText("nerts", "pls")
 
 	treeText.tooltip = "even on more text"
 
