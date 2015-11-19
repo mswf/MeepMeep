@@ -28,16 +28,22 @@ function MainMenuState:enter(transitionType)
 
 	local testWindow = UiWindow.create()
 	testWindow.x = 400
-	testWindow.y = 400
+	testWindow.y = 100
 	testWindow.height = 400
 	testWindow.width = 300
 	testWindow.resizable = false
 
+	testWindow.title = "Main Menu"
+
+
 	globalLabel = testWindow:addText("pls")
 
-	local closeButton = testWindow:addButton("close", function()
+	local closeButton = testWindow:addButton("Start Game", function()
 		Log.bobn("pls")
+
 		testWindow:close()
+
+		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
 	end)
 
 	closeButton.tooltip = "This closes the window"
@@ -82,12 +88,12 @@ function MainMenuState:enter(transitionType)
 	TestAnim.UITweener = self.UITweener
 
 	testWindow.onClose = function()
-		globalLabel = nil
-		local pls = UiWindow.create()
-		pls.closable = false;
-		pls:addText("can't close this")
-
-		self.UITweener:new(4, pls, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
+		-- globalLabel = nil
+		-- local pls = UiWindow.create()
+		-- pls.closable = false;
+		-- pls:addText("can't close this")
+		--
+		-- self.UITweener:new(4, pls, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
 	end
 
 end
