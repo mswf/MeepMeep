@@ -11,7 +11,7 @@ function MainMenuState:update(dt)
 		if checkbox.checked then
 			bobBes = "Bobn is da best!";
 		end
-		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..inputLabel.text.."\n"..bobBes.."\n"..(sliderA.value + sliderB.value).." cows"
+		globalLabel.text = "x: "..globalLabel.parent.x..", y: "..globalLabel.parent.y.."\n"..tostring(inputLabel.text).."\n"..bobBes.."\n"..(sliderA.value + sliderB.value).." cows"
 	end
 end
 
