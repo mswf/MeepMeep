@@ -9,7 +9,8 @@ local Users = {
 	"Valentinas",
 	"Gerben",
 	"Weikie",
-	"Warning"
+	"Warning",
+	"Error"
 }
 
 
@@ -115,7 +116,7 @@ end
 
 
 function Log.tinas(text, detail, subject)
-	local BG, FG = "rgba(24,97,51,0.8)", "#ffff	ff"
+	local BG, FG = "rgba(24,97,51,0.8)", "#ffffff"
 
 	if (text ~= nil) then
 		if (isEnumValue(text)) then
@@ -179,6 +180,29 @@ function Log.warning(text, detail, subject)
 	local BG, FG = "rgba(255, 153, 0,0.8)", "#FFFFFF"
 	local USER = Users.Warning
 	local USERSTRING = "[Warning]: "
+
+	if (text ~= nil) then
+		if (isEnumValue(text)) then
+			Log.printEnum(USER, text, detail, subject, BG, FG)
+		elseif (type(text) == "table") then
+			Log.printTable(USER, text, detail, subject, BG, FG)
+		else
+			if (text == "-") then
+				Log.log(USER, USERSTRING .. "-------------------------------------------------", detail, subject, BG, FG)
+			else
+				Log.log(USER, USERSTRING .. tostring(text), detail, subject, BG, FG)
+			end
+		end
+	else
+		Log.log(USER, USERSTRING .. "nil", detail, subject, BG, FG)
+	end
+end
+
+function Log.error(text, detail, subject)
+--	local BG, FG = "#663399", "#FF22AA"
+	local BG, FG = "rgba(255, 8, 0, 0.8)", "#FFFFFF"
+	local USER = Users.Error
+	local USERSTRING = "[Error]: "
 
 	if (text ~= nil) then
 		if (isEnumValue(text)) then

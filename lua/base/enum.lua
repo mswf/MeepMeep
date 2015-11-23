@@ -1,7 +1,7 @@
 
 local enumMetaTable = {
 	__newindex = function(table, index, value)
-		Log.warning("[enum] something tried to change the enum.")
+		Log.error("[enum] something tried to change the enum.")
 		return nil
 	end
 }
@@ -58,7 +58,7 @@ function enumify(customEnum, enumName)
 	if (enumName ~= nil) then
 		customEnum.name = enumName
 	else
-		Log.warning("[enum] tried to enumify a table without providing an enumName")
+		Log.error("[enum] tried to enumify a table without providing an enumName")
 	end
 
 	setmetatable(customEnum, enumMetatable)
