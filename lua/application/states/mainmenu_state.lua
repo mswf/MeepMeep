@@ -96,6 +96,12 @@ function MainMenuState:enter(transitionType)
 		-- self.UITweener:new(4, pls, {y = 10}):setEasing(EasingFunctions.outBounce):addOnComplete(function(twn) TestAnim.moveDown(twn) end)
 	end
 
+	local testRegion = testWindow:addRegion()
+	for ii=1,99 do
+		testRegion:addText("textasdadadhabdjabdjhabdjahsdjhabdjhabdjhbajshdbjbajshbdj-"..ii)
+	end
+	testRegion.width = -50
+
 end
 
 TestAnim = TestAnim or {}
