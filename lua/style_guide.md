@@ -4,6 +4,9 @@ This is a short written guide on how we are gonna type our code.
 ### OOP
 We all know OOP is sort-of bullshit, but by declaring objects as classes hot-reloading, will become a lot easier.
 
+### Code Standards
+NEVER put any game logic inside of UI code. UI may only send and receive data by registering and broadcasting to relevant Broadcasters. Transforming data to display information should be done through static functions inside of the relevant logic classes. Thinks like tooltips and texts should generally only be *formatted* inside of UI code, but its components should be *assembled* by its owners.
+
 ***
 ### Code Conventions
 #### Classes
@@ -167,9 +170,10 @@ uiWindow.title = "Window Title"
 uiWindow.displayTitle = true
 
 -- close and collapse widgets can only be visible
---   if displayTitle = true
+--   if displayTitle == true
 uiWindow.closable = true
 uiWindow.collapsable = true
+uiWindow.collapsed = true
 
 -- show resize widget in the bottom-right corner
 uiWindow.resizable = true
@@ -178,14 +182,16 @@ uiWindow.resizable = true
 uiWindow.movable = true
 
 -- CALLBACKS, be careful with upvalues you store in these!!
-uiWindow.onClose = function(enginePassedWindow) end
--- uiWindow.onMove = function(enginePassedWindow) end
--- uiWindow.onCollapse = function(enginePassedWindow) end
--- uiWindow.onResize = function(enginePassedWindow) end
+uiWindow.onClose = function(self) end
+uiWindow.onMove = function(self) end
+uiWindow.onExpand = function(self) end
+uiWindow.onCollapse = function(self) end
+uiWindow.onResize = function(self) end
 
 -- FUNCTIONS
 -- closes the uiWindow; mind any reference that may be left
 uiWindow:close()
+
 ```
 
 #### Region : UI Container
@@ -210,6 +216,7 @@ region.bordered = false
 local tree = uiContainer:addTree( [string "treeText"] )
 
 tree.text = "tree Text"
+-- Change this from code to manually open and close
 tree.opened = true
 ```
 
@@ -235,9 +242,13 @@ local button = uiContainer:addButton( [string "buttonText"],
                                       [onPress function() end] )
 
 button.text = "buttonText"
-button.onPress = function() end
--- button.onHover = function() end
--- button.onPress = function() end
+button.onPress = function(self) end
+button.onHoverIn = function(self) end
+button.onHoverOut = function(self) end
+
+-- setting width to 0 will make the button resize itself to fit its content
+button.width  = 0
+button.height = 0
 ```
 
 #### Input Text : UI Element
@@ -266,9 +277,8 @@ slider.minValue = 0
 slider.maxValue = 10
 slider.value = 5
 
-slider.rounded = true
 -- %.2f = display the value with 2 decimal points
-slider.format = "%.2f cooks"
+slider.format = "%.2f cooks" --> 5.00 cooks
 -- wonky
 -- slider.rounded = false
 ```
