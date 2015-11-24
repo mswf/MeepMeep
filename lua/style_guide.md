@@ -184,9 +184,10 @@ uiWindow.movable = true
 -- CALLBACKS, be careful with upvalues you store in these!!
 uiWindow.onClose = function(self) end
 uiWindow.onMove = function(self) end
+uiWindow.onResize = function(self) end
+
 uiWindow.onExpand = function(self) end
 uiWindow.onCollapse = function(self) end
-uiWindow.onResize = function(self) end
 
 -- FUNCTIONS
 -- closes the uiWindow; mind any reference that may be left
@@ -218,15 +219,21 @@ local tree = uiContainer:addTree( [string "treeText"] )
 tree.text = "tree Text"
 -- Change this from code to manually open and close
 tree.opened = true
+
+-- CALLBACKS
+checkbox.onExpand = function(self) end
+checkbox.onCollapse = function(self) end
+
+
 ```
 
 #### Text Element : UI Element
 ```lua
 -- square brackets are used to show optional parameters
-local textElement = uiContainer:addText( [string "label"],
+local textElement = uiContainer:addText( [string "text"],
                                          [int wrapWidth] )
 
-textElement.label = "Text that is displayed here"
+textElement.text = "Text that is displayed here"
 
 -- reset, will be equal to the available width
 textElement.wrapWidth = 0
@@ -242,13 +249,15 @@ local button = uiContainer:addButton( [string "buttonText"],
                                       [onPress function() end] )
 
 button.text = "buttonText"
-button.onPress = function(self) end
-button.onHoverIn = function(self) end
-button.onHoverOut = function(self) end
 
 -- setting width to 0 will make the button resize itself to fit its content
 button.width  = 0
 button.height = 0
+
+-- CALLBACKS
+button.onPress = function(self) end
+button.onHoverIn = function(self) end
+button.onHoverOut = function(self) end
 ```
 
 #### Input Text : UI Element
@@ -258,6 +267,11 @@ local inputText = uiContainer:addInputText( [string "label"],
 
 inputText.label = "label"
 inputText.text = "contents"
+
+-- CALLBACKS
+inputText.onFocusGain = function(self) end
+inputText.onFocusLose = function(self) end
+inputText.onChange = function(self) end
 ```
 
 #### Checkbox : UI Element
@@ -267,11 +281,16 @@ local checkbox = uiContainer:addCheckbox( [string "label"],
 
 checkbox.label = "label"
 checkbox.checked = false
+
+-- CALLBACKS
+checkbox.onChange = function(self) end
 ```
 
 #### Slider : UI Element
 ```lua
-local slider = uiContainer:addSlider( string "floats"/"ints")
+local slider = uiContainer:addSlider( string "label")
+
+slider.label = "labelText"
 
 slider.minValue = 0
 slider.maxValue = 10
@@ -279,6 +298,9 @@ slider.value = 5
 
 -- %.2f = display the value with 2 decimal points
 slider.format = "%.2f cooks" --> 5.00 cooks
--- wonky
--- slider.rounded = false
+-- switch between integers and floats
+slider.rounded = false
+
+-- CALLBACKS
+slider.onChange = function(self) end
 ```
