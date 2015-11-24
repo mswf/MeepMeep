@@ -20,8 +20,9 @@ function IngameState:enter()
 		testWindow.collapsable = false
 
 
-		testWindow.title = "Ingame Menu"
+		-- testWindow.title = "Ingame Menu"
 
+		testWindow.displayTitle = false
 
 		globalLabel = testWindow:addText("we are in game now")
 

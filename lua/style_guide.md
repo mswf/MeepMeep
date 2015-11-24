@@ -120,3 +120,155 @@ function ExampleClass:addMarkers(nodes)
 end
 
 ```
+
+***
+### UI Documentation
+
+#### UI Element
+```lua
+local uiElement
+
+uiElement.visible = true
+
+-- set to nil or "" to remove
+uiElement.tooltip = "tooltip text"
+```
+
+#### UI Container : UI Element
+```lua
+local uiContainer
+
+local tree        = uiContainer:addTree( [string "treeText"] )
+local textElement = uiContainer:addText( [string "label"],
+                                         [int wrapWidth] )
+local button      = uiContainer:addButton( [string "buttonText"],
+                                           [onPress function() end] )
+local inputText   = uiContainer:addInputText( [string "label"],
+                                              [string "defaultText"] )
+local checkbox    = uiContainer:addCheckbox( [string "label"],
+                                             [bool isChecked] )
+local slider      = uiContainer:addSlider( string "floats"/"ints")
+```
+
+#### UI Window : UI Container
+```lua
+local uiWindow = UiWindow.create()
+
+-- PROPERTIES
+-- position
+uiWindow.x = 10
+uiWindow.y = 10
+-- size
+uiWindow.height = 400
+uiWindow.width = 300
+
+-- title bar
+uiWindow.title = "Window Title"
+uiWindow.displayTitle = true
+
+-- close and collapse widgets can only be visible
+--   if displayTitle = true
+uiWindow.closable = true
+uiWindow.collapsable = true
+
+-- show resize widget in the bottom-right corner
+uiWindow.resizable = true
+
+-- click and drag anywhere on the window to move it
+uiWindow.movable = true
+
+-- CALLBACKS, be careful with upvalues you store in these!!
+uiWindow.onClose = function(enginePassedWindow) end
+-- uiWindow.onMove = function(enginePassedWindow) end
+-- uiWindow.onCollapse = function(enginePassedWindow) end
+-- uiWindow.onResize = function(enginePassedWindow) end
+
+-- FUNCTIONS
+-- closes the uiWindow; mind any reference that may be left
+uiWindow:close()
+```
+
+#### Region : UI Container
+```lua
+local region = uiContainer:addRegion()
+
+-- reset, will be equal to the available width
+region.width = 0
+-- absolute width
+region.width > 0
+-- takes up all available space, minus the provided amount
+region.width < 0
+
+region.height =
+
+-- show a visible border around the edges
+region.bordered = false
+```
+
+#### Tree : UI Container
+```lua
+local tree = uiContainer:addTree( [string "treeText"] )
+
+tree.text = "tree Text"
+tree.opened = true
+```
+
+#### Text Element : UI Element
+```lua
+-- square brackets are used to show optional parameters
+local textElement = uiContainer:addText( [string "label"],
+                                         [int wrapWidth] )
+
+textElement.label = "Text that is displayed here"
+
+-- reset, will be equal to the available width
+textElement.wrapWidth = 0
+-- absolute width
+textElement.wrapWidth > 0
+-- takes up all available space, minus the provided amount
+textElement.wrapWidth < 0
+```
+
+#### Button : UI Element
+```lua
+local button = uiContainer:addButton( [string "buttonText"],
+                                      [onPress function() end] )
+
+button.text = "buttonText"
+button.onPress = function() end
+-- button.onHover = function() end
+-- button.onPress = function() end
+```
+
+#### Input Text : UI Element
+```lua
+local inputText = uiContainer:addInputText( [string "label"],
+                                            [string "defaultText"] )
+
+inputText.label = "label"
+inputText.text = "contents"
+```
+
+#### Checkbox : UI Element
+```lua
+local checkbox = uiContainer:addCheckbox( [string "label"],
+                                          [bool isChecked] )
+
+checkbox.label = "label"
+checkbox.checked = false
+```
+
+#### Slider : UI Element
+```lua
+local slider = uiContainer:addSlider( string "floats"/"ints")
+
+slider.minValue = 0
+slider.maxValue = 10
+slider.value = 5
+
+slider.rounded = true
+-- %.2f = display the value with 2 decimal points
+slider.format = "%.2f cooks"
+-- wonky
+-- slider.rounded = false
+```
