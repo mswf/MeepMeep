@@ -135,6 +135,9 @@ uiElement.visible = true
 
 -- set to nil or "" to remove
 uiElement.tooltip = "tooltip text"
+
+--have this element remove itself from it's parent
+uiElement:destroy()
 ```
 
 #### UI Container : UI Element
@@ -151,6 +154,9 @@ local inputText   = uiContainer:addInputText( [string "label"],
 local checkbox    = uiContainer:addCheckbox( [string "label"],
                                              [bool isChecked] )
 local slider      = uiContainer:addSlider( string "floats"/"ints")
+
+--remove an element from this Container
+uiContainer:remove(element)
 ```
 
 #### UI Window : UI Container
