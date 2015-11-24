@@ -39,10 +39,10 @@ end
 
 function GameStateManager:_setCurrentState(newState, transitionType)
 	if (self._currentState) then
-		self._currentState:exit(transitionType)
+		self._currentState:baseExit(transitionType)
 	end
 
 	self._currentState = newState
 
-	newState:enter(transitionType)
+	newState:baseEnter(transitionType)
 end

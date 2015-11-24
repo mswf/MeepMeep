@@ -31,7 +31,7 @@ function MainMenuState:enter(transitionType)
 	testWindow.y = 100
 	testWindow.height = 400
 	testWindow.width = 300
-	testWindow.resizable = false
+	testWindow.resizable = true
 
 	testWindow.title = "Main Menu"
 
