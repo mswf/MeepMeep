@@ -290,16 +290,14 @@ checkbox.onChange = function(self) end
 ```lua
 local slider = uiContainer:addSlider( string "label")
 
+-- %.2f = display the value with 2 decimal points
+slider.format = "%.2f cooks" --> 5.00 cooks
 slider.label = "labelText"
 
 slider.minValue = 0
 slider.maxValue = 10
 slider.value = 5
-
--- %.2f = display the value with 2 decimal points
-slider.format = "%.2f cooks" --> 5.00 cooks
--- switch between integers and floats
-slider.rounded = false
+slider.rounded = false -- integer/float
 
 -- CALLBACKS
 slider.onChange = function(self) end
