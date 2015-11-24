@@ -29,12 +29,21 @@ function MainMenuState:enter(transitionType)
 	local testWindow = UiWindow.create()
 	testWindow.x = 400
 	testWindow.y = 100
-	testWindow.height = 400
-	testWindow.width = 300
+	testWindow.height = 500
+	testWindow.width = 400
 	testWindow.resizable = false
 
 	testWindow.title = "Main Menu"
 
+	testWindow.expanded = false
+
+	testWindow.onCollapse = function(window)
+		Log.bobn("collapsed")
+	end
+
+	testWindow.onExpand = function(window)
+		Log.bobn("expanded")
+	end
 
 	globalLabel = testWindow:addText("pls")
 
@@ -58,15 +67,36 @@ function MainMenuState:enter(transitionType)
 	testTestTree = testTree:addTree("more trees")
 	treeText = testTestTree:addText("More text in the trees")
 
-	inputLabel = testTestTree:addInputText("nerts", "pls")
+	inputLabel = testTestTree:addInputText("nerts", "wow")
 	checkbox = testWindow:addCheckbox("Is bob da bes?", true)
 	checkbox.tooltip = "The answer is yes"
 
+	inputLabel.text = "pls"
+
+	inputLabel.onFocusGain = function(inputText)
+		if inputText.text == "pls" then
+			inputText.text = ""
+		end
+		Log.bobn("focus gained: "..inputText.text)
+	end
+
+	inputLabel.onFocusLose = function(inputText)
+		if inputText.text == "" then
+			inputText.text = "pls"
+		end
+		--inputText.text = "lel"
+	end
+
+	inputLabel.onChange = function(inputText)
+		checkbox.tooltip = "the answer is "..inputText.text
+	end
+
 	treeText.tooltip = "even on more text"
 
-	treeButton.callback = function()
+	treeButton.onPress = function()
 		checkbox.checked = true
-		checkbox.visible = false;
+		checkbox:destroy()
+		testTestTree:remove(treeText);
 	end
 
 	--testWindow.visible = false
@@ -76,7 +106,7 @@ function MainMenuState:enter(transitionType)
 	sliderA = otherTree:addSlider("floats")
 	sliderA.minValue = 50
 	sliderA.maxValue = 150
-	sliderA.format = "cows: %.2f"
+	sliderA.format = "%.2f"
 
 	sliderB = otherTree:addSlider("ints")
 	sliderB.minValue = -10
@@ -98,9 +128,38 @@ function MainMenuState:enter(transitionType)
 
 	local testRegion = testWindow:addRegion()
 	for ii=1,99 do
-		testRegion:addText("textasdadadhabdjabdjhabdjahsdjhabdjhabdjhbajshdbjbajshbdj-"..ii)
+		testRegion:addText("text - "..ii)
 	end
+
 	testRegion.width = -50
+	testRegion.height = -100
+
+	local testHori = testWindow:addHorizontalLayout()
+	testHori:addButton("button a")
+	local big = testHori:addButton("button b")
+	big.width = 120
+	testHori:addButton("button c")
+
+	big.onHoverIn = function(button)
+		button.text = "hovered"
+	end
+
+	big.onHoverOut = function(button)
+		button.text = "not hovered"
+	end
+
+	testHori.spacing = 10;
+
+	local sliderC = testWindow:addSlider("spacing")
+	sliderC.minValue = 0
+	sliderC.maxValue = 20
+	sliderC.value = 10
+	sliderC.rounded = true
+	sliderC.format = "%.0f"
+
+	sliderC.onChange = function(slider)
+		testHori.spacing = slider.value
+	end
 
 end
 
