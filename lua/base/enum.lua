@@ -3,12 +3,15 @@ local enumMetaTable = {
 	__newindex = function(table, index, value)
 		Log.error("[enum] something tried to change the enum.")
 		return nil
+	end,
+	__tostring = function(value)
+		return "[ENUM] " .. retrieveVariableName(value)
 	end
 }
 
 local enumValueMetatable = {
-	__tostring = function (value)
-		return value.name
+	__tostring = function(value)
+		return "[ENUMVALUE] " .. retrieveVariableName(value.enum) .. "." .. value.name
 	end,
 	__concat = function(lhs, rhs)
 		return tostring(lhs) .. tostring(rhs)
@@ -22,7 +25,7 @@ function setEnum(table, enumName, ...)
 	end
 
 	for index, value in ipairs({...}) do
-		local enumValue = setmetatable({num = index, name = value}, enumValueMetatable)
+		local enumValue = setmetatable({num = index, name = value, enum = enumeration}, enumValueMetatable)
 		rawset(enumeration, index, enumValue)
 		rawset(enumeration, value, enumValue)
 	end
@@ -38,6 +41,10 @@ end
 
 function createPrivateEnum(table, enumName, ...)
 	return setEnum(table, enumName, ...)
+end
+
+function isEnum(table)
+	return getmetatable(table) == enumMetatable
 end
 
 function isEnumValue(value)

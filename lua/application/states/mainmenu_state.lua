@@ -4,6 +4,8 @@ MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
 
 end)
 
+
+
 function MainMenuState:update(dt)
 	-- Log.steb("updating the MainMenuState")
 	if globalLabel ~= nil then
@@ -16,16 +18,15 @@ function MainMenuState:update(dt)
 end
 
 function MainMenuState:__onReload()
-	Log.steb("MainMenuState reloaded")
+	Log.steb(self)
 
-	self.window.title = "Anything"
+
+	-- self.window.title = "Anything"
 
 	-- Log.steb("changed broadcaster reload")
 end
 
-
 function MainMenuState:enter(transitionType)
-
 	local testWindow = UiWindow.create()
 	testWindow.x = 400
 	testWindow.y = 100
@@ -33,7 +34,7 @@ function MainMenuState:enter(transitionType)
 	testWindow.width = 400
 	testWindow.resizable = false
 
-	testWindow.title = "Main Menu"
+	testWindow.title = "Test Menu"
 
 	testWindow.expanded = false
 

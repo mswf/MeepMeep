@@ -9,6 +9,10 @@ NEVER put any game logic inside of UI code. UI may only send and receive data by
 
 ***
 ### Code Conventions
+
+#### Horizontal Space
+For this project, configure your editor to always use tabs with 2 chars width. 
+
 #### Classes
 Classes are written in UpperCamelCase. Always use ```self``` to name the first parameter of class initialization.
 #### Functions

@@ -17,7 +17,9 @@ class = setmetatable(class or {}, {
 		elseif type(base) == 'table' then
 			-- our new class is a shallow copy of the base class!
 			for i,v in pairs(base) do
-				c[i] = v
+				if (i ~= "__instances") then
+					c[i] = v
+				end
 			end
 			c._base = base
 		end
@@ -50,11 +52,13 @@ class = setmetatable(class or {}, {
 
 			return obj
 		end
+		-- local variableName =
+		c.__tostring = function(value) return "[INSTANCE] " .. retrieveVariableName(c) end
 		c.init = init
 		c.is_a = function(self, klass)
-		local m = getmetatable(self)
-		while m do
-			if m == klass then return true end
+			local m = getmetatable(self)
+			while m do
+				if m == klass then return true end
 				m = m._base
 			end
 			return false

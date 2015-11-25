@@ -7,11 +7,11 @@ end
 UIBase = class(UIBase, function(self, uiManager)
 	uiManager = uiManager or GlobalUIManager
 
-	self.widget = uiManager:getNewWindow()
+	self.window = uiManager:getNewWindow()
 
 	self._uiManager = uiManager
 
-	self.widget.title = "UI Base"
+	self.window.title = "UI Base"
 
 	self:_createUI()
 	self:_setUI()
@@ -27,6 +27,8 @@ end
 
 function UIBase:_cleanUp()
 	self:unregister()
+
+	self.window:close()
 end
 
 function UIBase:__onReload()
@@ -48,3 +50,25 @@ end
 function UIBase:_unregister()
 
 end
+
+
+--[[
+UI_IMPLEMENTATION = class(UI_IMPLEMENTATION, UIBase)
+
+function UI_IMPLEMENTATION:_createUI()
+
+end
+
+function UI_IMPLEMENTATION:_setUI()
+
+end
+
+function UI_IMPLEMENTATION:_register()
+
+end
+
+function UI_IMPLEMENTATION:_unregister()
+
+end
+
+]]--

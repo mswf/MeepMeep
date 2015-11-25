@@ -1,5 +1,8 @@
 
 
+require "lua/base/utils/helper"
+
+
 require "lua/base/class"
 require "lua/base/enum"
 require "lua/base/broadcaster"
@@ -9,7 +12,6 @@ require "lua/base/parsing/parser"
 require "lua/base/parsing/parsingcontext"
 
 
-require "lua/base/utils/helper"
 require "lua/base/utils/queue"
 
 require "lua/base/math/extramath"
