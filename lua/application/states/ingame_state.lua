@@ -9,7 +9,7 @@ function IngameState:enter()
 	Log.steb("we entered the ingame")
 
 
-		local testWindow = UiWindow.create()
+		local testWindow = Engine.ui.createWindow()
 		testWindow.x = 10
 		testWindow.y = 10
 		testWindow.height = 400
@@ -26,13 +26,14 @@ function IngameState:enter()
 
 		globalLabel = testWindow:addText("we are in game now")
 
-		local closeButton = testWindow:addButton("To main menu", function()
+		local closeButton = testWindow:addButton("To main menu")
+		closeButton.onPress = function()
 			testWindow:close()
 
 			GlobalStateManager:doTransition(Transitions.GameToMainMenu)
-		end)
+		end
 
-		closeButton.width = 500
+		closeButton.width = 100
 
 end
 

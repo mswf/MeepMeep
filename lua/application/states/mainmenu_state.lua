@@ -54,13 +54,15 @@ function MainMenuState:enter(transitionType)
 
 	globalLabel = testWindow:addText("pls")
 
-	local closeButton = testWindow:addButton("Start Game", function()
+	local closeButton = testWindow:addButton("Start Game" )
+
+	closeButton.onPress =function()
 		Log.bobn("pls")
 
 		testWindow:close()
 
 		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
-	end)
+	end
 
 	closeButton.tooltip = "This closes the window"
 
