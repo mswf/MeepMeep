@@ -26,6 +26,13 @@ end
 
 function MainMenuState:enter(transitionType)
 
+
+	local testEntity = Entity()
+
+	testEntity.update = function(delta)
+		Log.bobn(delta)
+	end
+
 	local testWindow = Engine.ui.createWindow()
 	testWindow.x = 400
 	testWindow.y = 100

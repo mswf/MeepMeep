@@ -7,6 +7,8 @@ require "lua/base/class"
 require "lua/base/enum"
 require "lua/base/broadcaster"
 
+require "lua/base/entity"
+
 require "lua/base/parsing/i18n"
 require "lua/base/parsing/parser"
 require "lua/base/parsing/parsingcontext"
