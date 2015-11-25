@@ -42,7 +42,8 @@ void main()
 	vec4 specular = vec4( specularCoefficient );
 	 */
 	vec4 diffuse = vec4( texture( colorMap, uv ).rgb * NdotL, 1.0);
-	vec4 finalColor = diffuse;
+	//vec4 finalColor = diffuse;
+	vec4 finalColor = texture( colorMap, uv );
 	
 	Out_Color = finalColor;
 	//Out_Color = vec4( n, 1.0); // DEBUGGING NORMALS
