@@ -26,7 +26,7 @@ end
 
 function MainMenuState:enter(transitionType)
 
-	local testWindow = UiWindow.create()
+	local testWindow = Engine.ui.createWindow()
 	testWindow.x = 400
 	testWindow.y = 100
 	testWindow.height = 500

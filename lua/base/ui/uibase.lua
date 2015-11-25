@@ -1,6 +1,6 @@
 
-if (UiWindow.__UIInit == nil) then
-	UiWindow.__UIInit = UiWindow.create
+if (Engine.ui.__UIInit == nil) then
+	Engine.ui.__UIInit = Engine.ui.createWindow
 	-- UiWindow.create = nil
 end
 

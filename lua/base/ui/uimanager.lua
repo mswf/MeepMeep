@@ -7,7 +7,7 @@ end)
 
 
 function UIManager:getNewWindow()
-	local window = UiWindow.create()
+	local window = Engine.ui.createWindow()
 
 	self._activeWindows[window] = window
 
