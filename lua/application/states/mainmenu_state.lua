@@ -93,7 +93,8 @@ function MainMenuState:enter(transitionType)
 
 	treeText.tooltip = "even on more text"
 
-	treeButton.onPress = function()
+	treeButton.onPress = function(treeButton)
+		treeButton.onPress = nil
 		checkbox.checked = true
 		checkbox:destroy()
 		testTestTree:remove(treeText);
