@@ -24,7 +24,11 @@ end
 function GameStateManager:doTransition(transitionType)
 	if (self._currentState) then
 		if (self._transitions[self._currentState]) then
-			self._currentState = self._transitions[self._currentState]
+			if (self._transitions[self._currentState][transitionType]) then
+				self:_setCurrentState(self._transitions[self._currentState][transitionType])
+			else
+				Log.warning("Invalid transition: " .. tostring(transitionType))
+			end
 		else
 			Log.warning("")
 		end
@@ -35,10 +39,10 @@ end
 
 function GameStateManager:_setCurrentState(newState, transitionType)
 	if (self._currentState) then
-		self._currentState:exit(transitionType)
+		self._currentState:baseExit(transitionType)
 	end
 
 	self._currentState = newState
 
-	newState:enter(transitionType)
+	newState:baseEnter(transitionType)
 end

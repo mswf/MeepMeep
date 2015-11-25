@@ -9,7 +9,8 @@ local Users = {
 	"Valentinas",
 	"Gerben",
 	"Weikie",
-	"Warning"
+	"Warning",
+	"Error"
 }
 
 
@@ -43,15 +44,6 @@ function Log.printTable(user, table, detailLevel, subject, ...)
 	end
 end
 
-function Log.printEnum(user, enum, detailLevel, subject, ...)
-	if (Log.isEnabled(user,detailLevel,subject)) then
-		local subjectString = Log.getPrefix(subject, detailLevel)
-
-		if (...) then logFunc = logFuncColor end --if color information is given, use it
-		printEnumValue(enum, subjectString, logFunc, ...)
-	end
-end
-
 --Standardized subject string
 function Log.getPrefix(subject, detailLevel)
 	local subjectString = ""
@@ -74,9 +66,7 @@ function Log.steb(text, detail, subject)
 	local BG, FG = "rgba(102,51,153,0.8)", "#FF22AA"
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(Users.Steff, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
 			Log.printTable(Users.Steff, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then
@@ -96,9 +86,7 @@ function Log.bobn(text, detail, subject)
 	local BG, FG = "rgba(1,176,250,0.8)", "#ffffff"
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(Users.Robin, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
 			Log.printTable(Users.Robin, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then
@@ -115,12 +103,10 @@ end
 
 
 function Log.tinas(text, detail, subject)
-	local BG, FG = "rgba(24,97,51,0.8)", "#ffff	ff"
+	local BG, FG = "rgba(24,97,51,0.8)", "#ffffff"
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(Users.Valentinas, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
 			Log.printTable(Users.Valentinas, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then
@@ -138,9 +124,7 @@ function Log.waka(text, detail, subject)
 	local BG, FG = "rgba(254,245,2,0.8)", "#31311b"
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(Users.Weikie, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
 			Log.printTable(Users.Weikie, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then
@@ -158,9 +142,7 @@ function Log.gwebl(text, detail, subject)
 	local BG, FG = "rgba(73,15,1,0.8)", "#ffffff"
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(Users.Gerben, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
 			Log.printTable(Users.Gerben, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then
@@ -181,9 +163,28 @@ function Log.warning(text, detail, subject)
 	local USERSTRING = "[Warning]: "
 
 	if (text ~= nil) then
-		if (isEnumValue(text)) then
-			Log.printEnum(USER, text, detail, subject, BG, FG)
-		elseif (type(text) == "table") then
+		if (type(text) == "table") then
+			Log.printTable(USER, text, detail, subject, BG, FG)
+		else
+			if (text == "-") then
+				Log.log(USER, USERSTRING .. "-------------------------------------------------", detail, subject, BG, FG)
+			else
+				Log.log(USER, USERSTRING .. tostring(text), detail, subject, BG, FG)
+			end
+		end
+	else
+		Log.log(USER, USERSTRING .. "nil", detail, subject, BG, FG)
+	end
+end
+
+function Log.error(text, detail, subject)
+--	local BG, FG = "#663399", "#FF22AA"
+	local BG, FG = "rgba(255, 8, 0, 0.8)", "#FFFFFF"
+	local USER = Users.Error
+	local USERSTRING = "[Error]: "
+
+	if (text ~= nil) then
+		if (type(text) == "table") then
 			Log.printTable(USER, text, detail, subject, BG, FG)
 		else
 			if (text == "-") then

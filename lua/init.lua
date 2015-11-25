@@ -19,7 +19,10 @@ function Game.crash()
 end
 
 function Game.main()
+	GlobalUIManager = UIManager()
+	
 	GlobalStateManager = ApplicationStateManager()
+
 
 	--
 	-- GLOBTAB = {}
@@ -63,10 +66,10 @@ function Game.onShutdown()
 	Log.steb("Shutting down the game")
 end
 
-function Game.onFocusLost()
+function Game.onFocusLose()
 end
 
-function Game.onFocusGained()
+function Game.onFocusGain()
 end
 
 Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()

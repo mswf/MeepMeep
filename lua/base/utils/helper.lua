@@ -10,24 +10,29 @@ function math.round(num, idp)
 end
 
 --... is used for color information
-function printTableValues(table, prefix, logFunc,...)
+function printTableValues(printingTable, prefix, logFunc,...)
 	prefix = prefix or ""
-	logFunc = logFunc or Log.debug
-	logFunc(prefix.."Printing table: "..retrieveVariableName(table),...)
-	for k,v in pairs(table) do
-		logFunc(prefix..tostring(k).." -> "..tostring(v), ...)
+	logFunc = logFunc or Log.log
+
+	local printData = {}
+
+
+	table.insert(printData, prefix.."Printing ".. tostring(printingTable))
+	local counter = 0
+
+	for k,v in pairs(printingTable) do
+		table.insert(printData, prefix..tostring(k).." -> "..tostring(v))
+		counter = counter + 1
+
+		if (counter > 20) then
+			counter = 0
+			logFunc(table.concat(printData, "\n|     "), ...)
+			printData = {}
+		end
 	end
+	logFunc(table.concat(printData, "\n|     "), ...)
 end
 
---... is used for color information
-function printEnumValue(enumValue, prefix, logFunc,...)
-	prefix = prefix or ""
-	logFunc = logFunc or Log.debug
-	logFunc(prefix.."printing enum value:",...)
-	logFunc("enum ->	 ".. tostring(enumValue.enum.name),...)
-	logFunc("name ->	 ".. tostring(enumValue.name),...)
-	logFunc("num ->		".. tostring(enumValue.num),...)
-end
 
 --Retrieves the key of this object in the global or given table
 function retrieveVariableName(object, t)

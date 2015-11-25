@@ -23,14 +23,20 @@ function GameState:update(dt)
 	--override this
 end
 
+function GameState:baseEnter(transitionType)
+	self:enter(transitionType)
+end
+
 function GameState:enter(transitionType)
 
 end
 
-function GameState:exit(transitionType)
+function GameState:baseExit(transitionType)
+	self:exit(transitionType)
 
+	self.UITweener:clear()
 end
 
-function GameState:reset()
+function GameState:exit(transitionType)
 
 end
