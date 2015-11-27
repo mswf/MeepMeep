@@ -19,7 +19,6 @@ function IngameState:enter()
 		testWindow.movable = false
 		testWindow.collapsable = false
 
-
 		-- testWindow.title = "Ingame Menu"
 
 		testWindow.displayTitle = false

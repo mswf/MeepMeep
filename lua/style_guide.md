@@ -11,7 +11,7 @@ NEVER put any game logic inside of UI code. UI may only send and receive data by
 ### Code Conventions
 
 #### Horizontal Space
-For this project, configure your editor to always use tabs with 2 chars width. 
+For this project, configure your editor to always use tabs with 2 chars width.
 
 #### Classes
 Classes are written in UpperCamelCase. Always use ```self``` to name the first parameter of class initialization.
@@ -20,6 +20,8 @@ Functions are written in lowerCamelCase. Try use as many static functions as pos
 ### Values
 Values are written in lowerCamelCase. Private functions start with an underscore (```_value```).
 Constants are written in UPPERCASE. They should be stored in the class definition. When referencing constants, reference them by using the ```self``` keyword, NOT by referencing the base class by name.
+### Parameters
+When naming or storing a table with (optional) parameters or arguments, always use ```params``` or ```_params```.
 
 ***
 ### Example

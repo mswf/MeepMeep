@@ -8,6 +8,12 @@ require "lua/application/states/applicationstatemanager"
 --Log.steb("Running Carbon Version " .. Carbon.VersionString)
 --Log.steb(Carbon.Support:Report())
 
+--hardcoded tobe engine functions:
+Engine.ui.getScreenWidth = function() return 1280 end
+Engine.ui.getScreenHeight = function() return 720 end
+
+
+
 Game = Game or {}
 
 if (love) then
@@ -20,7 +26,7 @@ end
 
 function Game.main()
 	GlobalUIManager = UIManager()
-	
+
 	GlobalStateManager = ApplicationStateManager()
 
 
