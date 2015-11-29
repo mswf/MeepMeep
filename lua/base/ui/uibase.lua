@@ -4,14 +4,21 @@ if (Engine.ui.__UIInit == nil) then
 	-- UiWindow.create = nil
 end
 
-UIBase = class(UIBase, function(self, uiManager)
-	uiManager = uiManager or GlobalUIManager
+UIBase = class(UIBase, function(self, uiManager, params)
+	uiManager = uiManager or Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
+
+	self._params = params
 
 	self.window = uiManager:getNewWindow()
+	self.window.__owner = self
 
 	self._uiManager = uiManager
 
 	self.window.title = "UI Base"
+
+	if (self.update ~= UIBase.update) then
+		uiManager:registerUpdate(self.window)
+	end
 
 	self:_createUI()
 	self:_setUI()
@@ -26,7 +33,7 @@ function UIBase:destroy()
 end
 
 function UIBase:_cleanUp()
-	self:unregister()
+	self:_unregister()
 
 	self.window:close()
 end
@@ -51,6 +58,19 @@ function UIBase:_unregister()
 
 end
 
+function UIBase:update(dt)
+
+end
+
+function UIBase._getOrCreateUI(table, index, constructor)
+	if (table[index]) then
+		return table[index]
+	else
+		local element = constructor()
+		table[index] = element
+		return element
+	end
+end
 
 --[[
 UI_IMPLEMENTATION = class(UI_IMPLEMENTATION, UIBase)

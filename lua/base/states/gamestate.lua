@@ -7,6 +7,7 @@ GameState = class(GameState, function(self, gameStateManager)
 	self.broadcaster = Broadcaster()
 
 	self.UITweener = Tweener()
+	self.UIManager = UIManager()
 end)
 
 function GameState:initialize()
@@ -17,6 +18,7 @@ function GameState:baseUpdate(dt)
 	self:update(dt)
 
 	self.UITweener:update(dt)
+	self.UIManager:update(dt)
 end
 
 function GameState:update(dt)
@@ -35,6 +37,7 @@ function GameState:baseExit(transitionType)
 	self:exit(transitionType)
 
 	self.UITweener:clear()
+	self.UIManager:destroyAll()
 end
 
 function GameState:exit(transitionType)

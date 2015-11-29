@@ -6,6 +6,9 @@ local enumMetaTable = {
 	end,
 	__tostring = function(value)
 		return "[ENUM] " .. retrieveVariableName(value)
+	end,
+	__concat = function(lhs, rhs)
+		return tostring(lhs) .. tostring(rhs)
 	end
 }
 

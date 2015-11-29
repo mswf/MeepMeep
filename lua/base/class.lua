@@ -54,6 +54,7 @@ class = setmetatable(class or {}, {
 		end
 		-- local variableName =
 		c.__tostring = function(value) return "[INSTANCE] " .. retrieveVariableName(c) end
+		c.__concat = function(op1, op2) return tostring(op1) .. tostring(op2) end
 		c.init = init
 		c.is_a = function(self, klass)
 			local m = getmetatable(self)
