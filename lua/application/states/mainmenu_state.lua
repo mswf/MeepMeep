@@ -1,5 +1,5 @@
 
-require "lua/application/ui/mainmenu_ui"
+require "lua/application/ui/mainmenu/mainmenu_ui"
 require "lua/application/ui/test_ui"
 
 

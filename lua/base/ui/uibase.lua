@@ -21,7 +21,6 @@ UIBase = class(UIBase, function(self, uiManager, params)
 	end
 
 	self:_createUI()
-	self:_setUI()
 	self:_register()
 end)
 
@@ -29,7 +28,7 @@ end)
 function UIBase:destroy()
 	self._uiManager:removeWindow(self)
 
-	self:_cleanup()
+	self:_cleanUp()
 end
 
 function UIBase:_cleanUp()
@@ -39,14 +38,19 @@ function UIBase:_cleanUp()
 end
 
 function UIBase:__onReload()
-	self:_setUI()
+	self:destroy()
+
+	self.window = self._uiManager:getNewWindow()
+	self.window.__owner = self
+	if (self.update ~= UIBase.update) then
+		uiManager:registerUpdate(self.window)
+	end
+
+	self:_createUI()
+	self:_register()
 end
 
 function UIBase:_createUI()
-
-end
-
-function UIBase:_setUI()
 
 end
 
@@ -62,24 +66,10 @@ function UIBase:update(dt)
 
 end
 
-function UIBase._getOrCreateUI(table, index, constructor)
-	if (table[index]) then
-		return table[index]
-	else
-		local element = constructor()
-		table[index] = element
-		return element
-	end
-end
-
 --[[
 UI_IMPLEMENTATION = class(UI_IMPLEMENTATION, UIBase)
 
 function UI_IMPLEMENTATION:_createUI()
-
-end
-
-function UI_IMPLEMENTATION:_setUI()
 
 end
 

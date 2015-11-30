@@ -148,11 +148,6 @@ function TestUI:_createUI()
 	end
 end
 
--- set the properties for all UI elements here (called during hotreload)
-function TestUI:_setUI()
-
-end
-
 -- register to various events
 function TestUI:_register()
 
