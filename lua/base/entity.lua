@@ -1,4 +1,4 @@
-Entity = class(Entity, Engine.BaseEntity, function(self)
+Entity = class(Entity, Engine.baseEntity, function(self)
 
 
 end)

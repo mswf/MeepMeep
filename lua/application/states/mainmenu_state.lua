@@ -38,8 +38,9 @@ function MainMenuState:enter(transitionType)
 
 	local testEntity = Entity()
 
+	Log.bobn("plsdfff")
 	testEntity.update = function(delta)
-		Log.bobn(delta)
+		
 	end
 
 
