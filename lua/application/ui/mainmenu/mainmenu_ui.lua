@@ -5,14 +5,7 @@ MainMenuUI = class(MainMenuUI, UIBase)
 -- initialize and create UI elements here
 function MainMenuUI:_createUI()
 	Log.steb("creating main menu")
-	local window = self.window
 
-
-end
-
--- set the properties for all UI elements here (called during hotreload)
-local getCreateUI = UIBase._getOrCreateUI
-function MainMenuUI:_setUI()
 	local window = self.window
 
 	window.title = "Main Menu"
@@ -27,51 +20,49 @@ function MainMenuUI:_setUI()
 	window.resizable = false
 	window.movable = false
 
-	local titleLayout = getCreateUI(self, "titleLayout",
-		function() return window:addHorizontalLayout() end)
+	local titleLayout = window:addHorizontalLayout()
 
-	-- if (not self.titleLayout) then
-	-- 	self.titleLayout = window:addHorizontalLayout()
-	-- end
-	-- local titleLayout = self.titleLayout
 	titleLayout.spacing = 250
 
-	if (not self.titleText) then
-		self.titleText = titleLayout:addText()
-	end
+	self.titleText = titleLayout:addText()
 	local titleText = self.titleText
+
 	titleText.text = "The Frontier"
 
-
-	if (not self.versionText) then
-		self.versionText = titleLayout:addText()
-	end
+	self.versionText = titleLayout:addText()
 	local versionText = self.versionText
 	versionText.text = "v a.1"
 
-	if (not self.introText) then
-		self.introText = window:addText()
-	end
+	self.introText = window:addText()
 	local introText = self.introText
 	introText.text = "     A WIP game by some idiots."
 
-	local spacingStub = getCreateUI(self, "spacingStub",
-		function() return window:addText() end)
+	local spacingStub = window:addText()
 
 	spacingStub.text = ""
 
-	local startGameButton = getCreateUI(self, "startGameButton",
-		function() return window:addButton() end)
+	local startGameButton = window:addButton()
 
 	startGameButton.text = "Start Game"
 	startGameButton.width = 200
-	-- startGameButton.height = 50
 
 	startGameButton.onPress = function()
 		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
 	end
 
 
+	local openOptionsButton = window:addButton()
+
+	openOptionsButton.text = "Options"
+	openOptionsButton.width = 200
+
+	openOptionsButton.onPress = function()
+		local broadcaster = GlobalStateManager:getCurrentState().broadcaster
+		broadcaster:broadcast(MainMenuState.Events.OpenOptions)
+
+	end
+	--[[
+	]]--
 end
 
 -- register to various events

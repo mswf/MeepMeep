@@ -16,6 +16,12 @@ createEnum("Transitions",
 ApplicationStateManager = class(ApplicationStateManager, GameStateManager, function(self)
 	self._base.init(self)
 
+
+
+end)
+
+
+function ApplicationStateManager:start()
 	local mainMenuState = MainMenuState(self)
 	local ingameState = IngameState(self)
 
@@ -28,4 +34,4 @@ ApplicationStateManager = class(ApplicationStateManager, GameStateManager, funct
 	self:addTransition(ingameState, Transitions.GameToMainMenu, mainMenuState)
 
 	self:_setCurrentState(mainMenuState, Transitions.BootInMainMenu)
-end)
+end

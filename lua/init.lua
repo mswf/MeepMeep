@@ -28,7 +28,7 @@ function Game.main()
 	GlobalUIManager = UIManager()
 
 	GlobalStateManager = ApplicationStateManager()
-
+	GlobalStateManager:start()
 
 	--
 	-- GLOBTAB = {}
