@@ -7,7 +7,7 @@ end
 UIBase = class(UIBase, function(self, uiManager, params)
 	uiManager = uiManager or Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
 
-	self._params = params
+	self._params = params or {}
 
 	self.window = uiManager:getNewWindow()
 	self.window.__owner = self
@@ -18,6 +18,11 @@ UIBase = class(UIBase, function(self, uiManager, params)
 
 	if (self.update ~= UIBase.update) then
 		uiManager:registerUpdate(self.window)
+	end
+
+	local params = self._params
+	if (params["visible"] ~= nil) then
+		self.window.visible = params["visible"]
 	end
 
 	self:_createUI()

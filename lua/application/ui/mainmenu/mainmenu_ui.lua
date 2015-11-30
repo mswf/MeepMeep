@@ -49,6 +49,19 @@ function MainMenuUI:_createUI()
 	startGameButton.onPress = function()
 		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
 	end
+
+
+	local openOptionsButton = window:addButton()
+
+	openOptionsButton.text = "Options"
+	openOptionsButton.width = 200
+	-- startGameButton.height = 50
+
+	openOptionsButton.onPress = function()
+		local broadcaster = GlobalStateManager:getCurrentState().broadcaster
+		broadcaster:broadcast(MainMenuState.Events.OpenOptions)
+
+	end
 end
 
 -- register to various events

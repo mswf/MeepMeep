@@ -46,3 +46,7 @@ function GameStateManager:_setCurrentState(newState, transitionType)
 
 	newState:baseEnter(transitionType)
 end
+
+function GameStateManager:getCurrentState()
+	return self._currentState or Log.error("[GameStateManager] tried getting current state, none set!")
+end
