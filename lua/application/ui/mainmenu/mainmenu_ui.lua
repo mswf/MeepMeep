@@ -5,6 +5,7 @@ MainMenuUI = class(MainMenuUI, UIBase)
 -- initialize and create UI elements here
 function MainMenuUI:_createUI()
 	Log.steb("creating main menu")
+
 	local window = self.window
 
 	window.title = "Main Menu"
@@ -44,7 +45,6 @@ function MainMenuUI:_createUI()
 
 	startGameButton.text = "Start Game"
 	startGameButton.width = 200
-	-- startGameButton.height = 50
 
 	startGameButton.onPress = function()
 		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
@@ -55,13 +55,14 @@ function MainMenuUI:_createUI()
 
 	openOptionsButton.text = "Options"
 	openOptionsButton.width = 200
-	-- startGameButton.height = 50
 
 	openOptionsButton.onPress = function()
 		local broadcaster = GlobalStateManager:getCurrentState().broadcaster
 		broadcaster:broadcast(MainMenuState.Events.OpenOptions)
 
 	end
+	--[[
+	]]--
 end
 
 -- register to various events
