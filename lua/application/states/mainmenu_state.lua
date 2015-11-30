@@ -10,7 +10,8 @@ end)
 
 
 createPrivateEnum(MainMenuState, "Events",
-	"OpenOptions"
+	"OpenOptions",
+	"CloseOptions"
 )
 
 function MainMenuState:update(dt)

@@ -13,6 +13,15 @@ function OptionUI:_createUI()
 	window.y = 20
 
 	window.movable = false
+	window.closable = false
+
+	local button = window:addButton()
+	button.text = "close options"
+	button.onPress = function ()
+		local broadcaster = GlobalStateManager:getCurrentState().broadcaster
+		broadcaster:broadcast(MainMenuState.Events.CloseOptions)
+
+	end
 end
 
 function OptionUI:setVisible(isVisible)
@@ -27,12 +36,16 @@ end
 function OptionUI:_register()
 	local broadcaster = GlobalStateManager:getCurrentState().broadcaster
 	broadcaster:register(self, MainMenuState.Events.OpenOptions, function(self) self:setVisible(true) end)
+	broadcaster:register(self, MainMenuState.Events.CloseOptions, function(self) self:setVisible(false) end)
+
 end
 
 -- unregister to various events
 function OptionUI:_unregister()
 	local broadcaster = GlobalStateManager:getCurrentState().broadcaster
 	broadcaster:unregister(self, MainMenuState.Events.OpenOptions)
+	broadcaster:unregister(self, MainMenuState.Events.CloseOptions)
+
 
 end
 
