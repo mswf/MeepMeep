@@ -30,6 +30,8 @@ function Broadcaster:unregister(owner, event)
 		Log.warning("Object: " .. tostring(owner) .. " tried to unregister from Event: " .. tostring(event) .. " while no events were registered")
 		return
 	end
+
+	self._events[event][owner] = nil
 end
 
 function Broadcaster:broadcast(event, params)
