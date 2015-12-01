@@ -27,8 +27,17 @@ function MainMenuState:__onReload()
 	-- Log.steb("changed broadcaster reload")
 end
 
+function MainMenuState:exit(transitionType, args)
+	if (args.instruction == "NEWGAME") then
+		GlobalData:createGameNew()
+	elseif (args.instruction == "LOADGAME") then
+		GlobalData:createGameFromSave(args.saveData)
+	else
+		GlobalData:createGameNew()
+	end
+end
 
-function MainMenuState:enter(transitionType)
+function MainMenuState:enter(transitionType, args)
 	self._mainMenuUI = MainMenuUI(self.UIManager)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
@@ -40,7 +49,7 @@ function MainMenuState:enter(transitionType)
 
 	Log.bobn("plsdfff")
 	testEntity.update = function(delta)
-		
+
 	end
 
 

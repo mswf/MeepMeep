@@ -36,6 +36,14 @@ function IngameState:enter()
 
 end
 
+function IngameState:enter(transition, args)
+
+end
+
+function IngameState:exit(transition, args)
+
+end
+
 function IngameState:update(dt)
 	-- Log.steb("updating the IngameState")
 

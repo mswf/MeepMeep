@@ -25,21 +25,21 @@ function GameState:update(dt)
 	--override this
 end
 
-function GameState:baseEnter(transitionType)
-	self:enter(transitionType)
+function GameState:baseEnter(transitionType, args)
+	self:enter(transitionType, args)
 end
 
-function GameState:enter(transitionType)
+function GameState:enter(transitionType, args)
 
 end
 
-function GameState:baseExit(transitionType)
-	self:exit(transitionType)
+function GameState:baseExit(transitionType, args)
+	self:exit(transitionType, args)
 
 	self.UITweener:clear()
 	self.UIManager:destroyAll()
 end
 
-function GameState:exit(transitionType)
+function GameState:exit(transitionType, args)
 
 end

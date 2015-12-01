@@ -21,11 +21,11 @@ function GameStateManager:addTransition(fromState, transitionType, toState)
 	self._transitions[fromState][transitionType] = toState
 end
 
-function GameStateManager:doTransition(transitionType)
+function GameStateManager:doTransition(transitionType, args)
 	if (self._currentState) then
 		if (self._transitions[self._currentState]) then
 			if (self._transitions[self._currentState][transitionType]) then
-				self:_setCurrentState(self._transitions[self._currentState][transitionType])
+				self:_setCurrentState(self._transitions[self._currentState][transitionType], transitionType, args)
 			else
 				Log.warning("Invalid transition: " .. tostring(transitionType))
 			end
@@ -37,14 +37,14 @@ function GameStateManager:doTransition(transitionType)
 	end
 end
 
-function GameStateManager:_setCurrentState(newState, transitionType)
+function GameStateManager:_setCurrentState(newState, transitionType, args)
 	if (self._currentState) then
-		self._currentState:baseExit(transitionType)
+		self._currentState:baseExit(transitionType, args)
 	end
 
 	self._currentState = newState
 
-	newState:baseEnter(transitionType)
+	newState:baseEnter(transitionType, args)
 end
 
 function GameStateManager:getCurrentState()
