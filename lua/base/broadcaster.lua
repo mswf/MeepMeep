@@ -1,5 +1,7 @@
+local weakMetaTable = {__mode = "k"}
+
 Broadcaster = class(Broadcaster, function(self)
-	self._events = {}
+	self._events = setmetatable({}, weakMetaTable)
 
 end)
 
@@ -7,9 +9,7 @@ end)
 function Broadcaster:register(owner, event, callback)
 
 	if (not self._events[event]) then
-		self._events[event] = setmetatable({}, {
-			__mode = "k"
-		})
+		self._events[event] = setmetatable({}, weakMetaTable)
 	end
 
 	self._events[event][owner] = callback
