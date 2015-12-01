@@ -40,8 +40,10 @@ function UIBase:_cleanUp()
 	self:_unregister()
 
 	self.window:close()
-	-- self.window.__owner = nil
-	-- self.window = nil
+
+	-- workaround for ui leak
+	self.window.__owner = nil
+	self.window = nil
 end
 
 function UIBase:__onReload()
