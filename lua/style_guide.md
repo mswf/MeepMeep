@@ -314,3 +314,43 @@ slider.rounded = false -- integer/float
 -- CALLBACKS
 slider.onChange = function(self) end
 ```
+
+***
+### (Engine) Input Documentation
+Note : you might want to make a nice wrapper for this
+All keycodes are SDL_keycodes
+#### getMousePosition
+```lua
+	--returns both the x and y position of the mouse
+	local x, y = Input.getMousePosition()
+```
+
+#### key
+```lua
+	--returns wether the key with the given keycode is currently being pressed
+	local keyHeld = Input.key(keyCode)
+```
+
+#### keyDown
+```lua
+	--returns wether the key with the given keycode has been pressed in the last frame
+	local keyPressed = Input.keyDown(keyCode)
+```
+
+#### keyUp
+```lua
+	--returns wether the key with the given keycode has been released in the last frame
+	local keyReleased = Input.keyUp(keyCode)
+```
+
+#### mouseDown
+```lua
+	--returns wether a mouse button (int) has been pressed in the last frame
+	local mousePressed = Input.mouseDown(button)
+```
+
+#### mouseUp
+```lua
+	--returns wether a mouse button (int) has been released in the last frame
+	local mouseReleased = Input.mouseUp(button)
+```
