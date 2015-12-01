@@ -8,7 +8,7 @@ class = setmetatable(class or {}, {
 			end
 			-- class already exists, assuming we're hotreloading
 		else
-			c = {} -- a new class instance
+			c = {} -- a new class definition
 		end
 
 		if not init and type(base) == 'function' then
@@ -79,7 +79,11 @@ class.__hotReloadClasses = function(self)
 
 			Log.warning("[".. retrieveVariableName(targetClasses[i]) .. "] calling __onReload on its " .. #classInstances .. " instances")
 			for i=1, #classInstances do
-				classInstances[i]:__onReload()
+				if (classInstances[i]) then
+					classInstances[i]:__onReload()
+				else
+					Log.warning("noop")
+				end
 			end
 	end
 

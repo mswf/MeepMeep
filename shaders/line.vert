@@ -9,6 +9,8 @@ uniform mat4 projection;
 uniform float time;
 
 out vec3 fColour;
+// Redeclare gl_Position when using separate shader programs
+out vec4 gl_Position;
 
 void main()
 {
