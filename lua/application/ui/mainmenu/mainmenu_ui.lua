@@ -47,7 +47,7 @@ function MainMenuUI:_createUI()
 	startGameButton.width = 200
 
 	startGameButton.onPress = function()
-		GlobalStateManager:doTransition(Transitions.MainMenuToGame)
+		GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 	end
 
 

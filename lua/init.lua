@@ -1,8 +1,11 @@
 
+GAMEDEBUG = true
 
 require "lua/application/logging"
 require "lua/base/base"
+require "lua/application/data/applicationdata"
 require "lua/application/states/applicationstatemanager"
+
 
 --local Carbon = require("lua/Carbon/init")
 --Log.steb("Running Carbon Version " .. Carbon.VersionString)
@@ -11,8 +14,7 @@ require "lua/application/states/applicationstatemanager"
 --hardcoded tobe engine functions:
 Engine.ui.getScreenWidth = function() return 1280 end
 Engine.ui.getScreenHeight = function() return 720 end
-
-
+-- Engine.ui.hasFocus bool
 
 Game = Game or {}
 
@@ -27,39 +29,10 @@ end
 function Game.main()
 	GlobalUIManager = UIManager()
 
+	GlobalData = ApplicationData()
+
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
-
-	--
-	-- GLOBTAB = {}
-	-- Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
-	-- 	function(self, params)
-	-- 		Log.steb("woop")
-	-- 		Log.steb(params)
-	-- 	end)
-
-
-    --[[
-    labelA = window.addText("lorum ipsum")
-    labelA:setLabel("oh wow")
-
-    buttonA = window.addButton("do a lua function", function()
-        Log.bobn("yay")
-        window.close()
-    end)
-    buttonA:setLabel("do a thing")
-    buttonA:setCallback(function() Log.bobn("pls") end)
-
-    window = setmetatable({}, {
-        __newindex = function(table, key, value)
-            if (needForEngineMagic(key)) then
-
-            else
-                table[key] = value
-            end
-        end
-    })
-    ]]--
 end
 
 function Game.update(dt)
