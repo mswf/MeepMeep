@@ -32,3 +32,5 @@ require "lua/base/ui/uimanager"
 
 require "lua/base/libs/fun"
 require "lua/base/libs/smallfolk"
+
+require "lua/base/utils/io"

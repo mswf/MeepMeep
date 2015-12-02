@@ -50,6 +50,14 @@ function MainMenuUI:_createUI()
 		GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 	end
 
+	local loadGameButton = window:addButton()
+
+	loadGameButton.text = "Load Game"
+	loadGameButton.width = 200
+
+	loadGameButton.onPress = function()
+		GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "LOADGAME", saveHandle = "testsave"})
+	end
 
 	local openOptionsButton = window:addButton()
 

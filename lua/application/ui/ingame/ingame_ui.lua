@@ -29,6 +29,16 @@ function IngameUI:_createUI()
 
 	closeButton.width = 100
 
+	local saveButton = window:addButton("Save the game")
+	saveButton.onPress = function()
+		GlobalData:saveGame("testsave")
+
+	end
+
+	saveButton.width = 100
+
+
+
 end
 
 -- register to various events

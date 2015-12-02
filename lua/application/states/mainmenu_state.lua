@@ -31,7 +31,7 @@ function MainMenuState:exit(transitionType, args)
 	if (args.instruction == "NEWGAME") then
 		GlobalData:createGameNew()
 	elseif (args.instruction == "LOADGAME") then
-		GlobalData:createGameFromSave(args.saveData)
+		GlobalData:loadGame(args.saveHandle)
 	else
 		GlobalData:createGameNew()
 	end

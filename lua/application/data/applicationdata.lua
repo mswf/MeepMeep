@@ -59,7 +59,9 @@ end
 function ApplicationData:saveGame(handle)
 	local saveData = self:serialize()
 
-	local saveString = Serialization.dumps(saveData)
+	IO.saveTable(handle, saveData)
+
+	-- local saveString = Serialization.dumps(saveData)
 
 	-- TODO: store the saveString using the handle as a key
 end
@@ -67,8 +69,8 @@ end
 function ApplicationData:loadGame(handle)
 	-- TODO: load the saveString using the handle as a key
 
-	local saveString = [[{"worldData":{},"playerData":{"resourceManager":{"currentResources":{"Wood":0,"Food":0,"Fur":0,"Gold":0,"Water":0}},"families":{}}}]]
-	local saveData = Serialization.loads(saveString)
+	-- local saveString = [[{"worldData":{},"playerData":{"resourceManager":{"currentResources":{"Wood":0,"Food":0,"Fur":0,"Gold":0,"Water":0}},"families":{}}}]]
+	local saveData = IO.loadTable(handle)
 
 	self:createGameFromSave(saveData)
 end
