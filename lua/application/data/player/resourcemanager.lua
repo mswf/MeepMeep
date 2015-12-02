@@ -1,0 +1,70 @@
+
+createEnum("ResourceTypes",
+	"Food",
+	"Water",
+	"Wood",
+	"Fur",
+	"Gold"
+)
+
+ResourceManager = class(ResourceManager, function(self, serializedData)
+	serializedData = serializedData or {}
+	
+	self._resources = {}
+
+	Log.steb("creating resource manager")
+
+	for i=1, #ResourceTypes do
+		local type = ResourceTypes[i].name
+		self._resources[type] = serializedData[type] or 0
+	end
+
+end)
+
+function ResourceManager:serialize()
+	local serializedData = {}
+
+	for i=1, #ResourceTypes do
+		local type = ResourceTypes[i].name
+		serializedData[type] = self._resources[type]
+	end
+
+	return serializedData
+end
+
+function ResourceManager:changeResource(resourceType, amount)
+	local oldAmount = self._resources[resourceType.name]
+	local newAmount = self._resources[resourceType.name] + amount
+	local delta			= amount
+	local increase 	= (amount > 0)
+
+	self._resources[resourceType.name] = newAmount
+
+	GlobalData._playerData.broadcaster:broadcast(resourceType, {
+		resourceType = resourceType,
+		oldAmount    = oldAmount,
+		amount			 = newAmount,
+		delta			   = delta,
+		increase	   = increase
+	})
+end
+
+-- TODO: this not here; for now
+function ResourceManager:debugFillUIContainer(uiContainer)
+
+	for i=1, #ResourceTypes do
+		local type 		= ResourceTypes[i].name
+		local amount	= self._resources[type]
+
+		local titleLayout = uiContainer:addHorizontalLayout()
+
+		titleLayout.spacing = 10
+
+		local resourceName = titleLayout:addText()
+		resourceName.text = type
+
+		local amountText = titleLayout:addText()
+		amountText.text = amount
+	end
+
+end
