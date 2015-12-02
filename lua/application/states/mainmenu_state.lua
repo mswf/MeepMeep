@@ -45,13 +45,36 @@ function MainMenuState:enter(transitionType, args)
 	self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
-	local testEntity = Entity()
+
 
 	Log.bobn("plsdfff")
-	testEntity.update = function(delta)
+	Log.bobn(Engine.system.contentPath)
 
+	local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
+	local rabbit = Entity()
+	local renderer = MeshRenderer()
+	renderer:setModel(model)
+
+	rabbit:addComponent(renderer)
+
+	rabbit:setPosition(0,0,0)
+
+	rabbit.update = function(self, delta)
+		self:yaw(1)
 	end
 
+	model = Engine.loadModel("objects/icy_snowman.obj");
+	local snowman = Entity()
+	renderer = MeshRenderer()
+	renderer:setModel(model)
 
+	snowman:addComponent(renderer)
 
+	snowman:setPosition(-1,-1,-1)
+
+	snowman.update = function(self, delta)
+		self:roll(1)
+	end
+
+	rabbit:addChild(snowman)
 end
