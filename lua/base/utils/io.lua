@@ -1,5 +1,12 @@
 
-local Carbon_IO = require("lua/Carbon/init").IO
+local win = package.config:sub(1, 1) == "\\"
+
+if (win) then
+	local Carbon_IO = require("lua/Carbon/init").IO
+else
+	-- :(
+end
+
 local Serialization = require "lua/base/libs/smallfolk"
 
 
