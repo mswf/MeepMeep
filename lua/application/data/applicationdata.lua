@@ -1,4 +1,5 @@
 
+
 require "lua/application/data/playerdata"
 require "lua/application/data/worlddata"
 require "lua/application/data/persistentdata"
@@ -45,19 +46,40 @@ function ApplicationData:createGameNew()
 	return true
 end
 
+function ApplicationData:serialize()
+	local serializedData = {}
+
+	serializedData.playerData		= self._playerData:serialize()
+	serializedData.worldData		= self._worldData:serialize()
+
+
+	return serializedData
+end
+
+function ApplicationData:saveGame(handle)
+	local saveData = self:serialize()
+
+	local saveString = Serialization.dumps(saveData)
+
+	-- TODO: store the saveString using the handle as a key
+end
+
+function ApplicationData:loadGame(handle)
+	-- TODO: load the saveString using the handle as a key
+
+	local saveString = [[{"worldData":{},"playerData":{"resourceManager":{"currentResources":{"Wood":0,"Food":0,"Fur":0,"Gold":0,"Water":0}},"families":{}}}]]
+	local saveData = Serialization.loads(saveString)
+
+	self:createGameFromSave(saveData)
+end
+
 function ApplicationData:createGameFromSave(saveData)
+	self._playerData = PlayerData(saveData.playerData)
+	self._worldData = WorldData(saveData.worldData)
+
 	self._status = ApplicationData_Status.DataLoaded
 
-	return self:createGameNew()
-
-	-- TODO: actual load from serialzed stuff here
-	-- if (somethingGoesWrong) then
-	--	self._status = ApplicationData_Status.DataLoaded
-	-- 	return false
-	-- else
-	--	self._status = ApplicationData_Status.NoDataLoaded
-	-- 	return true
-	-- end
+	return true
 end
 
 function ApplicationData:saveData()

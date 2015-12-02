@@ -17,7 +17,7 @@ PlayerData = class(PlayerData, function(self, serializedData)
 	serializedData = serializedData or {}
 	self.broadcaster = Broadcaster()
 
-	self.resourcemanager = ResourceManager(serializedData.resourcemanager)
+	self.resourceManager = ResourceManager(serializedData.resourceManager)
 	self._families = {}
 
 	if (serializedData.families) then
@@ -27,13 +27,19 @@ PlayerData = class(PlayerData, function(self, serializedData)
 	end
 end)
 
-function PlayerData:getFamilies()
-	return self._families
-end
-
 function PlayerData:serialize()
 	local serializedData = {}
 
+	serializedData.resourceManager = self.resourceManager:serialize()
+	serializedData.families = {}
+
+	for i=1,#self._families do
+		serializedData.families[i] = self._families[i]:serialize()
+	end
 
 	return serializedData
+end
+
+function PlayerData:getFamilies()
+	return self._families
 end

@@ -1,4 +1,4 @@
 
-math.randomseed(os.time())
+math.randomseed(os.clock())
 
 require "lua/init"

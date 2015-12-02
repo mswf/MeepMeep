@@ -9,25 +9,34 @@ createEnum("ResourceTypes",
 
 ResourceManager = class(ResourceManager, function(self, serializedData)
 	serializedData = serializedData or {}
-	
+
 	self._resources = {}
 
 	Log.steb("creating resource manager")
 
-	for i=1, #ResourceTypes do
-		local type = ResourceTypes[i].name
-		self._resources[type] = serializedData[type] or 0
+	if (serializedData.currentResources) then
+		for i=1, #ResourceTypes do
+			local type = ResourceTypes[i].name
+			self._resources[type] = serializedData.currentResources[type] or 0
+		end
+	else
+		for i=1, #ResourceTypes do
+			local type = ResourceTypes[i].name
+			self._resources[type] = 0
+		end
 	end
-
 end)
 
 function ResourceManager:serialize()
 	local serializedData = {}
 
+	local resourceTable = {}
 	for i=1, #ResourceTypes do
 		local type = ResourceTypes[i].name
-		serializedData[type] = self._resources[type]
+		resourceTable[type] = self._resources[type]
 	end
+
+	serializedData.currentResources = resourceTable
 
 	return serializedData
 end
