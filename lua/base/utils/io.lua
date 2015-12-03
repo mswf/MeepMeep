@@ -1,9 +1,11 @@
 
 local win = package.config:sub(1, 1) == "\\"
 
+local Carbon_IO
 if (win) then
-	local Carbon_IO = require("lua/Carbon/init").IO
+	Carbon_IO = require("lua/Carbon/init").IO
 else
+	Carbon_IO = {}
 	-- :(
 end
 
