@@ -49,7 +49,7 @@ function ResourceManager:changeResource(resourceType, amount)
 
 	self._resources[resourceType.name] = newAmount
 
-	GlobalData._playerData.broadcaster:broadcast(resourceType, {
+	GlobalData.playerData.broadcaster:broadcast(resourceType, {
 		resourceType = resourceType,
 		oldAmount    = oldAmount,
 		amount			 = newAmount,

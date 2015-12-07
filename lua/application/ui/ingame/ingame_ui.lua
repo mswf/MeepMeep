@@ -32,7 +32,7 @@ function IngameUI:_createUI()
 	local saveButton = window:addButton("Save the game")
 	saveButton.onPress = function()
 		GlobalData:saveGame("testsave")
-
+		GlobalStateManager:doTransition(Transitions.GameToMainMenu)
 	end
 
 	saveButton.width = 100

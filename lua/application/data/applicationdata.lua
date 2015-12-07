@@ -8,8 +8,8 @@ ApplicationData = class(ApplicationData, function(self)
 	-- always has to be loaded
 	self.persistentData = PersistentData()
 
-	self._playerData = nil
-	self._worldData = nil
+	self.playerData = nil
+	self.worldData = nil
 
 	self._status = self.Status.NoDataLoaded
 end)
@@ -22,7 +22,7 @@ local ApplicationData_Status = ApplicationData.Status
 
 function ApplicationData:getPlayerData ()
 	if (self._status == ApplicationData_Status.DataLoaded) then
-		return self._playerData
+		return self.playerData
 	else
 		return nil
 	end
@@ -30,7 +30,7 @@ end
 
 function ApplicationData:getWorldData ()
 	if (self._status == ApplicationData_Status.DataLoaded) then
-		return self._worldData
+		return self.worldData
 	else
 		return nil
 	end
@@ -38,8 +38,8 @@ end
 
 function ApplicationData:createGameNew()
 
-	self._playerData = PlayerData()
-	self._worldData = WorldData()
+	self.playerData = PlayerData()
+	self.worldData = WorldData()
 
 	self._status = ApplicationData_Status.DataLoaded
 
@@ -49,8 +49,8 @@ end
 function ApplicationData:serialize()
 	local serializedData = {}
 
-	serializedData.playerData		= self._playerData:serialize()
-	serializedData.worldData		= self._worldData:serialize()
+	serializedData.playerData		= self.playerData:serialize()
+	serializedData.worldData		= self.worldData:serialize()
 
 
 	return serializedData
@@ -76,8 +76,8 @@ function ApplicationData:loadGame(handle)
 end
 
 function ApplicationData:createGameFromSave(saveData)
-	self._playerData = PlayerData(saveData.playerData)
-	self._worldData = WorldData(saveData.worldData)
+	self.playerData = PlayerData(saveData.playerData)
+	self.worldData = WorldData(saveData.worldData)
 
 	self._status = ApplicationData_Status.DataLoaded
 
