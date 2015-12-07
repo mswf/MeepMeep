@@ -45,12 +45,14 @@ function EntityDebugUI:_createUI()
 		self.zPos = zPos
 
 		--- ROTATION
+		local ROT_MIN = 0
+		local ROT_MAX = 1
 		local rotationTree = transformTree:addTree("Rotation")
 		local xRot = rotationTree:addSlider("pitch")
 		xRot.format = "%.3f"
 		xRot.value = entity:getPitch()
-		xRot.minValue = -math.pi
-		xRot.maxValue = math.pi
+		xRot.minValue = ROT_MIN
+		xRot.maxValue = ROT_MAX
 		xRot.onChange = function(slider)
 			entity:setPitch(slider.value)
 			-- slider.value = entity:getPitch()
@@ -60,8 +62,8 @@ function EntityDebugUI:_createUI()
 		local yRot = rotationTree:addSlider("yaw")
 		yRot.format = "%.3f"
 		yRot.value = entity:getYaw()
-		yRot.minValue = -math.pi
-		yRot.maxValue = math.pi
+		yRot.minValue = ROT_MIN
+		yRot.maxValue = ROT_MAX
 		yRot.onChange = function(slider)
 			entity:setYaw(slider.value)
 			-- slider.value = entity:getRoll()
@@ -71,8 +73,8 @@ function EntityDebugUI:_createUI()
 		local zRot = rotationTree:addSlider("roll")
 		zRot.value = entity:getRoll()
 		zRot.format = "%.3f"
-		zRot.minValue = -math.pi
-		zRot.maxValue = math.pi
+		zRot.minValue = ROT_MIN
+		zRot.maxValue = ROT_MAX
 		zRot.onChange = function(slider)
 			entity:setRoll(slider.value)
 			-- slider.value = entity:getYaw()
