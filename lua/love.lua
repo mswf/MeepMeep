@@ -5,7 +5,7 @@ local generateTiles = function()
 
 	GlobalTree = CairoTree(0,0)
 	GlobalTree:setSize(40)
-	GlobalTree:initializeToDimensions(10, 10)
+	GlobalTree:initialzeToDimensions(10, 10)
 end
 
 LoveGame = LoveGame or {}
@@ -263,7 +263,7 @@ end
 
 ------------------------------------------------------------------------------------------------------
 
--- GLOBALCOUNT = GLOBALCOUNT or 1
+GLOBALCOUNT = GLOBALCOUNT or 1
 CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
@@ -281,14 +281,14 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 
 	self._grid = {}
 
-	-- local num = GLOBALCOUNT
-	-- GlobalBroadcaster:register(self, "ON_MOUSE_PRESS", function(self, params) Log.steb(num) end)
-	-- GLOBALCOUNT = GLOBALCOUNT + 1
+	local num = GLOBALCOUNT
+	GlobalBroadcaster:register(self, "ON_MOUSE_PRESS", function(self, params) Log.steb(num) end)
+	GLOBALCOUNT = GLOBALCOUNT + 1
 
 
 end)
 
-function CairoTree:initializeToDimensions(width, height)
+function CairoTree:initialzeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
 
 	self._grid = {}

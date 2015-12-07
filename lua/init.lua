@@ -1,13 +1,6 @@
 
 GAMEDEBUG = true
 
-if (love) then
-	Engine = Engine or {}
-	Engine.ui = Engine.ui or {}
-	Engine.system = Engine.system or {}
-	Engine.system.contentPath = Engine.system.contentPath or ""
-end
-
 require "lua/application/logging"
 require "lua/base/base"
 require "lua/application/data/applicationdata"
