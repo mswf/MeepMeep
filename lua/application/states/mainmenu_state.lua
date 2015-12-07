@@ -42,7 +42,7 @@ function MainMenuState:enter(transitionType, args)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
 
-	self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
+	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
 
@@ -90,7 +90,7 @@ function MainMenuState:enter(transitionType, args)
 
 	snowman.update = function(self, dt)
 		self:roll(1)
-	end
+	end 
 
 	rabbit:addChild(snowman)
 
@@ -102,4 +102,5 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
 
+	EntityDebugUI(self.UIManager, {entity = rabbit})
 end
