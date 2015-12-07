@@ -93,4 +93,13 @@ function MainMenuState:enter(transitionType, args)
 	end
 
 	rabbit:addChild(snowman)
+
+
+	local lineEntity = Entity()
+	lineEntity:addComponent(DebugRenderer())
+	lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
+	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
+	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
+
+
 end

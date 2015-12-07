@@ -9,6 +9,7 @@ require "lua/base/broadcaster"
 
 require "lua/base/entity"
 require "lua/base/meshrenderer"
+require "lua/base/debugrenderer"
 
 require "lua/base/parsing/i18n"
 require "lua/base/parsing/parser"
