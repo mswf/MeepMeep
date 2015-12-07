@@ -12,6 +12,8 @@ require "lua/application/logging"
 require "lua/base/base"
 require "lua/application/data/applicationdata"
 require "lua/application/states/applicationstatemanager"
+require "lua/weikie/player"
+require "lua/weikie/level"
 
 
 --local Carbon = require("lua/Carbon/init")
@@ -40,12 +42,46 @@ function Game.main()
 
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
+
+	CHARACTER = Player()
+	LEVEL = Level()
+	--
+	-- GLOBTAB = {}
+	-- Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
+	-- 	function(self, params)
+	-- 		Log.steb("woop")
+	-- 		Log.steb(params)
+	-- 	end)
+
+
+    --[[
+    labelA = window.addText("lorum ipsum")
+    labelA:setLabel("oh wow")
+
+    buttonA = window.addButton("do a lua function", function()
+        Log.bobn("yay")
+        window.close()
+    end)
+    buttonA:setLabel("do a thing")
+    buttonA:setCallback(function() Log.bobn("pls") end)
+
+    window = setmetatable({}, {
+        __newindex = function(table, key, value)
+            if (needForEngineMagic(key)) then
+
+            else
+                table[key] = value
+            end
+        end
+    })
+    ]]--
 end
 
 function Game.update(dt)
 	dt = dt / 1000
 
 	GlobalStateManager:update(dt)
+
 end
 
 function Game.onShutdown()
