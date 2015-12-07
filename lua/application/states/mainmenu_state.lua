@@ -59,8 +59,24 @@ function MainMenuState:enter(transitionType, args)
 
 	rabbit:setPosition(0,0,0)
 
-	rabbit.update = function(self, delta)
-		self:yaw(1)
+	rabbit.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
 	end
 
 	model = Engine.loadModel("objects/icy_snowman.obj");
@@ -72,7 +88,7 @@ function MainMenuState:enter(transitionType, args)
 
 	snowman:setPosition(-1,-1,-1)
 
-	snowman.update = function(self, delta)
+	snowman.update = function(self, dt)
 		self:roll(1)
 	end
 
