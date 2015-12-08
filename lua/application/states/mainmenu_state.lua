@@ -94,12 +94,18 @@ function MainMenuState:enter(transitionType, args)
 
 	rabbit:addChild(snowman)
 
+	local testMat = Material();
+	testMat:setDiffuseTexture("objects/snowman.png");
+	rabbit.meshRenderer:setMaterial(testMat);
+
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
 	lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
+
+	Engine.loadMaterial('lol');
 
 
 	EntityDebugUI(self.UIManager, {entity = rabbit})

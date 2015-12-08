@@ -7,6 +7,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform float time;
+uniform float pointSize;
 
 out vec3 fColour;
 // Redeclare gl_Position when using separate shader programs
@@ -14,7 +15,10 @@ out vec4 gl_Position;
 
 void main()
 {
-	fColour = colour;
+	float value = sin( time * 2.0f ) + 1 * 5.0;
+	vec3 modifier = vec3( value, value, value);
+	gl_PointSize = pointSize;
+	fColour = colour * modifier;
 	gl_Position = projection * view * model * vec4( position, 1.0 );
 }
  
