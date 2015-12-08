@@ -17,7 +17,7 @@ Adds a child to this entity. Entities' transform values are relative to their pa
 * `component` [BaseComponent]  
 Adds any of the base components to this entity. The following are currently valid base components:
 * [Engine.baseMeshRenderer](meshRenderer.md)
-* [Engine.baseDebugRenderer](debugRenderer.md)
+* [Engine.baseDebugRenderer](debugRenderer.md)  
 Once added, the component can be accessed through the entity i.e. `someEntity.meshRenderer`
 
 #### getX
