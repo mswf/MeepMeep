@@ -50,7 +50,7 @@ function MainMenuState:enter(transitionType, args)
 	Log.bobn("plsdfff")
 	Log.bobn(Engine.system.contentPath)
 
-	local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
+	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
 	local renderer = MeshRenderer()
 	renderer:setModel(model)
@@ -79,7 +79,7 @@ function MainMenuState:enter(transitionType, args)
 		-- self:yaw(1)
 	end
 
-	model = Engine.loadModel("objects/icy_snowman.obj");
+	model = Engine.getModel("objects/icy_snowman.obj");
 	local snowman = Entity()
 	renderer = MeshRenderer()
 	renderer:setModel(model)
@@ -105,8 +105,8 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
-	Engine.loadMaterial('lol');
+	Engine.getModel('lol');
 
 
-	EntityDebugUI(self.UIManager, {entity = lineEntity})
+	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
