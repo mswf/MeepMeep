@@ -9,7 +9,7 @@ end)
 
 function Player:update()
 	self:pollInput()
-	--self._base:update()
+	self._base.update(self)
 end
 
 function Player:pollInput()

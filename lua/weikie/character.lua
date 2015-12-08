@@ -1,12 +1,15 @@
 Character = class(Character, Entity, function(self)
+	self.entity = self
 	self.horizontalSpeed = 0
 	self.verticalSpeed = 0
 	self.left = false
 	self.right = false
 	self.up = false
 	self.down = false
-	self.entity = self
-	self:_loadModel("objects/weikie/billboard.obj");
+	Log.waka(type (self))
+	self:_loadModel("objects/Rabbit/Rabbit.obj");
+	--self:_loadModel("objects/weikie/billboard.obj");
+
 
 	Log.waka("Character init")
 end)
@@ -47,8 +50,9 @@ function Character:update()
 end
 
 function Character:updateVelocity()
-	horizontalSpeed = self.horizontalSpeed
-	verticalSpeed = self.verticalSpeed
+	local horizontalSpeed = self.horizontalSpeed
+	local verticalSpeed = self.verticalSpeed
+
 	local speed = 1
 	local friction = 0.9
 
@@ -64,7 +68,6 @@ function Character:updateVelocity()
 	if self.down == true then
 		verticalSpeed = verticalSpeed - speed
 	end
-
 	--friction
 	horizontalSpeed = horizontalSpeed * friction
 	verticalSpeed = verticalSpeed * friction
