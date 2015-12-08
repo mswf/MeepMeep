@@ -12,8 +12,11 @@ require "lua/application/logging"
 require "lua/base/base"
 require "lua/application/data/applicationdata"
 require "lua/application/states/applicationstatemanager"
+require "lua/weikie/globals"
 require "lua/weikie/player"
+require "lua/weikie/enemy"
 require "lua/weikie/level"
+
 
 
 --local Carbon = require("lua/Carbon/init")
@@ -44,6 +47,7 @@ function Game.main()
 	GlobalStateManager:start()
 
 	CHARACTER = Player()
+	ENEMY = Enemy()
 	LEVEL = Level()
 	--
 	-- GLOBTAB = {}
