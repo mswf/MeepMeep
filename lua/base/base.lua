@@ -34,6 +34,8 @@ require "lua/base/ui/uibase"
 require "lua/base/ui/uimanager"
 
 require "lua/base/ui/entity_debug_ui"
+require "lua/base/ui/table_debug_ui"
+
 
 
 require "lua/base/libs/fun"

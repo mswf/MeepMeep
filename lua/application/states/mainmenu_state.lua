@@ -108,5 +108,5 @@ function MainMenuState:enter(transitionType, args)
 	Engine.loadMaterial('lol');
 
 
-	EntityDebugUI(self.UIManager, {entity = rabbit})
+	EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
