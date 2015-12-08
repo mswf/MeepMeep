@@ -50,47 +50,47 @@ function MainMenuState:enter(transitionType, args)
 	Log.bobn("plsdfff")
 	Log.bobn(Engine.system.contentPath)
 
-	local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
-	local rabbit = Entity()
-	local renderer = MeshRenderer()
-	renderer:setModel(model)
+	--local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
+	--local rabbit = Entity()
+	--local renderer = MeshRenderer()
+	--renderer:setModel(model)
 
-	rabbit:addComponent(renderer)
+	--rabbit:addComponent(renderer)
 
-	rabbit:setPosition(0,0,0)
+	--rabbit:setPosition(0,0,0)
 
-	rabbit.update = function(self, dt)
+	--rabbit.update = function(self, dt)
 		-- Log.steb(dt)
-		if (Input.key(KeyCode.w)) then
-			self:addZ(1*dt)
-		end
+		--if (Input.key(KeyCode.w)) then
+		--	self:addZ(1*dt)
+		--end
 
-		if (Input.key(KeyCode.s)) then
-			self:addZ(-1*dt)
-		end
-
-		if (Input.key(KeyCode.a)) then
-			self:addX(1*dt)
-		end
-
-		if (Input.key(KeyCode.d)) then
-			self:addX(-1*dt)
-		end
+		--if (Input.key(KeyCode.s)) then
+		--	self:addZ(-1*dt)
+		--end
+--
+		--if (Input.key(KeyCode.a)) then
+		--	self:addX(1*dt)
+		--end
+--
+		--if (Input.key(KeyCode.d)) then
+		--	self:addX(-1*dt)
+		--end
 		-- self:yaw(1)
-	end
+	--end
 
-	model = Engine.loadModel("objects/icy_snowman.obj");
-	local snowman = Entity()
-	renderer = MeshRenderer()
-	renderer:setModel(model)
+	--model = Engine.loadModel("objects/icy_snowman.obj");
+	--local snowman = Entity()
+	--renderer = MeshRenderer()
+	--renderer:setModel(model)
 
-	snowman:addComponent(renderer)
+	--snowman:addComponent(renderer)
 
-	snowman:setPosition(-1,-1,-1)
+	--snowman:setPosition(-1,-1,-1)
 
-	snowman.update = function(self, dt)
-		self:roll(1)
-	end
+	--snowman.update = function(self, dt)
+	--	self:roll(1)
+	--end
 
-	rabbit:addChild(snowman)
+	--rabbit:addChild(snowman)
 end
