@@ -50,12 +50,17 @@ end
 
 function Game.onShutdown()
 	Log.steb("Shutting down the game")
+	return true
 end
 
 function Game.onFocusLose()
 end
 
 function Game.onFocusGain()
+end
+
+function Game.onResizeWindow(newWidth, newHeight)
+
 end
 
 Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
