@@ -1,5 +1,6 @@
 
 require "lua/application/graph/tree"
+require "lua/application/graph/cairopentagon"
 
 -- GLOBALCOUNT = GLOBALCOUNT or 1
 CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
@@ -26,18 +27,19 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 
 end)
 
-function CairoTree:initialzeToDimensions(width, height)
+function CairoTree:initializeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
 
 	self._grid = {}
 	for x=1, width do
 		self._grid[x] = {}
 		for y=1, height do
+			-- Log.steb(y)
 			self._grid[x][y] = {}
 
-			local node1 = cairoConstructor(GlobalTree)
+			local node1 = cairoConstructor(self)
 			node1:setPosition(x,y,1)
-			local node2 = cairoConstructor(GlobalTree)
+			local node2 = cairoConstructor(self)
 			node2:setPosition(x,y,2)
 		end
 	end
