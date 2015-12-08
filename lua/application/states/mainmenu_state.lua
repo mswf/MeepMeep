@@ -90,7 +90,7 @@ function MainMenuState:enter(transitionType, args)
 
 	snowman.update = function(self, dt)
 		self:roll(1)
-	end 
+	end
 
 	rabbit:addChild(snowman)
 

@@ -52,7 +52,7 @@ function UIBase:__onReload()
 	self.window = self._uiManager:getNewWindow()
 	self.window.__owner = self
 	if (self.update ~= UIBase.update) then
-		uiManager:registerUpdate(self.window)
+		self._uiManager:registerUpdate(self.window)
 	end
 
 	self:_createUI()
