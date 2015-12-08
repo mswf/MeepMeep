@@ -8,6 +8,14 @@ function EntityDebugUI:_createUI()
 	local entity = self._params.entity
 	local window = self.window
 
+	window.title = "Inspector: " .. tostring(entity)
+
+	window.height = Engine.ui.getScreenHeight()
+	window.width = 280
+
+	window.x = Engine.ui.getScreenWidth() - window.width
+
+
 	local titleText = window:addText()
 	titleText.text = tostring(entity)
 
@@ -36,9 +44,8 @@ function EntityDebugUI:_createUI()
 		self.yPos = yPos
 
 		local zPos = positionTree:addSlider("z")
-		zPos.value = entity:getZ()
-
 		zPos.format = "%.3f"
+		zPos.value = entity:getZ()
 		zPos.minValue = entity:getZ() - DEVIATION
 		zPos.maxValue = entity:getZ() + DEVIATION
 		zPos.onChange = function(slider) entity:setZ(slider.value) end
@@ -86,6 +93,8 @@ function EntityDebugUI:_createUI()
 		local SCALE_MAX = 2
 
 		local scaleTree = transformTree:addTree("Scale")
+		scaleTree.opened = false
+
 		local xScale = scaleTree:addSlider("sX")
 		xScale.format = "%.3f"
 		xScale.value = entity:getScaleX()
@@ -118,6 +127,25 @@ function EntityDebugUI:_createUI()
 			-- slider.value = entity:getYaw()
 		end
 		self.zScale = zScale
+
+		-- local children = entity:getChildren()
+		-- local scaleTree = transformTree:addTree("Scale")
+		-- scaleTree.opened = false
+	end
+
+	if (entity.debugRenderer) then
+		local debugTree = window:addTree("Debug Renderer")
+		local debugText = debugTree:addText("Entity has a debug renderer!")
+	end
+
+	if (entity.meshRenderer) then
+		local rendererTree = window:addTree("Renderer")
+		local rendererText = rendererTree:addText("Entity has a renderer component.")
+	end
+
+	if (entity.camera) then
+		local cameraTree = window:addTree("Camera")
+		local cameraText = cameraTree:addText("Entity has a camera component.")
 	end
 
 	-- entity.debugRenderer
