@@ -1,10 +1,10 @@
 require "lua/weikie/character"
 
 Player = class(Player, Character, function(self)
-	Log.waka("player init")
-	--do i really need to do this
+	self:_loadModel("objects/Rabbit/Rabbit.obj");
+	--self:_loadModel("objects/weikie/billboard.obj");
+
 	self._base.init(self)
-	--self.character = Character()
 end)
 
 function Player:update()
@@ -13,19 +13,19 @@ function Player:update()
 end
 
 function Player:pollInput()
-	if Input.keyDown(KeyCode.w) == true then
+	if Input.key(KeyCode.w) == true then
 		self:moveUp()
 	end
 
-	if Input.keyDown(KeyCode.a) == true then
+	if Input.key(KeyCode.d) == true then
 		self:moveLeft()
 	end
 
-	if Input.keyDown(KeyCode.s) == true then
+	if Input.key(KeyCode.s) == true then
 		self:moveDown()
 	end
 
-	if Input.keyDown(KeyCode.d) == true then
+	if Input.key(KeyCode.a) == true then
 		self:moveRight()
 	end
 end

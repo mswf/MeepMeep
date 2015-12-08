@@ -6,21 +6,14 @@ Character = class(Character, Entity, function(self)
 	self.right = false
 	self.up = false
 	self.down = false
-	Log.waka(type (self))
-	self:_loadModel("objects/Rabbit/Rabbit.obj");
-	--self:_loadModel("objects/weikie/billboard.obj");
-
-
-	Log.waka("Character init")
 end)
 
 function Character:_loadModel(modelPath)
-	--local model = Engine.loadModel("objects/weikie/billboard.obj")
-	self.model = Engine.loadModel(modelPath)
+	self.model = Engine.getModel(modelPath)
 	self.renderer = MeshRenderer()
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
-	self:setPosition(1,1,1)
+	self:setPosition(0,0,0)
 
 	--self.entity:addChild(snowman)
 end
@@ -43,10 +36,11 @@ function Character:moveDown()
 end
 
 function Character:update()
-	--self:pollInput()
 	self:updateVelocity()
-	self:roll(1)
-	--Log.waka("asd")
+	self.up = false
+	self.down = false
+	self.left = false
+	self.right = false
 end
 
 function Character:updateVelocity()
@@ -54,7 +48,7 @@ function Character:updateVelocity()
 	local verticalSpeed = self.verticalSpeed
 
 	local speed = 1
-	local friction = 0.9
+	local friction = 0.8
 
 	if self.left == true then
 		horizontalSpeed = horizontalSpeed - speed
@@ -72,10 +66,9 @@ function Character:updateVelocity()
 	horizontalSpeed = horizontalSpeed * friction
 	verticalSpeed = verticalSpeed * friction
 
-	if horizontalSpeed ~= 0 then
-		Log.waka("hor: " .. tostring(horizontalSpeed))
-	end
-	if verticalSpeed ~= 0 then
-		Log.waka("ver: " .. tostring(verticalSpeed))
-	end
+	self:addX(horizontalSpeed * deltaTime)
+	self:addZ(verticalSpeed * deltaTime)
+
+	self.horizontalSpeed = horizontalSpeed
+	self.verticalSpeed = verticalSpeed
 end
