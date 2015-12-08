@@ -7,14 +7,14 @@ Since the `Engine.baseEntity` has a `__engineInit` function, extending it and cr
 ```lua
 	BaseEntity:addChild(child)
 ```
-* `child` BaseEntity
+* `child` BaseEntity  
 Adds a child to this entity. Entities' transform values are relative to their parent's.
 
 #### addComponent
 ```lua
 	BaseEntity:addComponent(component)
 ```
-* `component` [BaseComponent]
+* `component` [BaseComponent]  
 Adds any of the base components to this entity. The following are currently valid base components:
 * [Engine.baseMeshRenderer](meshRenderer.md)
 * [Engine.baseDebugRenderer](debugRenderer.md)
@@ -96,63 +96,63 @@ Returns the Rotation of the entity's transform as [?]
 ```lua
 	BaseEntity:setX(x)
 ```
-* `x`
+* `x`  
 Sets the x value of the entity's transform
 
 #### setY
 ```lua
 	BaseEntity:setY(y)
 ```
-* `y`
+* `y`  
 Sets the y value of the entity's transform
 
 #### setZ
 ```lua
 	BaseEntity:setZ(z)
 ```
-* `z`
+* `z`  
 Sets the z value of the entity's transform
 
 #### setScaleX
 ```lua
 	BaseEntity:setScaleX(scale)
 ```
-* `scale`
+* `scale`  
 Sets the scaleX value of the entity's transform
 
 #### setScaleY
 ```lua
 	BaseEntity:setScaleY(scale)
 ```
-* `scale`
+* `scale`  
 Sets the scaleY value of the entity's transform
 
 #### setScaleZ
 ```lua
 	BaseEntity:setScaleZ(scale)
 ```
-* `scale`
+* `scale`  
 Sets the scaleZ value of the entity's transform
 
 #### setPitch
 ```lua
 	BaseEntity:setPitch(pitch)
 ```
-* `pitch`
+* `pitch`  
 Sets the Pitch value of the entity's transform
 
 #### setYaw
 ```lua
 	BaseEntity:setYaw(yaw)
 ```
-* `yaw`
+* `yaw`  
 Sets the Yaw value of the entity's transform
 
 #### setRoll
 ```lua
 	BaseEntity:setRoll(roll)
 ```
-* `roll`
+* `roll`  
 Sets the Roll value of the entity's transform
 
 #### setPosition
@@ -161,7 +161,7 @@ Sets the Roll value of the entity's transform
 ```
 * `x`
 * `y`
-* `z`
+* `z`  
 Sets the position of the entity's transform to x,y,z
 
 #### setScale
@@ -170,7 +170,7 @@ Sets the position of the entity's transform to x,y,z
 ```
 * `x`
 * `y`
-* `z`
+* `z`  
 Sets the scale of the entity's transform to x,y,z
 
 #### setRotation
@@ -179,68 +179,68 @@ Sets the scale of the entity's transform to x,y,z
 ```
 * `?`
 * `?`
-* `?`
+* `?`  
 Sets the rotation of the entity's transform to ?,?,?
 
 #### addX
 ```lua
 	BaseEntity:addX(dx)
 ```
-* `dx`
+* `dx`  
 Add dx to the x position of the entity's transform
 
 #### addY
 ```lua
 	BaseEntity:addY(dy)
 ```
-* `dy`
+* `dy`  
 Add dy to the y position of the entity's transform
 
 #### addZ
 ```lua
 	BaseEntity:addZ(dz)
 ```
-* `dz`
+* `dz`  
 Add dz to the z position of the entity's transform
 
 #### addScaleX
 ```lua
 	BaseEntity:addScaleX(dx)
 ```
-* `dx`
+* `dx`  
 Add dx to the x scale of the entity's transform
 
 #### addScaleY
 ```lua
 	BaseEntity:addScaleY(dy)
 ```
-* `dy`
+* `dy`  
 Add dy to the y scale of the entity's transform
 
 #### addScaleZ
 ```lua
 	BaseEntity:addScaleZ(dz)
 ```
-* `dz`
+* `dz`  
 Add dz to the z scale of the entity's transform
 
 #### pitch
 ```lua
 	BaseEntity:pitch(?)
 ```
-* `?`
+* `?`  
 pitch the entity's transform by ?
 
 #### yaw
 ```lua
 	BaseEntity:yaw(?)
 ```
-* `?`
+* `?`  
 yaw the entity's transform by ?
 
 #### roll
 ```lua
 	BaseEntity:roll(?)
 ```
-* `?`
+* `?`  
 roll the entity's transform by ?

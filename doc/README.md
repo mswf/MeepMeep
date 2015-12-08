@@ -7,16 +7,17 @@ This is a collection of all relevant information to making a game in the MeepMee
 ##Vroom Vroom modules
 An overview of all the modules exposed to Lua by VroomVroom.
 
-[Input](../vroomVroom/input.md)
+[Input](../doc/vroomVroom/input.md)
 ###Engine
-[Log](../vroomVroom/log.md)
-[UI](../vroomVroom/ui.md)
+[Log](../doc/vroomVroom/log.md)  
+[UI](../doc/vroomVroom/ui.md)
 
-[BaseEntity](../vroomVroom/entity.md)
-[BaseMeshRenderer](../vroomVroom/meshRenderer.md)
-[BaseDebugRenderer](../vroomVroom/debugRenderer.md)
 
-[BaseMaterial](../vroomVroom/material.md)
-[Model](../vroomVroom/model.md)
+[BaseEntity](../doc/vroomVroom/entity.md)  
+[BaseMeshRenderer](../doc/vroomVroom/meshRenderer.md)  
+[BaseDebugRenderer](../doc/vroomVroom/debugRenderer.md)
+
+[BaseMaterial](../doc/vroomVroom/material.md)  
+[Model](../doc/vroomVroom/model.md)
 
 ###

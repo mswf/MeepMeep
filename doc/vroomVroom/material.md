@@ -9,7 +9,7 @@ Alternative, a material that has been imported can be gained through Engine.getM
 ```lua
 	Engine.getMaterial(name)
 ```
-* `name` String
+* `name` String  
 Gets a material from the resource manager with the name name, provided it has been imported already
 
 #### setShader
@@ -19,77 +19,77 @@ Gets a material from the resource manager with the name name, provided it has be
 ```lua
 	baseMaterial:setDiffuseTexture(path)
 ```
-* `path` String
+* `path` String  
 Sets the materials diffuse texture to the texture at the path. The texture has to be imported already
 
 #### setSpecularTexture
 ```lua
 	baseMaterial:setSpecularTexture(path)
 ```
-* `path` String
+* `path` String  
 Sets the materials specular texture to the texture at the path. The texture has to be imported already
 
 #### setNormalTexture
 ```lua
 	baseMaterial:setNormalTexture(path)
 ```
-* `path` String
+* `path` String  
 Sets the materials normal texture to the texture at the path. The texture has to be imported already
 
 #### setCubeMapTexture
 ```lua
 	baseMaterial:setCubeMapTexture(path)
 ```
-* `path` String
+* `path` String  
 Sets the materials cube map texture to the texture at the path. The texture has to be imported already
 
 #### setHeightMapTexture
 ```lua
 	baseMaterial:setHeightMapTexture(path)
 ```
-* `path` String
+* `path` String  
 Sets the materials height map texture to the texture at the path. The texture has to be imported already
 
 #### setDrawingWireframe
 ```lua
 	baseMaterial:setDrawingWireframe(drawing)
 ```
-* `drawing` Boolean
+* `drawing` Boolean  
 Sets the material's wireframe on or off
 
 #### setTwoSided
 ```lua
 	baseMaterial:setTwoSided(twoSided)
 ```
-* `twoSided` Boolean
+* `twoSided` Boolean  
 Sets the material's two sided drawing on or off
 
 #### setShininess
 ```lua
 	baseMaterial:setShininess(shininess)
 ```
-* `shininess` float
+* `shininess` Float  
 Sets the material's "shininess"
 
 #### setShininessStrength
 ```lua
 	baseMaterial:setShininessStrength(strength)
 ```
-* `strength` Float
+* `strength` Float  
 Sets the material's "shininess strength"
 
 #### setOpacity
 ```lua
 	baseMaterial:setOpacity(opacity)
 ```
-* `opacity` Float
+* `opacity` Float  
 Sets the material's opacity
 
 #### setBumpScaling
 ```lua
 	baseMaterial:setBumpScaling(scaling)
 ```
-* `scaling` Float
+* `scaling` Float  
 Sets the scaling of the material's bumps (as in, bumpmap)
 
 #### setAmbientColor
@@ -99,7 +99,7 @@ Sets the scaling of the material's bumps (as in, bumpmap)
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the ambient color of the material
 
 #### setDiffuseColor
@@ -109,7 +109,7 @@ Sets the ambient color of the material
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the diffuse color of the material
 
 #### setSpecularColor
@@ -119,7 +119,7 @@ Sets the diffuse color of the material
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the specular color of the material
 
 #### setEmissiveColor
@@ -129,7 +129,7 @@ Sets the specular color of the material
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the emissive color of the material
 
 #### setTransparentColor
@@ -139,7 +139,7 @@ Sets the emissive color of the material
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the transparent color of the material
 
 #### setReflectiveColor
@@ -149,7 +149,7 @@ Sets the transparent color of the material
 * `r` Float [0 - 1]
 * `g` Float [0 - 1]
 * `b` Float [0 - 1]
-* `a` Float [0 - 1]
+* `a` Float [0 - 1]  
 Sets the reflective color of the material
 
 #### getDrawingWireframe

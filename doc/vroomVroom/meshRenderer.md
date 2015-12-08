@@ -11,12 +11,12 @@ A mesh renderer can be added to an entity to make it appear in the game
 ```lua
 	baseMeshRenderer:setModel(model)
 ```
-* `model` Model
+* `model` Model  
 Sets the model that should be renderered by this meshrenderer
 
 #### setMaterial
 ```lua
 	baseMeshRenderer:setMaterial(material)
 ```
-* `material` Material
+* `material` Material  
 Sets the material that should be used to render this meshrenderer's model
