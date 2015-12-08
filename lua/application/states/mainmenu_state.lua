@@ -50,7 +50,7 @@ function MainMenuState:enter(transitionType, args)
 	Log.bobn("plsdfff")
 	Log.bobn(Engine.system.contentPath)
 
-	local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
+	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
 	local renderer = MeshRenderer()
 	renderer:setModel(model)
@@ -58,7 +58,7 @@ function MainMenuState:enter(transitionType, args)
 	rabbit:addComponent(renderer)
 
 	rabbit:setPosition(0,0,0)
-
+--[[
 	rabbit.update = function(self, dt)
 		-- Log.steb(dt)
 		if (Input.key(KeyCode.w)) then
@@ -78,8 +78,8 @@ function MainMenuState:enter(transitionType, args)
 		end
 		-- self:yaw(1)
 	end
-
-	model = Engine.loadModel("objects/icy_snowman.obj");
+]]--
+	model = Engine.getModel("objects/icy_snowman.obj");
 	local snowman = Entity()
 	renderer = MeshRenderer()
 	renderer:setModel(model)
@@ -105,7 +105,36 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
-	Engine.loadMaterial('lol');
+	Engine.getMaterial('lol');
+
+	local cameraEntity = Entity()
+	local camera = Camera()
+	cameraEntity:addComponent(camera);
+	cameraEntity:setPosition(0,0,0)
+
+	camera:setProjectionType("orthographic")
+	camera:makeActive()
+
+	cameraEntity.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+
 
 
 	EntityDebugUI(self.UIManager, {entity = rabbit})
