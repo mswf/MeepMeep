@@ -137,5 +137,5 @@ function MainMenuState:enter(transitionType, args)
 
 
 
-	EntityDebugUI(self.UIManager, {entity = rabbit})
+	EntityDebugUI(self.UIManager, {entity = lineEntity})
 end

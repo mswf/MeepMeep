@@ -31,6 +31,9 @@ class = setmetatable(class or {}, {
 
 		-- expose a constructor which can be called by <classname>(<args>)
 		local mt = {}
+		mt.__tostring = function(class_tbl)
+			return "[CLASS] " .. retrieveVariableName(c)
+		end
 		mt.__call = function(class_tbl, ...)
 			local obj = {}
 			setmetatable(obj,c)

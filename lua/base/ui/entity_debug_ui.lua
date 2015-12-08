@@ -8,12 +8,33 @@ function EntityDebugUI:_createUI()
 	local entity = self._params.entity
 	local window = self.window
 
+	-- window.movable = false
+
 	window.title = "Inspector: " .. tostring(entity)
 
-	window.height = Engine.ui.getScreenHeight()
+	window.height = Engine.ui.getScreenHeight()*.66
 	window.width = 280
 
 	window.x = Engine.ui.getScreenWidth() - window.width
+
+	window.onResize = function(self)
+		self.width = 280
+		local screenHeight = Engine.ui.getScreenHeight()
+		if (self.height> screenHeight) then
+			self.height = screenHeight
+		end
+	end
+
+	window.onMove = function(self)
+		local y = self.y
+		local screenHeight = Engine.ui.getScreenHeight()
+		if (y < 0) then
+			self.y = 0
+		elseif (y > screenHeight - self.height ) then
+			self.y = screenHeight- self.height
+		end
+		self.x = Engine.ui.getScreenWidth() - self.width
+	end
 
 
 	local titleText = window:addText()
