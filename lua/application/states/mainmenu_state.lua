@@ -58,7 +58,7 @@ function MainMenuState:enter(transitionType, args)
 	rabbit:addComponent(renderer)
 
 	rabbit:setPosition(0,0,0)
-
+--[[
 	rabbit.update = function(self, dt)
 		-- Log.steb(dt)
 		if (Input.key(KeyCode.w)) then
@@ -78,7 +78,7 @@ function MainMenuState:enter(transitionType, args)
 		end
 		-- self:yaw(1)
 	end
-
+]]--
 	model = Engine.getModel("objects/icy_snowman.obj");
 	local snowman = Entity()
 	renderer = MeshRenderer()
@@ -106,6 +106,36 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
 	Engine.getModel('lol');
+	Engine.getMaterial('lol');
+
+	local cameraEntity = Entity()
+	local camera = Camera()
+	cameraEntity:addComponent(camera);
+	cameraEntity:setPosition(0,0,0)
+
+	camera:setProjectionType("orthographic")
+	camera:makeActive()
+
+	cameraEntity.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+
 
 
 	-- EntityDebugUI(self.UIManager, {entity = lineEntity})

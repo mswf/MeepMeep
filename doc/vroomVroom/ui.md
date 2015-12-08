@@ -30,6 +30,9 @@ local slider      = uiContainer:addSlider( string "floats"/"ints")
 
 --remove an element from this Container
 uiContainer:remove(element)
+
+--remove all children from this Container
+uiContainer:removeChildren()
 ```
 
 ## UI Window : UI Container
