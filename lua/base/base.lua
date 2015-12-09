@@ -9,6 +9,8 @@ require "lua/base/broadcaster"
 
 require "lua/base/entity"
 require "lua/base/meshrenderer"
+require "lua/base/debugrenderer"
+require "lua/base/material"
 
 require "lua/base/parsing/i18n"
 require "lua/base/parsing/parser"
@@ -30,6 +32,11 @@ require "lua/base/input/keycode"
 
 require "lua/base/ui/uibase"
 require "lua/base/ui/uimanager"
+
+require "lua/base/ui/entity_debug_ui"
+require "lua/base/ui/table_debug_ui"
+
+
 
 require "lua/base/libs/fun"
 require "lua/base/libs/smallfolk"

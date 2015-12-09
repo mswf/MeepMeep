@@ -5,7 +5,12 @@ if (Engine.ui.__UIInit == nil) then
 end
 
 UIBase = class(UIBase, function(self, uiManager, params)
-	uiManager = uiManager or Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
+	if (not uiManager._activeWindows) then
+		params = uiManager
+		uiManager = Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
+	else
+		uiManager = uiManager or Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
+	end
 
 	self._params = params or {}
 
@@ -52,7 +57,7 @@ function UIBase:__onReload()
 	self.window = self._uiManager:getNewWindow()
 	self.window.__owner = self
 	if (self.update ~= UIBase.update) then
-		uiManager:registerUpdate(self.window)
+		self._uiManager:registerUpdate(self.window)
 	end
 
 	self:_createUI()

@@ -42,13 +42,13 @@ function MainMenuState:enter(transitionType, args)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
 
-	self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
+	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
 
 
-	Log.bobn("plsdfff")
-	Log.bobn(Engine.system.contentPath)
+	--Log.bobn("plsdfff")
+	--Log.bobn(Engine.system.contentPath)
 
 	--local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
 	--local rabbit = Entity()
@@ -60,23 +60,23 @@ function MainMenuState:enter(transitionType, args)
 	--rabbit:setPosition(0,0,0)
 
 	--rabbit.update = function(self, dt)
-		-- Log.steb(dt)
-		--if (Input.key(KeyCode.w)) then
-		--	self:addZ(1*dt)
-		--end
+	--	-- Log.steb(dt)
+	--	if (Input.key(KeyCode.w)) then
+	--		self:addZ(1*dt)
+	--	end
 
-		--if (Input.key(KeyCode.s)) then
-		--	self:addZ(-1*dt)
-		--end
---
-		--if (Input.key(KeyCode.a)) then
-		--	self:addX(1*dt)
-		--end
---
-		--if (Input.key(KeyCode.d)) then
-		--	self:addX(-1*dt)
-		--end
-		-- self:yaw(1)
+	--	if (Input.key(KeyCode.s)) then
+	--		self:addZ(-1*dt)
+	--	end
+
+	--	if (Input.key(KeyCode.a)) then
+	--		self:addX(1*dt)
+	--	end
+
+	--	if (Input.key(KeyCode.d)) then
+	--		self:addX(-1*dt)
+	--	end
+	--	-- self:yaw(1)
 	--end
 
 	--model = Engine.loadModel("objects/icy_snowman.obj");
@@ -93,4 +93,20 @@ function MainMenuState:enter(transitionType, args)
 	--end
 
 	--rabbit:addChild(snowman)
+
+	--local testMat = Material();
+	--testMat:setDiffuseTexture("objects/snowman.png");
+	--rabbit.meshRenderer:setMaterial(testMat);
+
+
+	--local lineEntity = Entity()
+	--lineEntity:addComponent(DebugRenderer())
+	--lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
+	--lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
+	--lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
+
+	--Engine.loadMaterial('lol');
+
+
+	--EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
