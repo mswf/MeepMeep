@@ -14,8 +14,6 @@ function Character:_loadModel(modelPath)
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
 	self:setPosition(0,0,0)
-
-	--self.entity:addChild(snowman)
 end
 
 function Character:moveLeft()
@@ -35,15 +33,15 @@ function Character:moveDown()
 	self.down = true
 end
 
-function Character:update(dt)
-	self:updateVelocity(dt)
+function Character:update(deltaTime)
+	self:updateVelocity(deltaTime)
 	self.up = false
 	self.down = false
 	self.left = false
 	self.right = false
 end
 
-function Character:updateVelocity(dt)
+function Character:updateVelocity(deltaTime)
 	local horizontalSpeed = self.horizontalSpeed
 	local verticalSpeed = self.verticalSpeed
 
@@ -66,8 +64,8 @@ function Character:updateVelocity(dt)
 	horizontalSpeed = horizontalSpeed * friction
 	verticalSpeed = verticalSpeed * friction
 
-	self:addX(horizontalSpeed * dt)
-	self:addZ(verticalSpeed * dt)
+	self:addX(horizontalSpeed * deltaTime)
+	self:addZ(verticalSpeed * deltaTime)
 
 	self.horizontalSpeed = horizontalSpeed
 	self.verticalSpeed = verticalSpeed
