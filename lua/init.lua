@@ -46,9 +46,21 @@ function Game.main()
 	GlobalStateManager:start()
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
+	Engine.importTexture("objects/snowman.png")
 	CHARACTER = Player()
 	--ENEMY = Enemy()
 	LEVEL = Level()
+	--createCamera()
+	local cameraEntity = Entity()
+	local camera = Camera()
+	cameraEntity:addComponent(camera);
+	cameraEntity:setPosition(0,0,0)
+
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(1.6)
+
+
 	--
 	-- GLOBTAB = {}
 	-- Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
@@ -79,6 +91,10 @@ function Game.main()
         end
     })
     ]]--
+end
+
+function Game:createCamera()
+
 end
 
 function Game.update(dt)
