@@ -16,13 +16,13 @@ end)
 
 function Enemy:update(dt)
 	if self.state == EnemyState.Suicidal then
-		Log.waka("SUICII")
+		--Log.waka("SUICII")
 	elseif self.state == EnemyState.Defensive then
-		Log.waka("DEFEEE")
+		--Log.waka("DEFEEE")
 	elseif self.state == EnemyState.Offensive then
-		Log.waka("OFFFFFF")
+		--Log.waka("OFFFFFF")
 	elseif self.state == EnemyState.Idle then
-		Log.waka("ZZZZ")
+		--Log.waka("ZZZZ")
 	else
 		Log.waka("OOOOOOOBBBB")
 	end
