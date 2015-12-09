@@ -3,13 +3,13 @@ require "lua/weikie/character"
 Player = class(Player, Character, function(self)
 	self:_loadModel("objects/Rabbit/Rabbit.obj");
 	--self:_loadModel("objects/weikie/billboard.obj");
-
+	self:doOnce()
 	self._base.init(self)
 end)
 
-function Player:update()
+function Player:update(dt)
 	self:pollInput()
-	self._base.update(self)
+	self._base.update(self, dt)
 end
 
 function Player:pollInput()
@@ -28,4 +28,15 @@ function Player:pollInput()
 	if Input.key(KeyCode.a) == true then
 		self:moveRight()
 	end
+end
+
+function Player:doOnce()
+	local cameraEntity = Entity()
+	local camera = Camera()
+	cameraEntity:addComponent(camera);
+	cameraEntity:setPosition(0,0,0)
+
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(0.5)
 end

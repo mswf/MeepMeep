@@ -35,15 +35,15 @@ function Character:moveDown()
 	self.down = true
 end
 
-function Character:update()
-	self:updateVelocity()
+function Character:update(dt)
+	self:updateVelocity(dt)
 	self.up = false
 	self.down = false
 	self.left = false
 	self.right = false
 end
 
-function Character:updateVelocity()
+function Character:updateVelocity(dt)
 	local horizontalSpeed = self.horizontalSpeed
 	local verticalSpeed = self.verticalSpeed
 
@@ -66,8 +66,8 @@ function Character:updateVelocity()
 	horizontalSpeed = horizontalSpeed * friction
 	verticalSpeed = verticalSpeed * friction
 
-	self:addX(horizontalSpeed * deltaTime)
-	self:addZ(verticalSpeed * deltaTime)
+	self:addX(horizontalSpeed * dt)
+	self:addZ(verticalSpeed * dt)
 
 	self.horizontalSpeed = horizontalSpeed
 	self.verticalSpeed = verticalSpeed

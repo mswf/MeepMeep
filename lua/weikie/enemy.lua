@@ -14,7 +14,7 @@ Enemy = class(Enemy, Character, function(self)
 	self._base.init(self)
 end)
 
-function Enemy:update()
+function Enemy:update(dt)
 	if self.state == EnemyState.Suicidal then
 		Log.waka("SUICII")
 	elseif self.state == EnemyState.Defensive then
@@ -29,5 +29,5 @@ function Enemy:update()
 
 
 	self.state = math.random(0, 3)
-	self._base.update(self)
+	self._base.update(self, dt)
 end
