@@ -38,5 +38,5 @@ function Player:doOnce()
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
-	camera:setAspectRatio(0.5)
+	camera:setAspectRatio(1.6)
 end
