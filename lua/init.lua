@@ -47,7 +47,7 @@ function Game.main()
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	CHARACTER = Player()
-	ENEMY = Enemy()
+	--ENEMY = Enemy()
 	LEVEL = Level()
 	--
 	-- GLOBTAB = {}
