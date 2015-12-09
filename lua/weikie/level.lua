@@ -1,5 +1,6 @@
 --require "lua/LuaXML/LuaXml"
 --require "lua/LuaXML/test"
+require "lua/weikie/floor"
 
 Level = class(Level, function(self)
 	Log.waka("level init")
@@ -22,6 +23,8 @@ function Level:init()
 			arr[i][n] = 1
 		end
 	end
+
+	self:_doFloor()
 end
 
 function Level:printTable()
@@ -38,4 +41,8 @@ end
 
 function Level:setTile(x, y, value)
 	self.local_arr[x][y].value = value
+end
+
+function Level:_doFloor()
+	self.floor = Floor()
 end
