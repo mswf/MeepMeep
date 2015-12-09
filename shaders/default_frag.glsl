@@ -32,6 +32,36 @@ subroutine( myMode ) vec3 modeRed()
 subroutine uniform shadeModelType shadeModel;
 subroutine uniform myMode colMode;
 
+struct MaterialInfo
+{
+	vec4 Ambient;
+	vec4 Diffuse;
+	vec4 Specular;
+	vec4 Emmisive;
+	vec4 Transparent;
+	vec4 Reflective;
+};
+
+struct LightInfo
+{
+	vec3 position;
+	float intensity;
+	vec4 color;
+};
+
+const int materialCount = 2;
+const int lightCount = 4;
+
+layout( std140 ) uniform Material
+{
+	MaterialInfo materials[materialCount];
+};
+
+layout( std140 ) uniform Light
+{
+	LightInfo lights[lightCount];
+};
+
 //in vec3 T;
 //in vec3 B;
 in vec3 N;
@@ -40,8 +70,6 @@ in vec3 EyeDirectionCameraSpace;
 in vec2 uv;
 
 layout(location = 0) out vec4 FragColor;
-
-
 
 float diffuse( vec3 n, vec3 l )
 {
