@@ -47,66 +47,98 @@ function MainMenuState:enter(transitionType, args)
 
 
 
-	--Log.bobn("plsdfff")
-	--Log.bobn(Engine.system.contentPath)
+	Log.bobn("plsdfff")
+	Log.bobn(Engine.system.contentPath)
 
-	--local model = Engine.loadModel("objects/Rabbit/Rabbit.obj");
-	--local rabbit = Entity()
-	--local renderer = MeshRenderer()
-	--renderer:setModel(model)
+	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
+	local rabbit = Entity()
+	local renderer = MeshRenderer()
+	renderer:setModel(model)
 
-	--rabbit:addComponent(renderer)
+	rabbit:addComponent(renderer)
 
-	--rabbit:setPosition(0,0,0)
+	rabbit:setPosition(0,0,0)
+--[[
+	rabbit.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
 
-	--rabbit.update = function(self, dt)
-	--	-- Log.steb(dt)
-	--	if (Input.key(KeyCode.w)) then
-	--		self:addZ(1*dt)
-	--	end
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
 
-	--	if (Input.key(KeyCode.s)) then
-	--		self:addZ(-1*dt)
-	--	end
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
 
-	--	if (Input.key(KeyCode.a)) then
-	--		self:addX(1*dt)
-	--	end
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+]]--
+	model = Engine.getModel("objects/icy_snowman.obj");
+	local snowman = Entity()
+	renderer = MeshRenderer()
+	renderer:setModel(model)
 
-	--	if (Input.key(KeyCode.d)) then
-	--		self:addX(-1*dt)
-	--	end
-	--	-- self:yaw(1)
-	--end
+	snowman:addComponent(renderer)
 
-	--model = Engine.loadModel("objects/icy_snowman.obj");
-	--local snowman = Entity()
-	--renderer = MeshRenderer()
-	--renderer:setModel(model)
+	snowman:setPosition(-1,-1,-1)
 
-	--snowman:addComponent(renderer)
+	snowman.update = function(self, dt)
+		self:roll(1)
+	end
 
-	--snowman:setPosition(-1,-1,-1)
+	rabbit:addChild(snowman)
 
-	--snowman.update = function(self, dt)
-	--	self:roll(1)
-	--end
-
-	--rabbit:addChild(snowman)
-
-	--local testMat = Material();
-	--testMat:setDiffuseTexture("objects/snowman.png");
-	--rabbit.meshRenderer:setMaterial(testMat);
-
-
-	--local lineEntity = Entity()
-	--lineEntity:addComponent(DebugRenderer())
-	--lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
-	--lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
-	--lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
-
-	--Engine.loadMaterial('lol');
+	local testMat = Material();
+	testMat:setDiffuseTexture("objects/snowman.png");
+	rabbit.meshRenderer:setMaterial(testMat);
 
 
-	--EntityDebugUI(self.UIManager, {entity = lineEntity})
+	local lineEntity = Entity()
+	lineEntity:addComponent(DebugRenderer())
+	lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
+	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
+	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
+
+	Engine.getModel('lol');
+	Engine.getMaterial('lol');
+
+	local cameraEntity = Entity()
+	local camera = Camera()
+	cameraEntity:addComponent(camera);
+	cameraEntity:setPosition(0,0,0)
+
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(0.5)
+
+	cameraEntity.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+
+	EntityDebugUI(self.UIManager, {entity = cameraEntity})
+
+
+	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
