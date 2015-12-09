@@ -38,6 +38,16 @@ function MainMenuState:exit(transitionType, args)
 end
 
 function MainMenuState:enter(transitionType, args)
+
+	Engine.importModel("objects/Rabbit/Rabbit.obj")
+	Engine.importModel( "objects/icy_snowman.obj" )
+	Engine.importTexture( "objects/snowman.png", true )
+	Engine.importTexture( "objects/object_group_test/checker_1.png" )
+	Engine.importTexture( "objects/object_group_test/checker_2.png" )
+
+	local snowmanMat = Material();
+	snowmanMat:setDiffuseTexture("objects/snowman.png")
+
 	self._mainMenuUI = MainMenuUI(self.UIManager)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
@@ -92,12 +102,9 @@ function MainMenuState:enter(transitionType, args)
 		self:roll(1)
 	end
 
+	snowman.meshRenderer:setMaterial(snowmanMat)
+
 	rabbit:addChild(snowman)
-
-	local testMat = Material();
-	testMat:setDiffuseTexture("objects/snowman.png");
-	rabbit.meshRenderer:setMaterial(testMat);
-
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -105,14 +112,12 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
-	Engine.getMaterial('lol');
-
 	local cameraEntity = Entity()
 	local camera = Camera()
 	cameraEntity:addComponent(camera);
 	cameraEntity:setPosition(0,0,0)
 
-	camera:setProjectionType("orthographic")
+	--camera:setProjectionType("orthographic")
 	camera:makeActive()
 
 	cameraEntity.update = function(self, dt)
