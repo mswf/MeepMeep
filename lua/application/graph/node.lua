@@ -74,39 +74,25 @@ function Node:draw()
 			-- love.graphics.setColor(unpack(self._RANDCOLOR))
 			-- love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
 		end
-		self:drawHovered()
 		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
-
-DEBUGSKIP = true
-
-
 function Node:drawHovered()
-	if (not DEBUGSKIP) then
-		return
-	end
-
-	DEBUGSKIP = false
-
+	-- if true then return end
 
 	if (self._vertices) then
 		local v = self._vertices
 		local num = #v
 
-		for i=1, num, 2 do
-			if (i + 1 < num) and not (i < 2) then
+		for i=3, num, 2 do
+			if (i + 1 < num) then
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
 																				unpack(self._RANDCOLORLINE))
 			end
 		end
-
-		-- love.graphics.setColor(unpack(self._RANDCOLORLINE))
-
-		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
@@ -118,6 +104,17 @@ function Node:drawSelected()
 	end
 
 	if (self._vertices) then
+		local v = self._vertices
+		local num = #v
+
+		for i=3, num, 2 do
+			if (i + 1 < num) then
+				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
+																				v[i],	v[i+1],
+																				v[i+2],	v[i+3],
+																				1,0,0,1)
+			end
+		end
 		-- love.graphics.setColor(255,255,255,128)
 
 		-- love.graphics.polygon('fill', self._vertices)
@@ -126,6 +123,18 @@ end
 
 function Node:drawNeighbour()
 	if (self._vertices) then
+
+		local v = self._vertices
+		local num = #v
+
+		for i=3, num, 2 do
+			if (i + 1 < num) then
+				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
+																				v[i],	v[i+1],
+																				v[i+2],	v[i+3],
+																				0.5,0,0,0.5)
+			end
+		end
 		-- love.graphics.setColor(100,100,100,128)
 
 		-- love.graphics.polygon('fill', self._vertices)

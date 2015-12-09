@@ -48,6 +48,8 @@ function Tree:draw()
 		if (curPath[i+1]) then
 			local x1, y1 = curPath[i]:getWorldCenter()
 			local x2, y2 = curPath[i+1]:getWorldCenter()
+
+			DebugDrawPath:addLine2D(x1, y1, x2, y2)
 			-- love.graphics.setColor(255,100,100,100)
 			-- love.graphics.line(x1, y1, x2, y2)
 		end

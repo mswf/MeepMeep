@@ -119,23 +119,22 @@ function CairoTree:registerInput()
 	-- local worldY = (mouseY - CAMOFFSET.Y) / CAMOFFSET.ZOOM
 
 	local worldX = mouseX
-	local worldY = mouseY
+	local worldY = Engine.ui.getScreenHeight() - mouseY 
 
-
-
-
-
-	local gridPosX = worldX/self.size*.5
-	local gridPosY = worldY/self.size*.5
+	local gridPosX = worldX/self.size*.5/50
+	local gridPosY = worldY/self.size*.5/50
 
 	local gridX = math.floor(gridPosX) +1
 	local gridY = math.floor(gridPosY) +1
 
+	-- Log.steb("X: ".. gridX .. ", Y: ".. gridY)
+
 	if  (gridX < 1 or gridX > self._width
 		or gridY < 1 or gridY > self._height) then
 
+			-- Log.steb("can't find")
 		self:setHovered(nil)
-		if (Input.mouseDown(0)) then
+		if (Input.mouseDown(1)) then
 			self:setSelected(nil)
 		end
 		return
@@ -156,11 +155,11 @@ function CairoTree:registerInput()
 
 	self:setHovered(self._grid[gridX][gridY][zOffset])
 
-	if (Input.mouseDown(0)) then
+	if (Input.mouseDown(1)) then
 		self:setSelected(self._grid[gridX][gridY][zOffset])
 	end
 
-	if (Input.keyDown(KeyCode.P) or Input.mouseDown(1)) then
+	if (Input.keyDown(KeyCode.P) or Input.mouseDown(3)) then
 		if (self._currentSelected and self._currentHovered) then
 			self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
 		else

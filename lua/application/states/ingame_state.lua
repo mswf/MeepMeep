@@ -34,7 +34,19 @@ function IngameState:enter(transition, args)
 		self:addTriangle(x1, y1, 0, x2, y2, 0, x3, y3, 0, r or 0,g or 0,b or 0,a or 1)
 	end
 
+	local pathEntity = Entity()
+	pathEntity:addComponent(DebugRenderer())
+
+	DebugDrawPath = pathEntity.debugRenderer
+
+	DebugDrawPath:setDrawPoints(true)
+
+	DebugDrawPath.addLine2D = function(self, x1, y1, x2, y2, r,g,b)
+		self:addLine(x1, y1, 0, x2, y2, 0, r,g,b)
+	end
+
 	lineEntity:addChild(triangleEntity)
+	lineEntity:addChild(pathEntity)
 	lineEntity:setPosition(-10,-10,-10)
 
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25, 0,0,0)
@@ -59,10 +71,17 @@ function IngameState:exit(transition, args)
 end
 
 function IngameState:update(dt)
+	-- if (Input.mouseDown(3)) then
+	-- 	Log.steb("2")
+	-- end
+
 	self.tree:registerInput()
 
-	-- DebugDraw:clear()
-	-- self.tree:draw()
+	DebugDraw:clear()
+	DebugDrawTriangle:clear()
+	DebugDrawPath:clear()
+
+	self.tree:draw()
 
 	-- Log.steb("updating the IngameState")
 
