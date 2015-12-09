@@ -55,10 +55,8 @@ function MainMenuState:enter(transitionType, args)
 	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
-
-
-	Log.bobn("plsdfff")
-	Log.bobn(Engine.system.contentPath)
+	-- Log.bobn("plsdfff")
+	-- Log.bobn(Engine.system.contentPath)
 
 	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
