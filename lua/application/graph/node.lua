@@ -80,8 +80,15 @@ function Node:draw()
 end
 
 
+DEBUGSKIP = true
+
 
 function Node:drawHovered()
+	if (not DEBUGSKIP) then
+		return
+	end
+
+	DEBUGSKIP = false
 
 
 	if (self._vertices) then
