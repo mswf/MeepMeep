@@ -5,34 +5,36 @@ require "lua/weikie/floor"
 Level = class(Level, function(self)
 	Log.waka("level init")
 
-	self.local_arr = {}
-	self:init()
+	self.levelObjects = {}
+	self.width = 20
+	self.height = 15
+	self:initLevelObjects()
+	self:_loadFloor()
 end)
 
 
 -- local arr = {}
 -- local arr2 = {}
 
-function Level:init()
+function Level:initLevelObjects()
 	local loopCount = 20
-	local arr = self.local_arr
+	local arr = self.levelObjects
 
-	for i=1, loopCount do
+	--global i/n?
+	for i=1, self.width do
 		arr[i] = {}
-		for n=1, loopCount do
+		for n=1, self.height do
 			arr[i][n] = 1
 		end
 	end
-
-	self:_doFloor()
 end
 
 function Level:printTable()
-	Log.waka(arr)
+	Log.waka(self.levelObjects[1])
 end
 
 function Level:printTableValue(x, y)
-	local innerArray = self.local_arr[x]
+	local innerArray = self.levelObjects[x]
 	local b = innerArray[y]
 	Log.waka(type(b))
 	Log.waka(b)
@@ -40,9 +42,9 @@ function Level:printTableValue(x, y)
 end
 
 function Level:setTile(x, y, value)
-	self.local_arr[x][y].value = value
+	self.levelObjects[x][y].value = value
 end
 
-function Level:_doFloor()
+function Level:_loadFloor()
 	self.floor = Floor()
 end
