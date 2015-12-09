@@ -45,6 +45,7 @@ function Game.main()
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
 
+	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	CHARACTER = Player()
 	ENEMY = Enemy()
 	LEVEL = Level()
