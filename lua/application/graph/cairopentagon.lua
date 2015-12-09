@@ -13,14 +13,16 @@ CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 	tree:addNode(self)
 
 	self._RANDCOLOR = {}
-	self._RANDCOLOR[1] = math.random()*205 +50
-	self._RANDCOLOR[2] = math.random()*205 +50
-	self._RANDCOLOR[3] = math.random()*205 +50
+	self._RANDCOLOR[1] = math.random()*.5
+	self._RANDCOLOR[2] = math.random()*.5
+	self._RANDCOLOR[3] = math.random()*.5
+	self._RANDCOLOR[4] = .8
 
 	self._RANDCOLORLINE = {}
-	self._RANDCOLORLINE[1] = math.random()*205 +50
-	self._RANDCOLORLINE[2] = math.random()*205 +50
-	self._RANDCOLORLINE[3] = math.random()*205 +50
+	self._RANDCOLORLINE[1] = math.random()*.5+.5
+	self._RANDCOLORLINE[2] = math.random()*.5+.5
+	self._RANDCOLORLINE[3] = math.random()*.5+.5
+	self._RANDCOLORLINE[4] = .5
 end)
 
 function CairoPentagon:setWorldCenter()

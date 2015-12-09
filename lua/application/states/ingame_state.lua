@@ -31,21 +31,18 @@ function IngameState:enter(transition, args)
 	DebugDrawTriangle = triangleEntity.debugRenderer
 
 	DebugDrawTriangle.addTriangle2D = function(self, x1, y1, x2, y2, x3, y3, r,g,b,a)
-		self:addTriangle(x1, y1, 0, x2, y2, 0, x3, y3, 1, r or 0,g or 0,b or 0,a or 1)
+		self:addTriangle(x1, y1, 0, x2, y2, 0, x3, y3, 0, r or 0,g or 0,b or 0,a or 1)
 	end
 
 	lineEntity:addChild(triangleEntity)
 	lineEntity:setPosition(-10,-10,-10)
 
-	DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25, 0,0,0)
+	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25, 0,0,0)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
-
-
 
 
 	EntityDebugUI(self.UIManager, {entity = lineEntity})
-
 
 	local tree = CairoTree(0,0)
 
@@ -54,7 +51,7 @@ function IngameState:enter(transition, args)
 
 
 	self.tree = tree
-self.tree:draw()
+	self.tree:draw()
 end
 
 function IngameState:exit(transition, args)
@@ -62,7 +59,7 @@ function IngameState:exit(transition, args)
 end
 
 function IngameState:update(dt)
-	-- self.tree:registerInput()
+	self.tree:registerInput()
 
 	-- DebugDraw:clear()
 	-- self.tree:draw()

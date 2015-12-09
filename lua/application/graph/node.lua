@@ -13,16 +13,16 @@ Node = class(Node, function(self, tree)
 	tree:addNode(self)
 
 	self._RANDCOLOR = {}
-	self._RANDCOLOR[1] = math.random()*205 +50
-	self._RANDCOLOR[2] = math.random()*205 +50
-	self._RANDCOLOR[3] = math.random()*205 +50
-	self._RANDCOLOR[4] = 128
+	self._RANDCOLOR[1] = math.random()*.2
+	self._RANDCOLOR[2] = math.random()*.2
+	self._RANDCOLOR[3] = math.random()*.2
+	self._RANDCOLOR[4] = .8
 
 	self._RANDCOLORLINE = {}
-	self._RANDCOLORLINE[1] = math.random()*205 +50
-	self._RANDCOLORLINE[2] = math.random()*205 +50
-	self._RANDCOLORLINE[3] = math.random()*205 +50
-	self._RANDCOLORLINE[4] = 50
+	self._RANDCOLORLINE[1] = math.random()*.2+.5
+	self._RANDCOLORLINE[2] = math.random()*.2+.5
+	self._RANDCOLORLINE[3] = math.random()*.2+.5
+	self._RANDCOLORLINE[4] = .5
 
 end)
 
@@ -74,13 +74,29 @@ function Node:draw()
 			-- love.graphics.setColor(unpack(self._RANDCOLOR))
 			-- love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
 		end
-
+		self:drawHovered()
 		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
+
+
 function Node:drawHovered()
+
+
 	if (self._vertices) then
+		local v = self._vertices
+		local num = #v
+
+		for i=1, num, 2 do
+			if (i + 1 < num) and not (i < 2) then
+				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
+																				v[i],	v[i+1],
+																				v[i+2],	v[i+3],
+																				unpack(self._RANDCOLORLINE))
+			end
+		end
+
 		-- love.graphics.setColor(unpack(self._RANDCOLORLINE))
 
 		-- love.graphics.polygon('fill', self._vertices)
