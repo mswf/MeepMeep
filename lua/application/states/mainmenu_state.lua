@@ -46,7 +46,7 @@ function MainMenuState:enter(transitionType, args)
 	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
 
-
+--[[
 	Log.bobn("plsdfff")
 	Log.bobn(Engine.system.contentPath)
 
@@ -78,7 +78,7 @@ function MainMenuState:enter(transitionType, args)
 		end
 		-- self:yaw(1)
 	end
-]]--
+
 	model = Engine.getModel("objects/icy_snowman.obj");
 	local snowman = Entity()
 	renderer = MeshRenderer()
@@ -138,7 +138,7 @@ function MainMenuState:enter(transitionType, args)
 	end
 
 	EntityDebugUI(self.UIManager, {entity = cameraEntity})
-
+]]--
 
 	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
