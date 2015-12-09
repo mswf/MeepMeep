@@ -1,5 +1,5 @@
 
-require "lua/application/graph/tree"
+-- require "lua/application/graph/tree"
 
 Node = class(Node, function(self, tree)
 	self._vertices = nil
@@ -65,10 +65,11 @@ function Node:draw()
 
 		local edges = self._edges
 		for i=1, #edges do
-			love.graphics.setColor(unpack(self._RANDCOLORLINE))
+			-- love.graphics.setColor(unpack(self._RANDCOLORLINE))
 
+			DebugDraw:addLine2D(unpack(edges[i]))
 
-			love.graphics.line(unpack(edges[i]))
+			-- love.graphics.line(unpack(edges[i]))
 
 			-- love.graphics.setColor(unpack(self._RANDCOLOR))
 			-- love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
@@ -80,9 +81,9 @@ end
 
 function Node:drawHovered()
 	if (self._vertices) then
-		love.graphics.setColor(unpack(self._RANDCOLORLINE))
+		-- love.graphics.setColor(unpack(self._RANDCOLORLINE))
 
-		love.graphics.polygon('fill', self._vertices)
+		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
@@ -94,16 +95,16 @@ function Node:drawSelected()
 	end
 
 	if (self._vertices) then
-		love.graphics.setColor(255,255,255,128)
+		-- love.graphics.setColor(255,255,255,128)
 
-		love.graphics.polygon('fill', self._vertices)
+		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
 function Node:drawNeighbour()
 	if (self._vertices) then
-		love.graphics.setColor(100,100,100,128)
+		-- love.graphics.setColor(100,100,100,128)
 
-		love.graphics.polygon('fill', self._vertices)
+		-- love.graphics.polygon('fill', self._vertices)
 	end
 end

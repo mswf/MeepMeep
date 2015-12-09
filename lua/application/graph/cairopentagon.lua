@@ -1,5 +1,4 @@
 
-require "lua/application/graph/cairotree"
 require "lua/application/graph/node"
 
 CairoPentagon = class(CairoPentagon, Node, function(self, tree)

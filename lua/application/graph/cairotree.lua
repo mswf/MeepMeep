@@ -1,5 +1,6 @@
 
 require "lua/application/graph/tree"
+require "lua/application/graph/cairopentagon"
 
 -- GLOBALCOUNT = GLOBALCOUNT or 1
 CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
@@ -26,18 +27,19 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 
 end)
 
-function CairoTree:initialzeToDimensions(width, height)
+function CairoTree:initializeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
 
 	self._grid = {}
 	for x=1, width do
 		self._grid[x] = {}
 		for y=1, height do
+			-- Log.steb(y)
 			self._grid[x][y] = {}
 
-			local node1 = cairoConstructor(GlobalTree)
+			local node1 = cairoConstructor(self)
 			node1:setPosition(x,y,1)
-			local node2 = cairoConstructor(GlobalTree)
+			local node2 = cairoConstructor(self)
 			node2:setPosition(x,y,2)
 		end
 	end
@@ -111,10 +113,17 @@ function CairoTree:registerInput()
 	-- end
 
 	--#TODO:0 refactor this input the moment this is moved to the engine side
-	local mouseX, mouseY = love.mouse.getPosition()
+	local mouseX, mouseY = Input.getMousePosition()
 
-	local worldX = (mouseX - CAMOFFSET.X) / CAMOFFSET.ZOOM
-	local worldY = (mouseY - CAMOFFSET.Y) / CAMOFFSET.ZOOM
+	-- local worldX = (mouseX - CAMOFFSET.X) / CAMOFFSET.ZOOM
+	-- local worldY = (mouseY - CAMOFFSET.Y) / CAMOFFSET.ZOOM
+
+	local worldX = mouseX
+	local worldY = mouseY
+
+
+
+
 
 	local gridPosX = worldX/self.size*.5
 	local gridPosY = worldY/self.size*.5
@@ -126,7 +135,7 @@ function CairoTree:registerInput()
 		or gridY < 1 or gridY > self._height) then
 
 		self:setHovered(nil)
-		if (INPUTS.mouse["l"]) then
+		if (Input.mouseDown(0)) then
 			self:setSelected(nil)
 		end
 		return
@@ -147,11 +156,11 @@ function CairoTree:registerInput()
 
 	self:setHovered(self._grid[gridX][gridY][zOffset])
 
-	if (INPUTS.mouse["l"]) then
+	if (Input.mouseDown(0)) then
 		self:setSelected(self._grid[gridX][gridY][zOffset])
 	end
 
-	if (INPUTS.key["p"] or INPUTS.mouse["r"]) then
+	if (Input.keyDown(KeyCode.P) or Input.mouseDown(1)) then
 		if (self._currentSelected and self._currentHovered) then
 			self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
 		else

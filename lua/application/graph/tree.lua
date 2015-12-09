@@ -1,7 +1,7 @@
 
 require "lua/application/graph/node"
 
-Tree = class(Tree ,function(self, rootX, rootY)
+Tree = class(Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 

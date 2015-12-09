@@ -14,7 +14,7 @@ local enumMetaTable = {
 
 local enumValueMetatable = {
 	__tostring = function(value)
-		return "[ENUMVALUE] " .. retrieveVariableName(value.enum) .. "." .. value.name
+		return "[ENUMVALUE] " .. retrieveVariableName(value.enum) .. "." .. value.name .. "[".. value.num .."]"
 	end,
 	__concat = function(lhs, rhs)
 		return tostring(lhs) .. tostring(rhs)
