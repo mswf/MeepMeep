@@ -13,6 +13,11 @@ function Character:_loadModel(modelPath)
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
 	self:setPosition(0,0,0)
+
+
+	local testMat = Material();
+	testMat:setDiffuseTexture("objects/snowman.png");
+	self.meshRenderer:setMaterial(testMat);
 end
 
 function Character:moveLeft()
