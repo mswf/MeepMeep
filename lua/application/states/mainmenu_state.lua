@@ -113,8 +113,9 @@ function MainMenuState:enter(transitionType, args)
 	cameraEntity:addComponent(camera);
 	cameraEntity:setPosition(0,0,0)
 
-	camera:setProjectionType("orthographic")
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
+	camera:setAspectRatio(0.5)
 
 	cameraEntity.update = function(self, dt)
 		-- Log.steb(dt)
@@ -136,6 +137,7 @@ function MainMenuState:enter(transitionType, args)
 		-- self:yaw(1)
 	end
 
+	EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
 
 	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
