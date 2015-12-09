@@ -115,7 +115,7 @@ function MainMenuState:enter(transitionType, args)
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
-	camera:setAspectRatio(0.5)
+	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 
 	cameraEntity.update = function(self, dt)
 		-- Log.steb(dt)
