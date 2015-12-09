@@ -1,5 +1,4 @@
 Character = class(Character, Entity, function(self)
-	self.entity = self
 	self.horizontalSpeed = 0
 	self.verticalSpeed = 0
 	self.left = false
@@ -18,7 +17,6 @@ end
 
 function Character:moveLeft()
 	self.left = true
-	Log.waka("left")
 end
 
 function Character:moveRight()
