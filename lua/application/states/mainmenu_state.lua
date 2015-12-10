@@ -113,7 +113,7 @@ function MainMenuState:enter(transitionType, args)
 	local cameraEntity = Entity()
 	local camera = Camera()
 	cameraEntity:addComponent(camera);
-	cameraEntity:setPosition(-0.2, -0.5 ,-0.75)
+	cameraEntity:setPosition(0,0,0)
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
