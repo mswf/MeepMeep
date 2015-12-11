@@ -119,10 +119,10 @@ function CairoTree:registerInput()
 	-- local worldY = (mouseY - CAMOFFSET.Y) / CAMOFFSET.ZOOM
 
 	local worldX = mouseX
-	local worldY = Engine.ui.getScreenHeight() - mouseY 
+	local worldY = Engine.ui.getScreenHeight() - mouseY
 
-	local gridPosX = worldX/self.size*.5/50
-	local gridPosY = worldY/self.size*.5/50
+	local gridPosX = worldX/self.size*.5/40
+	local gridPosY = worldY/self.size*.5/40
 
 	local gridX = math.floor(gridPosX) +1
 	local gridY = math.floor(gridPosY) +1
