@@ -1,7 +1,10 @@
 #version 410
 
+precision highp float;
+
 uniform sampler2D colorMap;
 uniform sampler2D normalMap;
+uniform samplerCube cubeMap;
 uniform vec3 lightPos;
 uniform float time;
 
@@ -113,6 +116,6 @@ void main()
 	
 	vec4 specular = vec4( vec3(specularCoefficient), 1 );
 	
-	FragColor = vec4( texture( colorMap, uv ).rgb, 1);
+	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS
 }
