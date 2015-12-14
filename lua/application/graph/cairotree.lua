@@ -124,7 +124,7 @@ function CairoTree:registerInput()
 	local gridPosX = worldX/self.size*.5/40
 	local gridPosY = worldY/self.size*.5/40
 
-	local gridX = math.floor(gridPosX) +1
+	local gridX = math.floor(gridPosX) +1 - 3
 	local gridY = math.floor(gridPosY) +1
 
 	-- Log.steb("X: ".. gridX .. ", Y: ".. gridY)
