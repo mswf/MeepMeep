@@ -20,19 +20,10 @@ function IngameState:enter(transition, args)
 
 	DebugDraw = lineEntity.debugRenderer
 
-	DebugDraw.addLine2D = function(self, x1, y1, x2, y2, r,g,b)
-		self:addLine(x1, y1, 0, x2, y2, 0, r,g,b)
-	end
-
-
 	local triangleEntity = Entity()
 	triangleEntity:addComponent(DebugRenderer())
 
 	DebugDrawTriangle = triangleEntity.debugRenderer
-
-	DebugDrawTriangle.addTriangle2D = function(self, x1, y1, x2, y2, x3, y3, r,g,b,a)
-		self:addTriangle(x1, y1, 0, x2, y2, 0, x3, y3, 0, r or 0,g or 0,b or 0,a or 1)
-	end
 
 	local pathEntity = Entity()
 	pathEntity:addComponent(DebugRenderer())
@@ -40,12 +31,9 @@ function IngameState:enter(transition, args)
 	DebugDrawPath = pathEntity.debugRenderer
 
 	DebugDrawPath:setDrawPoints(true)
+	DebugDrawPath:setPointSize(10.0)
 
-	DebugDrawPath.addLine2D = function(self, x1, y1, x2, y2, r,g,b)
-		self:addLine(x1, y1, 0, x2, y2, 0, r,g,b)
-	end
-
-	lineEntity:addChild(triangleEntity)
+	-- lineEntity:addChild(triangleEntity)
 	lineEntity:addChild(pathEntity)
 	lineEntity:setPosition(-10,-10,-10)
 
