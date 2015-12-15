@@ -16,7 +16,7 @@ Node = class(Node, function(self, tree)
 	self._RANDCOLOR[1] = math.random()*.2
 	self._RANDCOLOR[2] = math.random()*.2
 	self._RANDCOLOR[3] = math.random()*.2
-	self._RANDCOLOR[4] = .8
+	self._RANDCOLOR[4] = 1
 
 	self._RANDCOLORLINE = {}
 	self._RANDCOLORLINE[1] = math.random()*.2+.5

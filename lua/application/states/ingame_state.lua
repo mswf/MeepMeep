@@ -68,7 +68,7 @@ function IngameState:enter(transition, args)
 
 		local gridMaterial = Material();
 		gridMaterial:setDiffuseTexture("objects/snowman.png")
-		-- gridMaterial:setDiffuseColor(1,1,0,1)
+		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
 
 		renderer:setMaterial(gridMaterial)
 
@@ -100,11 +100,10 @@ function IngameState:enter(transition, args)
 
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
-
-		if (i == 1) then
-			debugEntity(gridEntity)
-		end
 	end
+
+	gridParent:setPosition(-10,-10,-10)
+
 
 	-- gridEntity:setPosition(-1,-1,-1)
 	--
