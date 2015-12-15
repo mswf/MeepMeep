@@ -314,6 +314,15 @@ local function performEasingOnSubject(subject, target, initial, clock, duration,
 
 				k(subject, easing(t,b,c,d))
 			else
+				-- Log.steb(v)
+				-- Log.steb(initial[k])
+				-- Log.steb(v)
+				-- Log.steb(initial[k])
+
+				-- if (type(initial[k]) == "function") then
+					-- initial[k] = initial[k](subject1)
+				-- end
+
 				t,b,c,d = clock, initial[k], v - initial[k], duration
 
       	subject[k] = easing(t,b,c,d)
@@ -395,18 +404,23 @@ end
 -- Public interface
 
 local function checkEntityTargets(subject, initial, target)
+	local keysToRemove = {}
 	for k, v in pairs(target) do
 		if (type(subject[k]) == "function") then
-			local stripped = k:sub(4):gsub("%a", string.lower,1)
-			target[k] = nil
+			local stripped = k:sub(4)
+			local setter = subject["set"..stripped]
+			local getter = subject["get"..stripped]
+
+			table.insert(keysToRemove, {k, v, setter})
+
 			initial[k] = nil
-
-			local setter = subject["set"..stripped:gsub("%a", string.upper,1)]
-			local getter = subject["get"..stripped:gsub("%a", string.upper,1)]
-
-			target[setter] = v
 			initial[setter] = getter(subject)
 		end
+	end
+
+	for i=1, #keysToRemove do
+		target[keysToRemove[i][1]] = nil
+		target[keysToRemove[i][3]] = keysToRemove[i][2]
 	end
 end
 
