@@ -55,6 +55,7 @@ function MainMenuState:enter(transitionType, args)
 	-- Log.bobn("plsdfff")
 	-- Log.bobn(Engine.system.contentPath)
 
+--[[
 	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
 	local renderer = MeshRenderer()
@@ -63,27 +64,7 @@ function MainMenuState:enter(transitionType, args)
 	rabbit:addComponent(renderer)
 
 	rabbit:setPosition(0,0,0)
---[[
-	rabbit.update = function(self, dt)
-		-- Log.steb(dt)
-		if (Input.key(KeyCode.w)) then
-			self:addZ(1*dt)
-		end
 
-		if (Input.key(KeyCode.s)) then
-			self:addZ(-1*dt)
-		end
-
-		if (Input.key(KeyCode.a)) then
-			self:addX(1*dt)
-		end
-
-		if (Input.key(KeyCode.d)) then
-			self:addX(-1*dt)
-		end
-		-- self:yaw(1)
-	end
-]]--
 	model = Engine.getModel("objects/icy_snowman.obj");
 	local snowman = Entity()
 	renderer = MeshRenderer()
@@ -105,6 +86,7 @@ function MainMenuState:enter(transitionType, args)
 
 
 	rabbit:addChild(snowman)
+]]--
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -144,7 +126,6 @@ function MainMenuState:enter(transitionType, args)
 
 	EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
-	self.UITweener:new(10, rabbit, {setX = 1, setScaleX=2, setScaleY=2, setScaleZ=2}):setEasing("outBounce")
 
 	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 
