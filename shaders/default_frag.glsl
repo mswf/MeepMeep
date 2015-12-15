@@ -96,27 +96,32 @@ vec3 viewLight( vec3 lP, vec3 vP, mat3 TBN )
 }
 
 void main()
-{	
+{
 	vec3 l = normalize( lightPos - VertexPositionCameraSpace ); // viewLight( lightPos, VertexPositionCameraSpace, TBN );
-	
+
 	//vec3 n = texture( normalMap, uv ).rgb * 2.0 - 1.0 ;
 	vec3 n = N;
 	n = normalize(n);
 	//n.y = -n.y;
-	
+
 	vec3 model = shadeModel( n,l );
 	vec3 m = colMode();
-	
+
 	float lambert = diffuse(n,l);
 	float specularCoefficient = 0.0;
-	
+
 	if (lambert > 0)
 	{
 		specularCoefficient = specular( EyeDirectionCameraSpace, VertexPositionCameraSpace, n, l );
 	}
-	
+
 	vec4 specular = vec4( vec3(specularCoefficient), 1 );
-	
-	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+
+	vec3 light = normalize(vec3(1.0,0.5,1.0));
+	float lightIntensity = dot(n, light);
+
+	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(lightIntensity), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+
+//	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(dot(n, light), dot(n, light), dot(n, light), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS
 }
