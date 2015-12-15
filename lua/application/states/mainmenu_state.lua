@@ -121,19 +121,19 @@ function MainMenuState:enter(transitionType, args)
 
 	cameraEntity.update = function(self, dt)
 		-- Log.steb(dt)
-		if (Input.key(KeyCode.w)) then
+		if (Input.binding("moveUp")) then
 			self:addZ(1*dt)
 		end
 
-		if (Input.key(KeyCode.s)) then
+		if (Input.binding("moveDown")) then
 			self:addZ(-1*dt)
 		end
 
-		if (Input.key(KeyCode.a)) then
+		if (Input.binding("moveLeft")) then
 			self:addX(1*dt)
 		end
 
-		if (Input.key(KeyCode.d)) then
+		if (Input.binding("moveRight")) then
 			self:addX(-1*dt)
 		end
 		-- self:yaw(1)

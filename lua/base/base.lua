@@ -28,7 +28,7 @@ require "lua/base/animation/tweener"
 
 require "lua/base/mesh/meshbuilder"
 
-require "lua/base/input/keycode"
+require "lua/base/input/input"
 
 
 require "lua/base/ui/uibase"
