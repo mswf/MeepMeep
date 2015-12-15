@@ -50,4 +50,8 @@ if (GAMEDEBUG) then
 	function debugEntity(entity)
 		EntityDebugUI{entity = entity}
 	end
+
+	function debugOutline(entity)
+		OutlinerDebugUI{parentEntity = entity}
+	end
 end
