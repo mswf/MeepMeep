@@ -80,9 +80,9 @@ function TableDebugUI:_listTable(uiContainer, debugTable, nestedLevel)
 	nestedLevel = nestedLevel + 1
 
 	for k,v in orderedPairs(debugTable) do
-		if (ignoreFunctions[tostring(k)] == true) then
+		if not (ignoreFunctions[tostring(k)] == true) then
 
-		else
+		-- else
 
 			local row = uiContainer:addHorizontalLayout()
 			row.offset = 250 + nestedLevel*30
@@ -141,12 +141,13 @@ function TableDebugUI:_listTable(uiContainer, debugTable, nestedLevel)
 					if (debugInfo.what == "Lua") then
 						treeInstance:addText(debugInfo.source)
 						treeInstance:addText("at line: " .. tostring(debugInfo.linedefined))
+						treeInstance:addText("#UpValues: " .. tostring(debugInfo.nups))
 					elseif (debugInfo.what == "main") then
 						treeInstance:addText("Main function")
+						treeInstance:addText("#UpValues: " .. tostring(debugInfo.nups))
 					else
 						treeInstance:addText("C function")
 					end
-					treeInstance:addText("#UpValues: " .. tostring(debugInfo.nups))
 				end
 				-- local valueString = row:addText("  " .. tostring(v))
 				-- valueString.x = 800
