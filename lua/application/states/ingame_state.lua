@@ -46,7 +46,7 @@ function IngameState:enter(transition, args)
 	local tree = CairoTree(0,0)
 
 	tree:setSize(1)
-	tree:initializeToDimensions(10,10)
+	tree:initializeToDimensions(10, 10)
 
 
 	self.tree = tree
@@ -68,7 +68,7 @@ function IngameState:enter(transition, args)
 
 		local gridMaterial = Material();
 		gridMaterial:setDiffuseTexture("objects/snowman.png")
-		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
+		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLORLINE))
 
 		renderer:setMaterial(gridMaterial)
 
@@ -97,12 +97,16 @@ function IngameState:enter(transition, args)
 
 
 		gridEntity:setPitch(0.25)
+		gridEntity:setScale(0,0,0)
 
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
+		self.UITweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
+
 	end
 
 	gridParent:setPosition(-10,-10,-10)
+	lineEntity:addChild(gridParent)
 
 
 	-- gridEntity:setPosition(-1,-1,-1)
