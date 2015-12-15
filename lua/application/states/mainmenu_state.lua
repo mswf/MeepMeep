@@ -45,9 +45,6 @@ function MainMenuState:enter(transitionType, args)
 	Engine.importTexture( "objects/object_group_test/checker_1.png" )
 	Engine.importTexture( "objects/object_group_test/checker_2.png" )
 
-	local snowmanMat = Material();
-	snowmanMat:setDiffuseTexture("objects/snowman.png")
-
 	self._mainMenuUI = MainMenuUI(self.UIManager)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
@@ -94,13 +91,18 @@ function MainMenuState:enter(transitionType, args)
 
 	snowman:addComponent(renderer)
 
+	local snowmanMat = Material();
+	snowmanMat:setDiffuseTexture("objects/snowman.png")
+
+	snowman.meshRenderer:setMaterial(snowmanMat)
+
 	snowman:setPosition(-1,-1,-1)
 
 	snowman.update = function(self, dt)
 		self:roll(1)
 	end
 
-	snowman.meshRenderer:setMaterial(snowmanMat)
+
 
 	rabbit:addChild(snowman)
 
@@ -121,19 +123,19 @@ function MainMenuState:enter(transitionType, args)
 
 	cameraEntity.update = function(self, dt)
 		-- Log.steb(dt)
-		if (Input.key(KeyCode.w)) then
+		if (Input.binding("moveUp")) then
 			self:addZ(1*dt)
 		end
 
-		if (Input.key(KeyCode.s)) then
+		if (Input.binding("moveDown")) then
 			self:addZ(-1*dt)
 		end
 
-		if (Input.key(KeyCode.a)) then
+		if (Input.binding("moveLeft")) then
 			self:addX(1*dt)
 		end
 
-		if (Input.key(KeyCode.d)) then
+		if (Input.binding("moveRight")) then
 			self:addX(-1*dt)
 		end
 		-- self:yaw(1)
@@ -141,6 +143,7 @@ function MainMenuState:enter(transitionType, args)
 
 	EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
+	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 
 	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
