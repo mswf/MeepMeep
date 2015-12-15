@@ -27,6 +27,18 @@ function Enemy:update(dt)
 		Log.waka("OOOOOOOBBBB")
 	end
 
+	if Input.key(KeyCode.UP) == true then
+		self:moveUp()
+	end
+	if Input.key(KeyCode.RIGHT) == true then
+		self:moveLeft()
+	end
+	if Input.key(KeyCode.DOWN) == true then
+		self:moveDown()
+	end
+	if Input.key(KeyCode.LEFT) == true then
+		self:moveRight()
+	end
 
 	self.state = math.random(0, 3)
 	self._base.update(self, dt)
