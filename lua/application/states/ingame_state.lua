@@ -10,10 +10,9 @@ IngameState = class(IngameState, GameState, function(self, gameStateManager)
 end)
 
 function IngameState:enter(transition, args)
-	IngameUI(self.UIManager)
-
 	Log.steb("we entered the ingame")
 
+	IngameUI(self.UIManager)
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -33,7 +32,7 @@ function IngameState:enter(transition, args)
 	DebugDrawPath:setDrawPoints(true)
 	DebugDrawPath:setPointSize(10.0)
 
-	-- lineEntity:addChild(triangleEntity)
+	lineEntity:addChild(triangleEntity)
 	lineEntity:addChild(pathEntity)
 	lineEntity:setPosition(-10,-10,-10)
 
@@ -52,6 +51,82 @@ function IngameState:enter(transition, args)
 
 	self.tree = tree
 	self.tree:draw()
+
+	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
+
+	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
+
+
+
+	local nodes = tree._nodes
+
+	local gridParent = Entity()
+
+	for i=1, #nodes do
+		renderer = MeshRenderer()
+		renderer:setModel(gridModel)
+
+		local gridMaterial = Material();
+		gridMaterial:setDiffuseTexture("objects/snowman.png")
+		-- gridMaterial:setDiffuseColor(1,1,0,1)
+
+		renderer:setMaterial(gridMaterial)
+
+		local gridEntity = Entity()
+		gridEntity:addComponent(renderer)
+
+		local worldX, worldY = nodes[i]:getWorldCenter()
+
+		local gridX, gridY, gridZ = nodes[i]:getGridPosition()
+
+		local isVertical = ((gridX + gridY) % 2 == 0)
+
+		if (isVertical) then
+			if (gridZ == 1) then
+				gridEntity:setRoll(0.25)
+			else
+				gridEntity:setRoll(0.75)
+			end
+		else
+			if (gridZ == 1) then
+				gridEntity:setRoll(0.5)
+			else
+				gridEntity:setRoll(1)
+			end
+		end
+
+
+		gridEntity:setPitch(0.25)
+
+		gridEntity:setPosition(worldX, worldY, 0)
+		gridParent:addChild(gridEntity)
+
+		if (i == 1) then
+			debugEntity(gridEntity)
+		end
+	end
+
+	-- gridEntity:setPosition(-1,-1,-1)
+	--
+	-- gridEntity.update = function(self, dt)
+	-- 	if (Input.binding("moveUp")) then
+	-- 		self:addZ(1*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveDown")) then
+	-- 		self:addZ(-1*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveLeft")) then
+	-- 		self:addX(1*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveRight")) then
+	-- 		self:addX(-1*dt)
+	-- 	end
+	-- end
+	-- EntityDebugUI(self.UIManager, {entity = gridEntity})
+
 end
 
 function IngameState:exit(transition, args)

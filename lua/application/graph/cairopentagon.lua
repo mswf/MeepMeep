@@ -82,6 +82,10 @@ function CairoPentagon:setPosition(gridX,gridY, gridZ)
 	self:generateVertices(0.5)
 end
 
+function CairoPentagon:getGridPosition()
+	return self.gridX, self.gridY, self.gridZ
+end
+
 function CairoPentagon:generateVertices(e)
 	local scale = self._tree.size
 
