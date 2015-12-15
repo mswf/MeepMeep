@@ -139,9 +139,12 @@ function MainMenuState:enter(transitionType, args)
 			self:addX(-1*dt)
 		end
 		-- self:yaw(1)
+
 	end
 
 	EntityDebugUI(self.UIManager, {entity = cameraEntity})
+
+	self.UITweener:new(10, rabbit, {setX = 1, setScaleX=2, setScaleY=2, setScaleZ=2}):setEasing("outBounce")
 
 	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 
