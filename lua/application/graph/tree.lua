@@ -77,8 +77,11 @@ function Tree:setHovered(newHovered)
 
 	if (newHovered) then
 		self._currentHovered = newHovered
+		gridX, gridY, gridZ = newHovered:getGridPosition()
+		Engine.ui.setTooltip(tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ)
 	else
 		self._currentHovered = nil
+		Engine.ui.setTooltip("")
 	end
 end
 
