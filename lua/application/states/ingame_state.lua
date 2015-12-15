@@ -34,7 +34,6 @@ function IngameState:enter(transition, args)
 
 	lineEntity:addChild(triangleEntity)
 	lineEntity:addChild(pathEntity)
-	lineEntity:setPosition(-10,-10,-10)
 
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25, 0,0,0)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
@@ -105,8 +104,9 @@ function IngameState:enter(transition, args)
 
 	end
 
-	gridParent:setPosition(-10,-10,-10)
+	-- gridParent:setPosition(-10,-10,-10)
 	lineEntity:addChild(gridParent)
+	lineEntity:setPosition(-10,-10,-10)
 
 
 	-- gridEntity:setPosition(-1,-1,-1)

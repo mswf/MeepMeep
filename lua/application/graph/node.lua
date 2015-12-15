@@ -140,3 +140,11 @@ function Node:drawNeighbour()
 		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
+
+function Node:onHoverIn()
+
+end
+
+function Node:onHoverOut()
+
+end
