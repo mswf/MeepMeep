@@ -3,6 +3,9 @@ require "lua/application/ui/mainmenu/mainmenu_ui"
 require "lua/application/ui/test_ui"
 require "lua/application/ui/option_ui"
 
+require "lua/base/ui/presentation_ui"
+
+
 MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
 	self._base.init(self, gameStateManager)
 
@@ -38,6 +41,7 @@ function MainMenuState:exit(transitionType, args)
 end
 
 function MainMenuState:enter(transitionType, args)
+	PREZZY = PresentationUI(self.UIManager)
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	Engine.importModel( "objects/icy_snowman.obj" )
