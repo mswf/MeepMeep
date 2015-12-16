@@ -7,5 +7,11 @@ function Floor:_loadModel(modelPath)
 	self.renderer = MeshRenderer()
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
-	self:setPosition(0,0,0)
+	self:setPosition(1,1,-1)
+end
+
+function Floor:setMaterial(texturePath)
+	local testMat = Material();
+	testMat:setDiffuseTexture(texturePath);
+	self.meshRenderer:setMaterial(testMat);
 end
