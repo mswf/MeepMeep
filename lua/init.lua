@@ -51,15 +51,19 @@ function Game.main()
 	ENEMY = Enemy()
 	LEVEL = Level()
 	--createCamera()
-	local cameraEntity = Entity()
+	CAMERA_ENTITY = Entity()
 	local camera = Camera()
-	cameraEntity:addComponent(camera);
-	cameraEntity:setPosition(0,0,0)
+	CAMERA_ENTITY:addComponent(camera);
+	CAMERA_ENTITY:setPosition(0,0,0)
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
 	camera:setAspectRatio(1.6)
-
+	Log.waka("adjqhkfvzjd")
+	CAMERA_ENTITY.update = function(self, dt)
+		Game:hackyCameraMovement(dt)
+		Log.waka("adjqhkfvzjd")
+	end
 
 	--
 	-- GLOBTAB = {}
@@ -191,4 +195,32 @@ function Game.game()
 
 	local number = math.random(1, #gameTable)
 	Log.steb(gameTable[number])
+end
+
+function Game:hackyCameraMovement(dt)
+	local speed = 1 * dt
+
+	if Input.key(KeyCode.w) == true then
+		CAMERA_ENTITY:addZ(speed)
+	end
+
+	if Input.key(KeyCode.d) == true then
+		CAMERA_ENTITY:addX(speed)
+	end
+
+	if Input.key(KeyCode.s) == true then
+		CAMERA_ENTITY:addZ(-speed)
+	end
+
+	if Input.key(KeyCode.a) == true then
+		CAMERA_ENTITY:addX(-speed)
+	end
+
+	if Input.key(KeyCode.q) == true then
+		CAMERA_ENTITY:addY(-speed)
+	end
+
+	if Input.key(KeyCode.e) == true then
+		CAMERA_ENTITY:addY(speed)
+	end
 end
