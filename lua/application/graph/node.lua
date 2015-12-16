@@ -16,7 +16,7 @@ Node = class(Node, function(self, tree)
 	self._RANDCOLOR[1] = math.random()*.2
 	self._RANDCOLOR[2] = math.random()*.2
 	self._RANDCOLOR[3] = math.random()*.2
-	self._RANDCOLOR[4] = 1
+	self._RANDCOLOR[4] = 0.8
 
 	self._RANDCOLORLINE = {}
 	self._RANDCOLORLINE[1] = math.random()*.2+.5
@@ -90,7 +90,7 @@ function Node:drawHovered()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				unpack(self._RANDCOLORLINE))
+																				unpack(self._RANDCOLOR))
 			end
 		end
 	end
@@ -112,7 +112,7 @@ function Node:drawSelected()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				1,0,0,1)
+																				1,0,0,0.8)
 			end
 		end
 		-- love.graphics.setColor(255,255,255,128)

@@ -67,7 +67,7 @@ function IngameState:enter(transition, args)
 
 		local gridMaterial = Material();
 		gridMaterial:setDiffuseTexture("objects/snowman.png")
-		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLORLINE))
+		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
 
 		renderer:setMaterial(gridMaterial)
 
