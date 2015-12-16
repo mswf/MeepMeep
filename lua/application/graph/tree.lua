@@ -49,7 +49,7 @@ function Tree:draw()
 			local x1, y1 = curPath[i]:getWorldCenter()
 			local x2, y2 = curPath[i+1]:getWorldCenter()
 
-			DebugDrawPath:addLine2D(x1, y1, x2, y2)
+			DebugDrawPath:addLine2D(x1, y1, x2, y2, 11/255, 218/255, 206/255, 0.8)
 			-- love.graphics.setColor(255,100,100,100)
 			-- love.graphics.line(x1, y1, x2, y2)
 		end

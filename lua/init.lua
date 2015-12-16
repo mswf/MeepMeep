@@ -19,8 +19,8 @@ require "lua/application/states/applicationstatemanager"
 --Log.steb(Carbon.Support:Report())
 
 --hardcoded tobe engine functions:
-Engine.ui.getScreenWidth = function() return 1280 end
-Engine.ui.getScreenHeight = function() return 720 end
+Engine.ui.getScreenWidth = function() return 1920 end
+Engine.ui.getScreenHeight = function() return 1080 end
 -- Engine.ui.hasFocus bool
 
 Game = Game or {}
