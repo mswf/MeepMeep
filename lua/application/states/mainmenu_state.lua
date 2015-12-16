@@ -41,7 +41,6 @@ function MainMenuState:exit(transitionType, args)
 end
 
 function MainMenuState:enter(transitionType, args)
-	PREZZY = PresentationUI(self.UIManager)
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	Engine.importModel( "objects/icy_snowman.obj" )
@@ -59,7 +58,7 @@ function MainMenuState:enter(transitionType, args)
 	-- Log.bobn("plsdfff")
 	-- Log.bobn(Engine.system.contentPath)
 
---[[
+
 	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
 	local renderer = MeshRenderer()
@@ -67,30 +66,35 @@ function MainMenuState:enter(transitionType, args)
 
 	rabbit:addComponent(renderer)
 
-	rabbit:setPosition(0,0,0)
+	rabbit:setPosition(0,0,-5)
 
-	model = Engine.getModel("objects/icy_snowman.obj");
-	local snowman = Entity()
-	renderer = MeshRenderer()
-	renderer:setModel(model)
+	for i=1, 10 do
+		model = Engine.getModel("objects/icy_snowman.obj");
+		local snowman = Entity()
+		local renderer = MeshRenderer()
+		renderer:setModel(model)
 
-	snowman:addComponent(renderer)
+		snowman:addComponent(renderer)
 
-	local snowmanMat = Material();
-	snowmanMat:setDiffuseTexture("objects/snowman.png")
+		local snowmanMat = Material();
+		snowmanMat:setDiffuseTexture("objects/snowman.png")
 
-	snowman.meshRenderer:setMaterial(snowmanMat)
+		snowman.meshRenderer:setMaterial(snowmanMat)
 
-	snowman:setPosition(-1,-1,-1)
+		snowman:setPosition(-1,-1,-1)
 
-	snowman.update = function(self, dt)
-		self:roll(1)
-	end
+		snowman.update = function(self, dt)
+			self:roll(1)
+		end
+		snowman:roll(math.random()*1100)
+
+		rabbit:addChild(snowman)
+end
 
 
 
-	rabbit:addChild(snowman)
-]]--
+
+
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -130,6 +134,11 @@ function MainMenuState:enter(transitionType, args)
 
 	EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
+	if (not PREZZY) then
+		PREZZY = PresentationUI()
+	end
+	PREZZY._uiManager = self.UIManager
+	PREZZY:_updateMayhem(false)
 
 	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 

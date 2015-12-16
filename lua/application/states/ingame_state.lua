@@ -108,7 +108,7 @@ function IngameState:enter(transition, args)
 	lineEntity:addChild(gridParent)
 	lineEntity:setPosition(-10,-10,-10)
 
-
+	self.lineEntity = lineEntity
 	-- gridEntity:setPosition(-1,-1,-1)
 	--
 	-- gridEntity.update = function(self, dt)
@@ -133,6 +133,7 @@ function IngameState:enter(transition, args)
 end
 
 function IngameState:exit(transition, args)
+	self.lineEntity:setPosition(500,5000,500)
 
 end
 
