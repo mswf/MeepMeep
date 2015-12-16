@@ -51,6 +51,23 @@ Note: once adding lines, you should not at any triangles
 Adds a line to the renderer from <x1,y1,z1> to <x2,y2,z2> to <x3,y3,z3> with the color (r,g,b,a)
 Note: once adding triangles, you should not at any lines
 
+
+#### setDrawPoints
+```lua
+	baseDebugRenderer:setDrawPoints(isDrawing)
+```
+* `isDrawing` bool = false
+
+Draw points at the start and end of every line.
+
+#### setPointSize
+```lua
+	baseDebugRenderer:setDrawPoints(size)
+```
+* `size` float = 5.0
+
+The size of the points drawn at the start and end of every line.
+
 #### clear
 ```lua
 	baseDebugRenderer:clear()

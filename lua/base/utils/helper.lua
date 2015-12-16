@@ -41,3 +41,17 @@ function retrieveVariableName(object, t)
   end
   return "NONAME"
 end
+
+if (GAMEDEBUG) then
+	function debugTable(table)
+		TableDebugUI{table = table}
+	end
+
+	function debugEntity(entity)
+		EntityDebugUI{entity = entity}
+	end
+
+	function debugOutline(entity)
+		OutlinerDebugUI{parentEntity = entity}
+	end
+end

@@ -14,6 +14,12 @@ function GameState:initialize()
 
 end
 
+function GameState:__onReload()
+	self:baseExit()
+
+	self:baseEnter()
+end
+
 function GameState:baseUpdate(dt)
 	self:update(dt)
 

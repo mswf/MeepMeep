@@ -48,6 +48,8 @@ function Tree:draw()
 		if (curPath[i+1]) then
 			local x1, y1 = curPath[i]:getWorldCenter()
 			local x2, y2 = curPath[i+1]:getWorldCenter()
+
+			DebugDrawPath:addLine2D(x1, y1, x2, y2)
 			-- love.graphics.setColor(255,100,100,100)
 			-- love.graphics.line(x1, y1, x2, y2)
 		end
@@ -70,13 +72,18 @@ function Tree:setHovered(newHovered)
 	end
 
 	if (self._currentHovered) then
-
+		self._currentHovered:onHoverOut()
 	end
 
 	if (newHovered) then
 		self._currentHovered = newHovered
+		self._currentHovered:onHoverIn()
+
+		gridX, gridY, gridZ = newHovered:getGridPosition()
+		Engine.ui.setTooltip(tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ)
 	else
 		self._currentHovered = nil
+		Engine.ui.setTooltip("")
 	end
 end
 

@@ -301,12 +301,33 @@ end
 local function performEasingOnSubject(subject, target, initial, clock, duration, easing)
   local t,b,c,d
   for k,v in pairs(target) do
-    if type(v) == 'table' then
+		local vType = type(v)
+		if vType == "function" then
+			v = v(subject)
+		end
+
+		if vType == 'table' then
       performEasingOnSubject(subject[k], v, initial[k], clock, duration, easing)
     else
-      t,b,c,d = clock, initial[k], v - initial[k], duration
-      subject[k] = easing(t,b,c,d)
-    end
+			if (type(k) == "function") then
+				t,b,c,d = clock, initial[k], v - initial[k], duration
+
+				k(subject, easing(t,b,c,d))
+			else
+				-- Log.steb(v)
+				-- Log.steb(initial[k])
+				-- Log.steb(v)
+				-- Log.steb(initial[k])
+
+				-- if (type(initial[k]) == "function") then
+					-- initial[k] = initial[k](subject1)
+				-- end
+
+				t,b,c,d = clock, initial[k], v - initial[k], duration
+
+      	subject[k] = easing(t,b,c,d)
+			end
+		end
   end
 end
 
@@ -323,12 +344,15 @@ function Tween:set(clock)
   if self.clock <= 0 then
 
     self.clock = 0
-    copyTables(self.subject, self.initial)
+    -- copyTables(self.subject, self.initial)
+		performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
+
 
   elseif self.clock >= self.duration then -- the tween has expired
 
     self.clock = self.duration
-    copyTables(self.subject, self.target)
+    -- copyTables(self.subject, self.target)
+		performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
 
   else
 
@@ -379,11 +403,38 @@ end
 
 -- Public interface
 
+local function checkEntityTargets(subject, initial, target)
+	local keysToRemove = {}
+	for k, v in pairs(target) do
+		if (type(subject[k]) == "function") then
+			local stripped = k:sub(4)
+			local setter = subject["set"..stripped]
+			local getter = subject["get"..stripped]
+
+			table.insert(keysToRemove, {k, v, setter})
+
+			initial[k] = nil
+			initial[setter] = getter(subject)
+		end
+	end
+
+	for i=1, #keysToRemove do
+		target[keysToRemove[i][1]] = nil
+		target[keysToRemove[i][3]] = keysToRemove[i][2]
+	end
+end
+
 -- function tween.new(duration, subject, target, easing)
 function tween.new(duration, subject, target)
   -- easing = getEasingFunction(easing)
   -- checkNewParams(duration, subject, target, easing)
-  return setmetatable({
+
+	local initial = copyTables({},target,subject)
+
+
+	checkEntityTargets(subject, initial, target)
+
+	return setmetatable({
     duration  = duration,
     subject   = subject,
     target    = target,
@@ -393,9 +444,29 @@ function tween.new(duration, subject, target)
 		onUpdate 	= {},
 		onComplete= {},
 
-    initial   = copyTables({},target,subject),
+    initial   = initial,
     clock     = 0
   }, Tween_mt)
 end
 
 return tween
+
+
+-- local entity_tween_mt = {
+-- 	__index = function(table, key)
+-- 		local getter = "get" .. k:gsub("^%l", string.upper)
+-- 		if (subject[getter]) then
+-- 			return subject[getter]()
+-- 		else
+-- 			return nil
+-- 		end
+-- 	end,
+-- 	__newindex = function(table, key, value)
+-- 		local setter = "set" .. k:gsub("^%l", string.upper)
+-- 		if (subject[setter]) then
+-- 			subject[setter](value)
+-- 		else
+-- 			return nil
+-- 		end
+-- 	end
+-- }

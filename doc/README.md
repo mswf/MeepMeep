@@ -12,6 +12,7 @@ An overview of all the modules exposed to Lua by VroomVroom.
 [Log](../doc/vroomVroom/log.md)  
 [UI](../doc/vroomVroom/ui.md)
 
+[Importing](../doc/vroomVroom/importing.md)
 
 [BaseEntity](../doc/vroomVroom/entity.md)  
 [BaseMeshRenderer](../doc/vroomVroom/meshRenderer.md)  

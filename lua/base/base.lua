@@ -28,7 +28,7 @@ require "lua/base/animation/tweener"
 
 require "lua/base/mesh/meshbuilder"
 
-require "lua/base/input/keycode"
+require "lua/base/input/input"
 
 
 require "lua/base/ui/uibase"
@@ -36,6 +36,8 @@ require "lua/base/ui/uimanager"
 
 require "lua/base/ui/entity_debug_ui"
 require "lua/base/ui/table_debug_ui"
+require "lua/base/ui/outliner_debug_ui"
+
 
 
 
@@ -43,3 +45,6 @@ require "lua/base/libs/fun"
 require "lua/base/libs/smallfolk"
 
 require "lua/base/utils/io"
+
+
+require "lua/base/assets/assetmanager"

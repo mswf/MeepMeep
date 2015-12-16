@@ -98,7 +98,7 @@ function Game:createCamera()
 end
 
 function Game.update(dt)
-	dt = dt / 1000
+	-- dt = dt / 1000
 
 	GlobalStateManager:update(dt)
 
