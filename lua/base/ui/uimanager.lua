@@ -15,6 +15,12 @@ function UIManager:getNewWindow()
 	return window
 end
 
+function UIManager:setVisible(isVisible)
+	for k,v in pairs(self._activeWindows) do
+		k.visible = isVisible
+	end
+end
+
 function UIManager:registerUpdate(window)
 	self._updatingWindows[window] = window.__owner or Log.warning("[UIManager] tried to registerUpdate a window without an '__owner' property")
 end

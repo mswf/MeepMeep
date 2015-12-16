@@ -5,6 +5,7 @@ if (Engine.ui.__UIInit == nil) then
 end
 
 UIBase = class(UIBase, function(self, uiManager, params)
+	uiManager = uiManager or {}
 	if (not uiManager._activeWindows) then
 		params = uiManager
 		uiManager = Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
