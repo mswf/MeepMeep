@@ -113,6 +113,15 @@ function CairoTree:registerInput()
 	-- end
 
 	--#TODO:0 refactor this input the moment this is moved to the engine side
+
+	if (Engine.ui.isMouseHoveringOverAnyWindow) then
+		self:setHovered(nil)
+		if (Input.mouseDown(1)) then
+			self:setSelected(nil)
+		end
+
+		return
+	end
 	local mouseX, mouseY = Input.getMousePosition()
 
 	-- local worldX = (mouseX - CAMOFFSET.X) / CAMOFFSET.ZOOM
