@@ -100,7 +100,7 @@ function IngameState:enter(transition, args)
 
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
-		self.UITweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
+		self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 
 	end
 

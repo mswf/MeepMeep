@@ -10,12 +10,15 @@ Later:
 
 ]]--
 
+require "lua/application/data/player/caravandata"
 require "lua/application/data/player/familydata"
 require "lua/application/data/player/resourcemanager"
 
 PlayerData = class(PlayerData, function(self, serializedData)
 	serializedData = serializedData or {}
 	self.broadcaster = Broadcaster()
+
+	self.playerCaravan = CaravanData(serializedData.playerCaravan)
 
 	self.resourceManager = ResourceManager(serializedData.resourceManager)
 	self._families = {}
@@ -29,6 +32,10 @@ end)
 
 function PlayerData:serialize()
 	local serializedData = {}
+
+	serializedData.playerCaravan = self.playerCaravan:serialize()
+
+	serializedData.position = self._position
 
 	serializedData.resourceManager = self.resourceManager:serialize()
 	serializedData.families = {}

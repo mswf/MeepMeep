@@ -4,6 +4,8 @@ UIManager = class(UIManager, function(self)
 	self._activeWindows = {}
 
 	self._updatingWindows = {}
+
+	self.tweener = Tweener()
 end)
 
 
@@ -26,6 +28,8 @@ function UIManager:registerUpdate(window)
 end
 
 function UIManager:update(dt)
+	self.tweener:update(dt)
+
 	for k, v in pairs(self._updatingWindows) do
 		v:update(dt)
 	end
@@ -42,6 +46,8 @@ function UIManager:removeWindow(uiWindow)
 end
 
 function UIManager:destroyAll()
+	self.tweener:clear()
+
 	for i,v in pairs(self._activeWindows) do
 		v.__owner:_cleanUp()
 	end
