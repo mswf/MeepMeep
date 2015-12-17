@@ -12,8 +12,6 @@ ResourceManager = class(ResourceManager, function(self, serializedData)
 
 	self._resources = {}
 
-	Log.steb("creating resource manager")
-
 	if (serializedData.currentResources) then
 		for i=1, #ResourceTypes do
 			local type = ResourceTypes[i].name
