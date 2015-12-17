@@ -34,12 +34,17 @@ function Game.crash()
 end
 
 function Game.main()
+	profiler.start("main")
+
+
 	GlobalUIManager = UIManager()
 
 	GlobalData = ApplicationData()
 
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
+	profiler.stop("main")
+
 end
 
 function Game.update(dt)
