@@ -47,6 +47,10 @@ function PresentationUI:_createUI()
 	self.entity = presEntity
 	self.material = presMaterial
 	self.slides = slides
+	self.specialSlides = {
+		[1] = true,
+		[11] = true
+	}
 
 	local window = self.window
 
@@ -100,7 +104,7 @@ function PresentationUI:_setSlide(slideIndex)
 	self.material:setDiffuseTexture(self.slides[self._currentSlide])
 
 
-	if (self._currentSlide == 11) then
+	if (self.specialSlides[self._currentSlide]) then
 		self.mayhemButton.visible = true
 		self.window.width = 122
 
@@ -121,6 +125,10 @@ function PresentationUI:_updateMayhem(isMayhem)
 
 		Engine.playSound("sounds/circus_theme.wav")
 	else
+		if (self.specialSlides[self._currentSlide]) then
+			self:_nextSlide()
+		end
+
 		self._uiManager.tweener(2, self.entity, {setZ = -1, setY = 0}):setEasing("outBounce")
 
 		-- self.entity:setPosition(0,0,-1)
