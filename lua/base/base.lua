@@ -6,6 +6,7 @@ require "lua/base/utils/helper"
 require "lua/base/class"
 require "lua/base/enum"
 require "lua/base/broadcaster"
+require "lua/base/signal"
 
 require "lua/base/entity"
 require "lua/base/meshrenderer"
