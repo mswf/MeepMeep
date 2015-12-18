@@ -1,5 +1,5 @@
 
-succes, profiler = pcall(require, "lua.jit.p")
+succes, profiler = pcall(require, "jit.p")
 
 if not succes then
 	print("booboo")
@@ -10,6 +10,6 @@ end
 
 math.randomseed(os.clock())
 
-profiler.start("init")
+profiler.start("F")
 require "lua/init"
-profiler.stop("init")
+profiler.stop()

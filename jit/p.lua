@@ -43,7 +43,7 @@
 local jit = require("jit")
 assert(jit.version_num == 20100, "LuaJIT core/library version mismatch")
 local profile = require("jit.profile")
-local vmdef = require("lua.jit.vmdef")
+local vmdef = require("jit.vmdef")
 local math = math
 local pairs, ipairs, tonumber, floor = pairs, ipairs, tonumber, math.floor
 local sort, format = table.sort, string.format
@@ -307,4 +307,3 @@ return {
   start = start, -- For -j command line option.
   stop = prof_finish
 }
-

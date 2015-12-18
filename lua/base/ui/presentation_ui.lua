@@ -26,6 +26,11 @@ function PresentationUI:_createUI()
 		"images/slides/Presentation 16-12-2015 (12).png",
 		"images/slides/Presentation 16-12-2015 (13).png"
 	}
+	self.specialSlides = {
+		-- [1] = true,
+		[11] = true
+	}
+
 
 	for i=1, #slides do
 		Engine.importTexture( slides[i], false )
@@ -47,10 +52,6 @@ function PresentationUI:_createUI()
 	self.entity = presEntity
 	self.material = presMaterial
 	self.slides = slides
-	self.specialSlides = {
-		[1] = true,
-		[11] = true
-	}
 
 	local window = self.window
 

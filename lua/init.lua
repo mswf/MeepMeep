@@ -34,7 +34,7 @@ function Game.crash()
 end
 
 function Game.main()
-	profiler.start("main")
+	profiler.start("F")
 
 
 	GlobalUIManager = UIManager()
@@ -43,7 +43,7 @@ function Game.main()
 
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
-	profiler.stop("main")
+	profiler.stop()
 
 end
 
