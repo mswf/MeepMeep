@@ -116,6 +116,10 @@ function IngameState:enter(transition, args)
 	self.lineEntity = lineEntity
 
 	GlobalCaravan = Caravan(nodes[50])
+
+	GlobalNodes = nodes
+
+	-- GlobalCaravan:moveToNode(GlobalNodes[25])
 end
 
 function IngameState:exit(transition, args)
