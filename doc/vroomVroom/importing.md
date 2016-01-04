@@ -32,3 +32,31 @@ Reloads the texture at path.
 * `path` String  
 * `type` String - ShaderType [VERTEX, GEOMETRY, FRAGMENT, TESS_CONTROL, TESS_EVALUATION]
 Reloads the shader at path.
+
+#### isModelLoaded
+```lua
+	Engine.isModelLoaded(path)
+```
+* `path` String  
+Returns wether the model at the given path is loaded
+
+#### isTextureLoaded
+```lua
+	Engine.isTextureLoaded(path)
+```
+* `path` String  
+Returns wether the texture at the given path is loaded
+
+#### isMaterialLoaded
+```lua
+	Engine.isMaterialLoaded(path)
+```
+* `path` String  
+Returns wether the material at the given path is loaded
+
+#### isShaderLoaded
+```lua
+	Engine.isShaderLoaded(path)
+```
+* `path` String  
+Returns wether the shader at the given path is loaded
