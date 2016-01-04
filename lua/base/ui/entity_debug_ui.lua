@@ -169,6 +169,20 @@ function EntityDebugUI:_createUI()
 		local cameraText = cameraTree:addText("Entity has a camera component.")
 	end
 
+	if (entity.node) then
+		local nodeTree = window:addTree("Node Component")
+
+		local unitsTree = nodeTree:addTree("Units:")
+		unitsTree.collapsed = false
+
+		local units = entity.node._units
+		local unitsCount = #units
+
+		for i=1, unitsCount do
+			unitsTree:addText("- " .. units[i].tooltipText)
+		end
+	end
+
 	-- entity.debugRenderer
 end
 

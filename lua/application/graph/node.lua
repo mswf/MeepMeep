@@ -24,7 +24,28 @@ Node = class(Node, function(self, tree)
 	self._RANDCOLORLINE[3] = math.random()*.2+.5
 	self._RANDCOLORLINE[4] = 1
 
+	self._units = {}
 end)
+
+function Node:getTooltip()
+	local tooltipText = "Tooltip for a Node"
+
+	return tooltipText
+end
+
+function Node:addUnit(unit)
+	self._units[#self._units + 1] = unit
+end
+
+function Node:removeUnit(unit)
+	local units = self._units
+	for i=1, #units do
+		if (units[i] == unit) then
+			table.remove(units, i)
+			break
+		end
+	end
+end
 
 function Node:addNeighbour(neighbour)
 	if (not neighbour) then
@@ -112,7 +133,7 @@ function Node:drawSelected()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				1,0,0,0.8)
+																				0,0,.8,0.5)
 			end
 		end
 		-- love.graphics.setColor(255,255,255,128)
@@ -132,7 +153,7 @@ function Node:drawNeighbour()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				0.5,0,0,0.5)
+																				0,0,0.5,0.2)
 			end
 		end
 		-- love.graphics.setColor(100,100,100,128)

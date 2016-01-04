@@ -79,8 +79,10 @@ function Tree:setHovered(newHovered)
 		self._currentHovered = newHovered
 		self._currentHovered:onHoverIn()
 
-		gridX, gridY, gridZ = newHovered:getGridPosition()
-		Engine.ui.setTooltip(tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ)
+		-- gridX, gridY, gridZ = newHovered:getGridPosition()
+		-- tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ
+
+		Engine.ui.setTooltip(newHovered:getTooltip())
 	else
 		self._currentHovered = nil
 		Engine.ui.setTooltip("")
@@ -103,7 +105,7 @@ function Tree:setSelected(newSelected)
 	end
 end
 
-function Tree:findPath(fromNode, toNode)
+function Tree.findPath(fromNode, toNode)
 	local frontier = Queue()
 	frontier:push(fromNode)
 	local came_from = {}
