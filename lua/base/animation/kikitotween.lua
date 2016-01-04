@@ -301,30 +301,19 @@ end
 local function performEasingOnSubject(subject, target, initial, clock, duration, easing)
   local t,b,c,d
   for k,v in pairs(target) do
-		local vType = type(v)
-		if vType == "function" then
-			v = v(subject)
-		end
-
-		if vType == 'table' then
+		if type(v) == 'table' then
       performEasingOnSubject(subject[k], v, initial[k], clock, duration, easing)
     else
-			if (type(k) == "function") then
-				t,b,c,d = clock, initial[k], v - initial[k], duration
+			-- Steb: I forgot what this was for, but it doesn't do anything so I disabled it
+			-- if type(v) == "function" then
+			-- 	v = v(subject)
+			-- end
 
+			t,b,c,d = clock, initial[k], v - initial[k], duration
+
+			if (type(k) == "function") then
 				k(subject, easing(t,b,c,d))
 			else
-				-- Log.steb(v)
-				-- Log.steb(initial[k])
-				-- Log.steb(v)
-				-- Log.steb(initial[k])
-
-				-- if (type(initial[k]) == "function") then
-					-- initial[k] = initial[k](subject1)
-				-- end
-
-				t,b,c,d = clock, initial[k], v - initial[k], duration
-
       	subject[k] = easing(t,b,c,d)
 			end
 		end
@@ -337,30 +326,28 @@ local Tween = {}
 local Tween_mt = {__index = Tween}
 
 function Tween:set(clock)
-  assert(type(clock) == 'number', "clock must be a positive number or 0")
-
+  -- assert(type(clock) == 'number', "clock must be a positive number or 0")
   self.clock = clock
 
-  if self.clock <= 0 then
+  if clock <= 0 then
 
     self.clock = 0
     -- copyTables(self.subject, self.initial)
-		performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
+		performEasingOnSubject(self.subject, self.target, self.initial, clock, self.duration, self.easing)
 
-
-  elseif self.clock >= self.duration then -- the tween has expired
+  elseif clock >= self.duration then -- the tween has expired
 
     self.clock = self.duration
     -- copyTables(self.subject, self.target)
-		performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
+		performEasingOnSubject(self.subject, self.target, self.initial, clock, self.duration, self.easing)
 
   else
 
-    performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
+    performEasingOnSubject(self.subject, self.target, self.initial, clock, self.duration, self.easing)
 
   end
 
-  return self.clock >= self.duration
+  return clock >= self.duration
 end
 
 function Tween:reset()
@@ -371,9 +358,12 @@ function Tween:update(dt)
   -- assert(type(dt) == 'number', "dt must be a number")
 	local isDone = self:set(self.clock + dt)
 
-	local onUpdate = self.onUpdate
-	for i=1, #onUpdate do
-		onUpdate[i](self, dt)
+	do
+		local onUpdate = self.onUpdate
+		local onUpdateCount = #onUpdate
+		for i=1, onUpdateCount do
+			onUpdate[i](self, dt)
+		end
 	end
 
   return isDone

@@ -39,7 +39,6 @@ function IngameState:enter(transition, args)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
 
-
 	EntityDebugUI(self.UIManager, {entity = lineEntity})
 
 	local tree = CairoTree(0,0)
@@ -54,8 +53,6 @@ function IngameState:enter(transition, args)
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 
 	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
-
-
 
 	local nodes = tree._nodes
 
@@ -94,7 +91,6 @@ function IngameState:enter(transition, args)
 			end
 		end
 
-
 		gridEntity:setPitch(0.25)
 		gridEntity:setScale(0,0,0)
 
@@ -103,33 +99,10 @@ function IngameState:enter(transition, args)
 		self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 
 	end
-
-	-- gridParent:setPosition(-10,-10,-10)
 	lineEntity:addChild(gridParent)
 	lineEntity:setPosition(-10,-10,-10)
 
 	self.lineEntity = lineEntity
-	-- gridEntity:setPosition(-1,-1,-1)
-	--
-	-- gridEntity.update = function(self, dt)
-	-- 	if (Input.binding("moveUp")) then
-	-- 		self:addZ(1*dt)
-	-- 	end
-	--
-	-- 	if (Input.binding("moveDown")) then
-	-- 		self:addZ(-1*dt)
-	-- 	end
-	--
-	-- 	if (Input.binding("moveLeft")) then
-	-- 		self:addX(1*dt)
-	-- 	end
-	--
-	-- 	if (Input.binding("moveRight")) then
-	-- 		self:addX(-1*dt)
-	-- 	end
-	-- end
-	-- EntityDebugUI(self.UIManager, {entity = gridEntity})
-
 end
 
 function IngameState:exit(transition, args)
@@ -149,7 +122,4 @@ function IngameState:update(dt)
 	DebugDrawPath:clear()
 
 	self.tree:draw()
-
-	-- Log.steb("updating the IngameState")
-
 end
