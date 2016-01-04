@@ -3,7 +3,7 @@ require "lua/application/ui/mainmenu/mainmenu_ui"
 require "lua/application/ui/test_ui"
 require "lua/application/ui/option_ui"
 
-require "lua/base/ui/presentation_ui"
+-- require "lua/base/ui/presentation_ui"
 
 
 MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
@@ -41,7 +41,6 @@ function MainMenuState:exit(transitionType, args)
 end
 
 function MainMenuState:enter(transitionType, args)
-
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	Engine.importModel( "objects/icy_snowman.obj" )
 	Engine.importTexture( "objects/snowman.png", true )
@@ -53,11 +52,7 @@ function MainMenuState:enter(transitionType, args)
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
 
 	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
-	self._testUI = TestUI(self.UIManager, {title = "Test 1"})
-
-	-- Log.bobn("plsdfff")
-	-- Log.bobn(Engine.system.contentPath)
-
+	-- self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
 	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
@@ -65,9 +60,9 @@ function MainMenuState:enter(transitionType, args)
 	renderer:setModel(model)
 
 	rabbit:addComponent(renderer)
-
 	rabbit:setPosition(0,0,-5)
 
+	--[[
 	for i=1, 10 do
 		model = Engine.getModel("objects/icy_snowman.obj");
 		local snowman = Entity()
@@ -89,12 +84,8 @@ function MainMenuState:enter(transitionType, args)
 		snowman:roll(math.random()*1100)
 
 		rabbit:addChild(snowman)
-end
-
-
-
-
-
+	end
+	]]--
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -111,8 +102,8 @@ end
 	camera:makeActive()
 	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 
+	--[[
 	cameraEntity.update = function(self, dt)
-		-- Log.steb(dt)
 		if (Input.binding("moveUp")) then
 			self:addZ(1*dt)
 		end
@@ -128,19 +119,16 @@ end
 		if (Input.binding("moveRight")) then
 			self:addX(-1*dt)
 		end
-		-- self:yaw(1)
-
 	end
+	]]--
 
-	EntityDebugUI(self.UIManager, {entity = cameraEntity})
+	-- EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
-	if (not PREZZY) then
-		PREZZY = PresentationUI()
-	end
-	PREZZY._uiManager = self.UIManager
-	PREZZY:_updateMayhem(false)
+	-- if (not PREZZY) then
+	-- 	PREZZY = PresentationUI()
+	-- end
+	-- PREZZY._uiManager = self.UIManager
+	-- PREZZY:_updateMayhem(false)
 
 	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
-
-	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 end
