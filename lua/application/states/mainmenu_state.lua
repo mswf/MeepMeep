@@ -102,14 +102,14 @@ function MainMenuState:enter(transitionType, args)
 	camera:makeActive()
 	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 
-	--[[
+
 	cameraEntity.update = function(self, dt)
 		if (Input.binding("moveUp")) then
-			self:addZ(1*dt)
+			self:addY(-1*dt)
 		end
 
 		if (Input.binding("moveDown")) then
-			self:addZ(-1*dt)
+			self:addY(1*dt)
 		end
 
 		if (Input.binding("moveLeft")) then
@@ -120,7 +120,9 @@ function MainMenuState:enter(transitionType, args)
 			self:addX(-1*dt)
 		end
 	end
-	]]--
+
+	cameraEntity:setPosition(-10,-10,-10)
+	-- debugEntity(cameraEntity)
 
 	-- EntityDebugUI(self.UIManager, {entity = cameraEntity})
 
@@ -130,5 +132,5 @@ function MainMenuState:enter(transitionType, args)
 	-- PREZZY._uiManager = self.UIManager
 	-- PREZZY:_updateMayhem(false)
 
-	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+	GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 end

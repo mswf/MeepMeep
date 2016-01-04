@@ -30,7 +30,7 @@ CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 	self._RANDCOLOR[1] = sensibleColours[colourIndex][1]
 	self._RANDCOLOR[2] = sensibleColours[colourIndex][2]
 	self._RANDCOLOR[3] = sensibleColours[colourIndex][3]
-	self._RANDCOLOR[4] = 0.8
+	self._RANDCOLOR[4] = 1
 
 		-- self._RANDCOLOR = {}
 		-- self._RANDCOLOR[1] = math.random()*.5
@@ -44,7 +44,21 @@ CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 	self._RANDCOLORLINE[2] = math.random()*.5+.5
 	self._RANDCOLORLINE[3] = math.random()*.5+.5
 	self._RANDCOLORLINE[4] = 1
+
+	self._units = {}
 end)
+
+function CairoPentagon:getTooltip()
+	local gridX, gridY, gridZ = self:getGridPosition()
+
+	local tooltipText = tostring(self).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ
+
+	for i=1, #self._units do
+		tooltipText = tooltipText .. "\n- " .. self._units[i].tooltipText
+	end
+
+	return tooltipText
+end
 
 function CairoPentagon:setWorldCenter()
 	local scale = self._tree.size

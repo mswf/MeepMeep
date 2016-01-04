@@ -4,9 +4,13 @@ require "lua/application/ui/ingame/ingame_ui"
 
 require "lua/application/graph/cairotree"
 
+require "lua/application/ingame/caravan"
+
+
 IngameState = class(IngameState, GameState, function(self, gameStateManager)
 	self._base.init(self, gameStateManager)
 
+	GlobalIngameState = self
 end)
 
 function IngameState:enter(transition, args)
@@ -39,7 +43,7 @@ function IngameState:enter(transition, args)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
 	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
 
-	EntityDebugUI(self.UIManager, {entity = lineEntity})
+	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 
 	local tree = CairoTree(0,0)
 
@@ -51,6 +55,8 @@ function IngameState:enter(transition, args)
 	self.tree:draw()
 
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
+	Engine.importModel("objects/world/grid/caravan.obj",2)
+
 
 	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
 
@@ -92,17 +98,24 @@ function IngameState:enter(transition, args)
 		end
 
 		gridEntity:setPitch(0.25)
-		gridEntity:setScale(0,0,0)
+		gridEntity:setScale(1,1,1)
+
+		-- TODO: dangerous, check if this link is smart!!!
+		gridEntity.node = nodes[i]
+		nodes[i].entity = gridEntity
+		--
 
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
-		self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
+		-- self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 
 	end
 	lineEntity:addChild(gridParent)
-	lineEntity:setPosition(-10,-10,-10)
+	-- lineEntity:setPosition(-10,-10,-10)
 
 	self.lineEntity = lineEntity
+
+	GlobalCaravan = Caravan(nodes[50])
 end
 
 function IngameState:exit(transition, args)

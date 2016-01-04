@@ -227,7 +227,7 @@ function Tree:setSelected(newSelected)
 	end
 end
 
-function Tree:findPath(fromNode, toNode)
+function Tree.findPath(fromNode, toNode)
 	local frontier = Queue()
 	frontier:push(fromNode)
 	local came_from = {}
@@ -415,7 +415,7 @@ function CairoTree:registerInput()
 
 	if (INPUTS.key["p"] or INPUTS.mouse["r"]) then
 		if (self._currentSelected and self._currentHovered) then
-			self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
+			self._currentPath = self.findPath(self._currentSelected, self._currentHovered)
 		else
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
 		end

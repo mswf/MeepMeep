@@ -68,19 +68,23 @@ function Signal:__call(...)
 end
 
 function Signal:dispatch(...)
+	local callbacksOnceDirty = false
 	for i=1,3 do
 		for context, callback in pairs(self._callbacks[i]) do
 			callback(context, ...)
 		end
 
 		for context, callback in pairs(self._callbacksOnce[i]) do
+			callbacksOnceDirty = true
 			callback(context, ...)
 		end
 	end
 
-	self._callbacksOnce = {
-		setmetatable({}, weakMT),
-		setmetatable({}, weakMT),
-		setmetatable({}, weakMT)
-	}
+	if (callbacksOnceDirty) then
+		self._callbacksOnce = {
+			setmetatable({}, weakMT),
+			setmetatable({}, weakMT),
+			setmetatable({}, weakMT)
+		}
+	end
 end

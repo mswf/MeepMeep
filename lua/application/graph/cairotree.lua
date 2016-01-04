@@ -106,6 +106,12 @@ end
 
 function CairoTree:registerInput()
 
+	if (Input.keyUp(KeyCode["i"])) then
+		if (self._currentSelected) then
+			debugEntity(self._currentSelected.entity)
+		end
+	end
+
 	-- local nodes = self._nodes
 	-- local value = (math.sin(love.timer.getTime())+1) /4
 	-- for i=1, #nodes do
@@ -170,7 +176,7 @@ function CairoTree:registerInput()
 
 	if (Input.keyDown(KeyCode.P) or Input.mouseDown(3)) then
 		if (self._currentSelected and self._currentHovered) then
-			self._currentPath = self:findPath(self._currentSelected, self._currentHovered)
+			self._currentPath = self.findPath(self._currentSelected, self._currentHovered)
 		else
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
 		end
