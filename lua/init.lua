@@ -62,8 +62,8 @@ end
 function Game.onFocusGain()
 end
 
-function Game.onResizeWindow(newWidth, newHeight)
-
+function Game.onWindowResized(newWidth, newHeight)
+	Log.bobn("resized to "..newWidth.."x"..newHeight)
 end
 
 Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
