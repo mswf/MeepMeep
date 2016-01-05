@@ -9,8 +9,8 @@ Tree = class(Tree, function(self, rootX, rootY)
 
 	self.size = 1
 
-	self._currentHovered = nil
-	self._currentSelected = nil
+	self._currentHoveredNode = nil
+	self._currentSelectedNode = nil
 
 	self._currentPath = {}
 
@@ -23,38 +23,21 @@ function Tree:setSize(newSize)
 end
 
 function Tree:draw()
+	DebugDrawTriangle:clear()
 
-
-	if (self._currentSelected) then
-		self._currentSelected:drawSelected()
+	if (self._currentSelectedNode) then
+		self._currentSelectedNode:drawSelected()
 	end
 
-	if (self._currentHovered) then
-		self._currentHovered:drawHovered()
+	if (self._currentHoveredNode) then
+		self._currentHoveredNode:drawHovered()
 	end
+end
 
+function Tree:drawGrid()
+	DebugDraw:clear()
 	for k,v in pairs(self._nodes) do
-		v:draw()
-	end
-
-	local curPath = self._currentPath
-	for i=1, #curPath do
-
-
-		local x, y = curPath[i]:getWorldCenter()
-		-- love.graphics.setColor(255,100,100,255)
-		-- love.graphics.circle("fill",x,y , self.size/5, 6)
-
-		if (curPath[i+1]) then
-			local x1, y1 = curPath[i]:getWorldCenter()
-			local x2, y2 = curPath[i+1]:getWorldCenter()
-
-			DebugDrawPath:addLine2D(x1, y1, x2, y2, 11/255, 218/255, 206/255, 0.8)
-			-- love.graphics.setColor(255,100,100,100)
-			-- love.graphics.line(x1, y1, x2, y2)
-		end
-
-
+		v:drawEdges()
 	end
 end
 
@@ -67,41 +50,44 @@ function Tree:addNode(node)
 end
 
 function Tree:setHovered(newHovered)
-	if (self._currentHovered == newHovered) then
+	if (self._currentHoveredNode == newHovered) then
 		return
 	end
 
-	if (self._currentHovered) then
-		self._currentHovered:onHoverOut()
+	if (self._currentHoveredNode) then
+		self._currentHoveredNode:onHoverOut()
 	end
 
 	if (newHovered) then
-		self._currentHovered = newHovered
-		self._currentHovered:onHoverIn()
+		self._currentHoveredNode = newHovered
+		self._currentHoveredNode:onHoverIn()
 
 		-- gridX, gridY, gridZ = newHovered:getGridPosition()
 		-- tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ
 
 		Engine.ui.setTooltip(newHovered:getTooltip())
 	else
-		self._currentHovered = nil
+		self._currentHoveredNode = nil
 		Engine.ui.setTooltip("")
 	end
 end
 
 function Tree:setSelected(newSelected)
-	if (self._currentSelected == newSelected) then
+	if (self._currentSelectedNode == newSelected) then
 		return
 	end
 
-	if (self._currentSelected) then
+	if (self._currentSelectedNode) then
 
 	end
 
 	if (newSelected) then
-		self._currentSelected = newSelected
+		self._currentSelectedNode = newSelected
+
+		self._currentSelectedNode:drawSelected()
+
 	else
-		self._currentSelected = nil
+		self._currentSelectedNode = nil
 	end
 end
 

@@ -52,7 +52,8 @@ function IngameState:enter(transition, args)
 
 
 	self.tree = tree
-	self.tree:draw()
+	self.tree:drawGrid()
+	-- self.tree:draw()
 
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
@@ -76,6 +77,7 @@ function IngameState:enter(transition, args)
 
 		local gridEntity = Entity()
 		gridEntity:addComponent(renderer)
+		lineEntity:addChild(gridParent)
 
 		local worldX, worldY = nodes[i]:getWorldCenter()
 
@@ -108,10 +110,7 @@ function IngameState:enter(transition, args)
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
 		-- self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
-
 	end
-	lineEntity:addChild(gridParent)
-	-- lineEntity:setPosition(-10,-10,-10)
 
 	self.lineEntity = lineEntity
 
@@ -124,19 +123,9 @@ end
 
 function IngameState:exit(transition, args)
 	self.lineEntity:setPosition(500,5000,500)
-
 end
 
 function IngameState:update(dt)
-	-- if (Input.mouseDown(3)) then
-	-- 	Log.steb("2")
-	-- end
-
 	self.tree:registerInput()
-
-	DebugDraw:clear()
-	DebugDrawTriangle:clear()
-	DebugDrawPath:clear()
-
 	self.tree:draw()
 end

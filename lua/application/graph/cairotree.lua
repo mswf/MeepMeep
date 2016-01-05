@@ -14,7 +14,7 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self._width = 0
 	self._height = 0
 
-	self._currentHovered = nil
+	self._currentHoveredNode = nil
 
 	self._currentPath = {}
 
@@ -107,8 +107,8 @@ end
 function CairoTree:registerInput()
 
 	if (Input.keyUp(KeyCode["i"])) then
-		if (self._currentSelected) then
-			debugEntity(self._currentSelected.entity)
+		if (self._currentSelectedNode) then
+			debugEntity(self._currentSelectedNode.entity)
 		end
 	end
 
@@ -174,15 +174,26 @@ function CairoTree:registerInput()
 		self:setSelected(self._grid[gridX][gridY][zOffset])
 	end
 
-	if (Input.keyDown(KeyCode.P) or Input.mouseDown(3)) then
-		if (self._currentSelected and self._currentHovered) then
-			self._currentPath = self.findPath(self._currentSelected, self._currentHovered)
+	if (Input.keyDown(KeyCode.P) or Input.mouse(3)) then
+		if (self._currentSelectedNode and self._currentHoveredNode) then
+			self._currentPath = self.findPath(self._currentSelectedNode, self._currentHoveredNode)
+
+			DebugDrawPath:clear()
+			local curPath = self._currentPath
+			for i=1, #curPath do
+				if (curPath[i+1]) then
+					local x1, y1 = curPath[i]:getWorldCenter()
+					local x2, y2 = curPath[i+1]:getWorldCenter()
+
+					DebugDrawPath:addLine2D(x1, y1, x2, y2, 11/255, 218/255, 206/255, 0.8)
+				end
+			end
 		else
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
 		end
 	end
 
-	-- if (self._currentHovered and self._currentSelected) then
+	-- if (self._currentHoveredNode and self._currentSelectedNode) then
 	-- 	self._path = self:getPathFro
 	-- end
 end

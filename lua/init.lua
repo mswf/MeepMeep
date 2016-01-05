@@ -46,6 +46,8 @@ function Game.main()
 end
 
 function Game.update(dt)
+	Input.update()
+	
 	GlobalStateManager:update(dt)
 end
 

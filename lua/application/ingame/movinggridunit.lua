@@ -28,9 +28,12 @@ function MovingGridUnit:moveToNode(targetNode)
 	end
 
 	self._path = Tree.findPath(self._currentNode, targetNode)
+	-- the path starts with the node that the unit is already on
 	table.remove(self._path)
 
-	self._isMoving = true
+	if (#self._path > 0) then
+		self._isMoving = true
+	end
 end
 
 function MovingGridUnit:update(dt)

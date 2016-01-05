@@ -138,8 +138,8 @@ Tree = class(Tree ,function(self, rootX, rootY)
 
 	self.size = 1
 
-	self._currentHovered = nil
-	self._currentSelected = nil
+	self._currentHoveredNode = nil
+	self._currentSelectedNode = nil
 
 	self._currentPath = {}
 
@@ -154,12 +154,12 @@ end
 function Tree:draw()
 
 
-	if (self._currentSelected) then
-		self._currentSelected:drawSelected()
+	if (self._currentSelectedNode) then
+		self._currentSelectedNode:drawSelected()
 	end
 
-	if (self._currentHovered) then
-		self._currentHovered:drawHovered()
+	if (self._currentHoveredNode) then
+		self._currentHoveredNode:drawHovered()
 	end
 
 	for k,v in pairs(self._nodes) do
@@ -196,34 +196,34 @@ function Tree:addNode(node)
 end
 
 function Tree:setHovered(newHovered)
-	if (self._currentHovered == newHovered) then
+	if (self._currentHoveredNode == newHovered) then
 		return
 	end
 
-	if (self._currentHovered) then
+	if (self._currentHoveredNode) then
 
 	end
 
 	if (newHovered) then
-		self._currentHovered = newHovered
+		self._currentHoveredNode = newHovered
 	else
-		self._currentHovered = nil
+		self._currentHoveredNode = nil
 	end
 end
 
 function Tree:setSelected(newSelected)
-	if (self._currentSelected == newSelected) then
+	if (self._currentSelectedNode == newSelected) then
 		return
 	end
 
-	if (self._currentSelected) then
+	if (self._currentSelectedNode) then
 
 	end
 
 	if (newSelected) then
-		self._currentSelected = newSelected
+		self._currentSelectedNode = newSelected
 	else
-		self._currentSelected = nil
+		self._currentSelectedNode = nil
 	end
 end
 
@@ -275,7 +275,7 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self._width = 0
 	self._height = 0
 
-	self._currentHovered = nil
+	self._currentHoveredNode = nil
 
 	self._currentPath = {}
 
@@ -414,14 +414,14 @@ function CairoTree:registerInput()
 	end
 
 	if (INPUTS.key["p"] or INPUTS.mouse["r"]) then
-		if (self._currentSelected and self._currentHovered) then
-			self._currentPath = self.findPath(self._currentSelected, self._currentHovered)
+		if (self._currentSelectedNode and self._currentHoveredNode) then
+			self._currentPath = self.findPath(self._currentSelectedNode, self._currentHoveredNode)
 		else
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
 		end
 	end
 
-	-- if (self._currentHovered and self._currentSelected) then
+	-- if (self._currentHoveredNode and self._currentSelectedNode) then
 	-- 	self._path = self:getPathFro
 	-- end
 end

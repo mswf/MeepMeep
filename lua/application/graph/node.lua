@@ -81,21 +81,12 @@ function Node:setVertices(vertices)
 	self._vertices = newVertices
 end
 
-function Node:draw()
+function Node:drawEdges()
 	if (self._vertices) then
-
 		local edges = self._edges
 		for i=1, #edges do
-			-- love.graphics.setColor(unpack(self._RANDCOLORLINE))
-
 			DebugDraw:addLine2D(unpack(edges[i]))
-
-			-- love.graphics.line(unpack(edges[i]))
-
-			-- love.graphics.setColor(unpack(self._RANDCOLOR))
-			-- love.graphics.circle("fill", edges[i][1], edges[i][2], self._tree.size/5, 6)
 		end
-		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
@@ -133,7 +124,7 @@ function Node:drawSelected()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				0,0,.8,0.5)
+																				1,1,1,0.5)
 			end
 		end
 		-- love.graphics.setColor(255,255,255,128)
@@ -153,7 +144,7 @@ function Node:drawNeighbour()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				0,0,0.5,0.2)
+																				1,1,1,0.2)
 			end
 		end
 		-- love.graphics.setColor(100,100,100,128)
