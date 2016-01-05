@@ -31,3 +31,20 @@ function GridUnit:setCurrentNode(node)
 
 	node:addUnit(self)
 end
+
+
+--[[
+SELECTABLE GRID UNIT
+
+	self.selectable
+
+function SELECTABLEUNIT:onSelected()
+
+end
+
+function SELECTABLEUNIT:onDeselected()
+
+end
+
+
+]]

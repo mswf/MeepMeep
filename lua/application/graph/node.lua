@@ -35,6 +35,10 @@ end
 
 function Node:addUnit(unit)
 	self._units[#self._units + 1] = unit
+
+	if (self._isSelected) then
+		self:_changeSelectableUnits()
+	end
 end
 
 function Node:removeUnit(unit)
@@ -45,7 +49,95 @@ function Node:removeUnit(unit)
 			break
 		end
 	end
+
+	-- self._changeSelectableUnits()
 end
+
+function Node:onSelected()
+	self._isSelected = true
+
+	self._currentSelectedIndex = 0
+	self:_changeSelectableUnits(1)
+end
+
+function Node:_changeSelectableUnits(increment)
+	local selectableUnits = {}
+
+	local previousSelectedUnit = self._currentSelectedUnit
+
+	local units = self._units
+	for i=1, #units do
+		if (units[i].selectable) then
+			table.insert(selectableUnits, units[i])
+		end
+	end
+
+	-- TODO: sort by priority
+	self._selectableUnits = selectableUnits
+	self._currentSelectedIndex = self._currentSelectedIndex	+ (increment or 0)
+
+	if (#selectableUnits > 0) then
+		if (self._currentSelectedIndex > #selectableUnits) then
+			self._currentSelectedIndex = #selectableUnits
+		end
+
+		self._currentSelectedIndex = 1
+		self._currentSelectedUnit = selectableUnits[self._currentSelectedIndex]
+		if (self._currentSelectedUnit ~= previousSelectedUnit) and (previousSelectedUnit ~= nil) then
+			previousSelectedUnit:onDeselected()
+			self._currentSelectedUnit:onSelected()
+		end
+	end
+end
+
+function Node:onCycleSelected()
+	self:_changeSelectableUnits(1)
+	--[[
+	local selectableUnits = self._selectableUnits
+	local selectableUnitsCount = #selectableUnits
+
+	if (selectableUnitsCount > 1) then
+		self._currentSelectedUnit:onDeselected()
+
+		self._currentSelectedIndex = self._currentSelectedIndex + 1
+		if (self._currentSelectedIndex > selectableUnitsCount) then
+			self._currentSelectedIndex = 1
+		end
+		self._currentSelectedUnit = selectableUnits[self._currentSelectedIndex]
+
+		self._currentSelectedUnit:onSelected()
+	end
+	]]
+end
+
+function Node:onSelectNew(newNode)
+	--[[
+	if (OBJECT_THATS_CURRENTLY_ACTIVE) then
+		OBJECT_THATS_CURRENTLY_ACTIVE:doaction()
+		return true
+	end
+	]]
+
+	if (self._currentSelectedUnit) then
+		if (self._currentSelectedUnit.mayStopSelection) then
+			return self._currentSelectedUnit:onSelectNew(newNode)
+		end
+	end
+
+	return false
+end
+
+function Node:onDeselected()
+	self._isSelected = nil
+
+	self._selectableUnits = {}
+
+	if (self._currentSelectedUnit) then
+		self._currentSelectedUnit:onDeselected()
+	end
+
+end
+
 
 function Node:addNeighbour(neighbour)
 	if (not neighbour) then
@@ -127,15 +219,11 @@ function Node:drawSelected()
 																				1,1,1,0.5)
 			end
 		end
-		-- love.graphics.setColor(255,255,255,128)
-
-		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 
 function Node:drawNeighbour()
 	if (self._vertices) then
-
 		local v = self._vertices
 		local num = #v
 
@@ -147,9 +235,6 @@ function Node:drawNeighbour()
 																				1,1,1,0.2)
 			end
 		end
-		-- love.graphics.setColor(100,100,100,128)
-
-		-- love.graphics.polygon('fill', self._vertices)
 	end
 end
 

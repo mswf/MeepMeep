@@ -73,20 +73,28 @@ function Tree:setHovered(newHovered)
 end
 
 function Tree:setSelected(newSelected)
-	if (self._currentSelectedNode == newSelected) then
+	if (self._currentSelectedNode == newSelected) and (newSelected ~= nil) then
+		newSelected:onCycleSelected()
 		return
 	end
 
-	if (self._currentSelectedNode) then
-
-	end
-
 	if (newSelected) then
+		if (self._currentSelectedNode) then
+			local staySelected = self._currentSelectedNode:onSelectNew(newSelected)
+			if (staySelected) then
+				return
+			end
+
+			self._currentSelectedNode:onDeselected()
+		end
+
 		self._currentSelectedNode = newSelected
 
-		self._currentSelectedNode:drawSelected()
-
+		self._currentSelectedNode:onSelected()
 	else
+		if (self._currentSelectedNode) then
+			self._currentSelectedNode:onDeselected()
+		end
 		self._currentSelectedNode = nil
 	end
 end

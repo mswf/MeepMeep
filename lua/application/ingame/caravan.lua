@@ -5,6 +5,11 @@ require "lua/application/ingame/movinggridunit"
 Caravan = class(Caravan, MovingGridUnit)
 
 function Caravan:initializeFromData(data)
+	-- gameplay
+	self.selectable = true
+	self.mayStopSelection = true
+
+	-- visuals
 	caravanModel = Engine.getModel("objects/world/grid/caravan.obj");
 	renderer = MeshRenderer()
 	renderer:setModel(caravanModel)
@@ -20,8 +25,24 @@ function Caravan:initializeFromData(data)
 
 	self:setPitch(0.25)
 
-	debugEntity(self)
+	-- debugEntity(self)
 
+
+end
+
+
+function Caravan:onSelected()
+
+end
+
+function Caravan:onDeselected()
+
+end
+
+function Caravan:onSelectNew(newNode)
+	self:moveToNode(newNode)
+
+	return false
 end
 
 -- function Caravan:setTargetNode(node)
