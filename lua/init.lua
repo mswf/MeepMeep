@@ -37,6 +37,19 @@ function Game.crash()
 	noTable["yes"] = 500
 end
 
+function Game.xmlStuff()
+	--require
+	local SLAXML = require "lua/SLAXML-master/slaxdom"
+	--read the file
+	local file = "testwk.xml"
+	local myxml = io.open(Engine.system.contentPath .. "/" .. file):read('*all')
+	--do stuff to read xml
+	local doc = SLAXML:dom(myxml)
+
+	Log.waka("Xml Something: ")
+	Log.waka(doc.root.el[1].attr["src"])
+end
+
 function Game.main()
 	GlobalUIManager = UIManager()
 
@@ -59,10 +72,11 @@ function Game.main()
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
 	camera:setAspectRatio(1.6)
-	Log.waka("adjqhkfvzjd")
+
+	Game.xmlStuff()
+
 	CAMERA_ENTITY.update = function(self, dt)
 		Game:hackyCameraMovement(dt)
-		Log.waka("adjqhkfvzjd")
 	end
 
 	--
