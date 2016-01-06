@@ -62,12 +62,18 @@ function MainMenuState:enter(transitionType, args)
 	rabbit:addComponent(renderer)
 	rabbit:setPosition(0,0,5)
 
+	local lightEntity = Entity()
 	local light = Light()
-	rabbit:addComponent(light)
 	light:setIntensity(0.1)
 	light:setColor(1,0,1,1)
+	lightEntity:addComponent(light)
 
-	debugEntity(rabbit)
+	lightEntity:setPitch(0.547)
+	lightEntity:setYaw(0.337)
+	lightEntity:setRoll(0.895)
+
+
+	debugEntity(lightEntity)
 
 	-- light.entity.update = function(self, dt)
 	-- 	self:yaw(1)

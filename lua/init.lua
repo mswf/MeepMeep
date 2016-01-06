@@ -30,6 +30,7 @@ if (love) then
 end
 
 function Game.crash()
+	local noTable
 	noTable["yes"] = 500
 end
 
