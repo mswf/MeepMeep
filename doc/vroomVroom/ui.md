@@ -181,6 +181,31 @@ slider.maxValue = 10
 slider.value = 5
 slider.rounded = false -- integer/float
 
+--the power with which the value increases, with the center point always being 0
+slider.power = 1.0
+
 -- CALLBACKS
 slider.onChange = function(self) end
+```
+
+## Drag : UI Element
+```lua
+local drag = uiContainer:addDrag( string "label")
+
+-- %.2f = display the value with 2 decimal points
+drag.format = "%.2f cooks" --> 5.00 cooks
+drag.label = "labelText"
+
+--if minValue > maxValue, the value can be increased/decreased indefinitely
+drag.minValue = 0
+drag.maxValue = 10
+drag.value = 5
+drag.rounded = false -- integer/float
+
+--the power with which the value increases, with the center point always being 0
+drag.power = 1.0
+drag.speed = 1.0
+
+-- CALLBACKS
+drag.onChange = function(self) end
 ```
