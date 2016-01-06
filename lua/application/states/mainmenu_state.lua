@@ -112,21 +112,22 @@ function MainMenuState:enter(transitionType, args)
 	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 
 
+	local cameraMoveSpeed = 10
 	cameraEntity.update = function(self, dt)
 		if (Input.binding("moveUp")) then
-			self:addY(-1*dt)
+			self:addY(-cameraMoveSpeed*dt)
 		end
 
 		if (Input.binding("moveDown")) then
-			self:addY(1*dt)
+			self:addY(cameraMoveSpeed*dt)
 		end
 
 		if (Input.binding("moveLeft")) then
-			self:addX(1*dt)
+			self:addX(cameraMoveSpeed*dt)
 		end
 
 		if (Input.binding("moveRight")) then
-			self:addX(-1*dt)
+			self:addX(-cameraMoveSpeed*dt)
 		end
 	end
 
