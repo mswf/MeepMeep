@@ -13,6 +13,7 @@ require "lua/base/meshrenderer"
 require "lua/base/debugrenderer"
 require "lua/base/material"
 require "lua/base/camera"
+require "lua/base/light"
 
 require "lua/base/parsing/i18n"
 require "lua/base/parsing/parser"

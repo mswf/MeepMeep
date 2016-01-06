@@ -24,7 +24,10 @@ Sets the camera's projection type to either 'orthographic' or 'perspective'
 ```lua
 	baseCamera:setAspectRatio(ratio)
 ```
-* `ratio` Float
+* `r` Float
+* `g` Float
+* `b` Float
+* `a` Float  
 Sets the camera's aspect ratio to a a value of <0,1]
 
 #### setFOV

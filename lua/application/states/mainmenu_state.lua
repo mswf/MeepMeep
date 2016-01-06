@@ -60,7 +60,16 @@ function MainMenuState:enter(transitionType, args)
 	renderer:setModel(model)
 
 	rabbit:addComponent(renderer)
-	rabbit:setPosition(0,0,-5)
+	rabbit:setPosition(0,0,5)
+
+	local light = Light()
+	rabbit:addComponent(light)
+	light:setIntensity(0.1)
+	light:setColor(1,0,1,1)
+
+	rabbit.update = function(self, dt)
+		self:yaw(1)
+	end
 
 	--[[
 	for i=1, 10 do
