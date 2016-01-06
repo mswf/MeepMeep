@@ -66,7 +66,7 @@ end
 ***
 
 ## Functionality unique to VroomVroom
-You can register a callback for when files are reloaded. Register under the path to the global Broadcaster 'Debug_FileChangedBroadcaster' with a callback that will be called with 2 params; the path + filetype.
+You can register a callback for when files are reloaded. Register under the path to the AssetManager 'Game.assetManager.broadcaster' with a callback that will be called with 2 params; the path + filetype.
 
 ### Reserved Functions
 The "VroomVroom" engine uses several reserved functions in class definitions. Like Lua metatable keys, these always start with ' __ ' + function.

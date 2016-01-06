@@ -57,19 +57,19 @@ function Game.onShutdown()
 end
 
 function Game.onMouseEntered()
-	Log.steb("Mouse entered")
+	-- Log.steb("Mouse entered")
 end
 
 function Game.onMouseLeft()
-	Log.steb("Mouse left")
+	-- Log.steb("Mouse left")
 end
 
 function Game.onMouseGained()
-	Log.steb("Mouse gained")
+	-- Log.steb("Mouse gained")
 end
 
 function Game.onMouseLost()
-	Log.steb("Mouse lost")
+	-- Log.steb("Mouse lost")
 end
 
 
@@ -81,11 +81,11 @@ end
 Game.windowResizedSignal = Game.windowResizedSignal or Signal()
 
 function Game.onFocusLost()
-	Log.steb("Game focus lost")
+	Log.steb("Focus lost")
 end
 
 function Game.onFocusGained()
-	Log.steb("Game focus gained")
+	Log.steb("Focus gained")
 
 end
 
@@ -101,61 +101,10 @@ end
 function Game.onWindowHidden()
 end
 
-Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
 Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
-	local type = nil
-
-	do
-		local stringLength = string.len(path)
-
-		dotPosition  = string.find(path, "%.")
-
-		type = string.sub(path, dotPosition+1)
-		path = string.sub(path, 1, dotPosition-1)
-
-		-- Windows path fixing step
-		path = string.gsub(path, "\\", "/")
-
-		-- Mac returns the full filepath, this step strips away the first part
-		-- You're now left with only the reletive path
-		local projectStart, projectEnd = string.find(path, "MeepMeep/")
-		if (not projectStart) then
-			projectStart, projectEnd = string.find(path, "HonkHonk/")
-		end
-
-		if (projectStart) then
-			path = string.sub(path, projectEnd + 1)
-		end
-	end
-
-	Log.warning("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
-
-	local isSucces = false
-
-	if (type == "lua") then
-		if (package.loaded[path]) then
-			Log.warning("Reloaded lua file: " .. tostring(path))
-			package.loaded[path] = nil
-			require(path)
-
-			class:__hotReloadClasses()
-
-			isSucces = true
-		else
-			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
-			isSucces = false
-		end
-	elseif (type == "glsl") then
-		Game.assetManager:reloadShader(path)
-	else
-		isSucces = false
-	end
-
-	Debug_FileChangedBroadcaster:broadcast(path, {path = path, type = type})
-
-	return isSucces
+	return Game.assetManager:onFileChanged(path)
 end
 
 function Game.game()
