@@ -62,8 +62,10 @@ end
 
 
 function AssetManager:reloadShader(path)
-	if (self._importedShaders[path]) then
-		Log.error("[AssetLoader] TODO: reload asset")
+	Log.steb("Trying to reload shader at path: "..path)
+	if (Engine.isShaderLoaded(path .. ".glsl")) then
+		Log.error("[AssetLoader] TODO: reload shader")
+		Engine.reloadShader(path .. ".glsl")
 	end
 end
 

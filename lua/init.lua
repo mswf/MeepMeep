@@ -74,7 +74,7 @@ end
 
 
 function Game.onWindowResized(newWidth, newHeight)
-	Log.bobn("resized to "..newWidth.."x"..newHeight)
+	-- Log.bobn("resized to "..newWidth.."x"..newHeight)
 	Game.windowResizedSignal(newWidth, newHeight)
 end
 
@@ -102,6 +102,7 @@ function Game.onWindowHidden()
 end
 
 Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
+Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
 	local type = nil
@@ -146,6 +147,8 @@ function Game.onFileChanged(path)
 			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
 			isSucces = false
 		end
+	elseif (type == "glsl") then
+		Game.assetManager:reloadShader(path)
 	else
 		isSucces = false
 	end

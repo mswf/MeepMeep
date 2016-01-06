@@ -67,9 +67,11 @@ function MainMenuState:enter(transitionType, args)
 	light:setIntensity(0.1)
 	light:setColor(1,0,1,1)
 
-	light.entity.update = function(self, dt)
-		self:yaw(1)
-	end
+	debugEntity(rabbit)
+
+	-- light.entity.update = function(self, dt)
+	-- 	self:yaw(1)
+	-- end
 
 	--[[
 	for i=1, 10 do
