@@ -25,6 +25,9 @@ UIBase = class(UIBase, function(self, uiManager, params)
 	if (self.update ~= UIBase.update) then
 		uiManager:registerUpdate(self.window)
 	end
+	if (self.onWindowResized ~= UIBase.onWindowResized) then
+		self._uiManager:registerResize(self.window)
+	end
 
 	local params = self._params
 	if (params["visible"] ~= nil) then
@@ -60,6 +63,9 @@ function UIBase:__onReload()
 	if (self.update ~= UIBase.update) then
 		self._uiManager:registerUpdate(self.window)
 	end
+	if (self.onWindowResized ~= UIBase.onWindowResized) then
+		self._uiManager:registerResize(self.window)
+	end
 
 	self:_createUI()
 	self:_register()
@@ -78,6 +84,10 @@ function UIBase:_unregister()
 end
 
 function UIBase:update(dt)
+
+end
+
+function UIBase:onWindowResized(newWidht, newHeight)
 
 end
 

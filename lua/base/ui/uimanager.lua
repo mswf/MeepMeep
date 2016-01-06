@@ -4,8 +4,11 @@ UIManager = class(UIManager, function(self)
 	self._activeWindows = {}
 
 	self._updatingWindows = {}
+	self._windowsWithResizeCallbacks = {}
 
 	self.tweener = Tweener()
+
+	Game.windowResizedSignal:add(self.onWindowResized, self)
 end)
 
 
@@ -35,10 +38,21 @@ function UIManager:update(dt)
 	end
 end
 
+function UIManager:registerResize(window)
+	self._windowsWithResizeCallbacks[window] = window.__owner or Log.warning("[UIManager] tried to registerResize a window without an '__owner' property")
+end
+
+function UIManager:onWindowResized(newWidth, newHeight)
+	for k, v in pairs(self._windowsWithResizeCallbacks) do
+		v:onWindowResized(newWidth, newHeight)
+	end
+end
+
 function UIManager:removeWindow(uiWindow)
 	if (self._activeWindows[uiWindow]) then
 		self._updatingWindows[uiWindow] = nil
 		self._activeWindows[uiWindow] = nil
+		self._windowsWithResizeCallbacks[uiWindow] = nil
 		return true
 	else
 		return false
@@ -54,4 +68,5 @@ function UIManager:destroyAll()
 
 	self._activeWindows = {}
 	self._updatingWindows = {}
+	self._windowsWithResizeCallbacks = {}
 end

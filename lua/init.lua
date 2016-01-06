@@ -47,7 +47,7 @@ end
 
 function Game.update(dt)
 	Input.update()
-	
+
 	GlobalStateManager:update(dt)
 end
 
@@ -56,14 +56,49 @@ function Game.onShutdown()
 	return true
 end
 
-function Game.onFocusLose()
+function Game.onMouseEntered()
+	Log.steb("Mouse entered")
 end
 
-function Game.onFocusGain()
+function Game.onMouseLeft()
+	Log.steb("Mouse left")
 end
+
+function Game.onMouseGained()
+	Log.steb("Mouse gained")
+end
+
+function Game.onMouseLost()
+	Log.steb("Mouse lost")
+end
+
 
 function Game.onWindowResized(newWidth, newHeight)
 	Log.bobn("resized to "..newWidth.."x"..newHeight)
+	Game.windowResizedSignal(newWidth, newHeight)
+end
+
+Game.windowResizedSignal = Game.windowResizedSignal or Signal()
+
+function Game.onFocusLost()
+	Log.steb("Game focus lost")
+end
+
+function Game.onFocusGained()
+	Log.steb("Game focus gained")
+
+end
+
+function Game.onWindowMinimized()
+end
+
+function Game.onWindowMaximized()
+end
+function Game.onWindowRestored()
+end
+function Game.onWindowShown()
+end
+function Game.onWindowHidden()
 end
 
 Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()

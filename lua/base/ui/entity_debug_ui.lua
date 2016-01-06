@@ -204,3 +204,7 @@ function EntityDebugUI:update(dt)
 
 	end
 end
+
+function EntityDebugUI:onWindowResized()
+	self.window:onMove()
+end
