@@ -115,6 +115,16 @@ function IngameState:enter(transition, args)
 	self.lineEntity = lineEntity
 
 	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan.tooltipText = "Weikie yay"
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan.tooltipText = "Gwebl sucks"
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
+	GlobalCaravan = Caravan(nodes[50])
 
 	GlobalNodes = nodes
 

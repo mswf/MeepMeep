@@ -25,6 +25,10 @@ function Input.update()
 			Input._mouse[i] = false
 		end
 	end
+
+	if Input.keyDown(KeyCode.F2) or Input.keyDown(KeyCode.ESCAPE) then
+		Engine.clearConsole()
+	end
 end
 
 function Input.mouse(mouseButton)
