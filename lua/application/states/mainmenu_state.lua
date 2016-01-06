@@ -67,7 +67,7 @@ function MainMenuState:enter(transitionType, args)
 	light:setIntensity(0.1)
 	light:setColor(1,0,1,1)
 
-	rabbit.update = function(self, dt)
+	light.entity.update = function(self, dt)
 		self:yaw(1)
 	end
 
