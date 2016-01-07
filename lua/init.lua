@@ -105,8 +105,7 @@ end
 Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
-	Log.warning("File changed at path:")
-	Log.warning(path)
+	Log.warning("[FileChanged] " .. path)
 	return Game.assetManager:onFileChanged(path)
 end
 
