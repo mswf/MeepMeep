@@ -8,3 +8,5 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
+map_Kd objects/Rabbit/Rabbit_D.tga
+map_bump objects/Rabbit/Rabbit_N.tga
