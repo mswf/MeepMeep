@@ -1,5 +1,6 @@
 
 require "lua/application/ui/ingame/ingame_ui"
+require "lua/application/ui/ingame/selection_ui"
 
 
 require "lua/application/graph/cairotree"
@@ -16,7 +17,8 @@ end)
 function IngameState:enter(transition, args)
 	Log.steb("we entered the ingame")
 
-	IngameUI(self.UIManager)
+	self._ingameUI = IngameUI(self.UIManager)
+	self._selectionUI = SelectionUI(self.UIManager)
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())

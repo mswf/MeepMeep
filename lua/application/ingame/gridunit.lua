@@ -36,13 +36,22 @@ end
 --[[
 SELECTABLE GRID UNIT
 
-	self.selectable
+	self.selectable = true
 
 function SELECTABLEUNIT:onSelected()
 
 end
 
 function SELECTABLEUNIT:onDeselected()
+
+end
+
+
+STOPSELECTION
+
+	self.mayStopSelection = true
+
+function STOPSELECTION:onSelectNew(newNode)
 
 end
 
