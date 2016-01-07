@@ -82,11 +82,11 @@ end
 Game.windowResizedSignal = Game.windowResizedSignal or Signal()
 
 function Game.onFocusLost()
-	Log.steb("Focus lost")
+	-- Log.steb("Focus lost")
 end
 
 function Game.onFocusGained()
-	Log.steb("Focus gained")
+	-- Log.steb("Focus gained")
 
 end
 
@@ -105,6 +105,8 @@ end
 Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
+	Log.warning("File changed at path:")
+	Log.warning(path)
 	return Game.assetManager:onFileChanged(path)
 end
 

@@ -48,7 +48,9 @@ if (GAMEDEBUG) then
 	end
 
 	function debugEntity(entity)
-		EntityDebugUI{entity = entity}
+		if (entity) then
+			EntityDebugUI{entity = entity}
+		end
 	end
 
 	function debugOutline(entity)
