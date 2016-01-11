@@ -37,7 +37,7 @@ function IngameInput:update()
 
 	if (Input.keyDown(KeyCode.P) or Input.mouse(3)) then
 		if (self._currentSelectedNode and self._currentHoveredNode) then
-			self._currentPath = Tree.findPath(self._currentSelectedNode, self._currentHoveredNode)
+			self._currentPath = Graph.findPath(self._currentSelectedNode, self._currentHoveredNode)
 
 			DebugDrawPath:clear()
 			local curPath = self._currentPath

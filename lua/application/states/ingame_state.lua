@@ -2,7 +2,7 @@
 require "lua/application/ui/ingame/ingame_ui"
 require "lua/application/ui/ingame/selection_ui"
 
-require "lua/application/graph/cairotree"
+require "lua/application/graph/cairograph"
 
 require "lua/application/ingame/caravan"
 require "lua/application/ingame/ingameinput"
@@ -47,7 +47,7 @@ function IngameState:enter(transition, args)
 
 	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
 
-	local tree = CairoTree(0,0)
+	local tree = CairoGraph(0,0)
 
 	tree:setSize(1)
 	tree:initializeToDimensions(10, 10)

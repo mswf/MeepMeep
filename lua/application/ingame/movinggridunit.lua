@@ -27,7 +27,7 @@ function MovingGridUnit:moveToNode(targetNode)
 		return
 	end
 
-	self._path = Tree.findPath(self._currentNode, targetNode)
+	self._path = Graph.findPath(self._currentNode, targetNode)
 	-- the path starts with the node that the unit is already on
 	table.remove(self._path)
 

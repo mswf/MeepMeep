@@ -1,8 +1,8 @@
 
-require "lua/application/graph/tree"
+require "lua/application/graph/graph"
 require "lua/application/graph/cairopentagon"
 
-CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
+CairoGraph = class(CairoGraph, Graph, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -16,7 +16,7 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self._grid = {}
 end)
 
-function CairoTree:initializeToDimensions(width, height)
+function CairoGraph:initializeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
 
 	self._grid = {}
@@ -93,11 +93,11 @@ function CairoTree:initializeToDimensions(width, height)
 	self._height = height
 end
 
-function CairoTree:addToGrid(cairoPentagon,x,y,z)
+function CairoGraph:addToGrid(cairoPentagon,x,y,z)
 	self._grid[x][y][z] = cairoPentagon
 end
 
-function CairoTree:getNodeByWorldCoord(worldX, worldY)
+function CairoGraph:getNodeByWorldCoord(worldX, worldY)
 	local gridPosX = worldX/self.size*.5/40
 	local gridPosY = worldY/self.size*.5/40
 
@@ -126,7 +126,7 @@ function CairoTree:getNodeByWorldCoord(worldX, worldY)
 	return self._grid[gridX][gridY][zOffset]
 end
 
-function CairoTree:getNodeByGridPos(x,y,z)
+function CairoGraph:getNodeByGridPos(x,y,z)
 	local grid = self._grid
 
 	if (grid[x]) then

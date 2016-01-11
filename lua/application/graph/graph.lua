@@ -1,7 +1,7 @@
 
 require "lua/application/graph/node"
 
-Tree = class(Tree, function(self, rootX, rootY)
+Graph = class(Graph, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
 
@@ -13,26 +13,26 @@ Tree = class(Tree, function(self, rootX, rootY)
 
 end)
 
-function Tree:setSize(newSize)
+function Graph:setSize(newSize)
 	self.size = newSize
 end
 
-function Tree:drawGrid()
+function Graph:drawGrid()
 	DebugDraw:clear()
 	for k,v in pairs(self._nodes) do
 		v:drawEdges()
 	end
 end
 
-function Tree:addNode(node)
+function Graph:addNode(node)
 	table.insert(self._nodes, node)
 end
 
-function Tree:getNodeByWorldCoord(worldX, worldY)
+function Graph:getNodeByWorldCoord(worldX, worldY)
 	Log.error("[TREE] implement getNodeByWorldCoord")
 end
 
-function Tree.findPath(fromNode, toNode)
+function Graph.findPath(fromNode, toNode)
 	local frontier = Queue()
 	frontier:push(fromNode)
 	local came_from = {}
