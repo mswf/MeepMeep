@@ -9,29 +9,12 @@ Tree = class(Tree, function(self, rootX, rootY)
 
 	self.size = 1
 
-	self._currentHoveredNode = nil
-	self._currentSelectedNode = nil
-
-	self._currentPath = {}
-
 	self._grid = {}
 
 end)
 
 function Tree:setSize(newSize)
 	self.size = newSize
-end
-
-function Tree:draw()
-	DebugDrawTriangle:clear()
-
-	if (self._currentSelectedNode) then
-		self._currentSelectedNode:drawSelected()
-	end
-
-	if (self._currentHoveredNode) then
-		self._currentHoveredNode:drawHovered()
-	end
 end
 
 function Tree:drawGrid()
@@ -41,62 +24,12 @@ function Tree:drawGrid()
 	end
 end
 
-function Tree:registerInput()
-
-end
-
 function Tree:addNode(node)
 	table.insert(self._nodes, node)
 end
 
-function Tree:setHovered(newHovered)
-	if (self._currentHoveredNode == newHovered) then
-		return
-	end
-
-	if (self._currentHoveredNode) then
-		self._currentHoveredNode:onHoverOut()
-	end
-
-	if (newHovered) then
-		self._currentHoveredNode = newHovered
-		self._currentHoveredNode:onHoverIn()
-
-		-- gridX, gridY, gridZ = newHovered:getGridPosition()
-		-- tostring(newHovered).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ
-
-		Engine.ui.setTooltip(newHovered:getTooltip())
-	else
-		self._currentHoveredNode = nil
-		Engine.ui.setTooltip("")
-	end
-end
-
-function Tree:setSelected(newSelected)
-	if (self._currentSelectedNode == newSelected) and (newSelected ~= nil) then
-		newSelected:onCycleSelected()
-		return
-	end
-
-	if (newSelected) then
-		if (self._currentSelectedNode) then
-			local staySelected = self._currentSelectedNode:onSelectNew(newSelected)
-			if (staySelected) then
-				return
-			end
-
-			self._currentSelectedNode:onDeselected()
-		end
-
-		self._currentSelectedNode = newSelected
-
-		self._currentSelectedNode:onSelected()
-	else
-		if (self._currentSelectedNode) then
-			self._currentSelectedNode:onDeselected()
-		end
-		self._currentSelectedNode = nil
-	end
+function Tree:getNodeByWorldCoord(worldX, worldY)
+	Log.error("[TREE] implement getNodeByWorldCoord")
 end
 
 function Tree.findPath(fromNode, toNode)
@@ -116,7 +49,6 @@ function Tree.findPath(fromNode, toNode)
 			if (not came_from[neighbour]) then
 				frontier:push(neighbour)
 				came_from[neighbour] = current
-
 			end
 		end
 	end

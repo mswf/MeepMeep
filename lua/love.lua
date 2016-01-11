@@ -313,47 +313,47 @@ function CairoTree:initializeToDimensions(width, height)
 			if (isVertical) then
 				local node1 = grid[x][y][1]
 				-- top
-				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node1:addNeighbour(self:getNodeAt(x,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y,2))
 				-- bottom
-				node1:addNeighbour(self:getNodeAt(x,y+1,1))
+				node1:addNeighbour(self:getNodeByGridPos(x,y+1,1))
 				-- left
-				node1:addNeighbour(self:getNodeAt(x-1,y,2))
-				node1:addNeighbour(self:getNodeAt(x-1,y,1))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,1))
 
 				local node2 = grid[x][y][2]
 				-- top
-				node2:addNeighbour(self:getNodeAt(x,y-1,2))
+				node2:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node2:addNeighbour(self:getNodeAt(x+1,y,1))
-				node2:addNeighbour(self:getNodeAt(x+1,y,2))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,2))
 				-- bottom
-				node2:addNeighbour(self:getNodeAt(x,y+1,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,1))
 				-- left
-				node2:addNeighbour(self:getNodeAt(x,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y,1))
 			else
 				local node1 = grid[x][y][1]
 				-- top
-				node1:addNeighbour(self:getNodeAt(x,y-1,1))
-				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,1))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node1:addNeighbour(self:getNodeAt(x+1,y,1))
+				node1:addNeighbour(self:getNodeByGridPos(x+1,y,1))
 				-- bottom
-				node1:addNeighbour(self:getNodeAt(x,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y,2))
 				-- left
-				node1:addNeighbour(self:getNodeAt(x-1,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,2))
 
 				local node2 = grid[x][y][2]
 				-- top
-				node2:addNeighbour(self:getNodeAt(x,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y,1))
 				-- right
-				node2:addNeighbour(self:getNodeAt(x+1,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,1))
 				-- bottom
-				node2:addNeighbour(self:getNodeAt(x,y+1,1))
-				node2:addNeighbour(self:getNodeAt(x,y+1,2))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,2))
 				-- left
-				node2:addNeighbour(self:getNodeAt(x-1,y,2))
+				node2:addNeighbour(self:getNodeByGridPos(x-1,y,2))
 			end
 		end
 	end
@@ -430,7 +430,7 @@ function CairoTree:addToGrid(cairoPentagon,x,y,z)
 	self._grid[x][y][z] = cairoPentagon
 end
 
-function CairoTree:getNodeAt(x,y,z)
+function CairoTree:getNodeByGridPos(x,y,z)
 	local grid = self._grid
 
 	if (grid[x]) then

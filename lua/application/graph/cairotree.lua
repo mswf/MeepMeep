@@ -2,7 +2,6 @@
 require "lua/application/graph/tree"
 require "lua/application/graph/cairopentagon"
 
--- GLOBALCOUNT = GLOBALCOUNT or 1
 CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self.worldX = rootX
 	self.worldY = rootY
@@ -13,10 +12,6 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 
 	self._width = 0
 	self._height = 0
-
-	self._currentHoveredNode = nil
-
-	self._currentPath = {}
 
 	self._grid = {}
 end)
@@ -47,47 +42,47 @@ function CairoTree:initializeToDimensions(width, height)
 			if (isVertical) then
 				local node1 = grid[x][y][1]
 				-- top
-				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node1:addNeighbour(self:getNodeAt(x,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y,2))
 				-- bottom
-				node1:addNeighbour(self:getNodeAt(x,y+1,1))
+				node1:addNeighbour(self:getNodeByGridPos(x,y+1,1))
 				-- left
-				node1:addNeighbour(self:getNodeAt(x-1,y,2))
-				node1:addNeighbour(self:getNodeAt(x-1,y,1))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,1))
 
 				local node2 = grid[x][y][2]
 				-- top
-				node2:addNeighbour(self:getNodeAt(x,y-1,2))
+				node2:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node2:addNeighbour(self:getNodeAt(x+1,y,1))
-				node2:addNeighbour(self:getNodeAt(x+1,y,2))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,2))
 				-- bottom
-				node2:addNeighbour(self:getNodeAt(x,y+1,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,1))
 				-- left
-				node2:addNeighbour(self:getNodeAt(x,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y,1))
 			else
 				local node1 = grid[x][y][1]
 				-- top
-				node1:addNeighbour(self:getNodeAt(x,y-1,1))
-				node1:addNeighbour(self:getNodeAt(x,y-1,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,1))
+				node1:addNeighbour(self:getNodeByGridPos(x,y-1,2))
 				-- right
-				node1:addNeighbour(self:getNodeAt(x+1,y,1))
+				node1:addNeighbour(self:getNodeByGridPos(x+1,y,1))
 				-- bottom
-				node1:addNeighbour(self:getNodeAt(x,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x,y,2))
 				-- left
-				node1:addNeighbour(self:getNodeAt(x-1,y,2))
+				node1:addNeighbour(self:getNodeByGridPos(x-1,y,2))
 
 				local node2 = grid[x][y][2]
 				-- top
-				node2:addNeighbour(self:getNodeAt(x,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y,1))
 				-- right
-				node2:addNeighbour(self:getNodeAt(x+1,y,1))
+				node2:addNeighbour(self:getNodeByGridPos(x+1,y,1))
 				-- bottom
-				node2:addNeighbour(self:getNodeAt(x,y+1,1))
-				node2:addNeighbour(self:getNodeAt(x,y+1,2))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,1))
+				node2:addNeighbour(self:getNodeByGridPos(x,y+1,2))
 				-- left
-				node2:addNeighbour(self:getNodeAt(x-1,y,2))
+				node2:addNeighbour(self:getNodeByGridPos(x-1,y,2))
 			end
 		end
 	end
@@ -98,55 +93,20 @@ function CairoTree:initializeToDimensions(width, height)
 	self._height = height
 end
 
-function CairoTree:registerInput()
+function CairoTree:addToGrid(cairoPentagon,x,y,z)
+	self._grid[x][y][z] = cairoPentagon
+end
 
-	if (Input.keyUp(KeyCode["i"])) then
-		if (self._currentSelectedNode) then
-			debugEntity(self._currentSelectedNode.entity)
-		end
-	end
-
-	-- local nodes = self._nodes
-	-- local value = (math.sin(love.timer.getTime())+1) /4
-	-- for i=1, #nodes do
-	-- 	nodes[i]:generateVertices(value)
-	-- end
-
-	--#TODO:0 refactor this input the moment this is moved to the engine side
-
-	if (Engine.ui.isMouseHoveringOverAnyWindow) then
-		self:setHovered(nil)
-		if (Input.mouseDown(1)) then
-			self:setSelected(nil)
-		end
-
-		return
-	end
-	local mouseX, mouseY = Input.getMousePosition()
-
-	-- local worldX = (mouseX - CAMOFFSET.X) / CAMOFFSET.ZOOM
-	-- local worldY = (mouseY - CAMOFFSET.Y) / CAMOFFSET.ZOOM
-
-	local worldX = mouseX
-	local worldY = Engine.ui.getScreenHeight() - mouseY
-
+function CairoTree:getNodeByWorldCoord(worldX, worldY)
 	local gridPosX = worldX/self.size*.5/40
 	local gridPosY = worldY/self.size*.5/40
 
 	local gridX = math.floor(gridPosX) +1 - 3
 	local gridY = math.floor(gridPosY) +1
 
-	-- Log.steb("X: ".. gridX .. ", Y: ".. gridY)
-
 	if  (gridX < 1 or gridX > self._width
 		or gridY < 1 or gridY > self._height) then
-
-			-- Log.steb("can't find")
-		self:setHovered(nil)
-		if (Input.mouseDown(1)) then
-			self:setSelected(nil)
-		end
-		return
+		return nil
 	end
 
 	local isVertical = ((gridX + gridY) % 2 == 0)
@@ -162,37 +122,11 @@ function CairoTree:registerInput()
 		end
 	end
 
-	self:setHovered(self._grid[gridX][gridY][zOffset])
-
-	if (Input.mouseDown(1)) then
-		self:setSelected(self._grid[gridX][gridY][zOffset])
-	end
-
-	if (Input.keyDown(KeyCode.P) or Input.mouse(3)) then
-		if (self._currentSelectedNode and self._currentHoveredNode) then
-			self._currentPath = self.findPath(self._currentSelectedNode, self._currentHoveredNode)
-
-			DebugDrawPath:clear()
-			local curPath = self._currentPath
-			for i=1, #curPath do
-				if (curPath[i+1]) then
-					local x1, y1 = curPath[i]:getWorldCenter()
-					local x2, y2 = curPath[i+1]:getWorldCenter()
-
-					DebugDrawPath:addLine2D(x1, y1, x2, y2, 11/255, 218/255, 206/255, 0.8)
-				end
-			end
-		else
-			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
-		end
-	end
+	-- return self:getNodeByGridPos(gridX, gridY, zOffset)
+	return self._grid[gridX][gridY][zOffset]
 end
 
-function CairoTree:addToGrid(cairoPentagon,x,y,z)
-	self._grid[x][y][z] = cairoPentagon
-end
-
-function CairoTree:getNodeAt(x,y,z)
+function CairoTree:getNodeByGridPos(x,y,z)
 	local grid = self._grid
 
 	if (grid[x]) then
