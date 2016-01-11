@@ -2,10 +2,10 @@
 require "lua/application/ui/ingame/ingame_ui"
 require "lua/application/ui/ingame/selection_ui"
 
-
 require "lua/application/graph/cairotree"
 
 require "lua/application/ingame/caravan"
+require "lua/application/ingame/ingameinput"
 
 
 IngameState = class(IngameState, GameState, function(self, gameStateManager)
@@ -53,9 +53,9 @@ function IngameState:enter(transition, args)
 	tree:initializeToDimensions(10, 10)
 
 
-	self.tree = tree
-	self.tree:drawGrid()
-	-- self.tree:draw()
+	self.graph = tree
+	self.graph:drawGrid()
+	-- self.graph:draw()
 
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
@@ -117,20 +117,12 @@ function IngameState:enter(transition, args)
 	self.lineEntity = lineEntity
 
 	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan.tooltipText = "Weikie yay"
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan.tooltipText = "Gwebl sucks"
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
-	GlobalCaravan = Caravan(nodes[50])
 
-	GlobalNodes = nodes
+	-- GlobalNodes = nodes
 
 	-- GlobalCaravan:moveToNode(GlobalNodes[25])
+
+	self.input = IngameInput(self, self.graph)
 end
 
 function IngameState:exit(transition, args)
@@ -138,6 +130,5 @@ function IngameState:exit(transition, args)
 end
 
 function IngameState:update(dt)
-	self.tree:registerInput()
-	self.tree:draw()
+	self.input:update()
 end

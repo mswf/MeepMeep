@@ -19,12 +19,6 @@ CairoTree = class(CairoTree, Tree, function(self, rootX, rootY)
 	self._currentPath = {}
 
 	self._grid = {}
-
-	-- local num = GLOBALCOUNT
-	-- GlobalBroadcaster:register(self, "ON_MOUSE_PRESS", function(self, params) Log.steb(num) end)
-	-- GLOBALCOUNT = GLOBALCOUNT + 1
-
-
 end)
 
 function CairoTree:initializeToDimensions(width, height)
@@ -192,10 +186,6 @@ function CairoTree:registerInput()
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
 		end
 	end
-
-	-- if (self._currentHoveredNode and self._currentSelectedNode) then
-	-- 	self._path = self:getPathFro
-	-- end
 end
 
 function CairoTree:addToGrid(cairoPentagon,x,y,z)
