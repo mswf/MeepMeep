@@ -22,8 +22,11 @@ function Caravan:initializeFromData(data)
 
 	self:addComponent(renderer)
 
+	self:setInitialNode(GlobalIngameState.graph:getNodeByGridPos(data:getPosition()))
 
 	self:setPitch(0.25)
+
+	self.tooltipText = "Player Caravan"
 
 	-- debugEntity(self)
 

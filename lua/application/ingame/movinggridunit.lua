@@ -2,10 +2,8 @@
 require "lua/application/ingame/gridunit"
 
 
-MovingGridUnit = class(MovingGridUnit, GridUnit, function(self, currentNode, data)
+MovingGridUnit = class(MovingGridUnit, GridUnit, function(self, data)
 	data = data or {}
-
-	self:setPositionFromNode(currentNode)
 
 	self._path = {}
 	self._isMoving = false
@@ -13,11 +11,13 @@ MovingGridUnit = class(MovingGridUnit, GridUnit, function(self, currentNode, dat
 	self._movementSpeed = data.movementSpeed or 1.0
 	self._turnSpeed			=	data.turnSpeed or 0.25
 
-	self:setCurrentNode(currentNode)
-
-	self:initializeFromData(data)
+	if (data.initialNode) then
+		self:setInitialNode(data.initialNode)
+	end
 
 	self.tooltipText = "Moving Grid Unit"
+
+	self:initializeFromData(data)
 end)
 
 

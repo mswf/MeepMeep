@@ -1,16 +1,21 @@
 
-GridUnit = class(GridUnit, Entity, function(self, currentNode, data)
-	self:setPositionFromNode(currentNode)
-
-	self:setCurrentNode(currentNode)
-
-	self:initializeFromData(data)
+GridUnit = class(GridUnit, Entity, function(self, data)
+	if (data.initialNode) then
+		self:setInitialNode(data.initialNode)
+	end
 
 	self.tooltipText = "Grid Unit"
+
+	self:initializeFromData(data)
 end)
 
 function GridUnit:initializeFromData(data)
 	--
+end
+
+function GridUnit:setInitialNode(initialNode)
+	self:setPositionFromNode(initialNode)
+	self:setCurrentNode(initialNode)
 end
 
 function GridUnit:setPositionFromNode(node, offset)
@@ -30,6 +35,10 @@ function GridUnit:setCurrentNode(node)
 	self._currentNode = node
 
 	node:addUnit(self)
+end
+
+function GridUnit:getCurrentNode()
+	return self._currentNode
 end
 
 

@@ -4,7 +4,9 @@ require "lua/application/ui/ingame/selection_ui"
 
 require "lua/application/graph/cairograph"
 
-require "lua/application/ingame/caravan"
+require "lua/application/ingame/player/caravan"
+require "lua/application/ingame/player/family"
+
 require "lua/application/ingame/ingameinput"
 
 
@@ -116,7 +118,16 @@ function IngameState:enter(transition, args)
 
 	self.lineEntity = lineEntity
 
-	GlobalCaravan = Caravan(nodes[50])
+	local caravanData = GlobalData.playerData.playerCaravan
+
+	self.caravan = Caravan(caravanData)
+
+	local familiesData = GlobalData.playerData:getFamilies()
+	local families = {}
+
+	for i=1, #familiesData do
+		families[i] = Family(familiesData[i])
+	end
 
 	-- GlobalNodes = nodes
 
