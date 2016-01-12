@@ -35,7 +35,7 @@ function IngameInput:update()
 		self:setSelected(nodeUnderMouse)
 	end
 
-	if (Input.keyDown(KeyCode.P) or Input.mouse(3)) then
+	if (Input.keyDown(KeyCode.P)) then
 		if (self._currentSelectedNode and self._currentHoveredNode) then
 			self._currentPath = Graph.findPath(self._currentSelectedNode, self._currentHoveredNode)
 
@@ -51,6 +51,17 @@ function IngameInput:update()
 			end
 		else
 			Log.steb("Can't draw a path, either there's no currentSelected or no currentHovered")
+		end
+	end
+
+	if (Input.mouse(3)) then
+		if (self._currentSelectedNode) then
+			local unit = self._currentSelectedNode:getCurrentSelectedUnit()
+			if (unit) and (unit:mayMove()) then
+				unit:moveToNode(self._currentHoveredNode)
+
+				self:setSelected(nil)
+			end
 		end
 	end
 
@@ -97,7 +108,6 @@ function IngameInput:setSelected(newSelected)
 		end
 
 		self._currentSelectedNode = newSelected
-
 		self._currentSelectedNode:onSelected()
 	else
 		if (self._currentSelectedNode) then

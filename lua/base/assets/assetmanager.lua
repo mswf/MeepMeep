@@ -108,7 +108,7 @@ function AssetManager:onFileChanged(fullPath)
 		self:reloadShader(path, type)
 	elseif (type == "obj") then
 		self:reloadModel(path, type)
-	elseif (type == "png") then
+	elseif (type == "png" or type == "jpg" or type == "jpeg") then
 		self:reloadTexture(path, type)
 	else
 		isSucces = false

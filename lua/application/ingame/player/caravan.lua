@@ -43,9 +43,13 @@ function Caravan:onDeselected()
 end
 
 function Caravan:onSelectNew(newNode)
-	self:moveToNode(newNode)
+	-- self:moveToNode(newNode)
 
 	return false
+end
+
+function Caravan:mayMove()
+	return true
 end
 
 -- function Caravan:setTargetNode(node)

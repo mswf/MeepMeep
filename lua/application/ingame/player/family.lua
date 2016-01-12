@@ -62,6 +62,15 @@ function Family:removeFromCaravan()
 	end
 end
 
+
+function Family:mayMove()
+	if (self._currentCaravan == nil) then
+		return true
+	else
+		return false
+	end
+end
+
 function Family:onSelected()
 
 end

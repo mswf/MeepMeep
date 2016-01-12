@@ -73,6 +73,10 @@ function MovingGridUnit:_moveToNextNode()
 
 end
 
+function MovingGridUnit:mayMove()
+	return false
+end
+
 function MovingGridUnit:update(dt)
 	-- if (self._isMoving) then
 	-- 	self._isMoving = false

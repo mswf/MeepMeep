@@ -18,6 +18,13 @@ Node = class(Node, function(self, tree)
 	self._RANDCOLOR[3] = math.random()*.2
 	self._RANDCOLOR[4] = 0.8
 
+	self._RANDCOLORHOVER = {}
+	self._RANDCOLORHOVER[1] = sensibleColours[colourIndex][1]
+	self._RANDCOLORHOVER[2] = sensibleColours[colourIndex][2]
+	self._RANDCOLORHOVER[3] = sensibleColours[colourIndex][3]
+	self._RANDCOLORHOVER[4] = .5
+
+
 	self._RANDCOLORLINE = {}
 	self._RANDCOLORLINE[1] = math.random()*.2+.5
 	self._RANDCOLORLINE[2] = math.random()*.2+.5
@@ -58,6 +65,10 @@ function Node:onSelected()
 
 	self._currentSelectedIndex = 0
 	self:_changeSelectableUnits(1)
+end
+
+function Node:getCurrentSelectedUnit()
+	return self._currentSelectedUnit
 end
 
 function Node:_changeSelectableUnits(increment)
@@ -194,7 +205,7 @@ function Node:drawHovered()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				unpack(self._RANDCOLOR))
+																				unpack(self._RANDCOLORHOVER))
 			end
 		end
 	end
@@ -203,9 +214,9 @@ end
 function Node:drawSelected()
 	local neighbours = self.neighbours
 
-	for i=1, #neighbours do
-		neighbours[i]:drawNeighbour()
-	end
+	-- for i=1, #neighbours do
+	-- 	neighbours[i]:drawNeighbour()
+	-- end
 
 	if (self._vertices) then
 		local v = self._vertices
