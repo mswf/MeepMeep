@@ -128,6 +128,7 @@ function IngameState:enter(transition, args)
 	for i=1, #familiesData do
 		families[i] = Family(familiesData[i])
 	end
+	self.families = families
 
 	-- GlobalNodes = nodes
 
@@ -137,7 +138,13 @@ function IngameState:enter(transition, args)
 end
 
 function IngameState:exit(transition, args)
-	self.lineEntity:setPosition(500,5000,500)
+
+	self.lineEntity:destroy()
+	self.caravan:destroy()
+
+	for i=1, #self.families do
+		self.families[i]:destroy()
+	end
 end
 
 function IngameState:update(dt)
