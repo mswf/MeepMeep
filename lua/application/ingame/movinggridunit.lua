@@ -11,6 +11,8 @@ MovingGridUnit = class(MovingGridUnit, GridUnit, function(self, data)
 	self._movementSpeed = data.movementSpeed or 1.0
 	self._turnSpeed			=	data.turnSpeed or 0.25
 
+	self.onSetCurrentNode = Signal()
+
 	if (data.initialNode) then
 		self:setInitialNode(data.initialNode)
 	end

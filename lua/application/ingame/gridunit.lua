@@ -1,5 +1,8 @@
 
 GridUnit = class(GridUnit, Entity, function(self, data)
+
+	self.onSetCurrentNode = Signal()
+
 	if (data.initialNode) then
 		self:setInitialNode(data.initialNode)
 	end
@@ -35,6 +38,8 @@ function GridUnit:setCurrentNode(node)
 	self._currentNode = node
 
 	node:addUnit(self)
+
+	self.onSetCurrentNode(node)
 end
 
 function GridUnit:getCurrentNode()
