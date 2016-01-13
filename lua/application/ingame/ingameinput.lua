@@ -1,5 +1,5 @@
 
-IngameInput = class(IngameInput, function(self, ingamestate, graph)
+IngameInput = class(IngameInput, function(self, ingamestate, graph, cameraController)
 
 	self._ingameState = ingamestate
 	self._graph = graph
@@ -10,10 +10,14 @@ IngameInput = class(IngameInput, function(self, ingamestate, graph)
 
 	self._currentSelectedUnit	= nil
 
+	self._cameraController = cameraController
+
 end)
 
 
-function IngameInput:update()
+function IngameInput:update(dt)
+	self._cameraController:updateInput(dt)
+
 	if (Input.keyUp(KeyCode["i"])) then
 		if (self._currentSelectedNode) then
 			debugEntity(self._currentSelectedNode.entity)

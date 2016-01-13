@@ -8,6 +8,8 @@ require "lua/application/ingame/player/caravan"
 require "lua/application/ingame/player/family"
 
 require "lua/application/ingame/ingameinput"
+require "lua/application/ingame/cameracontroller"
+
 
 
 IngameState = class(IngameState, GameState, function(self, gameStateManager)
@@ -18,6 +20,8 @@ end)
 
 function IngameState:enter(transition, args)
 	Log.steb("we entered the ingame")
+
+	local cameraController = CameraController()
 
 	self._ingameUI = IngameUI(self.UIManager)
 	self._selectionUI = SelectionUI(self.UIManager)
@@ -120,7 +124,7 @@ function IngameState:enter(transition, args)
 		-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 	end
 
-	debugEntity(lineEntity)
+	-- debugEntity(lineEntity)
 
 	self.lineEntity = lineEntity
 
@@ -141,7 +145,7 @@ function IngameState:enter(transition, args)
 
 	-- GlobalCaravan:moveToNode(GlobalNodes[25])
 
-	self.input = IngameInput(self, self.graph)
+	self.input = IngameInput(self, self.graph, cameraController)
 end
 
 function IngameState:exit(transition, args)
@@ -155,5 +159,5 @@ function IngameState:exit(transition, args)
 end
 
 function IngameState:update(dt)
-	self.input:update()
+	self.input:update(dt)
 end

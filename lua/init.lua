@@ -50,6 +50,7 @@ function Game.update(dt)
 	Input.update()
 
 	GlobalStateManager:update(dt)
+	GlobalUIManager:update(dt)
 end
 
 function Game.onShutdown()
@@ -59,13 +60,17 @@ end
 
 function Game.onMouseEntered()
 	-- Log.steb("Mouse entered")
+
+	Input.isMouseInWindow = true
 end
 
 function Game.onMouseLeft()
+	Input.isMouseInWindow = false
 	-- Log.steb("Mouse left")
 end
 
 function Game.onMouseGained()
+
 	-- Log.steb("Mouse gained")
 end
 
