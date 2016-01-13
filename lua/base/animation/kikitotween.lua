@@ -312,7 +312,8 @@ local function performEasingOnSubject(subject, target, initial, clock, duration,
 			t,b,c,d = clock, initial[k], v - initial[k], duration
 
 			if (type(k) == "function") then
-				k(subject, easing(t,b,c,d))
+				result = easing(t,b,c,d)
+				k(subject, result, result, result)
 			else
       	subject[k] = easing(t,b,c,d)
 			end

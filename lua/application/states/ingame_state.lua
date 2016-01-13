@@ -113,8 +113,14 @@ function IngameState:enter(transition, args)
 
 		gridEntity:setPosition(worldX, worldY, 0)
 		gridParent:addChild(gridEntity)
-		-- self.tweener:new(1.1*math.random()+3.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
+
+		gridEntity:setScale(0,0,0)
+		self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScale"]=1}):setEasing("outBounce")
+
+		-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 	end
+
+	debugEntity(lineEntity)
 
 	self.lineEntity = lineEntity
 
@@ -129,6 +135,7 @@ function IngameState:enter(transition, args)
 		families[i] = Family(familiesData[i])
 	end
 	self.families = families
+
 
 	-- GlobalNodes = nodes
 

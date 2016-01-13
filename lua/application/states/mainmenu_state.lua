@@ -30,16 +30,6 @@ function MainMenuState:__onReload()
 	-- Log.steb("changed broadcaster reload")
 end
 
-function MainMenuState:exit(transitionType, args)
-	if (args.instruction == "NEWGAME") then
-		GlobalData:createGameNew()
-	elseif (args.instruction == "LOADGAME") then
-		GlobalData:loadGame(args.saveHandle)
-	else
-		GlobalData:createGameNew()
-	end
-end
-
 function MainMenuState:enter(transitionType, args)
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	Engine.importModel( "objects/icy_snowman.obj" )
@@ -72,8 +62,9 @@ function MainMenuState:enter(transitionType, args)
 	lightEntity:setYaw(0.337)
 	lightEntity:setRoll(0.895)
 
+	GlobalLight = lightEntity
 
-	debugEntity(lightEntity)
+	-- debugEntity(lightEntity)
 
 	-- light.entity.update = function(self, dt)
 	-- 	self:yaw(1)
@@ -140,6 +131,7 @@ function MainMenuState:enter(transitionType, args)
 	end
 
 	cameraEntity:setPosition(-10,-10,-10)
+	self.camera = cameraEntity
 	-- debugEntity(cameraEntity)
 
 	-- EntityDebugUI(self.UIManager, {entity = cameraEntity})
@@ -150,5 +142,17 @@ function MainMenuState:enter(transitionType, args)
 	-- PREZZY._uiManager = self.UIManager
 	-- PREZZY:_updateMayhem(false)
 
-	GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+end
+
+function MainMenuState:exit(transitionType, args)
+	-- self.camera:destroy()
+
+	if (args.instruction == "NEWGAME") then
+		GlobalData:createGameNew()
+	elseif (args.instruction == "LOADGAME") then
+		GlobalData:loadGame(args.saveHandle)
+	else
+		GlobalData:createGameNew()
+	end
 end

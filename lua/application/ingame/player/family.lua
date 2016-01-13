@@ -28,12 +28,12 @@ function Family:initializeFromData(data)
 
 	if (data:isInMainCaravan()) then
 		-- TODO: hide visuals
+		-- self:setInitialNode(GlobalIngameState.caravan:getCurrentNode())
 		self:addToCaravan(GlobalIngameState.caravan)
-		self:setInitialNode(GlobalIngameState.caravan:getCurrentNode())
 
 	else
-		self:removeFromCaravan()
 		self:setInitialNode(GlobalIngameState.graph:getNodeByGridPos(data:getPosition()))
+		self:removeFromCaravan()
 	end
 
 	-- debugEntity(self)
