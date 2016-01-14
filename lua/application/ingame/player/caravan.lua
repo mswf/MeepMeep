@@ -2,9 +2,7 @@
 
 require "lua/application/ingame/movinggridunit"
 
-Caravan = class(Caravan, MovingGridUnit)
-
-function Caravan:initializeFromData(data)
+Caravan = class(Caravan, MovingGridUnit, function(self, data)
 	-- gameplay
 	self.selectable = true
 	self.mayStopSelection = true
@@ -29,10 +27,7 @@ function Caravan:initializeFromData(data)
 	self.tooltipText = "Player Caravan"
 
 	-- debugEntity(self)
-
-
-end
-
+end)
 
 function Caravan:onSelected()
 

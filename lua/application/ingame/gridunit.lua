@@ -8,13 +8,7 @@ GridUnit = class(GridUnit, Entity, function(self, data)
 	end
 
 	self.tooltipText = "Grid Unit"
-
-	self:initializeFromData(data)
 end)
-
-function GridUnit:initializeFromData(data)
-	--
-end
 
 function GridUnit:setInitialNode(initialNode)
 	self:setPositionFromNode(initialNode)

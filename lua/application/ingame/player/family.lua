@@ -1,11 +1,7 @@
 
 require "lua/application/ingame/movinggridunit"
 
-Family = class(Family, MovingGridUnit)
-
-Family.selectable = true
-
-function Family:initializeFromData(data)
+Family = class(Family, MovingGridUnit, function(self, data)
 	-- gameplay
 	-- self.selectable = true
 	-- self.mayStopSelection = true
@@ -38,8 +34,9 @@ function Family:initializeFromData(data)
 
 	-- debugEntity(self)
 
+end)
 
-end
+Family.selectable = true
 
 function Family:addToCaravan(caravan)
 	self.selectable = false
