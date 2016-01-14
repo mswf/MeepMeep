@@ -3,10 +3,7 @@
 class = setmetatable(class or {}, {
 	__call = function(classTable, c, base, init)
 		if (c) then
-			if (c.__onReload) then
-				table.insert(classTable.__classesToHotreload, c)
-			end
-			-- class already exists, assuming we're hotreloading
+			table.insert(classTable.__classesToHotreload, c)
 		else
 			c = {} -- a new class definition
 		end
@@ -16,11 +13,11 @@ class = setmetatable(class or {}, {
 			base = nil
 		elseif type(base) == 'table' then
 			-- our new class is a shallow copy of the base class!
-			for i,v in pairs(base) do
-				if (i ~= "__instances") then
-					c[i] = v
-				end
-			end
+			-- for i,v in pairs(base) do
+			-- 	if (i ~= "__instances") then
+			-- 		c[i] = v
+			-- 	end
+			-- end
 			c._base = base
 		end
 
@@ -31,6 +28,7 @@ class = setmetatable(class or {}, {
 
 		-- expose a constructor which can be called by <classname>(<args>)
 		local mt = {}
+		mt.__index = base
 		mt.__tostring = function(class_tbl)
 			return "[CLASS] " .. retrieveVariableName(c)
 		end
@@ -42,6 +40,20 @@ class = setmetatable(class or {}, {
 				base.__engineInit(obj)
 			end
 
+			do
+				local currentClass = class_tbl
+				local initialers = {}
+				while (currentClass) do
+					table.insert(initialers, rawget(currentClass, "init"))
+					currentClass = currentClass._base
+				end
+				local initCount = #initialers
+				for i=initCount,1,-1  do
+					initialers[i](obj, ...)
+				end
+			end
+			--[[
+			-- Old init call code
 			if init then
 				init(obj,...)
 			else
@@ -50,6 +62,7 @@ class = setmetatable(class or {}, {
 					base.init(obj, ...)
 				end
 			end
+			]]
 
 			table.insert(c.__instances, obj)
 
@@ -78,9 +91,10 @@ class.__hotReloadClasses = function(self)
 	local targetClasses = self.__classesToHotreload
 
 	for i=1, #targetClasses do
+		if (targetClasses[i].__onReload) then
 			local classInstances = targetClasses[i].__instances
 
-			Log.warning("[".. retrieveVariableName(targetClasses[i]) .. "] calling __onReload on its " .. #classInstances .. " instances")
+			Log.warning("[".. retrieveVariableName(targetClasses[i]) .. "] calling __onReload on its " .. #classInstances .. " instance(s)")
 			for i=1, #classInstances do
 				if (classInstances[i]) then
 					classInstances[i]:__onReload()
@@ -88,6 +102,7 @@ class.__hotReloadClasses = function(self)
 					Log.warning("noop")
 				end
 			end
+		end
 	end
 
 	self.__classesToHotreload = {}

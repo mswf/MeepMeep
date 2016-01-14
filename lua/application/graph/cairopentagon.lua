@@ -1,58 +1,9 @@
 
 require "lua/application/graph/node"
 
-local function rgb(r,g,b,a)
-	a = a or 255
-	return {r/255, g/255, b/255, a/255}
-end
-
-local sensibleColours = {}
-sensibleColours[1] = rgb(52, 170, 64)
-sensibleColours[2] = rgb(184, 132, 84)
-sensibleColours[3] = rgb(46, 131, 179)
-sensibleColours[4] = rgb(98, 148, 64)
--- sensibleColours[4] = rgb(11, 218, 206)
-
-
 CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 
-	self._vertices = nil
-	self._edges = nil
 
-	self._tree = tree
-	self.neighbours = {}
-	self.hasNeighbour = {}
-
-	tree:addNode(self)
-
-	local colourIndex = math.random(#sensibleColours)
-
-	self._RANDCOLOR = {}
-	self._RANDCOLOR[1] = sensibleColours[colourIndex][1]
-	self._RANDCOLOR[2] = sensibleColours[colourIndex][2]
-	self._RANDCOLOR[3] = sensibleColours[colourIndex][3]
-	self._RANDCOLOR[4] = 1
-
-	self._RANDCOLORHOVER = {}
-	self._RANDCOLORHOVER[1] = sensibleColours[colourIndex][1]
-	self._RANDCOLORHOVER[2] = sensibleColours[colourIndex][2]
-	self._RANDCOLORHOVER[3] = sensibleColours[colourIndex][3]
-	self._RANDCOLORHOVER[4] = .5
-
-		-- self._RANDCOLOR = {}
-		-- self._RANDCOLOR[1] = math.random()*.5
-		-- self._RANDCOLOR[2] = math.random()*.5
-		-- self._RANDCOLOR[3] = math.random()*.5
-		-- self._RANDCOLOR[4] = 1
-
-
-	self._RANDCOLORLINE = {}
-	self._RANDCOLORLINE[1] = math.random()*.5+.5
-	self._RANDCOLORLINE[2] = math.random()*.5+.5
-	self._RANDCOLORLINE[3] = math.random()*.5+.5
-	self._RANDCOLORLINE[4] = 1
-
-	self._units = {}
 end)
 
 function CairoPentagon:getTooltip()
