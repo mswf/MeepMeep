@@ -113,21 +113,21 @@ function MainMenuState:enter(transitionType, args)
 
 	local cameraMoveSpeed = 10
 	cameraEntity.update = function(self, dt)
-		if (Input.binding("moveUp")) then
-			self:addY(-cameraMoveSpeed*dt)
-		end
-
-		if (Input.binding("moveDown")) then
-			self:addY(cameraMoveSpeed*dt)
-		end
-
-		if (Input.binding("moveLeft")) then
-			self:addX(cameraMoveSpeed*dt)
-		end
-
-		if (Input.binding("moveRight")) then
-			self:addX(-cameraMoveSpeed*dt)
-		end
+		-- if (Input.binding("moveUp")) then
+		-- 	self:addY(-cameraMoveSpeed*dt)
+		-- end
+		--
+		-- if (Input.binding("moveDown")) then
+		-- 	self:addY(cameraMoveSpeed*dt)
+		-- end
+		--
+		-- if (Input.binding("moveLeft")) then
+		-- 	self:addX(cameraMoveSpeed*dt)
+		-- end
+		--
+		-- if (Input.binding("moveRight")) then
+		-- 	self:addX(-cameraMoveSpeed*dt)
+		-- end
 	end
 
 	cameraEntity:setPosition(-10,-10,-10)
@@ -142,7 +142,7 @@ function MainMenuState:enter(transitionType, args)
 	-- PREZZY._uiManager = self.UIManager
 	-- PREZZY:_updateMayhem(false)
 
-	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+	GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 end
 
 function MainMenuState:exit(transitionType, args)

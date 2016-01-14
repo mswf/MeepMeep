@@ -60,8 +60,7 @@ function IngameState:enter(transition, args)
 
 
 	self.graph = tree
-	self.graph:drawGrid()
-	-- self.graph:draw()
+	-- self.graph:drawGrid()
 
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
