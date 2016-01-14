@@ -8,30 +8,36 @@ CameraController = class(CameraController, Entity, function(self)
 	self:addChild(basePlate);
 	self._basePlate = basePlate;
 
-	-- local camera = Camera()
-	-- camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
-	-- camera:makeActive()
-	-- camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
-	-- basePlate:addComponent(camera);
-
-	local debugRenderer = DebugRenderer()
-	basePlate:addComponent(debugRenderer)
-
+	local camera = Camera()
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
+	basePlate:addComponent(camera);
+	do
+		local debugRenderer = DebugRenderer()
+		basePlate:addComponent(debugRenderer)
 --[[
 	-- euler
 	debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
 	debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 ]]--
-debugRenderer:setDrawPoints(true)
+		debugRenderer:setDrawPoints(true)
 
-debugRenderer:addLine(0,0,-1, 0,0.2,-0.7, 0,1,0)
-debugRenderer:addLine(0,0,-1, 0,-0.2,-0.7, 1,0,0)
+		debugRenderer:addLine(0,0,-1, 0,0.2,-0.7, 0,1,0)
+		debugRenderer:addLine(0,0,-1, 0,-0.2,-0.7, 1,0,0)
 
-debugRenderer:addLine(0,0,-1, 0.2,0,-0.7, 1,0,0)
-debugRenderer:addLine(0,0,-1, -0.2,0,-0.7, 1,0,0)
+		debugRenderer:addLine(0,0,-1, 0.2,0,-0.7, 1,0,0)
+		debugRenderer:addLine(0,0,-1, -0.2,0,-0.7, 1,0,0)
 
-debugRenderer:addLine(0,0,0, 	0,	0,-1, 0,0,1)
+		debugRenderer:addLine(0,0,0, 	0,	0,-1, 0,0,1)
+	end
+
+	do
+		local debugRenderer = DebugRenderer()
+		self:addComponent(debugRenderer)
+
+	end
 
 	self:setPosition(10,10,0);
 
@@ -45,7 +51,9 @@ debugRenderer:addLine(0,0,0, 	0,	0,-1, 0,0,1)
 end)
 
 function CameraController:__onReload()
+	local debugRenderer = self.debugRenderer
 
+	debugRenderer:addLine()
 end
 
 local MAX_MOUSE_PAN_DELAY = 0.5
