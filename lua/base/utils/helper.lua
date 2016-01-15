@@ -47,9 +47,9 @@ if (GAMEDEBUG) then
 		TableDebugUI{table = table}
 	end
 
-	function debugEntity(entity)
+	function debugEntity(entity, windowTitle, anchorToBottom)
 		if (entity) then
-			EntityDebugUI{entity = entity}
+			EntityDebugUI{entity = entity, windowTitle = windowTitle, anchorToBottom= anchorToBottom}
 		end
 	end
 

@@ -5,21 +5,31 @@ EntityDebugUI = class(EntityDebugUI, UIBase)
 function EntityDebugUI:_createUI()
 	self.currentEntity = self._params.entity
 
+	local anchorToBottom = self._params.anchorToBottom
+
 	local entity = self._params.entity
 	local window = self.window
 
 	-- window.movable = false
 
-	window.title = "Inspector: " .. tostring(entity)
+	if (self._params.windowTitle) then
+		window.title = "Inspector: " .. tostring(self._params.windowTitle)
+	else
+		window.title = "Inspector: " .. tostring(entity)
+	end
 
-	window.height = Engine.ui.getScreenHeight()*.66
+	window.height = 300
 	window.width = 280
 
-	window.x = Engine.ui.getScreenWidth() - window.width
+	window.x = Engine.window.getWidth() - window.width
+
+	if (anchorToBottom) then
+		window.y = Engine.window.getHeight() - window.height
+	end
 
 	window.onResize = function(self)
 		self.width = 280
-		local screenHeight = Engine.ui.getScreenHeight()
+		local screenHeight = Engine.window.getHeight()
 		if (self.height> screenHeight) then
 			self.height = screenHeight
 		end
@@ -27,13 +37,13 @@ function EntityDebugUI:_createUI()
 
 	window.onMove = function(self)
 		local y = self.y
-		local screenHeight = Engine.ui.getScreenHeight()
+		local screenHeight = Engine.window.getHeight()
 		if (y < 0) then
 			self.y = 0
 		elseif (y > screenHeight - self.height ) then
 			self.y = screenHeight- self.height
 		end
-		self.x = Engine.ui.getScreenWidth() - self.width
+		self.x = Engine.window.getWidth() - self.width
 	end
 
 

@@ -3,16 +3,18 @@ CameraController = class(CameraController, Entity, function(self)
 
 
 	local basePlate = Entity()
+	basePlate:setPitch(0.5);
+	basePlate:setRoll(0.5);
 
 
 	self:addChild(basePlate);
 	self._basePlate = basePlate;
 
-	local camera = Camera()
-	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
-	camera:makeActive()
-	camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
-	basePlate:addComponent(camera);
+	-- local camera = Camera()
+	-- camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	-- camera:makeActive()
+	-- camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
+	-- basePlate:addComponent(camera);
 	do
 		local debugRenderer = DebugRenderer()
 		basePlate:addComponent(debugRenderer)
@@ -37,6 +39,11 @@ CameraController = class(CameraController, Entity, function(self)
 		local debugRenderer = DebugRenderer()
 		self:addComponent(debugRenderer)
 
+
+		debugRenderer:addLine(0,1,0, 1,0,0, 1,1,1)
+		debugRenderer:addLine(1,0,0, 0,-1,0, 1,1,1)
+		debugRenderer:addLine(0,-1,0, -1,0,0, 1,1,1)
+		debugRenderer:addLine(-1,0,0, 0,1,0, 1,1,1)
 	end
 
 	self:setPosition(10,10,0);
@@ -44,8 +51,8 @@ CameraController = class(CameraController, Entity, function(self)
 	basePlate:setPosition(0,0,5);
 
 
-	debugEntity(self)
-	debugEntity(basePlate)
+	debugEntity(self, "CameraFocus")
+	debugEntity(basePlate, "Camera", true)
 
 	self._mousePanDelay = 0
 end)
@@ -53,7 +60,6 @@ end)
 function CameraController:__onReload()
 	local debugRenderer = self.debugRenderer
 
-	debugRenderer:addLine()
 end
 
 local MAX_MOUSE_PAN_DELAY = 0.5
@@ -67,19 +73,19 @@ function CameraController:updateInput(dt)
 	self:updateBorderPanning(dt)
 
 	if (Input.binding("moveUp")) then
-		self:addY(-cameraMoveSpeed*dt)
-	end
-
-	if (Input.binding("moveDown")) then
 		self:addY(cameraMoveSpeed*dt)
 	end
 
+	if (Input.binding("moveDown")) then
+		self:addY(-cameraMoveSpeed*dt)
+	end
+
 	if (Input.binding("moveLeft")) then
-		self:addX(cameraMoveSpeed*dt)
+		self:addX(-cameraMoveSpeed*dt)
 	end
 
 	if (Input.binding("moveRight")) then
-		self:addX(-cameraMoveSpeed*dt)
+		self:addX(cameraMoveSpeed*dt)
 	end
 
 
@@ -105,22 +111,22 @@ function CameraController:updateBorderPanning(dt)
 
 		if (mouseX < panningSpacing) then
 			isMousePanning = true
-			self:addX(cameraMoveSpeed*dt*((mouseX / panningSpacing)*-1+1)*mousePanDelayFactor)
+			self:addX(-cameraMoveSpeed*dt*((mouseX / panningSpacing)*-1+1)*mousePanDelayFactor)
 		end
 
 		if ((mouseX) > (sWidth - panningSpacing)) then
 			isMousePanning = true
-			self:addX(-cameraMoveSpeed*dt*(((mouseX- sWidth) / panningSpacing)+1)*mousePanDelayFactor)
+			self:addX(cameraMoveSpeed*dt*(((mouseX- sWidth) / panningSpacing)+1)*mousePanDelayFactor)
 		end
 
 		if (mouseY < panningSpacing) then
 			isMousePanning = true
-			self:addY(-cameraMoveSpeed*dt*((mouseY / panningSpacing)*-1+1)*mousePanDelayFactor)
+			self:addY(cameraMoveSpeed*dt*((mouseY / panningSpacing)*-1+1)*mousePanDelayFactor)
 		end
 
 		if ((mouseY) > (sHeight - panningSpacing)) then
 			isMousePanning = true
-			self:addY(cameraMoveSpeed*dt*(((mouseY- sHeight) / panningSpacing)+1)*mousePanDelayFactor)
+			self:addY(-cameraMoveSpeed*dt*(((mouseY- sHeight) / panningSpacing)+1)*mousePanDelayFactor)
 		end
 	end
 

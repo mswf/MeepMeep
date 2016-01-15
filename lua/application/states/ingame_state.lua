@@ -71,8 +71,11 @@ function IngameState:enter(transition, args)
 	local nodes = tree._nodes
 
 	local gridParent = Entity()
+	lineEntity:addChild(gridParent)
 
-	for i=1, #nodes do
+	local nodeCount = #nodes
+	
+	for i=1, nodeCount do
 		renderer = MeshRenderer()
 		renderer:setModel(gridModel)
 
@@ -84,7 +87,6 @@ function IngameState:enter(transition, args)
 
 		local gridEntity = Entity()
 		gridEntity:addComponent(renderer)
-		lineEntity:addChild(gridParent)
 
 		local worldX, worldY = nodes[i]:getWorldCenter()
 

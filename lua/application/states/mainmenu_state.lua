@@ -111,26 +111,29 @@ function MainMenuState:enter(transitionType, args)
 	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 
 
-	local cameraMoveSpeed = 10
-	cameraEntity.update = function(self, dt)
-		-- if (Input.binding("moveUp")) then
-		-- 	self:addY(-cameraMoveSpeed*dt)
-		-- end
-		--
-		-- if (Input.binding("moveDown")) then
-		-- 	self:addY(cameraMoveSpeed*dt)
-		-- end
-		--
-		-- if (Input.binding("moveLeft")) then
-		-- 	self:addX(cameraMoveSpeed*dt)
-		-- end
-		--
-		-- if (Input.binding("moveRight")) then
-		-- 	self:addX(-cameraMoveSpeed*dt)
-		-- end
-	end
+	-- local cameraMoveSpeed = 10
+	-- cameraEntity.update = function(self, dt)
+	-- 	if (Input.binding("moveUp")) then
+	-- 		self:addY(cameraMoveSpeed*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveDown")) then
+	-- 		self:addY(-cameraMoveSpeed*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveLeft")) then
+	-- 		self:addX(-cameraMoveSpeed*dt)
+	-- 	end
+	--
+	-- 	if (Input.binding("moveRight")) then
+	-- 		self:addX(cameraMoveSpeed*dt)
+	-- 	end
+	-- end
 
-	cameraEntity:setPosition(-10,-10,-10)
+	cameraEntity:setPosition(10,10,15)
+	cameraEntity:setPitch(0.5);
+	cameraEntity:setRoll(0.5);
+
 	self.camera = cameraEntity
 	-- debugEntity(cameraEntity)
 
