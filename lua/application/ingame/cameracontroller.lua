@@ -3,18 +3,22 @@ CameraController = class(CameraController, Entity, function(self)
 
 
 	local basePlate = Entity()
-	basePlate:setPitch(0.5);
-	basePlate:setRoll(0.5);
+	-- basePlate:setPitch(0.5);
+	-- basePlate:setRoll(0.5);
+	basePlate:setYaw(0.5);
+
 
 
 	self:addChild(basePlate);
 	self._basePlate = basePlate;
+	self:setPosition(10,10,0);
 
-	-- local camera = Camera()
-	-- camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
-	-- camera:makeActive()
-	-- camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
-	-- basePlate:addComponent(camera);
+	basePlate:setPosition(0,0,10);
+	local camera = Camera()
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
+	basePlate:addComponent(camera);
 	do
 		local debugRenderer = DebugRenderer()
 		basePlate:addComponent(debugRenderer)
@@ -46,9 +50,6 @@ CameraController = class(CameraController, Entity, function(self)
 		debugRenderer:addLine(-1,0,0, 0,1,0, 1,1,1)
 	end
 
-	self:setPosition(10,10,0);
-
-	basePlate:setPosition(0,0,5);
 
 
 	debugEntity(self, "CameraFocus")
