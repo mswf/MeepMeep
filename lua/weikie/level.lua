@@ -1,6 +1,7 @@
 --require "lua/LuaXML/LuaXml"
 --require "lua/LuaXML/test"
 require "lua/weikie/floor"
+require "lua/base/base"
 
 TILE_WIDTH = 1
 TILE_LENGTH = 1
@@ -16,29 +17,35 @@ Level = class(Level, function(self)
 end)
 
 function Level.loadLevelFromFile(fileName)
-	Log.waka(fileName)
-	Log.waka("Loading file: " .. fileName)
+	--local path = "lua/"
+	Log.waka("Loading file: " .. Engine.system.contentPath .. "/" .. fileName)
 
 	--require
 	local SLAXML = require "lua/SLAXML-master/slaxdom"
 	--read the file
-	local path = "lua/"
-	local myxml = io.open(Engine.system.contentPath .. "/" .. path .. fileName):read('*all')
+	local myxml = io.open(Engine.system.contentPath .. "/" .. fileName):read('*all')
 	--do stuff to read xml
 	local doc = SLAXML:dom(myxml)
+	local floorIndex = 1
+	local objectsIndex = 2
 
-
-	Log.waka(doc)--[1].attr["src"])
+	--Log.waka(doc)--[1].attr["src"])
+	Log.waka(#doc.root.el .. " Tiles")
 	for i=1, #doc.root.el do
 		--doc.root.el = tile
-		Log.waka(#doc .. " Tiles")
-		local x = doc.root.el[i].attr["x"]
-		local y = doc.root.el[i].attr["y"]
-		local z = doc.root.el[i].attr["z"]
-		local value = doc.root.el["floor"].attr["value"]
-		if doc.root.el["objects"] ~= nil then
-			for n=1, #doc.root.el["objects"].el do
-
+		local tile = doc.root.el[i]
+		local x = tile.attr["x"]
+		local y = tile.attr["y"]
+		local z = tile.attr["z"]
+		local value = tile.el[floorIndex].attr["value"]
+		Log.waka("tile: x:" .. x .. " y:" .. y .. " z:" .. z)
+		Log.waka("floor value: " .. value)
+		local objects = tile.el[objectsIndex]
+		if objects ~= nil then
+			Log.waka("notnil")
+			for n=1, #objects.el do
+				local objVal = objects.el[n].attr["value"]
+				Log.waka("Object value: " .. objVal)
 			end
 		end
 	end

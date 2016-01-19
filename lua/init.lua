@@ -40,7 +40,7 @@ end
 
 function Game.xmlStuff()
 	fileName = "testwk.xml"
-	--Level.loadLevelFromFile(fileName)
+	Level.loadLevelFromFile(fileName)
 
 	----require
 	--local SLAXML = require "lua/SLAXML-master/slaxdom"
