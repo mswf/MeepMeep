@@ -9,6 +9,10 @@ uniform vec3 lightPos;
 uniform float time;
 uniform vec4 diffuseColor;
 
+uniform vec4 lightColour;
+uniform vec3 lightDirection;
+uniform float lightIntensity;
+
 subroutine vec3 myMode();
 subroutine vec3 shadeModelType( vec3 position, vec3 normal);
 
@@ -117,10 +121,10 @@ void main()
 
 	vec4 specular = vec4( vec3(specularCoefficient), 1 );
 
-	vec3 light = normalize(vec3(1.0,0.5,1.0));
-	float lightIntensity = dot(n, light);
+	vec3 light = normalize(lightDirection);
+	float intensity = dot(n, light);
 
-	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(lightIntensity), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(intensity * intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 
 //	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(dot(n, light), dot(n, light), dot(n, light), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS

@@ -7,6 +7,17 @@ Tweener = class(Tweener, function(self)
 	self._pausedTweens = {}
 end)
 
+function Tweener:__call(...)
+	return self:new(...)
+end
+
+function Tweener:new(duration, subject, target)
+	local newTween = KikitoTween.new(duration, subject, target)
+	table.insert(self._activeTweens, newTween)
+
+	return newTween
+end
+
 function Tweener:update(dt)
 	local activeTweens = self._activeTweens
 
@@ -23,13 +34,6 @@ function Tweener:update(dt)
 	for i=#toRemove, 1,-1  do
 		table.remove(self._activeTweens, toRemove[i])
 	end
-end
-
-function Tweener:new(duration, subject, target)
-	local newTween = KikitoTween.new(duration, subject, target)
-	table.insert(self._activeTweens, newTween)
-
-	return newTween
 end
 
 function Tweener:removeActiveTween(tweenToRemove)

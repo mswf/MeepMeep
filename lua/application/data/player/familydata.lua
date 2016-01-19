@@ -4,9 +4,10 @@ require "lua/application/data/player/familymemberdata"
 FamilyData = class(FamilyData, function(self, serializedData)
 	serializedData = serializedData or {}
 
-	self.position = serializedData.position or "mainCaravan"
+	self._position = serializedData.position or "mainCaravan"
 
 	self.experience = serializedData.experience or {}
+	self.familyName = serializedData.familyName or "FAMILY NAME"
 
 	-- motivation
 	-- heritage
@@ -15,17 +16,19 @@ FamilyData = class(FamilyData, function(self, serializedData)
 	self.members = {}
 
 	for i=1, #serializedData.members do
-		self.members[i] = FamilyMemberData(serializedData.member[i])
+		self.members[i] = FamilyMemberData(serializedData.members[i])
 	end
 
 	self:_recalculateEffects()
 	-- self._effects = nil
 end)
 
+FamilyData.IS_IN_MAIN_CARAVAN = "mainCaravan"
+
 function FamilyData:serialize()
 	local serializedData = {}
 
-	serializedData.position = self.position
+	serializedData.position = self._position
 
 	serializedData.experience = self.experience
 	serializedData.traits = self.traits
@@ -60,6 +63,26 @@ function FamilyData:removeMember(member)
 			table.remove(members, i)
 			break
 		end
+	end
+end
+
+function FamilyData:isInMainCaravan()
+	return (self._position == self.IS_IN_MAIN_CARAVAN)
+end
+
+function FamilyData:getPosition()
+	if (self._position == self.IS_IN_MAIN_CARAVAN) then
+		return GlobalData.playerData.playerCaravan:getPosition()
+	else
+		return self._position[1], self._position[2], self._position[3]
+	end
+end
+
+function FamilyData:setPosition(gridX, gridY, gridZ)
+	if (gridX == self.IS_IN_MAIN_CARAVAN) then
+		self._position = self.IS_IN_MAIN_CARAVAN
+	else
+		self._position = {gridX, gridY, gridZ}
 	end
 end
 

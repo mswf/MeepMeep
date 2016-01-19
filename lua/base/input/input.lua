@@ -15,6 +15,32 @@ Input.InputStates.default = {
 	}
 }
 
+
+function Input.update()
+	for i=1,3 do
+		if (Input.mouseDown(i)) then
+			Input._mouse[i] = true
+		end
+		if (Input.mouseUp(i)) then
+			Input._mouse[i] = false
+		end
+	end
+
+	if Input.keyDown(KeyCode.F2) or Input.keyDown(KeyCode.ESCAPE) then
+		Engine.clearConsole()
+	end
+end
+
+function Input.mouse(mouseButton)
+	return Input._mouse[mouseButton]
+end
+
+Input._mouse = {
+	false,
+	false,
+	false
+}
+
 function Input._getCurrentInputState()
 	return Input.InputStates.default
 end

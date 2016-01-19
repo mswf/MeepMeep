@@ -14,6 +14,8 @@ AssetManager = class(AssetManager, function(self)
 
 	self._importedTextures = {}
 	self._importedModels = {}
+
+	self.broadcaster = Broadcaster()
 end)
 
 function AssetManager:importShader(path, shaderType)
@@ -47,7 +49,7 @@ end
 
 function AssetManager:importModel(path, scale)
 	if (not self._importedModels[path]) then
-		if (Engine.importTexture(path)) then
+		if (Engine.importModel(path)) then
 			self._importedModels[path] = {
 				scale = scale
 				-- TODO: debug information also?
@@ -60,21 +62,81 @@ function AssetManager:importModel(path, scale)
 	end
 end
 
+function AssetManager:onFileChanged(fullPath)
+	local path = fullPath
+	local type = nil
 
-function AssetManager:reloadShader(path)
-	if (self._importedShaders[path]) then
-		Log.error("[AssetLoader] TODO: reload asset")
+	do
+		local stringLength = string.len(path)
+
+		dotPosition  = string.find(path, "%.")
+
+		type = string.sub(path, dotPosition+1)
+		path = string.sub(path, 1, dotPosition-1)
+
+		-- Windows path fixing step
+		path = string.gsub(path, "\\", "/")
+
+		-- Mac returns the full filepath, this step strips away the first part
+		-- You're now left with only the reletive path
+		local projectStart, projectEnd = string.find(path, "MeepMeep/")
+		if (not projectStart) then
+			projectStart, projectEnd = string.find(path, "HonkHonk/")
+		end
+
+		if (projectStart) then
+			path = string.sub(path, projectEnd + 1)
+		end
+	end
+
+	local isSucces = false
+
+	if (type == "lua") then
+		if (package.loaded[path]) then
+			Log.warning("Reloaded lua file: " .. tostring(path))
+			package.loaded[path] = nil
+			require(path)
+
+			class:__hotReloadClasses()
+
+			isSucces = true
+		else
+			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
+			isSucces = false
+		end
+	elseif (type == "glsl") then
+		self:reloadShader(path, type)
+	elseif (type == "obj") then
+		self:reloadModel(path, type)
+	elseif (type == "png" or type == "jpg" or type == "jpeg") then
+		self:reloadTexture(path, type)
+	else
+		isSucces = false
+	end
+
+	self.broadcaster:broadcast(path, {path = path, type = type, reloaded = isSucces})
+
+	return isSucces
+end
+
+function AssetManager:reloadShader(path, type)
+	if (Engine.isShaderLoaded(path .. "." .. type)) then
+		Log.warning("Reloaded shader: " .. tostring(path) .. ", extension: " .. tostring(type))
+		Engine.reloadShader(path .. "." .. type)
 	end
 end
 
-function AssetManager:reloadTexture(path)
-	if (self._importedTextures[path]) then
-		Log.error("[AssetLoader] TODO: reload asset")
+function AssetManager:reloadTexture(path, type)
+	if (Engine.isTextureLoaded(path .. "." .. type)) then
+		Log.warning("Reloaded texture: " .. tostring(path) .. ", extension: " .. tostring(type))
+		Engine.reloadTexture(path .. "." .. type)
 	end
 end
 
-function AssetManager:reloadModel(path)
-	if (self._importedModels[path]) then
-		Log.error("[AssetLoader] TODO: reload asset")
+function AssetManager:reloadModel(path, type)
+	if (Engine.isModelLoaded(path .. "." .. type)) then
+		Log.warning("Reloaded model: " .. tostring(path) .. ", extension: " .. tostring(type))
+		-- Engine.reloadModel(path .. "." .. type)
+		Log.error("Engine.reloadModel not implemented yet!")
 	end
 end

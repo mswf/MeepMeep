@@ -4,8 +4,6 @@ MainMenuUI = class(MainMenuUI, UIBase)
 
 -- initialize and create UI elements here
 function MainMenuUI:_createUI()
-	Log.steb("creating main menu")
-
 	local window = self.window
 
 	window.title = "Main Menu"

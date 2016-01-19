@@ -5,6 +5,7 @@ if (Engine.ui.__UIInit == nil) then
 end
 
 UIBase = class(UIBase, function(self, uiManager, params)
+	uiManager = uiManager or {}
 	if (not uiManager._activeWindows) then
 		params = uiManager
 		uiManager = Log.warning("Creating UI " .. tostring(self) .. " as a global UI") or GlobalUIManager
@@ -23,6 +24,9 @@ UIBase = class(UIBase, function(self, uiManager, params)
 
 	if (self.update ~= UIBase.update) then
 		uiManager:registerUpdate(self.window)
+	end
+	if (self.onWindowResized ~= UIBase.onWindowResized) then
+		self._uiManager:registerResize(self.window)
 	end
 
 	local params = self._params
@@ -59,6 +63,9 @@ function UIBase:__onReload()
 	if (self.update ~= UIBase.update) then
 		self._uiManager:registerUpdate(self.window)
 	end
+	if (self.onWindowResized ~= UIBase.onWindowResized) then
+		self._uiManager:registerResize(self.window)
+	end
 
 	self:_createUI()
 	self:_register()
@@ -77,6 +84,10 @@ function UIBase:_unregister()
 end
 
 function UIBase:update(dt)
+
+end
+
+function UIBase:onWindowResized(newWidht, newHeight)
 
 end
 

@@ -5,21 +5,31 @@ EntityDebugUI = class(EntityDebugUI, UIBase)
 function EntityDebugUI:_createUI()
 	self.currentEntity = self._params.entity
 
+	local anchorToBottom = self._params.anchorToBottom
+
 	local entity = self._params.entity
 	local window = self.window
 
 	-- window.movable = false
 
-	window.title = "Inspector: " .. tostring(entity)
+	if (self._params.windowTitle) then
+		window.title = "Inspector: " .. tostring(self._params.windowTitle)
+	else
+		window.title = "Inspector: " .. tostring(entity)
+	end
 
-	window.height = Engine.ui.getScreenHeight()*.66
+	window.height = 300
 	window.width = 280
 
-	window.x = Engine.ui.getScreenWidth() - window.width
+	window.x = Engine.window.getWidth() - window.width
+
+	if (anchorToBottom) then
+		window.y = Engine.window.getHeight() - window.height
+	end
 
 	window.onResize = function(self)
 		self.width = 280
-		local screenHeight = Engine.ui.getScreenHeight()
+		local screenHeight = Engine.window.getHeight()
 		if (self.height> screenHeight) then
 			self.height = screenHeight
 		end
@@ -27,13 +37,13 @@ function EntityDebugUI:_createUI()
 
 	window.onMove = function(self)
 		local y = self.y
-		local screenHeight = Engine.ui.getScreenHeight()
+		local screenHeight = Engine.window.getHeight()
 		if (y < 0) then
 			self.y = 0
 		elseif (y > screenHeight - self.height ) then
 			self.y = screenHeight- self.height
 		end
-		self.x = Engine.ui.getScreenWidth() - self.width
+		self.x = Engine.window.getWidth() - self.width
 	end
 
 
@@ -48,27 +58,30 @@ function EntityDebugUI:_createUI()
 		transformTree.opened = true
 
 		local positionTree = transformTree:addTree("Position")
-		local xPos = positionTree:addSlider("x")
+		local xPos = positionTree:addDrag("x")
 		xPos.format = "%.3f"
+		xPos.speed = 0.1
 		xPos.value = entity:getX()
-		xPos.minValue = entity:getX() - DEVIATION
-		xPos.maxValue = entity:getX() + DEVIATION
+		xPos.minValue = entity:getX() + DEVIATION
+		xPos.maxValue = entity:getX() - DEVIATION
 		xPos.onChange = function(slider) entity:setX(slider.value) end
 		self.xPos = xPos
 
-		local yPos = positionTree:addSlider("y")
+		local yPos = positionTree:addDrag("y")
 		yPos.format = "%.3f"
+		yPos.speed = 0.1
 		yPos.value = entity:getY()
-		yPos.minValue = entity:getY() - DEVIATION
-		yPos.maxValue = entity:getY() + DEVIATION
+		yPos.minValue = entity:getY() + DEVIATION
+		yPos.maxValue = entity:getY() - DEVIATION
 		yPos.onChange = function(slider) entity:setY(slider.value) end
 		self.yPos = yPos
 
-		local zPos = positionTree:addSlider("z")
+		local zPos = positionTree:addDrag("z")
 		zPos.format = "%.3f"
+		zPos.speed = 0.1
 		zPos.value = entity:getZ()
-		zPos.minValue = entity:getZ() - DEVIATION
-		zPos.maxValue = entity:getZ() + DEVIATION
+		zPos.minValue = entity:getZ() + DEVIATION
+		zPos.maxValue = entity:getZ() - DEVIATION
 		zPos.onChange = function(slider) entity:setZ(slider.value) end
 		self.zPos = zPos
 
@@ -76,33 +89,36 @@ function EntityDebugUI:_createUI()
 		local ROT_MIN = 0
 		local ROT_MAX = 1
 		local rotationTree = transformTree:addTree("Rotation")
-		local xRot = rotationTree:addSlider("pitch")
+		local xRot = rotationTree:addDrag("pitch")
 		xRot.format = "%.3f"
+		xRot.speed = 0.004
 		xRot.value = entity:getPitch()
-		xRot.minValue = ROT_MIN
-		xRot.maxValue = ROT_MAX
+		xRot.minValue = ROT_MAX
+		xRot.maxValue = ROT_MIN
 		xRot.onChange = function(slider)
 			entity:setPitch(slider.value)
 			-- slider.value = entity:getPitch()
 		end
 		self.xRot = xRot
 
-		local yRot = rotationTree:addSlider("yaw")
+		local yRot = rotationTree:addDrag("yaw")
 		yRot.format = "%.3f"
+		yRot.speed = 0.004
 		yRot.value = entity:getYaw()
-		yRot.minValue = ROT_MIN
-		yRot.maxValue = ROT_MAX
+		yRot.minValue = ROT_MAX
+		yRot.maxValue = ROT_MIN
 		yRot.onChange = function(slider)
 			entity:setYaw(slider.value)
 			-- slider.value = entity:getRoll()
 		end
 		self.yRot = yRot
 
-		local zRot = rotationTree:addSlider("roll")
-		zRot.value = entity:getRoll()
+		local zRot = rotationTree:addDrag("roll")
 		zRot.format = "%.3f"
-		zRot.minValue = ROT_MIN
-		zRot.maxValue = ROT_MAX
+		zRot.speed = 0.004
+		zRot.value = entity:getRoll()
+		zRot.minValue = ROT_MAX
+		zRot.maxValue = ROT_MIN
 		zRot.onChange = function(slider)
 			entity:setRoll(slider.value)
 			-- slider.value = entity:getYaw()
@@ -169,6 +185,20 @@ function EntityDebugUI:_createUI()
 		local cameraText = cameraTree:addText("Entity has a camera component.")
 	end
 
+	if (entity.node) then
+		local nodeTree = window:addTree("Node Component")
+
+		local unitsTree = nodeTree:addTree("Units:")
+		unitsTree.collapsed = false
+
+		local units = entity.node._units
+		local unitsCount = #units
+
+		for i=1, unitsCount do
+			unitsTree:addText("- " .. units[i].tooltipText)
+		end
+	end
+
 	-- entity.debugRenderer
 end
 
@@ -189,4 +219,8 @@ function EntityDebugUI:update(dt)
 		self.zScale.value	 = entity:getScaleZ()
 
 	end
+end
+
+function EntityDebugUI:onWindowResized()
+	self.window:onMove()
 end

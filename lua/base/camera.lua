@@ -1,6 +1,8 @@
 Camera = class(Camera, Engine.baseCamera, function(self)
 	-- self:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 	-- self:setProjectionType(self.ProjectionType.ORTHOGRAPHIC)
+	Game.windowResizedSignal:add(self.onWindowResized, self)
+
 end)
 
 function Camera:__onReload()
@@ -21,4 +23,8 @@ function Camera:setProjectionType(projectionType)
 	else
 		Log.error("[Camera] invalid projectionType: " .. tostring(projectionType))
 	end
+end
+
+function Camera:onWindowResized(newWidth, newHeight)
+	self:setAspectRatio(newWidth/newHeight)
 end

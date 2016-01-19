@@ -3,27 +3,20 @@ require "lua/application/graph/node"
 
 CairoPentagon = class(CairoPentagon, Node, function(self, tree)
 
-	self._vertices = nil
-	self._edges = nil
 
-	self._tree = tree
-	self.neighbours = {}
-	self.hasNeighbour = {}
-
-	tree:addNode(self)
-
-	self._RANDCOLOR = {}
-	self._RANDCOLOR[1] = math.random()*.5
-	self._RANDCOLOR[2] = math.random()*.5
-	self._RANDCOLOR[3] = math.random()*.5
-	self._RANDCOLOR[4] = 1
-
-	self._RANDCOLORLINE = {}
-	self._RANDCOLORLINE[1] = math.random()*.5+.5
-	self._RANDCOLORLINE[2] = math.random()*.5+.5
-	self._RANDCOLORLINE[3] = math.random()*.5+.5
-	self._RANDCOLORLINE[4] = 1
 end)
+
+function CairoPentagon:getTooltip()
+	local gridX, gridY, gridZ = self:getGridPosition()
+
+	local tooltipText = tostring(self).. "\ngridX: " .. gridX .. "\ngridY: " .. gridY .. "\ngridZ: " .. gridZ
+
+	for i=1, #self._units do
+		tooltipText = tooltipText .. "\n- " .. self._units[i].tooltipText
+	end
+
+	return tooltipText
+end
 
 function CairoPentagon:setWorldCenter()
 	local scale = self._tree.size

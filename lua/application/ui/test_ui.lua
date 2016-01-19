@@ -20,11 +20,11 @@ function TestUI:_createUI()
 	testWindow.expanded = false
 
 	testWindow.onCollapse = function(window)
-		Log.bobn("collapsed")
+		-- Log.bobn("collapsed")
 	end
 
 	testWindow.onExpand = function(window)
-		Log.bobn("expanded")
+		-- Log.bobn("expanded")
 	end
 
 	self.globalLabel = testWindow:addText("pls")
@@ -32,7 +32,7 @@ function TestUI:_createUI()
 	local closeButton = testWindow:addButton("Start Game" )
 
 	closeButton.onPress =function()
-		Log.bobn("pls")
+		-- Log.bobn("pls")
 
 		testWindow:close()
 

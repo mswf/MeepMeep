@@ -36,9 +36,30 @@ function ApplicationData:getWorldData ()
 	end
 end
 
+local DEBUG_NEW_GAME_DATA = {
+	families = {
+		{
+			familyName = "Stay At Caravan Family",
+			members = {
+				{age=55},
+				{age=55},
+				{age=55}
+			}
+		},
+		{
+			familyName = "Wilderness Family",
+			position = {2,2,1},
+			members = {
+				{age=22},
+				{age=22}
+			}
+		}
+	}
+}
+
 function ApplicationData:createGameNew()
 
-	self.playerData = PlayerData()
+	self.playerData = PlayerData(DEBUG_NEW_GAME_DATA)
 	self.worldData = WorldData()
 
 	self._status = ApplicationData_Status.DataLoaded

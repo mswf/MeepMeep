@@ -23,8 +23,8 @@ require "lua/weikie/level"
 --Log.steb(Carbon.Support:Report())
 
 --hardcoded tobe engine functions:
-Engine.ui.getScreenWidth = function() return 1280 end
-Engine.ui.getScreenHeight = function() return 720 end
+Engine.ui.getScreenWidth = Engine.window.getWidth
+Engine.ui.getScreenHeight = Engine.window.getHeight
 -- Engine.ui.hasFocus bool
 
 Game = Game or {}
@@ -34,12 +34,13 @@ if (love) then
 end
 
 function Game.crash()
+	local noTable
 	noTable["yes"] = 500
 end
 
 function Game.xmlStuff()
 	fileName = "testwk.xml"
-	Level.loadLevelFromFile(fileName)
+	--Level.loadLevelFromFile(fileName)
 
 	----require
 	--local SLAXML = require "lua/SLAXML-master/slaxdom"
@@ -54,6 +55,7 @@ function Game.xmlStuff()
 end
 
 function Game.main()
+	-- profiler.start("F")
 	GlobalUIManager = UIManager()
 
 	GlobalData = ApplicationData()
@@ -119,7 +121,7 @@ function Game:createCamera()
 end
 
 function Game.update(dt)
-	-- dt = dt / 1000
+	Input.update()
 
 	GlobalStateManager:update(dt)
 
@@ -130,68 +132,60 @@ function Game.onShutdown()
 	return true
 end
 
-function Game.onFocusLose()
+function Game.onMouseEntered()
+	-- Log.steb("Mouse entered")
+
+	Input.isMouseInWindow = true
 end
 
-function Game.onFocusGain()
+function Game.onMouseLeft()
+	Input.isMouseInWindow = false
+	-- Log.steb("Mouse left")
 end
 
-function Game.onResizeWindow(newWidth, newHeight)
+function Game.onMouseGained()
+
+	-- Log.steb("Mouse gained")
+end
+
+function Game.onMouseLost()
+	-- Log.steb("Mouse lost")
+end
+
+
+function Game.onWindowResized(newWidth, newHeight)
+	-- Log.bobn("resized to "..newWidth.."x"..newHeight)
+	Game.windowResizedSignal(newWidth, newHeight)
+end
+
+Game.windowResizedSignal = Game.windowResizedSignal or Signal()
+
+function Game.onFocusLost()
+	-- Log.steb("Focus lost")
+end
+
+function Game.onFocusGained()
+	-- Log.steb("Focus gained")
 
 end
 
-Debug_FileChangedBroadcaster = Debug_FileChangedBroadcaster or Broadcaster()
+function Game.onWindowMinimized()
+end
+
+function Game.onWindowMaximized()
+end
+function Game.onWindowRestored()
+end
+function Game.onWindowShown()
+end
+function Game.onWindowHidden()
+end
+
+Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
-	local type = nil
-
-	do
-		local stringLength = string.len(path)
-
-		dotPosition  = string.find(path, "%.")
-
-		type = string.sub(path, dotPosition+1)
-		path = string.sub(path, 1, dotPosition-1)
-
-		-- Windows path fixing step
-		path = string.gsub(path, "\\", "/")
-
-		-- Mac returns the full filepath, this step strips away the first part
-		-- You're now left with only the reletive path
-		local projectStart, projectEnd = string.find(path, "MeepMeep/")
-		if (not projectStart) then
-			projectStart, projectEnd = string.find(path, "HonkHonk/")
-		end
-
-		if (projectStart) then
-			path = string.sub(path, projectEnd + 1)
-		end
-	end
-
-	Log.warning("File Changed: " .. tostring(path) .. ", of type: " .. tostring(type))
-
-	local isSucces = false
-
-	if (type == "lua") then
-		if (package.loaded[path]) then
-			Log.warning("Reloaded lua file: " .. tostring(path))
-			package.loaded[path] = nil
-			require(path)
-
-			class:__hotReloadClasses()
-
-			isSucces = true
-		else
-			-- Log.warning("Package: ".. tostring(path) .. " was not loaded")
-			isSucces = false
-		end
-	else
-		isSucces = false
-	end
-
-	Debug_FileChangedBroadcaster:broadcast(path, {path = path, type = type})
-
-	return isSucces
+	Log.warning("[FileChanged] " .. path)
+	return Game.assetManager:onFileChanged(path)
 end
 
 function Game.game()
