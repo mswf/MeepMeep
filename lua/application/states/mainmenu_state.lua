@@ -130,7 +130,7 @@ function MainMenuState:enter(transitionType, args)
 	-- 	end
 	-- end
 
-	cameraEntity:setPosition(10,10,15)
+	cameraEntity:setPosition(10,10,20)
 	cameraEntity:setPitch(0.5);
 	cameraEntity:setRoll(0.5);
 

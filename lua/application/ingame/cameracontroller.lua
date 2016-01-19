@@ -63,6 +63,34 @@ function CameraController:__onReload()
 
 end
 
+local cast_ray = Engine.raycaster.castRay
+
+function CameraController:screenToWorldPosition(windowX, windowY)
+	local dirX, dirY, dirZ = self._basePlate.camera:screenToWorldDirection(windowX, windowY)
+
+	local camWorldX, camWorldY, camWorldZ = self._basePlate:getPosition()
+
+	local MAGIC_DISTANCE_VAR = 0
+
+	local worldX, worldY, worldZ = cast_ray(camWorldX, camWorldY, camWorldZ , dirX, dirY, dirZ, 0,0,1, MAGIC_DISTANCE_VAR)
+	-- local worldX, worldY, worldZ = cast_ray(camWorldX, camWorldY, camWorldZ , dirX, dirY, dirZ, 0,0,1, 10)
+
+--[[
+	local debugRenderer = DebugDraw
+	debugRenderer:clear()
+
+	debugRenderer:addLine(camWorldX, camWorldY, camWorldZ , worldX, worldY, worldZ, 1,1,1)
+
+	local C_OFFSET = 1
+	debugRenderer:addLine(worldX+C_OFFSET, worldY, worldZ , worldX, worldY, worldZ, 0,0,0)
+	debugRenderer:addLine(worldX-C_OFFSET, worldY, worldZ , worldX, worldY, worldZ, 0,0,0)
+	debugRenderer:addLine(worldX, worldY+C_OFFSET, worldZ , worldX, worldY, worldZ, 0,1,0)
+	debugRenderer:addLine(worldX, worldY-C_OFFSET, worldZ , worldX, worldY, worldZ, 0,0,0)
+--]]
+return worldX, worldY, worldZ
+
+end
+
 local MAX_MOUSE_PAN_DELAY = 0.5
 
 local cameraMoveSpeed = 30

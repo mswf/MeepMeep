@@ -98,10 +98,10 @@ function CairoGraph:addToGrid(cairoPentagon,x,y,z)
 end
 
 function CairoGraph:getNodeByWorldCoord(worldX, worldY)
-	local gridPosX = worldX/self.size*.5/40
-	local gridPosY = worldY/self.size*.5/40
+	local gridPosX = worldX/ (self.size*2)
+	local gridPosY = worldY/ (self.size*2)
 
-	local gridX = math.floor(gridPosX) +1 - 3
+	local gridX = math.floor(gridPosX) +1
 	local gridY = math.floor(gridPosY) +1
 
 	if  (gridX < 1 or gridX > self._width

@@ -24,10 +24,7 @@ function IngameInput:update(dt)
 		end
 	end
 
-	local mouseX, mouseY = Input.getMousePosition()
-
-	local worldX = mouseX
-	local worldY = Engine.ui.getScreenHeight() - mouseY
+	local worldX, worldY, worldZ = self._cameraController:screenToWorldPosition(Input.getMousePosition())
 
 	local nodeUnderMouse = self._graph:getNodeByWorldCoord(worldX, worldY)
 	if (Engine.ui.isMouseHoveringOverAnyWindow) then
