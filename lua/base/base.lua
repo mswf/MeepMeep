@@ -50,3 +50,5 @@ require "lua/base/utils/io"
 
 
 require "lua/base/assets/assetmanager"
+
+require "lua/base/modding/sandbox"

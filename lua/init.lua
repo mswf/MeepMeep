@@ -130,7 +130,9 @@ function Game.onDropFile(path)
 		relativePath = string.sub(relativePath, 1, dotPosition-1)
 
 		if (type == "lua") then
-			require(relativePath)
+			Sandbox.run(loadfile(path))
+			-- dofile(path)
+			-- require(relativePath)
 		end
 	end
 

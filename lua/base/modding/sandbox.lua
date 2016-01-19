@@ -25,6 +25,9 @@ local env = {
 	xpcall = xpcall,
 
 	print = Log.steb,
+	Log = {
+		steb = Log.steb,
+	},
 	string = {
 		byte = string.byte,
 		char = string.char,
@@ -84,23 +87,33 @@ local env = {
 	},
 	os = {
 		clock = os.clock,
-		time = os.time
+		time = os.time,
 
-	}
+	},
+	-- hax
+	-- require = require
 }
 env["_G"] = env
 
-local envmeta = { __index={}, __newindex=function() end }
+-- local envmeta = { __index = _G }
+local envmeta = { __index= _G, __newindex=function(tbl, index) Log.steb(index) end }
 setmetatable(env, envmeta)
 
-function run(code)
-	local f = loadstring(code)
-	setfenv(f, env)
-	pcall(f)
+Sandbox = Sandbox or {}
+
+Sandbox._spaces = Sandbox._spaces or {}
+
+function Sandbox.run(code, spaceCode)
+	setfenv(code, env)
+	local status, error = pcall(code)
+	if (not status) then
+		Log.error("Failed while running mod: " .. tostring(spaceCode))
+		Log.error(error)
+	end
 end
 
-run([[
-	local x = “Hello, World!”
-	print(x)
-	local y = string.len(x)
-]])
+-- run([[
+-- 	local x = “Hello, World!”
+-- 	print(x)
+-- 	local y = string.len(x)
+-- ]])
