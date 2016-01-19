@@ -38,16 +38,19 @@ function Game.crash()
 end
 
 function Game.xmlStuff()
-	--require
-	local SLAXML = require "lua/SLAXML-master/slaxdom"
-	--read the file
-	local file = "testwk.xml"
-	local myxml = io.open(Engine.system.contentPath .. "/" .. file):read('*all')
-	--do stuff to read xml
-	local doc = SLAXML:dom(myxml)
+	fileName = "testwk.xml"
+	Level.loadLevelFromFile(fileName)
 
-	Log.waka("Xml Something: ")
-	Log.waka(doc.root.el[1].attr["src"])
+	----require
+	--local SLAXML = require "lua/SLAXML-master/slaxdom"
+	----read the file
+	--local file = "testwk.xml"
+	--local myxml = io.open(Engine.system.contentPath .. "/" .. file):read('*all')
+	----do stuff to read xml
+	--local doc = SLAXML:dom(myxml)
+--
+	--Log.waka("Xml Something: ")
+	--Log.waka(doc.root.el[1].attr["src"])
 end
 
 function Game.main()
@@ -67,7 +70,7 @@ function Game.main()
 	CAMERA_ENTITY = Entity()
 	local camera = Camera()
 	CAMERA_ENTITY:addComponent(camera);
-	CAMERA_ENTITY:setPosition(0,0,0)
+	CAMERA_ENTITY:setPosition(0,2,-3)
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
@@ -219,7 +222,7 @@ function Game:hackyCameraMovement(dt)
 	end
 
 	if Input.key(KeyCode.d) == true then
-		CAMERA_ENTITY:addX(speed)
+		CAMERA_ENTITY:addX(-speed)
 	end
 
 	if Input.key(KeyCode.s) == true then
@@ -227,7 +230,7 @@ function Game:hackyCameraMovement(dt)
 	end
 
 	if Input.key(KeyCode.a) == true then
-		CAMERA_ENTITY:addX(-speed)
+		CAMERA_ENTITY:addX(speed)
 	end
 
 	if Input.key(KeyCode.q) == true then

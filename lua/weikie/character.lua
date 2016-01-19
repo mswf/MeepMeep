@@ -55,7 +55,7 @@ function Character:updateVelocity(deltaTime)
 	if self.left == true then
 		horizontalSpeed = horizontalSpeed - speed
 	end
-	if (self.right == true) then
+	if self.right == true then
 		horizontalSpeed = horizontalSpeed + speed
 	end
 	if self.up == true then

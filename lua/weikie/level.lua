@@ -15,6 +15,35 @@ Level = class(Level, function(self)
 	self:_loadFloor()
 end)
 
+function Level.loadLevelFromFile(fileName)
+	Log.waka(fileName)
+	Log.waka("Loading file: " .. fileName)
+
+	--require
+	local SLAXML = require "lua/SLAXML-master/slaxdom"
+	--read the file
+	local path = "lua/"
+	local myxml = io.open(Engine.system.contentPath .. "/" .. path .. fileName):read('*all')
+	--do stuff to read xml
+	local doc = SLAXML:dom(myxml)
+
+
+	Log.waka(doc)--[1].attr["src"])
+	for i=1, #doc.root.el do
+		--doc.root.el = tile
+		Log.waka(#doc .. " Tiles")
+		local x = doc.root.el[i].attr["x"]
+		local y = doc.root.el[i].attr["y"]
+		local z = doc.root.el[i].attr["z"]
+		local value = doc.root.el["floor"].attr["value"]
+		if doc.root.el["objects"] ~= nil then
+			for n=1, #doc.root.el["objects"].el do
+
+			end
+		end
+	end
+end
+
 function Level:initLevelObjects()
 	local loopCount = 20
 	local tiles = self.floorTiles
@@ -22,7 +51,9 @@ function Level:initLevelObjects()
 		tiles[i] = {}
 		for n=1, self.height do
 			tiles[i][n] = Floor()
-			self:setFloorTile(i, n, 0)
+			tiles[i][n].setPosition(tiles[i][n], i * TILE_WIDTH, 0, (n * TILE_LENGTH))
+			--tiles[i][n].setPosition(tiles[i][n], 5, 0, 1)
+			--self:setFloorTile(i, n, 0)
 		end
 	end
 end
@@ -40,14 +71,10 @@ function Level:printTableValue(x, y)
 end
 
 function Level:setFloorTile(x, y, value)
-	--should be texture
 	local tile = self.floorTiles[x][y]
-	--tile:setPosition ?
-	tile.setPosition(tile, x * TILE_WIDTH, 0, -(y * TILE_LENGTH))
-	--tile.value = value
-
+	tile.setValue(tile, value)
 end
 
 function Level:_loadFloor()
-	self.floor = Floor()
+	--self.floor = Floor()
 end
