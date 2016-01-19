@@ -16,8 +16,13 @@ CameraController = class(CameraController, Entity, function(self)
 	basePlate:setPosition(0,0,10);
 	local camera = Camera()
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
-	camera:makeActive()
 	camera:setAspectRatio(Engine.window.getWidth()/Engine.window.getHeight())
+	camera:setFOV(28)
+	camera:setFarPlaneDistance(100)
+
+
+	camera:makeActive()
+
 	basePlate:addComponent(camera);
 	do
 		local debugRenderer = DebugRenderer()
@@ -52,10 +57,11 @@ CameraController = class(CameraController, Entity, function(self)
 
 
 
-	debugEntity(self, "CameraFocus")
-	debugEntity(basePlate, "Camera", true)
+	debugEntity(basePlate, "Camera")
+	debugEntity(self, "CameraFocus", true)
 
 	self._mousePanDelay = 0
+	self:_setZoomLevel(1)
 end)
 
 function CameraController:__onReload()
@@ -168,7 +174,56 @@ function CameraController:updateBorderPanning(dt)
 	self._mousePanDelay = m_min(m_max(mousePanDelay, 0),MAX_MOUSE_PAN_DELAY)
 end
 
+
+local ZOOM_DURATION = .5
+
 function CameraController:updateCameraZoom(dt)
+	local _, mouseWheelScroll = Input.getMouseWheelScroll();
+
+	self:_addZoomLevel(mouseWheelScroll*dt*5)
+
+--[[
+	if (Input.keyDown(KeyCode.e)) then
+		if (self._currentTween) then
+			GlobalIngameState.tweener:removeActiveTween(self._currentTween)
+			self._currentTween = nil
+		end
+
+		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION, self, {}):addOnUpdate(function(tween, dt, ratio)
+			self:_setZoomLevel(ratio)
+		end)
 
 
+	end
+	if (Input.keyDown(KeyCode.q)) then
+		if (self._currentTween) then
+			GlobalIngameState.tweener:removeActiveTween(self._currentTween)
+			self._currentTween = nil
+		end
+
+		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION, self, {}):addOnUpdate(function(tween, dt, ratio)
+			self:_setZoomLevel(1-ratio)
+		end)
+
+	end
+--]]
+end
+
+function CameraController:_addZoomLevel(deltaZoomLevel)
+	self:_setZoomLevel(self._currentZoomLevel + deltaZoomLevel)
+end
+
+local math_min, math_max, math_lerp = math.min, math.max, math.lerp
+
+function CameraController:_setZoomLevel(newZoomLevel)
+	newZoomLevel = math_min(1, math_max(0, newZoomLevel))
+
+	self._basePlate:setY(math_lerp(-5.7, 0, newZoomLevel))
+	self._basePlate:setZ(math_lerp(8, 30, newZoomLevel))
+
+
+	self._basePlate:setPitch(EasingFunctions.inSine(newZoomLevel, -.1, .1, 1))
+
+
+	self._currentZoomLevel = newZoomLevel
 end

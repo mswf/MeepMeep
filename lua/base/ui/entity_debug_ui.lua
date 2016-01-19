@@ -18,7 +18,7 @@ function EntityDebugUI:_createUI()
 		window.title = "Inspector: " .. tostring(entity)
 	end
 
-	window.height = 300
+	window.height = 360
 	window.width = 280
 
 	window.x = Engine.window.getWidth() - window.width
@@ -181,7 +181,33 @@ function EntityDebugUI:_createUI()
 	end
 
 	if (entity.camera) then
+		local camera = entity.camera
 		local cameraTree = window:addTree("Camera")
+
+		local fovSlider = cameraTree:addSlider("FoV")
+		fovSlider.value = camera:getFOV()
+		fovSlider.minValue = 0
+		fovSlider.maxValue = 180
+		fovSlider.onChange = function(slider)
+			camera:setFOV(slider.value)
+		end
+
+		local nearPlaneSlider = cameraTree:addSlider("FoV")
+		nearPlaneSlider.value = camera:getNearPlaneDistance()
+		nearPlaneSlider.minValue = 0
+		nearPlaneSlider.maxValue = 50
+		nearPlaneSlider.onChange = function(slider)
+			camera:setNearPlaneDistance(slider.value)
+		end
+
+		local farPlaneSlider = cameraTree:addSlider("FoV")
+		farPlaneSlider.value = camera:getFarPlaneDistance()
+		farPlaneSlider.minValue = 0
+		farPlaneSlider.maxValue = math.min(300, camera:getFarPlaneDistance())
+		farPlaneSlider.onChange = function(slider)
+			camera:setFarPlaneDistance(slider.value)
+		end
+
 		local cameraText = cameraTree:addText("Entity has a camera component.")
 	end
 
