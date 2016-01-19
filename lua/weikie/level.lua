@@ -2,9 +2,11 @@
 --require "lua/LuaXML/test"
 require "lua/weikie/floor"
 require "lua/base/base"
+require "lua/weikie/tiles"
 
 TILE_WIDTH = 1
 TILE_LENGTH = 1
+ENUM = Enum()
 
 Level = class(Level, function(self)
 	Log.waka("level init")
@@ -46,6 +48,8 @@ function Level.loadLevelFromFile(fileName)
 			for n=1, #objects.el do
 				local objVal = objects.el[n].attr["value"]
 				Log.waka("Object value: " .. objVal)
+				Log.waka("ROCKY" .. ENUM.floorTiles.Rock)
+
 			end
 		end
 	end
