@@ -8,9 +8,7 @@ function PresentationUI:_createUI()
 		self._isMayhem = false
 	end
 
-	local slides = self._params.slides
-
-	slides = {
+	local slides = self._params.slides or {
 		"images/slides/Presentation 16-12-2015.png",
 		"images/slides/Presentation 16-12-2015 (1).png",
 		"images/slides/Presentation 16-12-2015 (2).png",
@@ -26,7 +24,7 @@ function PresentationUI:_createUI()
 		"images/slides/Presentation 16-12-2015 (12).png",
 		"images/slides/Presentation 16-12-2015 (13).png"
 	}
-	self.specialSlides = {
+	self.specialSlides = self._params.specialSlides or {
 		-- [1] = true,
 		[11] = true
 	}
@@ -47,7 +45,11 @@ function PresentationUI:_createUI()
 	presMaterial:makeQuadShader()
 	renderer:setMaterial(presMaterial)
 
-	presEntity:setPosition(0,0,-1)
+	Engine.getActiveCamera().entity:addChild(presEntity)
+	presEntity:setPosition(0,0,1)
+	presEntity:setYaw(0.5)
+-- self._uiManager:setVisible(true)
+	-- debugEntity(presEntity)
 
 	self.entity = presEntity
 	self.material = presMaterial
@@ -119,7 +121,7 @@ end
 
 function PresentationUI:_updateMayhem(isMayhem)
 	if (isMayhem == true) then
-		self._uiManager.tweener(6, self.entity, {setZ = 2, setY = 10}):setEasing("inQuad")
+		self._uiManager.tweener(6, self.entity, {setZ = -2, setY = 10}):setEasing("inQuad")
 		-- self.entity:setPosition(0,0,10)
 
 		self._uiManager:setVisible(true)
@@ -130,7 +132,7 @@ function PresentationUI:_updateMayhem(isMayhem)
 			self:_nextSlide()
 		end
 
-		self._uiManager.tweener(2, self.entity, {setZ = -1, setY = 0}):setEasing("outBounce")
+		self._uiManager.tweener(2, self.entity, {setZ = 1, setY = 0}):setEasing("outBounce")
 
 		-- self.entity:setPosition(0,0,-1)
 

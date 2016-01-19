@@ -114,6 +114,28 @@ function Game.onFileChanged(path)
 	return Game.assetManager:onFileChanged(path)
 end
 
+local contentPath = Engine.system.contentPath
+function Game.onDropFile(path)
+	Log.warning("[DropFile] " .. path)
+	local startPath, endPath = string.find(path, contentPath)
+	if (startPath == 1) then
+		local relativePath = string.sub(path, endPath+2)
+		Log.steb("Dropped file at: " .. relativePath)
+
+		local stringLength = string.len(relativePath)
+
+		local dotPosition  = string.find(relativePath, "%.")
+
+		local type = string.sub(relativePath, dotPosition+1)
+		relativePath = string.sub(relativePath, 1, dotPosition-1)
+
+		if (type == "lua") then
+			require(relativePath)
+		end
+	end
+
+end
+
 function Game.game()
 	gameTable = {}
 	local width,height = 1600/2, 900/2
