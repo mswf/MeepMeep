@@ -63,7 +63,6 @@ function Game.main()
 	GlobalStateManager:start()
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
-	Engine.importModel("content/models/tiles/cave_floor.obj")
 	CHARACTER = Player()
 	ENEMY = Enemy()
 	LEVEL = Level()
