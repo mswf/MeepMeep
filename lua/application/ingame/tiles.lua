@@ -64,6 +64,8 @@ enumify(tileProperties, "TileProperties")
 
 local tileTypes = {
 	Water = {
+		color = rgb(35, 169, 245),
+
 		walkable = false,
 		potentialProperties = {
 			TileProperties.Cold,
@@ -72,6 +74,8 @@ local tileTypes = {
 		},
 	},
 	Grassland = {
+		color = rgb(111, 222, 122),
+
 		walkable = true,
 		potentialProperties = {
 			TileProperties.Fish,
@@ -81,6 +85,8 @@ local tileTypes = {
 		},
 	},
 	Arid = {
+		color = rgb(228, 170, 116),
+
 		walkable = true,
 		potentialProperties = {
 			TileProperties.Cold,
@@ -89,6 +95,8 @@ local tileTypes = {
 		},
 	},
 	Mountain = {
+		color = rgb(105, 84, 65),
+
 		walkable = false,
 		potentialProperties = {
 			TileProperties.Cold,

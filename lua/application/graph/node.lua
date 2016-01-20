@@ -24,23 +24,25 @@ Node = class(Node, function(self, tree)
 
 	local colourIndex = math.random(#sensibleColours)
 
-	self._RANDCOLOR = {}
-	self._RANDCOLOR[1] = sensibleColours[colourIndex][1]
-	self._RANDCOLOR[2] = sensibleColours[colourIndex][2]
-	self._RANDCOLOR[3] = sensibleColours[colourIndex][3]
-	self._RANDCOLOR[4] = 1
+	-- self._RANDCOLOR = {}
+	-- self._RANDCOLOR[1] = sensibleColours[colourIndex][1]
+	-- self._RANDCOLOR[2] = sensibleColours[colourIndex][2]
+	-- self._RANDCOLOR[3] = sensibleColours[colourIndex][3]
+	-- self._RANDCOLOR[4] = 1
+	--
+	-- self._RANDCOLORHOVER = {}
+	-- self._RANDCOLORHOVER[1] = sensibleColours[colourIndex][1]
+	-- self._RANDCOLORHOVER[2] = sensibleColours[colourIndex][2]
+	-- self._RANDCOLORHOVER[3] = sensibleColours[colourIndex][3]
+	-- self._RANDCOLORHOVER[4] = .5
+	--
+	-- self._RANDCOLORLINE = {}
+	-- self._RANDCOLORLINE[1] = math.random()*.5+.5
+	-- self._RANDCOLORLINE[2] = math.random()*.5+.5
+	-- self._RANDCOLORLINE[3] = math.random()*.5+.5
+	-- self._RANDCOLORLINE[4] = 1
 
-	self._RANDCOLORHOVER = {}
-	self._RANDCOLORHOVER[1] = sensibleColours[colourIndex][1]
-	self._RANDCOLORHOVER[2] = sensibleColours[colourIndex][2]
-	self._RANDCOLORHOVER[3] = sensibleColours[colourIndex][3]
-	self._RANDCOLORHOVER[4] = .5
-
-	self._RANDCOLORLINE = {}
-	self._RANDCOLORLINE[1] = math.random()*.5+.5
-	self._RANDCOLORLINE[2] = math.random()*.5+.5
-	self._RANDCOLORLINE[3] = math.random()*.5+.5
-	self._RANDCOLORLINE[4] = 1
+	self.tileType = TileTypes.Water;
 
 	self._units = {}
 end)
@@ -216,7 +218,7 @@ function Node:drawHovered()
 				DebugDrawTriangle:addTriangle2D(v[1],		v[2],
 																				v[i],	v[i+1],
 																				v[i+2],	v[i+3],
-																				unpack(self._RANDCOLORHOVER))
+																				0.5,0.5,0.5,0.5)
 			end
 		end
 	end

@@ -26,9 +26,9 @@ function IngameState:enter(transition, args)
 	Log.steb("we entered the ingame")
 
 	local cameraController = CameraController()
-
+	self._cameraController = cameraController
 	self._ingameUI = IngameUI(self.UIManager)
-	self._selectionUI = SelectionUI(self.UIManager)
+	-- self._selectionUI = SelectionUI(self.UIManager)
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -76,19 +76,60 @@ function IngameState:enter(transition, args)
 	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
 
 	local nodes = tree._nodes
+	local nodeCount = #nodes
+
+	Log.steb("Start Generation")
+
+	local currentNode = tree:getNodeByGridPos(math.random(14,16),math.random(14,16),math.random(1,2))
+
+	local startNode = currentNode
+
+	local T_TYPES = TileTypes
+	local T_TYPES_GRASS = T_TYPES.Grassland
+
+	for i=1, 90 do
+
+		currentNode.tileType = T_TYPES_GRASS;
+		local currentNodeNeighbours = currentNode.neighbours
+
+		local nextNode = currentNodeNeighbours[math.random(1, #currentNode.neighbours)]
+		if (nextNode.tileType == T_TYPES_GRASS) then
+			nextNode = currentNodeNeighbours[math.random(1, #currentNode.neighbours)]
+		end
+
+		local prevNode = currentNode
+
+		currentNode = nextNode
+
+
+		for i=1, #prevNode.neighbours do
+			prevNode.neighbours[i].tileType = TileTypes.Grassland;
+		end
+
+		-- currentNode = currentNode.neighbours[math.random(1, #currentNode.neighbours)]
+		-- local neighbour = currentNode.neighbours[i];
+		-- neighbour.tileType = TileTypes.Grassland;
+
+
+	end
+
+	Log.steb("Generation Done")
+
 
 	local gridParent = Entity()
 	lineEntity:addChild(gridParent)
 
-	local nodeCount = #nodes
 
 	for i=1, nodeCount do
+		if (nodes[i].tileType == TileTypes.Water) then
+			break
+		end
 		renderer = MeshRenderer()
 		renderer:setModel(gridModel)
 
-		local gridMaterial = Engine.getMaterial("CairoMaterial");
-		-- gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
-		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
+		local gridMaterial = Material();
+		gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
+		gridMaterial:setDiffuseColor(unpack(nodes[i].tileType.color))
 
 		renderer:setMaterial(gridMaterial)
 
@@ -137,8 +178,11 @@ function IngameState:enter(transition, args)
 	self.lineEntity = lineEntity
 
 	local caravanData = GlobalData.playerData.playerCaravan
-
+	caravanData:setPosition(startNode:getGridPosition())
 	self.caravan = Caravan(caravanData)
+
+	cameraController:setPosition(startNode:getWorldCenter())
+
 
 	local familiesData = GlobalData.playerData:getFamilies()
 	local families = {}
@@ -147,7 +191,6 @@ function IngameState:enter(transition, args)
 		families[i] = Family(familiesData[i])
 	end
 	self.families = families
-
 
 	-- GlobalNodes = nodes
 
@@ -160,6 +203,7 @@ function IngameState:exit(transition, args)
 
 	self.lineEntity:destroy()
 	self.caravan:destroy()
+	self._cameraController:destroy()
 
 	for i=1, #self.families do
 		self.families[i]:destroy()

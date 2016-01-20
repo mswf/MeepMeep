@@ -135,7 +135,7 @@ function MainMenuState:enter(transitionType, args)
 	cameraEntity:setRoll(0.5);
 
 	self.camera = cameraEntity
-	GlobalCamera = cameraEntity.camera
+	-- GlobalCamera = cameraEntity.camera
 	-- debugEntity(cameraEntity)
 
 	-- EntityDebugUI(self.UIManager, {entity = cameraEntity})

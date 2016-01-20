@@ -59,14 +59,17 @@ CameraController = class(CameraController, Entity, function(self)
 
 
 
-	debugEntity(basePlate, "Camera")
-	debugEntity(self, "CameraFocus", true)
+	-- debugEntity(basePlate, "Camera")
+	-- debugEntity(self, "CameraFocus", true)
 
 	self._mousePanDelay = 0
 	self:_setZoomLevel(1)
 
-	-- basePlate:setPosition(0,-7,10);
-	-- basePlate:setPitch(0.9);
+	-- basePlate:setPosition(0,-3.77,53.5);
+	-- basePlate:setPitch(-0.02);
+	-- basePlate.camera:setFOV(80);
+	--
+	-- self:setPosition(33,26)
 end)
 
 function CameraController:__onReload()

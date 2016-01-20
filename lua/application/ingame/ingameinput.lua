@@ -95,6 +95,18 @@ end
 
 function IngameInput:setSelected(newSelected)
 	if (self._currentSelectedNode == newSelected) and (newSelected ~= nil) then
+		if (newSelected.getWorldCenter) then
+			if (self._curCameraTween) then
+				self._ingameState.tweener:removeActiveTween(self._curCameraTween)
+				self._curCameraTween = nil
+			end
+
+			local targetX, targetY = newSelected:getWorldCenter()
+
+			self._curCameraTween = self._ingameState.tweener(.4, self._cameraController, {setX=targetX, setY= targetY})
+				:setEasing("inOutCubic")
+			-- self._cameraController:setPosition()
+		end
 		newSelected:onCycleSelected()
 		return
 	end
