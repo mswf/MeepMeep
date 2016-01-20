@@ -69,7 +69,10 @@ function IngameState:enter(transition, args)
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
 
+
+
 	Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
+	Engine.importTexture("objects/world/grid/caravan_D.png", true)
 
 
 

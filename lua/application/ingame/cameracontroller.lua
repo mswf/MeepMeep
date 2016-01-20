@@ -79,7 +79,7 @@ end
 function CameraController:__onReload()
 	-- local debugRenderer = self.debugRenderer
 	self._basePlate.camera:makeActive()
-
+	self:_setZoomLevel(self._currentZoomLevel)
 end
 
 function CameraController:setBounds(width, height)
@@ -195,7 +195,10 @@ function CameraController:updateBorderPanning(dt)
 end
 
 
-local ZOOM_DURATION = .5
+
+local ZOOM_DURATION_IN = .5
+local ZOOM_DURATION_OUT = .65
+
 
 function CameraController:updateCameraZoom(dt)
 	local _, mouseWheelScroll = Input.getMouseWheelScroll();
@@ -218,7 +221,7 @@ function CameraController:updateCameraZoom(dt)
 		if (curZoom == 1) then
 			return
 		end
-		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION*(1-curZoom), self, {}):addOnUpdate(function(tween, dt, ratio)
+		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION_OUT*(1-curZoom), self, {}):addOnUpdate(function(tween, dt, ratio)
 			self:_setZoomLevel(curZoom+ratio*(1-curZoom))
 		end):setEasing("outBack")
 	end
@@ -233,7 +236,7 @@ function CameraController:updateCameraZoom(dt)
 		if (curZoom == 0) then
 			return
 		end
-		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION*(curZoom), self, {}):addOnUpdate(function(tween, dt, ratio)
+		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION_IN*(curZoom), self, {}):addOnUpdate(function(tween, dt, ratio)
 			self:_setZoomLevel(curZoom-ratio*(curZoom))
 		end):setEasing("inOutCubic")
 
@@ -247,12 +250,12 @@ function CameraController:_addZoomLevel(deltaZoomLevel)
 end
 
 function CameraController:_setZoomLevel(newZoomLevel)
-	self._basePlate:setY(math_lerp(-21.8, -3.77, newZoomLevel))
+	self._basePlate:setY(math_lerp(-28.0, -3.77, newZoomLevel))
 	self._basePlate:setZ(30)
 
-	self._basePlate.camera:setFOV(math_lerp(8.7, 60, newZoomLevel))
+	self._basePlate.camera:setFOV(math_lerp(8.2, 60, newZoomLevel))
 
-	self._basePlate:setPitch(math_lerp(-.1, -0.02, newZoomLevel))
+	self._basePlate:setPitch(math_lerp(-.12, -0.02, newZoomLevel))
 
 	self._currentZoomLevel = newZoomLevel
 end

@@ -13,7 +13,7 @@ Caravan = class(Caravan, MovingGridUnit, function(self, data)
 	renderer:setModel(caravanModel)
 
 	local caravanMaterial = Material();
-	caravanMaterial:setDiffuseTexture("objects/snowman.png")
+	caravanMaterial:setDiffuseTexture("objects/world/grid/caravan_D.png")
 	-- caravanMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
 
 	renderer:setMaterial(caravanMaterial)

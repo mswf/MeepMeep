@@ -19,6 +19,7 @@ Family = class(Family, MovingGridUnit, function(self, data)
 
 	self:addComponent(renderer)
 	self:setPitch(0.25)
+	debugEntity(self)
 
 	self.tooltipText = data.familyName
 
@@ -43,6 +44,7 @@ function Family:addToCaravan(caravan)
 	self._currentCaravan = caravan
 
 	caravan:addChild(self)
+	self:setPitch(0)
 
 -- (callback, context, priority)
 	caravan.onSetCurrentNode:add(self.setCurrentNode, self)
@@ -50,6 +52,7 @@ end
 
 function Family:removeFromCaravan()
 	self.selectable = true
+	self:setPitch(0.25)
 
 	if (self._currentCaravan) then
 		self._currentCaravan:removeChild(self)
