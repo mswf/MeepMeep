@@ -16,9 +16,10 @@ function Character:_loadModel(modelPath)
 end
 
 function Character:setMaterial(texturePath)
-	local testMat = Material();
-	testMat:setDiffuseTexture(texturePath);
-	self.meshRenderer:setMaterial(testMat);
+	Log.waka("texture path:" .. texturePath)
+	local material = Material();
+	material:setDiffuseTexture(texturePath);
+	self.meshRenderer:setMaterial(material);
 end
 
 function Character:moveLeft()
