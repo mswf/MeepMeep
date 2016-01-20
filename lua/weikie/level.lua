@@ -77,18 +77,6 @@ function Level:initLevelObjects()
 	end
 end
 
-function Level:printTable()
-	Log.waka(self.floorTiles[1])
-end
-
-function Level:printTableValue(x, y)
-	local innerArray = self.floorTiles[x]
-	local b = innerArray[y]
-	Log.waka(type(b))
-	Log.waka(b)
-	--Log.waka(arr2[x])
-end
-
 function Level:setFloorTile(x, y, value)
 	local tile = self.floorTiles[x + 1][y + 1] --I hate arrays starting from 1
 	tile:setValue(value)
