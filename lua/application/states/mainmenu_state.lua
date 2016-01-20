@@ -105,6 +105,9 @@ function MainMenuState:enter(transitionType, args)
 	local camera = Camera()
 	cameraEntity:addComponent(camera);
 	cameraEntity:setPosition(0,0,0)
+	cameraEntity.onDestroy = function(self)
+		Game.windowResizedSignal:remove(self.camera)
+	end
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
@@ -150,7 +153,7 @@ function MainMenuState:enter(transitionType, args)
 end
 
 function MainMenuState:exit(transitionType, args)
-	-- self.camera:destroy()
+	self.camera:destroy()
 
 	if (args.instruction == "NEWGAME") then
 		GlobalData:createGameNew()

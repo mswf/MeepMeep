@@ -122,55 +122,56 @@ function IngameState:enter(transition, args)
 
 	for i=1, nodeCount do
 		if (nodes[i].tileType == TileTypes.Water) then
-			break
-		end
-		renderer = MeshRenderer()
-		renderer:setModel(gridModel)
 
-		local gridMaterial = Material();
-		gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
-		gridMaterial:setDiffuseColor(unpack(nodes[i].tileType.color))
-
-		renderer:setMaterial(gridMaterial)
-
-		local gridEntity = Entity()
-		gridEntity:addComponent(renderer)
-
-		local worldX, worldY = nodes[i]:getWorldCenter()
-
-		local gridX, gridY, gridZ = nodes[i]:getGridPosition()
-
-		local isVertical = ((gridX + gridY) % 2 == 0)
-
-		if (isVertical) then
-			if (gridZ == 1) then
-				gridEntity:setRoll(0.25)
-			else
-				gridEntity:setRoll(0.75)
-			end
 		else
-			if (gridZ == 1) then
-				gridEntity:setRoll(0.5)
+			renderer = MeshRenderer()
+			renderer:setModel(gridModel)
+
+			local gridMaterial = Material();
+			gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
+			gridMaterial:setDiffuseColor(unpack(nodes[i].tileType.color))
+
+			renderer:setMaterial(gridMaterial)
+
+			local gridEntity = Entity()
+			gridEntity:addComponent(renderer)
+
+			local worldX, worldY = nodes[i]:getWorldCenter()
+
+			local gridX, gridY, gridZ = nodes[i]:getGridPosition()
+
+			local isVertical = ((gridX + gridY) % 2 == 0)
+
+			if (isVertical) then
+				if (gridZ == 1) then
+					gridEntity:setRoll(0.25)
+				else
+					gridEntity:setRoll(0.75)
+				end
 			else
-				gridEntity:setRoll(1)
+				if (gridZ == 1) then
+					gridEntity:setRoll(0.5)
+				else
+					gridEntity:setRoll(1)
+				end
 			end
+
+			gridEntity:setPitch(0.25)
+			gridEntity:setScale(1,1,1)
+
+			-- TODO: dangerous, check if this link is smart!!!
+			gridEntity.node = nodes[i]
+			nodes[i].entity = gridEntity
+			--
+
+			gridEntity:setPosition(worldX, worldY, 0)
+			gridParent:addChild(gridEntity)
+
+			-- gridEntity:setScale(0,0,0)
+			-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScale"]=1}):setEasing("outBounce")
+
+			-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 		end
-
-		gridEntity:setPitch(0.25)
-		gridEntity:setScale(1,1,1)
-
-		-- TODO: dangerous, check if this link is smart!!!
-		gridEntity.node = nodes[i]
-		nodes[i].entity = gridEntity
-		--
-
-		gridEntity:setPosition(worldX, worldY, 0)
-		gridParent:addChild(gridEntity)
-
-		-- gridEntity:setScale(0,0,0)
-		-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScale"]=1}):setEasing("outBounce")
-
-		-- self.tweener:new(1.5*math.random()+5.9, gridEntity, {["setScaleX"]=1, ["setScaleY"]=1, ["setScaleZ"]=1}):setEasing("outBounce")
 	end
 
 	-- debugEntity(lineEntity)

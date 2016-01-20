@@ -72,6 +72,10 @@ CameraController = class(CameraController, Entity, function(self)
 	-- self:setPosition(33,26)
 end)
 
+function CameraController:onDestroy()
+	Game.windowResizedSignal:remove(self._basePlate.camera)
+end
+
 function CameraController:__onReload()
 	-- local debugRenderer = self.debugRenderer
 	self._basePlate.camera:makeActive()
