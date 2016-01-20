@@ -124,7 +124,7 @@ void main()
 	vec3 light = normalize(lightDirection);
 	float intensity = dot(n, light);
 
-	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(intensity * intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor;// * vec4(vec3(intensity * intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 
 //	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(dot(n, light), dot(n, light), dot(n, light), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS
