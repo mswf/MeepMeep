@@ -23,7 +23,7 @@ CameraController = class(CameraController, Entity, function(self)
 	camera:makeActive()
 
 	basePlate:addComponent(camera);
-	do
+	if (false) then
 		local debugRenderer = DebugRenderer()
 		basePlate:addComponent(debugRenderer)
 --[[
@@ -53,7 +53,7 @@ CameraController = class(CameraController, Entity, function(self)
 		debugRenderer:addLine(0,-1,0, -1,0,0, 1,1,1)
 		debugRenderer:addLine(-1,0,0, 0,1,0, 1,1,1)
 
-		debugRenderer:addLine(-50,0,0, 50,0,0, 1,1,1,.5)
+		-- debugRenderer:addLine(-50,0,0, 50,0,0, 1,1,1,.5)
 
 	end
 
@@ -199,7 +199,7 @@ function CameraController:updateCameraZoom(dt)
 			self._currentTween = nil
 		end
 
-		self:_addZoomLevel(mouseWheelScroll*dt*5)
+		self:_addZoomLevel(mouseWheelScroll*dt*-5)
 	end
 ----[[
 	if (Input.keyDown(KeyCode.z)) then
@@ -213,7 +213,7 @@ function CameraController:updateCameraZoom(dt)
 		end
 		self._currentTween = GlobalIngameState.tweener(ZOOM_DURATION*(1-curZoom), self, {}):addOnUpdate(function(tween, dt, ratio)
 			self:_setZoomLevel(curZoom+ratio*(1-curZoom))
-		end):setEasing("inOutCubic")
+		end):setEasing("outBack")
 	end
 	if (Input.keyDown(KeyCode.x)) then
 		local curZoom = self._currentZoomLevel
@@ -233,16 +233,13 @@ function CameraController:updateCameraZoom(dt)
 	end
 --]]
 end
-
-function CameraController:_addZoomLevel(deltaZoomLevel)
-	self:_setZoomLevel(self._currentZoomLevel + deltaZoomLevel)
-end
-
 local math_min, math_max, math_lerp = math.min, math.max, math.lerp
 
-function CameraController:_setZoomLevel(newZoomLevel)
-	newZoomLevel = math_min(1, math_max(0, newZoomLevel))
+function CameraController:_addZoomLevel(deltaZoomLevel)
+	self:_setZoomLevel(math_min(1, math_max(0, self._currentZoomLevel + deltaZoomLevel)))
+end
 
+function CameraController:_setZoomLevel(newZoomLevel)
 	self._basePlate:setY(math_lerp(-21.8, -3.77, newZoomLevel))
 	self._basePlate:setZ(30)
 
