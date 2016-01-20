@@ -1,6 +1,6 @@
 <level>
 	<tile x="0" y="0" z="0">
-		<floor value="1" />
+		<floor value="0" />
 		<objects>
 			<object value="1" />
 			<object value="1" />
@@ -15,7 +15,7 @@
 			<object value="1" />
 		</objects>
 	</tile>
-	<tile x="0" y="0" z="0">
+	<tile x="0" y="0" z="2">
 		<floor value="2" />
 		<objects>
 			<object value="1" />
