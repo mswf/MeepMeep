@@ -10,7 +10,7 @@ EnemyState = {
 Enemy = class(Enemy, Character, function(self)
 	self.state = EnemyState.Idle
 	Log.waka(self.state)
-	self:_loadModel("objects/Rabbit/Rabbit.obj");
+	--self:_loadModel("objects/Rabbit/Rabbit.obj");
 	self._base.init(self)
 end)
 
