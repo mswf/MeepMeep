@@ -1,5 +1,6 @@
 Floor = class(Floor, Entity, function(self)
-	--self:_loadModel("objects/Rabbit/Rabbit.obj")
+	self:_loadModel("content/models/tiles/cave_floor.obj")
+	self:setValue(0)
 end)
 
 function Floor:_loadModel(modelPath)
@@ -11,21 +12,12 @@ function Floor:_loadModel(modelPath)
 end
 
 function Floor:setMaterial(texturePath)
-	local testMat = Material();
-	testMat:setDiffuseTexture(texturePath);
-	self.meshRenderer:setMaterial(testMat);
+	local material = Material();
+	material:setDiffuseTexture(texturePath);
+	self.meshRenderer:setMaterial(material);
 end
 
 function Floor:setValue(value)
 	self.value = value;
-
-	--should be texture?
-	if value == 0 then
-		self:_loadModel("objects/Rabbit/Rabbit.obj")
-	elseif value == 1 then
-		self:_loadModel("objects/Rabbit/Rabbit.obj")
-	elseif value == 2 then
-		self:_loadModel("objects/Rabbit/Rabbit.obj")
-	end
-
+	self:setMaterial(ENUM.FLOOR_TILES[value])
 end
