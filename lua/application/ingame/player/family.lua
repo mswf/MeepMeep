@@ -19,7 +19,6 @@ Family = class(Family, MovingGridUnit, function(self, data)
 
 	self:addComponent(renderer)
 	self:setPitch(0.25)
-	debugEntity(self)
 
 	self.tooltipText = data.familyName
 
