@@ -2,7 +2,7 @@
 --require "lua/LuaXML/test"
 require "lua/weikie/floor"
 require "lua/base/base"
-require "lua/weikie/tiles"
+require "lua/weikie/enum"
 
 TILE_WIDTH = 1
 TILE_LENGTH = 1
@@ -18,7 +18,7 @@ Level = class(Level, function(self)
 	self:_loadFloor()
 end)
 
-function Level.loadLevelFromFile(fileName)
+function Level:loadLevelFromFile(fileName)
 	--local path = "lua/"
 	Log.waka("Loading file: " .. Engine.system.contentPath .. "/" .. fileName)
 
@@ -31,24 +31,24 @@ function Level.loadLevelFromFile(fileName)
 	local floorIndex = 1
 	local objectsIndex = 2
 
-	--Log.waka(doc)--[1].attr["src"])
-	Log.waka(#doc.root.el .. " Tiles")
+
 	for i=1, #doc.root.el do
-		--doc.root.el = tile
 		local tile = doc.root.el[i]
 		local x = tile.attr["x"]
-		local y = tile.attr["y"]
-		local z = tile.attr["z"]
+		--local y = tile.attr["y"]
+		local y = tile.attr["z"]
 		local value = tile.el[floorIndex].attr["value"]
-		Log.waka("tile: x:" .. x .. " y:" .. y .. " z:" .. z)
-		Log.waka("floor value: " .. value)
+
+		--Set floor texture
+		if tonumber(value) > 0 then
+			self:setFloorTile(tonumber(x), tonumber(y), tonumber(value))
+		end
+
 		local objects = tile.el[objectsIndex]
 		if objects ~= nil then
-			Log.waka("notnil")
 			for n=1, #objects.el do
 				local objVal = objects.el[n].attr["value"]
-				Log.waka("Object value: " .. objVal)
-				Log.waka("ROCKY" .. ENUM.floorTiles.Rock)
+				--Do something with object loading here
 
 			end
 		end
@@ -82,8 +82,12 @@ function Level:printTableValue(x, y)
 end
 
 function Level:setFloorTile(x, y, value)
-	local tile = self.floorTiles[x][y]
-	tile.setValue(tile, value)
+	Log.waka("floortiles: ")
+	Log.waka(self.floorTiles)
+	Log.waka("x:" .. x .. " y:" .. y)
+	local tile = self.floorTiles[x + 1][y + 1] --I hate arrays starting from 1
+	tile:setValue(value)
+	--If error happens, out of bounds, Keep in mind arrays start from 1 in lua normally
 end
 
 function Level:_loadFloor()
