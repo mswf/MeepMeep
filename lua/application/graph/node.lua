@@ -7,11 +7,10 @@ local function rgb(r,g,b,a)
 end
 
 local sensibleColours = {}
-sensibleColours[1] = rgb(52, 170, 64)
-sensibleColours[2] = rgb(184, 132, 84)
-sensibleColours[3] = rgb(46, 131, 179)
-sensibleColours[4] = rgb(98, 148, 64)
--- sensibleColours[4] = rgb(11, 218, 206)
+sensibleColours[1] = rgb(111, 222, 122)
+sensibleColours[2] = rgb(228, 170, 116)
+sensibleColours[3] = rgb(35, 169, 245)
+sensibleColours[4] = rgb(255, 255, 255)
 
 Node = class(Node, function(self, tree)
 	self._vertices = nil

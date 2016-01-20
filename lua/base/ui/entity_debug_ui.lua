@@ -192,7 +192,7 @@ function EntityDebugUI:_createUI()
 			camera:setFOV(slider.value)
 		end
 
-		local nearPlaneSlider = cameraTree:addSlider("FoV")
+		local nearPlaneSlider = cameraTree:addSlider("NearPlaneDistance")
 		nearPlaneSlider.value = camera:getNearPlaneDistance()
 		nearPlaneSlider.minValue = 0
 		nearPlaneSlider.maxValue = 50
@@ -200,7 +200,7 @@ function EntityDebugUI:_createUI()
 			camera:setNearPlaneDistance(slider.value)
 		end
 
-		local farPlaneSlider = cameraTree:addSlider("FoV")
+		local farPlaneSlider = cameraTree:addSlider("FarPlaneDistance")
 		farPlaneSlider.value = camera:getFarPlaneDistance()
 		farPlaneSlider.minValue = 0
 		farPlaneSlider.maxValue = math.min(300, camera:getFarPlaneDistance())

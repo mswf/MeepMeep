@@ -62,23 +62,23 @@ function enumify(customEnum, enumName)
 	local newEnum = {}
 	local num = 1
 	for name, enumValue in pairs(customEnum) do
-		Log.steb(name)
 		newEnum[name] = enumValue
 		newEnum[num] = enumValue
 
 		enumValue.name = name
-		enumValue.enum = customEnum
+		enumValue.enum = newEnum
 		enumValue.num = num
 		num = num + 1
 		setmetatable(enumValue, enumValueMetatable)
 	end
 	if (enumName ~= nil) then
-		newEnum.name = enumName
+		rawset(newEnum, "name", enumName)
 	else
 		Log.error("[enum] tried to enumify a table without providing an enumName")
 	end
 
 
 	setmetatable(newEnum, enumMetaTable)
-	return newEnum
+	rawset(_G, enumName, newEnum)
+	-- return newEnum
 end

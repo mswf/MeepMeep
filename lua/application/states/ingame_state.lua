@@ -1,4 +1,6 @@
 
+require "lua/application/ingame/tiles"
+
 require "lua/application/ui/ingame/ingame_ui"
 require "lua/application/ui/ingame/selection_ui"
 
@@ -9,6 +11,8 @@ require "lua/application/ingame/player/family"
 
 require "lua/application/ingame/ingameinput"
 require "lua/application/ingame/cameracontroller"
+
+
 
 
 
@@ -56,7 +60,7 @@ function IngameState:enter(transition, args)
 	local tree = CairoGraph(0,0)
 
 	tree:setSize(1)
-	tree:initializeToDimensions(10, 10)
+	tree:initializeToDimensions(30, 30)
 
 
 	self.graph = tree
@@ -65,7 +69,7 @@ function IngameState:enter(transition, args)
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
 
-	Engine.importTexture("objects/world/grid/grid_texture.png", true)
+	Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
 
 
 
@@ -82,9 +86,9 @@ function IngameState:enter(transition, args)
 		renderer = MeshRenderer()
 		renderer:setModel(gridModel)
 
-		local gridMaterial = Material();
-		gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture.png")
-		-- gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
+		local gridMaterial = Engine.getMaterial("CairoMaterial");
+		-- gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
+		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
 
 		renderer:setMaterial(gridMaterial)
 
