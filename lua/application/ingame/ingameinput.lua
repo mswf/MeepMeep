@@ -12,6 +12,7 @@ IngameInput = class(IngameInput, function(self, ingamestate, graph, cameraContro
 
 	self._cameraController = cameraController
 
+	cameraController:setBounds(graph._width*graph.size, graph._height*graph.size)
 end)
 
 

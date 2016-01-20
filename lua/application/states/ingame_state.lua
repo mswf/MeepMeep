@@ -65,6 +65,9 @@ function IngameState:enter(transition, args)
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
 
+	Engine.importTexture("objects/world/grid/grid_texture.png", true)
+
+
 
 	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
 
@@ -80,8 +83,8 @@ function IngameState:enter(transition, args)
 		renderer:setModel(gridModel)
 
 		local gridMaterial = Material();
-		gridMaterial:setDiffuseTexture("objects/snowman.png")
-		gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
+		gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture.png")
+		-- gridMaterial:setDiffuseColor(unpack(nodes[i]._RANDCOLOR))
 
 		renderer:setMaterial(gridMaterial)
 

@@ -362,7 +362,7 @@ function Tween:update(dt)
 	do
 		local onUpdate = self.onUpdate
 		local onUpdateCount = #onUpdate
-		local ratio = self.clock/self.duration
+		local ratio = self.easing(self.clock,0,1, self.duration)
 		for i=1, onUpdateCount do
 			onUpdate[i](self, dt, ratio)
 		end
