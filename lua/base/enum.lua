@@ -47,7 +47,7 @@ function createPrivateEnum(table, enumName, ...)
 end
 
 function isEnum(table)
-	return getmetatable(table) == enumMetatable
+	return getmetatable(table) == enumMetaTable
 end
 
 function isEnumValue(value)
@@ -59,17 +59,26 @@ function isEnumMember(enumValue, enum)
 end
 
 function enumify(customEnum, enumName)
-	for index, enumValue in ipairs(customEnum) do
-		customEnum[enumValue.name] = enumValue
+	local newEnum = {}
+	local num = 1
+	for name, enumValue in pairs(customEnum) do
+		Log.steb(name)
+		newEnum[name] = enumValue
+		newEnum[num] = enumValue
+
+		enumValue.name = name
 		enumValue.enum = customEnum
-		enumValue.num = index
+		enumValue.num = num
+		num = num + 1
 		setmetatable(enumValue, enumValueMetatable)
 	end
 	if (enumName ~= nil) then
-		customEnum.name = enumName
+		newEnum.name = enumName
 	else
 		Log.error("[enum] tried to enumify a table without providing an enumName")
 	end
 
-	setmetatable(customEnum, enumMetatable)
+
+	setmetatable(newEnum, enumMetaTable)
+	return newEnum
 end
