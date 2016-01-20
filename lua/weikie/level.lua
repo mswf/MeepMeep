@@ -16,12 +16,11 @@ Level = class(Level, function(self)
 	self.height = 15
 	self:initLevelObjects()
 	self:_loadFloor()
+	self.player = nil
+
 end)
 
 function Level:loadLevelFromFile(fileName)
-	--local path = "lua/"
-	--Log.waka("Loading file: " .. Engine.system.contentPath .. "/" .. fileName)
-
 	--require
 	local SLAXML = require "lua/SLAXML-master/slaxdom"
 	--read the file
