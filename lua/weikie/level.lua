@@ -20,7 +20,7 @@ end)
 
 function Level:loadLevelFromFile(fileName)
 	--local path = "lua/"
-	Log.waka("Loading file: " .. Engine.system.contentPath .. "/" .. fileName)
+	--Log.waka("Loading file: " .. Engine.system.contentPath .. "/" .. fileName)
 
 	--require
 	local SLAXML = require "lua/SLAXML-master/slaxdom"
@@ -47,9 +47,18 @@ function Level:loadLevelFromFile(fileName)
 		local objects = tile.el[objectsIndex]
 		if objects ~= nil then
 			for n=1, #objects.el do
+				local nodeName = objects.el[n].name
 				local objVal = objects.el[n].attr["value"]
-				--Do something with object loading here
 
+				if (nodeName == "character") then
+					--create load character
+
+				elseif (nodeName == "object") then
+					--create and load object
+
+				else
+					Log.waka("Unknown node " .. nodeName .. " in Level:loadLevelFromFile, go fix.")
+				end
 			end
 		end
 	end
@@ -82,9 +91,6 @@ function Level:printTableValue(x, y)
 end
 
 function Level:setFloorTile(x, y, value)
-	Log.waka("floortiles: ")
-	Log.waka(self.floorTiles)
-	Log.waka("x:" .. x .. " y:" .. y)
 	local tile = self.floorTiles[x + 1][y + 1] --I hate arrays starting from 1
 	tile:setValue(value)
 	--If error happens, out of bounds, Keep in mind arrays start from 1 in lua normally
