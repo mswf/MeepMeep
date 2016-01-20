@@ -39,8 +39,7 @@ function Game.crash()
 end
 
 function Game.xmlStuff()
-	fileName = "testwk.xml"
-	Level.loadLevelFromFile(fileName)
+
 
 	----require
 	--local SLAXML = require "lua/SLAXML-master/slaxdom"
@@ -64,10 +63,12 @@ function Game.main()
 	GlobalStateManager:start()
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
-	Engine.importTexture("objects/snowman.png")
+	Engine.importModel("content/models/tiles/cave_floor.obj")
 	CHARACTER = Player()
 	ENEMY = Enemy()
 	LEVEL = Level()
+	fileName = "testwk.xml"
+	LEVEL:loadLevelFromFile(fileName)
 	--createCamera()
 	CAMERA_ENTITY = Entity()
 	local camera = Camera()
