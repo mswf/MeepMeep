@@ -51,20 +51,13 @@ function IngameState:enter(transition, args)
 	lineEntity:addChild(triangleEntity)
 	lineEntity:addChild(pathEntity)
 
-	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25, 0,0,0)
-	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
-	-- DebugDrawTriangle:addTriangle2D(0,0,25,25,0,25,r,g,b)
-
-	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
-
 	local tree = CairoGraph(0,0)
 
 	local GRID_WIDTH, GRID_HEIGHT = 100,100
-	local NODE_COUNT = 10
+	local NODE_COUNT = 200
 
 	tree:setSize(1)
 	tree:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)
-
 
 	self.graph = tree
 	-- self.graph:drawGrid()
@@ -72,15 +65,12 @@ function IngameState:enter(transition, args)
 	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
 	Engine.importModel("objects/world/grid/caravan.obj",2)
 
-
-
 	Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
 	Engine.importTexture("objects/world/grid/caravan_D.png", true)
 
-	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
+	local gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
 
 	local nodes = tree._nodes
-	local nodeCount = #nodes
 
 	Log.steb("Start Generation")
 
@@ -113,19 +103,14 @@ function IngameState:enter(transition, args)
 				if (prevNode.neighbours[i].neighbours[j].tileType ~= TileTypes.Grassland) then
 					prevNode.neighbours[i].neighbours[j].tileType = TileTypes.Arid;
 				end
-
 			end
-
-
 		end
 	end
-
-	Log.steb("Generation Done")
-
 
 	local gridParent = Entity()
 	lineEntity:addChild(gridParent)
 
+	local nodeCount = GRID_WIDTH * GRID_HEIGHT * 2
 
 	for i=1, nodeCount do
 		if (nodes[i].tileType == TileTypes.Water) then
@@ -167,8 +152,8 @@ function IngameState:enter(transition, args)
 			gridEntity:setScale(1,1,1)
 
 			-- TODO: dangerous, check if this link is smart!!!
-			gridEntity.node = nodes[i]
-			nodes[i].entity = gridEntity
+			-- gridEntity.node = nodes[i]
+			-- nodes[i].entity = gridEntity
 			--
 
 			gridEntity:setPosition(worldX, worldY, 0)
@@ -201,7 +186,6 @@ function IngameState:enter(transition, args)
 	self.families = families
 
 	-- GlobalNodes = nodes
-
 	-- GlobalCaravan:moveToNode(GlobalNodes[25])
 
 	self.input = IngameInput(self, self.graph, cameraController)
@@ -213,9 +197,24 @@ function IngameState:exit(transition, args)
 	self.caravan:destroy()
 	self._cameraController:destroy()
 
+	self.lineEntity = nil
+	self.caravan = nil
+	self._cameraController = nil
+
+
 	for i=1, #self.families do
 		self.families[i]:destroy()
 	end
+	self.families = nil
+
+	self.input = nil
+
+	self.graph = nil
+
+
+	DebugDraw	=	nil
+	DebugDrawTriangle	=	nil
+	DebugDrawPath	=	nil
 end
 
 function IngameState:update(dt)

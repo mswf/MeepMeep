@@ -44,6 +44,8 @@ function GameState:baseExit(transitionType, args)
 
 	self.tweener:clear()
 	self.UIManager:destroyAll()
+
+	collectgarbage()
 end
 
 function GameState:exit(transitionType, args)

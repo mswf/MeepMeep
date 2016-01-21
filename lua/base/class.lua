@@ -25,6 +25,7 @@ class = setmetatable(class or {}, {
 		-- and they will look up their methods in it.
 		c.__index = c
 		c.__instances = c.__instances or setmetatable({}, {__mode = "v"})
+		c.init = init
 
 		-- expose a constructor which can be called by <classname>(<args>)
 		local mt = {}
@@ -32,6 +33,20 @@ class = setmetatable(class or {}, {
 		mt.__tostring = function(class_tbl)
 			return "[CLASS] " .. retrieveVariableName(c)
 		end
+
+
+		local initialers = {}
+		do
+			local currentClass = c
+			while (currentClass) do
+				table.insert(initialers, rawget(currentClass, "init"))
+				currentClass = currentClass._base
+			end
+		end
+		
+		c.__initializers = initialers
+		c.__initializersCount = #initialers
+
 		mt.__call = function(class_tbl, ...)
 			local obj = {}
 			setmetatable(obj,c)
@@ -40,29 +55,12 @@ class = setmetatable(class or {}, {
 				base.__engineInit(obj)
 			end
 
-			do
-				local currentClass = class_tbl
-				local initialers = {}
-				while (currentClass) do
-					table.insert(initialers, rawget(currentClass, "init"))
-					currentClass = currentClass._base
-				end
-				local initCount = #initialers
-				for i=initCount,1,-1  do
-					initialers[i](obj, ...)
-				end
+			local initializers = class_tbl.__initializers
+			local initCount = class_tbl.__initializersCount
+
+			for i=initCount,1,-1  do
+				initializers[i](obj, ...)
 			end
-			--[[
-			-- Old init call code
-			if init then
-				init(obj,...)
-			else
-				-- make sure that any stuff from the base class is initialized!
-				if base and base.init then
-					base.init(obj, ...)
-				end
-			end
-			]]
 
 			table.insert(c.__instances, obj)
 
@@ -71,7 +69,6 @@ class = setmetatable(class or {}, {
 		-- local variableName =
 		c.__tostring = function(value) return "[INSTANCE] " .. retrieveVariableName(c) end
 		c.__concat = function(op1, op2) return tostring(op1) .. tostring(op2) end
-		c.init = init
 		c.is_a = function(self, klass)
 			local m = getmetatable(self)
 			while m do

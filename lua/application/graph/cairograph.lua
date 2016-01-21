@@ -3,37 +3,27 @@ require "lua/application/graph/graph"
 require "lua/application/graph/cairopentagon"
 
 CairoGraph = class(CairoGraph, Graph, function(self, rootX, rootY)
-	self.worldX = rootX
-	self.worldY = rootY
-
-	self._nodes = {}
-
 	self.size = 1
 
 	self._width = 0
 	self._height = 0
-
-	self._grid = {}
 end)
 
 function CairoGraph:initializeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
 
-	self._grid = {}
-	for x=1, width do
-		self._grid[x] = {}
-		for y=1, height do
-			-- Log.steb(y)
-			self._grid[x][y] = {}
+	local grid = {}
 
-			local node1 = cairoConstructor(self)
-			node1:setPosition(x,y,1)
-			local node2 = cairoConstructor(self)
-			node2:setPosition(x,y,2)
+	self._grid = grid
+	for x=1, width do
+		grid[x] = {}
+		for y=1, height do
+			grid[x][y] = {}
+
+			cairoConstructor(self):setPosition(x,y,1)
+			cairoConstructor(self):setPosition(x,y,2)
 		end
 	end
-
-	local grid = self._grid
 
 	for x=1, width do
 		for y=1, height do
@@ -86,8 +76,6 @@ function CairoGraph:initializeToDimensions(width, height)
 			end
 		end
 	end
-
-
 
 	self._width = width
 	self._height = height
