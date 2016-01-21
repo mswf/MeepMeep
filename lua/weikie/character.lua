@@ -5,6 +5,7 @@ Character = class(Character, Entity, function(self)
 	self.right = false
 	self.up = false
 	self.down = false
+	self:_loadModel(ENUM.characterModel)
 end)
 
 function Character:_loadModel(modelPath)

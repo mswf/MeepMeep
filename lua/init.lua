@@ -63,8 +63,6 @@ function Game.main()
 	GlobalStateManager:start()
 
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
-	CHARACTER = Player()
-	ENEMY = Enemy()
 	LEVEL = Level()
 	fileName = "testwk.xml"
 	LEVEL:loadLevelFromFile(fileName)

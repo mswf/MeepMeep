@@ -13,6 +13,8 @@ Enum = class(Enum, function(self)
 	self.basePathObjectsModel 	= "content/models/"
 	self.basePathObjectsTexture	= "content/images/textures/props/"
 	self.basePathCharacters		= "content/images/characters/"
+	self.characterModel 		= "content/models/special/holder_character.obj"
+
 
 	self:importFloorTiles()
 	self:importObjects()
@@ -22,6 +24,10 @@ end)
 function Enum:importCharacters()
 	self:addCharacter("player.png")
 	self:addCharacter("bomb.png")
+
+
+	--model
+	Engine.importModel(self.characterModel)
 
 	--Import floor textures
 	for i = 0, self.numCharacters - 1 do
