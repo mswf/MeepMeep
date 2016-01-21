@@ -208,7 +208,7 @@ end
 
 function Game:hackyCameraMovement(dt)
 	local speed = 1 * dt
-
+	local rotateSpeed = 40 * dt
 	if Input.key(KeyCode.w) == true then
 		CAMERA_ENTITY:addZ(speed)
 	end
@@ -226,10 +226,18 @@ function Game:hackyCameraMovement(dt)
 	end
 
 	if Input.key(KeyCode.q) == true then
-		CAMERA_ENTITY:addY(-speed)
+		CAMERA_ENTITY:yaw(rotateSpeed)
 	end
 
 	if Input.key(KeyCode.e) == true then
+		CAMERA_ENTITY:yaw(-rotateSpeed)
+	end
+
+	if Input.key(KeyCode.z) == true then
+		CAMERA_ENTITY:addY(-speed)
+	end
+
+	if Input.key(KeyCode.x) == true then
 		CAMERA_ENTITY:addY(speed)
 	end
 end
