@@ -53,8 +53,8 @@ function IngameState:enter(transition, args)
 
 	local tree = CairoGraph(0,0)
 
-	local GRID_WIDTH, GRID_HEIGHT = 100,100
-	local NODE_COUNT = 200
+	local GRID_WIDTH, GRID_HEIGHT = 300,300
+	local NODE_COUNT = 100
 
 	tree:setSize(1)
 	tree:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)
