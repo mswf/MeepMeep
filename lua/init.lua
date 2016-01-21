@@ -46,7 +46,18 @@ function Game.main()
 
 end
 
+Game.fullScreenMode = 0
+
 function Game.update(dt)
+	if (Input.keyDown(KeyCode.F11)) then
+		if (Game.fullScreenMode == 0) then
+			Game.fullScreenMode = 1
+		else
+			Game.fullScreenMode = 0
+		end
+		Engine.window.setFullscreenMode(Game.fullScreenMode)
+	end
+
 	Input.update()
 
 	GlobalStateManager:update(dt)
