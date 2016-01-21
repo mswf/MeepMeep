@@ -47,8 +47,8 @@ function Level:loadLevelFromFile(fileName)
 		if objects ~= nil then
 			for n=1, #objects.el do
 				local nodeName = objects.el[n].name
-				local objVal = objects.el[n].attr["value"]
-
+				local objVal = tonumber(objects.el[n].attr["value"])
+				Log.waka("character creation")
 				if (nodeName == "character") then
 					--create load character
 
@@ -81,6 +81,23 @@ function Level:setFloorTile(x, y, value)
 	local tile = self.floorTiles[x + 1][y + 1] --I hate arrays starting from 1
 	tile:setValue(value)
 	--If error happens, out of bounds, Keep in mind arrays start from 1 in lua normally
+end
+
+function Level:createCharacter(value, x, y)
+	Log.waka("should happen once")
+	if value == 1 then
+		if self.player ~= nil then
+			--destroy entity
+		end
+		Log.waka("pre player")
+		self.player = Player()
+		Log.waka("post player")
+		self.player:setPosition(x, 0, y)
+		Log.waka("setting material?")
+		self.player:setMaterial(ENUM.CHARACTERS[value])
+	elseif value == 2 then
+
+	end
 end
 
 function Level:_loadFloor()
