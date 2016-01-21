@@ -13,7 +13,7 @@ function Character:_loadModel(modelPath)
 	self.renderer = MeshRenderer()
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
-	self:setPosition(0,0,0)
+	self:yaw(180)
 end
 
 function Character:setMaterial(texturePath)
