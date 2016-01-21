@@ -6,10 +6,11 @@ require "lua/weikie/enum"
 
 TILE_WIDTH = 1
 TILE_LENGTH = 1
-ENUM = Enum()
+
 
 Level = class(Level, function(self)
 	Log.waka("level init")
+	ENUM = Enum()
 
 	self.floorTiles = {}
 	self.width = 20
@@ -17,7 +18,6 @@ Level = class(Level, function(self)
 	self:initLevelObjects()
 	self:_loadFloor()
 	self.player = nil
-
 end)
 
 function Level:loadLevelFromFile(fileName)
@@ -48,10 +48,10 @@ function Level:loadLevelFromFile(fileName)
 			for n=1, #objects.el do
 				local nodeName = objects.el[n].name
 				local objVal = tonumber(objects.el[n].attr["value"])
-				Log.waka("character creation")
+				--Log.waka("character creation")
 				if (nodeName == "character") then
 					--create load character
-
+					self:createCharacter(objVal, x, y)
 				elseif (nodeName == "object") then
 					--create and load object
 
@@ -89,15 +89,12 @@ function Level:createCharacter(value, x, y)
 		if self.player ~= nil then
 			--destroy entity
 		end
-		Log.waka("pre player")
 		self.player = Player()
-		Log.waka("post player")
-		self.player:setPosition(x, 0, y)
-		Log.waka("setting material?")
-		self.player:setMaterial(ENUM.CHARACTERS[value])
 	elseif value == 2 then
-
+		Enemy()
 	end
+	self.player:setPosition(x, 0, y)
+	self.player:setMaterial(ENUM.CHARACTERS[value])
 end
 
 function Level:_loadFloor()

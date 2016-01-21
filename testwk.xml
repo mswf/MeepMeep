@@ -1,5 +1,5 @@
 <level>
-	<tile x="0" y="0" z="0">
+	<tile x="5" y="0" z="3">
 		<floor value="0" />
 		<objects>
 			<character value="1" /> <!-- character -->

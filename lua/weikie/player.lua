@@ -4,12 +4,10 @@ Player = class(Player, Character, function(self)
 	--self:_loadModel("objects/Rabbit/Rabbit.obj")
 	--self:_loadModel("objects/weikie/billboard.obj")
 	--self:setMaterial("objects/snowman.png")
-	self._base.init(self)
 end)
 
 function Player:update(dt)
 	self:pollInput()
-	self._base.update(self, dt)
 end
 
 function Player:pollInput()
