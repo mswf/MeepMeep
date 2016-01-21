@@ -54,21 +54,30 @@ function MainMenuState:enter(transitionType, args)
 
 	local lightEntity = Entity()
 	local light = Light()
-	light:setIntensity(0.1)
-	light:setColor(1,0,1,1)
+
+	light:setIntensity(1.5)
+
+	light:setColor(249/255,243/255,194/255,1)
 	lightEntity:addComponent(light)
 
-	lightEntity:setPitch(0.547)
-	lightEntity:setYaw(0.337)
-	lightEntity:setRoll(0.895)
+--[[
+	local debugRenderer = DebugRenderer()
+	lightEntity:addComponent(debugRenderer)
+	debugRenderer:setDrawPoints(true)
+	debugRenderer:addLine(0,0,1, 0,0.2,0.7, 0,1,0)
+	debugRenderer:addLine(0,0,1, 0,-0.2,0.7, 1,0,0)
+	debugRenderer:addLine(0,0,1, 0.2,0,0.7, 1,0,0)
+	debugRenderer:addLine(0,0,1, -0.2,0,0.7, 1,0,0)
+	debugRenderer:addLine(0,0,0, 	0,	0,1, 0,0,1)
+--]]--
+
+	lightEntity:setPitch(0.496)
+	lightEntity:setYaw(0.9)
+	lightEntity:setRoll(0.032)
 
 	GlobalLight = lightEntity
 
 	-- debugEntity(lightEntity)
-
-	-- light.entity.update = function(self, dt)
-	-- 	self:yaw(1)
-	-- end
 
 	--[[
 	for i=1, 10 do

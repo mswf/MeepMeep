@@ -122,9 +122,9 @@ void main()
 	vec4 specular = vec4( vec3(specularCoefficient), 1 );
 
 	vec3 light = normalize(lightDirection);
-	float intensity = dot(n, light);
+	float intensity = dot(n, light)* lightIntensity;
 
-	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(intensity * intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 
 //	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(dot(n, light), dot(n, light), dot(n, light), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS

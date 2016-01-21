@@ -74,7 +74,7 @@ local tileTypes = {
 		},
 	},
 	Grassland = {
-		color = rgb(111, 222, 122),
+		color = rgb(193, 251, 199),
 
 		walkable = true,
 		potentialProperties = {

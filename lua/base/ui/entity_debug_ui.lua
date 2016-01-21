@@ -180,6 +180,68 @@ function EntityDebugUI:_createUI()
 		local rendererText = rendererTree:addText("Entity has a renderer component.")
 	end
 
+	if (entity.light) then
+		local lightTree = window:addTree("Light")
+		local rendererText = lightTree:addText("Light Type not implemented.")
+
+		local light = entity.light
+
+		local intensitySlider = lightTree:addSlider("intensity")
+		intensitySlider.value = light:getIntensity()
+		intensitySlider.minValue = 0
+		intensitySlider.maxValue = 3
+
+		intensitySlider.onChange = function(slider)
+			light:setIntensity(slider.value)
+		end
+
+		local r,g,b,a = light:getColor()
+
+		local rSlider = lightTree:addSlider("r")
+		rSlider.value = r
+		rSlider.minValue = 0
+		rSlider.maxValue = 1
+
+		rSlider.onChange = function(slider)
+			local r,g,b,a = light:getColor()
+
+			light:setColor(slider.value,g,b,a)
+		end
+
+		local gSlider = lightTree:addSlider("g")
+		gSlider.value = g
+		gSlider.minValue = 0
+		gSlider.maxValue = 1
+
+		gSlider.onChange = function(slider)
+			local r,g,b,a = light:getColor()
+
+			light:setColor(r,slider.value,b,a)
+		end
+
+		local bSlider = lightTree:addSlider("b")
+		bSlider.value = b
+		bSlider.minValue = 0
+		bSlider.maxValue = 1
+
+		bSlider.onChange = function(slider)
+			local r,g,b,a = light:getColor()
+
+			light:setColor(r,g,slider.value,a)
+		end
+
+		local aSlider = lightTree:addSlider("a")
+		aSlider.value = a
+		aSlider.minValue = 0
+		aSlider.maxValue = 1
+
+		aSlider.onChange = function(slider)
+			local r,g,b,a = light:getColor()
+
+			light:setColor(r,g,b,slider.value)
+		end
+	end
+
 	if (entity.camera) then
 		local camera = entity.camera
 		local cameraTree = window:addTree("Camera")
@@ -207,8 +269,6 @@ function EntityDebugUI:_createUI()
 		farPlaneSlider.onChange = function(slider)
 			camera:setFarPlaneDistance(slider.value)
 		end
-
-		local cameraText = cameraTree:addText("Entity has a camera component.")
 	end
 
 	if (entity.node) then
