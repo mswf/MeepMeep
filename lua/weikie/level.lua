@@ -107,8 +107,6 @@ end
 
 function Level:createObject(value, x, y)
 	local obj = ObjectEntity()
-	Log.waka(value)
-	Log.waka(ENUM.ENVIRONMENT_OBJECTS[value])
 	obj:_loadModel(ENUM.ENVIRONMENT_OBJECTS[value].model)
 	obj:setMaterial(ENUM.ENVIRONMENT_OBJECTS[value].texture)
 	obj:setPosition(x, 0, y)
