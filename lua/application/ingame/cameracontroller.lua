@@ -65,6 +65,9 @@ CameraController = class(CameraController, Entity, function(self)
 	self._mousePanDelay = 0
 	self:_setZoomLevel(1)
 
+	self:_setRotation(0.125)
+	self._targetRotation = self._currentRotation
+
 	-- basePlate:setPosition(0,-3.77,53.5);
 	-- basePlate:setPitch(-0.02);
 	-- basePlate.camera:setFOV(80);
@@ -128,23 +131,37 @@ function CameraController:updateInput(dt)
 	self:updateBorderPanning(dt)
 
 	if (Input.binding("moveUp")) then
-		self:addY(cameraMoveSpeed*dt)
+		self:_moveRelative(0, cameraMoveSpeed*dt)
 	end
 
 	if (Input.binding("moveDown")) then
-		self:addY(-cameraMoveSpeed*dt)
+		self:_moveRelative(0, -cameraMoveSpeed*dt)
 	end
 
 	if (Input.binding("moveLeft")) then
-		self:addX(-cameraMoveSpeed*dt)
+		self:_moveRelative(-cameraMoveSpeed*dt, 0)
 	end
 
 	if (Input.binding("moveRight")) then
-		self:addX(cameraMoveSpeed*dt)
+		self:_moveRelative(cameraMoveSpeed*dt, 0)
 	end
 
 
 	self:updateCameraZoom(dt)
+
+	self:_updateCameraRotation(dt)
+end
+
+local math_pi, math_sin, math_cos = math.pi, math.sin, math.cos
+
+function CameraController:_moveRelative(screenY, screenX)
+	local rotation = self:getRoll() * 2*math_pi
+
+	local worldY = screenX * math_cos(rotation) + screenY * math_cos(rotation - math_pi/2)
+	local worldX = screenX * -math_sin(rotation) + screenY * -math_sin(rotation - math_pi/2)
+
+	self:addX(worldX)
+	self:addY(worldY)
 end
 
 local m_min, m_max = math.min, math.max
@@ -166,22 +183,22 @@ function CameraController:updateBorderPanning(dt)
 
 		if (mouseX < panningSpacing) then
 			isMousePanning = true
-			self:addX(-cameraMoveSpeed*dt*((mouseX / panningSpacing)*-1+1)*mousePanDelayFactor)
+			self:_moveRelative(-cameraMoveSpeed*dt*((mouseX / panningSpacing)*-1+1)*mousePanDelayFactor, 0)
 		end
 
 		if ((mouseX) > (sWidth - panningSpacing)) then
 			isMousePanning = true
-			self:addX(cameraMoveSpeed*dt*(((mouseX- sWidth) / panningSpacing)+1)*mousePanDelayFactor)
+			self:_moveRelative(cameraMoveSpeed*dt*(((mouseX- sWidth) / panningSpacing)+1)*mousePanDelayFactor, 0)
 		end
 
 		if (mouseY < panningSpacing) then
 			isMousePanning = true
-			self:addY(cameraMoveSpeed*dt*((mouseY / panningSpacing)*-1+1)*mousePanDelayFactor)
+			self:_moveRelative(0, cameraMoveSpeed*dt*((mouseY / panningSpacing)*-1+1)*mousePanDelayFactor)
 		end
 
 		if ((mouseY) > (sHeight - panningSpacing)) then
 			isMousePanning = true
-			self:addY(-cameraMoveSpeed*dt*(((mouseY- sHeight) / panningSpacing)+1)*mousePanDelayFactor)
+			self:_moveRelative(0, -cameraMoveSpeed*dt*(((mouseY- sHeight) / panningSpacing)+1)*mousePanDelayFactor)
 		end
 	end
 
@@ -258,4 +275,55 @@ function CameraController:_setZoomLevel(newZoomLevel)
 	self._basePlate:setPitch(math_lerp(-.12, -0.02, newZoomLevel))
 
 	self._currentZoomLevel = newZoomLevel
+end
+
+local ROTATION_DURATION = 0.5
+local SNAP_ROTATION_AMOUNT = 0.125
+
+function CameraController:_updateCameraRotation(dt)
+	-- self:_setRotation(0.125)
+
+if (Input.keyDown(KeyCode.q)) then
+	-- self:_setRotation(self._currentRotation + dt)
+	-- if true then return end
+
+	local curRotation = self._currentRotation
+	local targetRotation = self._targetRotation - SNAP_ROTATION_AMOUNT
+
+	self._targetRotation = targetRotation
+
+	if (self._currentRotationTween) then
+		GlobalIngameState.tweener:removeActiveTween(self._currentRotationTween)
+		self._currentRotationTween = nil
+	end
+
+	self._currentRotationTween = GlobalIngameState.tweener(ROTATION_DURATION, self, {}):addOnUpdate(function(tween, dt, ratio)
+		self:_setRotation(curRotation+ratio*(targetRotation-curRotation))
+	end):setEasing("outQuad")
+end
+
+	if (Input.keyDown(KeyCode.e)) then
+		-- self:_setRotation(self._currentRotation - dt)
+		-- if true then return end
+
+		local curRotation = self._currentRotation
+		local targetRotation = self._targetRotation + SNAP_ROTATION_AMOUNT
+
+		self._targetRotation = targetRotation
+
+		if (self._currentRotationTween) then
+			GlobalIngameState.tweener:removeActiveTween(self._currentRotationTween)
+			self._currentRotationTween = nil
+		end
+
+		self._currentRotationTween = GlobalIngameState.tweener(ROTATION_DURATION, self, {}):addOnUpdate(function(tween, dt, ratio)
+			self:_setRotation(curRotation+ratio*(targetRotation-curRotation))
+		end):setEasing("outQuad")
+	end
+
+end
+
+function CameraController:_setRotation(roll)
+	self._currentRotation = roll
+	self:setRoll(roll)
 end
