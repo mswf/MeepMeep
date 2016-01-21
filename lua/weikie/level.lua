@@ -3,6 +3,7 @@
 require "lua/weikie/floor"
 require "lua/base/base"
 require "lua/weikie/enum"
+require "lua/weikie/objectEntity"
 
 TILE_WIDTH = 1
 TILE_LENGTH = 1
@@ -37,17 +38,19 @@ function Level:loadLevelFromFile(fileName)
 		local x = tile.attr["x"]
 		--local y = tile.attr["y"]
 		local y = tile.attr["z"]
-		local value = tile.el[floorIndex].attr["value"]
+		-- -1 to fight arrays starting from 1
+		local value = tonumber(tile.el[floorIndex].attr["value"])
 
 		--Set floor texture
-		if tonumber(value) > 0 then
-			self:setFloorTile(tonumber(x), tonumber(y), tonumber(value))
+		if value > 0 then
+			self:setFloorTile(tonumber(x), tonumber(y), value)
 		end
 
 		local objects = tile.el[objectsIndex]
 		if objects ~= nil then
 			for n=1, #objects.el do
 				local nodeName = objects.el[n].name
+				-- -1 to fight arrays starting from 1
 				local objVal = tonumber(objects.el[n].attr["value"])
 				--Log.waka("character creation")
 				if (nodeName == "character") then
@@ -95,14 +98,10 @@ function Level:createCharacter(value, x, y)
 	else--if value == 2 then
 		--Should store somewhere honestly, so that it can be cleaned up later
 		character = Enemy()
-		self:addEnemy(character)
+		table.insert(self.enemies, character)
 	end
 	character:setPosition(x, 0, y)
 	character:setMaterial(ENUM.CHARACTERS[value])
-end
-
-function Level:addEnemy(character)
-	table.insert(self.enemies, character)
 end
 
 --I dont know what this is supposed to do
@@ -111,5 +110,9 @@ function Level:_loadFloor()
 end
 
 function Level:createObject(value, x, y)
-
+	local obj = ObjectEntity()
+	Log.waka(value)
+	Log.waka(ENUM.ENVIRONMENT_OBJECTS[value])
+	obj:_loadModel(ENUM.ENVIRONMENT_OBJECTS[value].model)
+	obj:setMaterial(ENUM.ENVIRONMENT_OBJECTS[value].texture)
 end

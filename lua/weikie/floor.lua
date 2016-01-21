@@ -1,6 +1,6 @@
 Floor = class(Floor, Entity, function(self)
 	self:_loadModel("content/models/tiles/cave_floor.obj")
-	self:setValue(0)
+	self:setValue(1)
 end)
 
 function Floor:_loadModel(modelPath)

@@ -1,6 +1,6 @@
 <level>
 	<tile x="5" y="0" z="3">
-		<floor value="0" />
+		<floor value="1" />
 		<objects>
 			<character value="1" /> <!-- character -->
 			<object value="2" /> <!-- enemy -->
