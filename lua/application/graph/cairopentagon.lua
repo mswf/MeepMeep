@@ -1,10 +1,7 @@
 
 require "lua/application/graph/node"
 
-CairoPentagon = class(CairoPentagon, Node, function(self, tree)
-
-
-end)
+CairoPentagon = class(CairoPentagon, Node)
 
 function CairoPentagon:getTooltip()
 	local gridX, gridY, gridZ = self:getGridPosition()

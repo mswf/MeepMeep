@@ -51,9 +51,11 @@ Game.fullScreenMode = 0
 function Game.update(dt)
 	if (Input.keyDown(KeyCode.F11)) then
 		if (Game.fullScreenMode == 0) then
+			Engine.window.setPosition(-2000, 100)
 			Game.fullScreenMode = 1
 		else
 			Game.fullScreenMode = 0
+			Engine.window.setSize(1280, 720)
 		end
 		Engine.window.setFullscreenMode(Game.fullScreenMode)
 	end

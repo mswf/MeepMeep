@@ -59,8 +59,11 @@ function IngameState:enter(transition, args)
 
 	local tree = CairoGraph(0,0)
 
+	local GRID_WIDTH, GRID_HEIGHT = 100,100
+	local NODE_COUNT = 10
+
 	tree:setSize(1)
-	tree:initializeToDimensions(30, 30)
+	tree:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)
 
 
 	self.graph = tree
@@ -74,8 +77,6 @@ function IngameState:enter(transition, args)
 	Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
 	Engine.importTexture("objects/world/grid/caravan_D.png", true)
 
-
-
 	gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
 
 	local nodes = tree._nodes
@@ -83,14 +84,14 @@ function IngameState:enter(transition, args)
 
 	Log.steb("Start Generation")
 
-	local currentNode = tree:getNodeByGridPos(math.random(14,16),math.random(14,16),math.random(1,2))
+	local currentNode = tree:getNodeByGridPos(math.random(GRID_WIDTH/2-5,GRID_WIDTH/2+5),math.random(GRID_HEIGHT/2-5,GRID_HEIGHT/2+5),math.random(1,2))
 
 	local startNode = currentNode
 
 	local T_TYPES = TileTypes
 	local T_TYPES_GRASS = T_TYPES.Grassland
 
-	for i=1, 90 do
+	for i=1, NODE_COUNT do
 
 		currentNode.tileType = T_TYPES_GRASS;
 		local currentNodeNeighbours = currentNode.neighbours
@@ -107,13 +108,16 @@ function IngameState:enter(transition, args)
 
 		for i=1, #prevNode.neighbours do
 			prevNode.neighbours[i].tileType = TileTypes.Grassland;
+
+			for j=1, #prevNode.neighbours[i].neighbours do
+				if (prevNode.neighbours[i].neighbours[j].tileType ~= TileTypes.Grassland) then
+					prevNode.neighbours[i].neighbours[j].tileType = TileTypes.Arid;
+				end
+
+			end
+
+
 		end
-
-		-- currentNode = currentNode.neighbours[math.random(1, #currentNode.neighbours)]
-		-- local neighbour = currentNode.neighbours[i];
-		-- neighbour.tileType = TileTypes.Grassland;
-
-
 	end
 
 	Log.steb("Generation Done")

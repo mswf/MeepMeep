@@ -1,20 +1,11 @@
 
 -- require "lua/application/graph/tree"
 
-local function rgb(r,g,b,a)
-	a = a or 255
-	return {r/255, g/255, b/255, a/255}
-end
-
-local sensibleColours = {}
-sensibleColours[1] = rgb(111, 222, 122)
-sensibleColours[2] = rgb(228, 170, 116)
-sensibleColours[3] = rgb(35, 169, 245)
-sensibleColours[4] = rgb(255, 255, 255)
+local BASE_TILE_TYPE = TileTypes.Water
 
 Node = class(Node, function(self, tree)
-	self._vertices = nil
-	self._edges = nil
+	-- self._vertices = nil
+	-- self._edges = nil
 
 	self._tree = tree
 	self.neighbours = {}
@@ -22,27 +13,7 @@ Node = class(Node, function(self, tree)
 
 	tree:addNode(self)
 
-	local colourIndex = math.random(#sensibleColours)
-
-	-- self._RANDCOLOR = {}
-	-- self._RANDCOLOR[1] = sensibleColours[colourIndex][1]
-	-- self._RANDCOLOR[2] = sensibleColours[colourIndex][2]
-	-- self._RANDCOLOR[3] = sensibleColours[colourIndex][3]
-	-- self._RANDCOLOR[4] = 1
-	--
-	-- self._RANDCOLORHOVER = {}
-	-- self._RANDCOLORHOVER[1] = sensibleColours[colourIndex][1]
-	-- self._RANDCOLORHOVER[2] = sensibleColours[colourIndex][2]
-	-- self._RANDCOLORHOVER[3] = sensibleColours[colourIndex][3]
-	-- self._RANDCOLORHOVER[4] = .5
-	--
-	-- self._RANDCOLORLINE = {}
-	-- self._RANDCOLORLINE[1] = math.random()*.5+.5
-	-- self._RANDCOLORLINE[2] = math.random()*.5+.5
-	-- self._RANDCOLORLINE[3] = math.random()*.5+.5
-	-- self._RANDCOLORLINE[4] = 1
-
-	self.tileType = TileTypes.Water;
+	self.tileType = BASE_TILE_TYPE
 
 	self._units = {}
 end)
