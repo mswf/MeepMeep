@@ -18,6 +18,7 @@ Level = class(Level, function(self)
 	self:initLevelObjects()
 	self:_loadFloor()
 	self.player = nil
+	self.enemies = {}
 end)
 
 function Level:loadLevelFromFile(fileName)
@@ -54,7 +55,7 @@ function Level:loadLevelFromFile(fileName)
 					self:createCharacter(objVal, x, y)
 				elseif (nodeName == "object") then
 					--create and load object
-
+					self:createObject(objVal, x, y)
 				else
 					Log.waka("Unknown node " .. nodeName .. " in Level:loadLevelFromFile, go fix.")
 				end
@@ -84,19 +85,31 @@ function Level:setFloorTile(x, y, value)
 end
 
 function Level:createCharacter(value, x, y)
-	Log.waka("should happen once")
+	local character = nil
 	if value == 1 then
 		if self.player ~= nil then
 			--destroy entity
 		end
 		self.player = Player()
-	elseif value == 2 then
-		Enemy()
+		character = self.player
+	else--if value == 2 then
+		--Should store somewhere honestly, so that it can be cleaned up later
+		character = Enemy()
+		self:addEnemy(character)
 	end
-	self.player:setPosition(x, 0, y)
-	self.player:setMaterial(ENUM.CHARACTERS[value])
+	character:setPosition(x, 0, y)
+	character:setMaterial(ENUM.CHARACTERS[value])
 end
 
+function Level:addEnemy(character)
+	table.insert(self.enemies, character)
+end
+
+--I dont know what this is supposed to do
 function Level:_loadFloor()
 	--self.floor = Floor()
+end
+
+function Level:createObject(value, x, y)
+
 end
