@@ -31,7 +31,7 @@ function Enum:importCharacters()
 
 	--Import floor textures
 	for i = 0, self.numCharacters - 1 do
-		Engine.importTexture(self.CHARACTERS[i])
+		Engine.importTexture(self.CHARACTERS[i], true)
 	end
 end
 
