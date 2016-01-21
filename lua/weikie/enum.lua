@@ -5,10 +5,6 @@ Enum = class(Enum, function(self)
 	self.ENVIRONMENT_OBJECTS = {}
 	self.CHARACTERS = {}
 
-	--self.numTiles = 0
-	--self.numObjects = 0
-	--self.numCharacters = 0
-
 	self.basePathFloorTiles		= "content/images/textures/tiles/"
 	self.basePathObjectsModel 	= "content/models/"
 	self.basePathObjectsTexture	= "content/images/textures/props/"
@@ -63,21 +59,15 @@ end
 
 function Enum:addCharacter(texturePath)
 	table.insert(self.CHARACTERS, self.basePathCharacters .. texturePath)
-	--self.numCharacters = self.numCharacters + 1
-	--self.CHARACTERS[self.numCharacters] = self.basePathCharacters .. texturePath
 end
 
 function Enum:addObject(modelPath, texturePath)
-	--self.numObjects = self.numObjects + 1
 	local temp = ModelTexture()
-	temp.model 	= self.basePathObjectsModel .. modelPath
+	temp.model 		= self.basePathObjectsModel .. modelPath
 	temp.texture 	= self.basePathObjectsTexture .. texturePath
-	--self.ENVIRONMENT_OBJECTS[self.numObjects] = temp
 	table.insert(self.ENVIRONMENT_OBJECTS, temp)
 end
 
 function Enum:addFloorTile(path)
-	--self.numTiles = self.numTiles + 1
-	--self.FLOOR_TILES[self.numTiles] = self.basePathFloorTiles .. path
 	table.insert(self.FLOOR_TILES, self.basePathFloorTiles .. path)
 end

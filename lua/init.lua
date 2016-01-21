@@ -41,16 +41,6 @@ end
 function Game.xmlStuff()
 
 
-	----require
-	--local SLAXML = require "lua/SLAXML-master/slaxdom"
-	----read the file
-	--local file = "testwk.xml"
-	--local myxml = io.open(Engine.system.contentPath .. "/" .. file):read('*all')
-	----do stuff to read xml
-	--local doc = SLAXML:dom(myxml)
---
-	--Log.waka("Xml Something: ")
-	--Log.waka(doc.root.el[1].attr["src"])
 end
 
 function Game.main()
@@ -66,7 +56,6 @@ function Game.main()
 	LEVEL = Level()
 	fileName = "testwk.xml"
 	LEVEL:loadLevelFromFile(fileName)
-	--createCamera()
 	CAMERA_ENTITY = Entity()
 	local camera = Camera()
 	CAMERA_ENTITY:addComponent(camera);

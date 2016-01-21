@@ -1,5 +1,3 @@
---require "lua/LuaXML/LuaXml"
---require "lua/LuaXML/test"
 require "lua/weikie/floor"
 require "lua/base/base"
 require "lua/weikie/enum"
@@ -38,11 +36,10 @@ function Level:loadLevelFromFile(fileName)
 		local x = tile.attr["x"]
 		--local y = tile.attr["y"]
 		local y = tile.attr["z"]
-		-- -1 to fight arrays starting from 1
 		local value = tonumber(tile.el[floorIndex].attr["value"])
 
 		--Set floor texture
-		if value > 0 then
+		if value > 1 then
 			self:setFloorTile(tonumber(x), tonumber(y), value)
 		end
 
@@ -50,9 +47,10 @@ function Level:loadLevelFromFile(fileName)
 		if objects ~= nil then
 			for n=1, #objects.el do
 				local nodeName = objects.el[n].name
-				-- -1 to fight arrays starting from 1
 				local objVal = tonumber(objects.el[n].attr["value"])
-				--Log.waka("character creation")
+				if objVal == 0 then
+					Log.waka("Object value is 0, this is not allowed (1 is first index)")
+				end
 				if (nodeName == "character") then
 					--create load character
 					self:createCharacter(objVal, x, y)
@@ -75,8 +73,6 @@ function Level:initLevelObjects()
 		for n=1, self.height do
 			tiles[i][n] = Floor()
 			tiles[i][n].setPosition(tiles[i][n], i * TILE_WIDTH, 0, (n * TILE_LENGTH))
-			--tiles[i][n].setPosition(tiles[i][n], 5, 0, 1)
-			--self:setFloorTile(i, n, 0)
 		end
 	end
 end

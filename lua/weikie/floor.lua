@@ -8,7 +8,6 @@ function Floor:_loadModel(modelPath)
 	self.renderer = MeshRenderer()
 	self.renderer:setModel(self.model)
 	self:addComponent(self.renderer)
-	--self:setPosition(1,1,-1)
 end
 
 function Floor:setMaterial(texturePath)
