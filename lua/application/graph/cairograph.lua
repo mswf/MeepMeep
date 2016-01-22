@@ -7,7 +7,25 @@ CairoGraph = class(CairoGraph, Graph, function(self, rootX, rootY)
 
 	self._width = 0
 	self._height = 0
+
+	self:_calculatePentagonOffset(0.5)
 end)
+
+function CairoGraph:setSize(newSize)
+	self.size = newSize
+
+	self:_calculatePentagonOffset(0.5)
+end
+
+function CairoGraph:_calculatePentagonOffset(e)
+	if (e < 0.5) then
+		self.offset = math.lerp(0, self.size*((math.sqrt(3)-1)*0.5), e*2)
+	elseif (e > 0.5) then
+		self.offset = math.lerp(self.size*((math.sqrt(3)-1)*0.5), self.size, (e-.5)*2)
+	else
+		self.offset = self.size*((math.sqrt(3)-1)*0.5)
+	end
+end
 
 function CairoGraph:initializeToDimensions(width, height)
 	local cairoConstructor = CairoPentagon
@@ -20,8 +38,12 @@ function CairoGraph:initializeToDimensions(width, height)
 		for y=1, height do
 			grid[x][y] = {}
 
-			cairoConstructor(self):setPosition(x,y,1)
-			cairoConstructor(self):setPosition(x,y,2)
+			local z1 = cairoConstructor(self)
+			z1:setPosition(x,y,1)
+			grid[x][y][1] = z1
+			local z2 = cairoConstructor(self)
+			z2:setPosition(x,y,2)
+			grid[x][y][2] = z2
 		end
 	end
 
@@ -83,6 +105,28 @@ end
 
 function CairoGraph:addToGrid(cairoPentagon,x,y,z)
 	self._grid[x][y][z] = cairoPentagon
+end
+
+function CairoGraph:getGridPositionFromNode(cairoPentagon)
+	local gridX = self._grid
+
+	local numGridX = #gridX
+
+
+	for x=1, numGridX do
+		local gridY = gridX[x]
+		local numGridY = #gridY
+
+		for y=1, numGridY do
+			for z=1,2 do
+				if (gridY[y][z].neighbours == cairoPentagon.neighbours) then
+					return x, y, z
+				end
+			end
+		end
+	end
+	Log.error("[CairoGraph] couldn't find node")
+	return nil
 end
 
 function CairoGraph:getNodeByWorldCoord(worldX, worldY)

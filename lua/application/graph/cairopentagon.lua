@@ -15,28 +15,28 @@ function CairoPentagon:getTooltip()
 	return tooltipText
 end
 
-function CairoPentagon:setWorldCenter()
+function CairoPentagon:setWorldCenter(gridX, gridY, gridZ)
 	local scale = self._tree.size
-	local isVertical = ((self.gridX + self.gridY) % 2 == 0)
+	local isVertical = ((gridX + gridY) % 2 == 0)
 
 	local x, y = 0,0
 
-	x = (self.gridX-1) * scale * 2
-	y = (self.gridY-1) * scale * 2
+	x = (gridX-1) * scale * 2
+	y = (gridY-1) * scale * 2
 
 	if (isVertical) then
 		y = y + scale
-		if (self.gridZ == 1) then
-			x = x + scale*.5 - self.offset/2
+		if (gridZ == 1) then
+			x = x + scale*.5 - self._tree.offset/2
 		else
-			x = x + scale* 1.5 + self.offset/2
+			x = x + scale* 1.5 + self._tree.offset/2
 		end
 	else
 		x = x + scale
-		if (self.gridZ == 1) then
-			y = y + scale *.5 - self.offset/2
+		if (gridZ == 1) then
+			y = y + scale *.5 - self._tree.offset/2
 		else
-			y = y + scale * 1.5 + self.offset/2
+			y = y + scale * 1.5 + self._tree.offset/2
 		end
 	end
 
@@ -45,6 +45,7 @@ function CairoPentagon:setWorldCenter()
 end
 
 function CairoPentagon:getWorldCenter()
+	-- return 0, 0
 	return self.worldX, self.worldY
 end
 
@@ -61,48 +62,39 @@ end
 -- DEBUGSKIPDRAW = true
 
 function CairoPentagon:setPosition(gridX,gridY, gridZ)
-	self.gridX = gridX
-	self.gridY = gridY
-	self.gridZ = gridZ
+	-- self.gridX = gridX
+	-- self.gridY = gridY
+	-- self.gridZ = gridZ
 
-	-- self:setWorldCenter()
+	self:setWorldCenter(gridX, gridY, gridZ)
 
-	self._tree:addToGrid(self, gridX, gridY, gridZ)
-
-	self:generateVertices(0.5)
+	self:generateVertices(gridX,gridY, gridZ)
 end
 
 function CairoPentagon:getGridPosition()
-	return self.gridX, self.gridY, self.gridZ
+	-- return self.gridX, self.gridY, self.gridZ
+	return self._tree:getGridPositionFromNode(self)
 end
 
-function CairoPentagon:generateVertices(e)
+function CairoPentagon:generateVertices(gridX,gridY, gridZ)
+	-- if true then return end
 	local scale = self._tree.size
 
-	local isVertical = ((self.gridX + self.gridY) % 2 == 0)
+	-- local gridX, gridY, gridZ = self:getGridPosition()
 
-	local startX = (self.gridX-1) *2 *scale
-	local startY = (self.gridY-1) *2 *scale
+	local isVertical = ((gridX + gridY) % 2 == 0)
 
+	local startX = (gridX-1) *2 *scale
+	local startY = (gridY-1) *2 *scale
 
-	local offset = 0
-	if (e < 0.5) then
-		offset = math.lerp(0, scale*((math.sqrt(3)-1)*0.5), e*2)
-	elseif (e > 0.5) then
-		offset = math.lerp(scale*((math.sqrt(3)-1)*0.5), scale, (e-.5)*2)
-	else
-		offset = scale*((math.sqrt(3)-1)*0.5)
-	end
-	self.offset = offset
-
-	self:setWorldCenter()
+	local offset = self._tree.offset
 
 	-- local offset = 0
 	-- local offset = scale*((math.sqrt(3)-1)*0.5)
 	-- local offset = scale
 
 	if (isVertical) then
-		if (self.gridZ == 1) then
+		if (gridZ == 1) then
 			-- A
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({
@@ -124,7 +116,7 @@ function CairoPentagon:generateVertices(e)
 			})
 		end
 	else
-		if (self.gridZ == 1) then
+		if (gridZ == 1) then
 			-- C
 			-- if DEBUGSKIPDRAW then return end
 			self:setVertices({

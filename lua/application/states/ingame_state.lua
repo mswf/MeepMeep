@@ -34,6 +34,8 @@ function IngameState:enter(transition, args)
 	lineEntity:addComponent(DebugRenderer())
 
 	DebugDraw = lineEntity.debugRenderer
+	-- DebugDraw:addLine(0,0,0, 1,1,1, .5,.5,.5,1)
+	-- DebugDraw:setBufferSize(4096)
 
 	local triangleEntity = Entity()
 	triangleEntity:addComponent(DebugRenderer())
@@ -53,8 +55,8 @@ function IngameState:enter(transition, args)
 
 	local tree = CairoGraph(0,0)
 
-	local GRID_WIDTH, GRID_HEIGHT = 300,300
-	local NODE_COUNT = 100
+	local GRID_WIDTH, GRID_HEIGHT = 100,100
+	local NODE_COUNT = 2
 
 	tree:setSize(1)
 	tree:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)
@@ -74,7 +76,7 @@ function IngameState:enter(transition, args)
 
 	Log.steb("Start Generation")
 
-	local currentNode = tree:getNodeByGridPos(math.random(GRID_WIDTH/2-5,GRID_WIDTH/2+5),math.random(GRID_HEIGHT/2-5,GRID_HEIGHT/2+5),math.random(1,2))
+	local currentNode = tree:getNodeByGridPos(math.floor(GRID_WIDTH/2),math.floor(GRID_HEIGHT/2),math.random(1,2))
 
 	local startNode = currentNode
 

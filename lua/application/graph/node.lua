@@ -168,9 +168,39 @@ function Node:setVertices(vertices)
 	self._vertices = newVertices
 end
 
+function Node.getDebugVerticesFromVertices(vertices)
+	local newVertices = {}
+
+	local cornerCount = #vertices
+	for i=1, cornerCount do
+		table.insert(newVertices, vertices[i][1])
+		table.insert(newVertices, vertices[i][2])
+	end
+
+	return newVertices
+end
+
+function Node.getDebugEdgesFromVertices(vertices)
+	local newEdges = {}
+
+	local cornerCount = #vertices
+	for i=1, cornerCount do
+		if (i < cornerCount) then
+			table.insert(newEdges, {	vertices[i]	[1], 	vertices[i]		[2],
+																vertices[i+1][1], vertices[i+1]	[2]})
+		else
+			table.insert(newEdges, { vertices[i]	[1], 	vertices[i]		[2],
+																vertices[1]	[1], 	vertices[1]		[2]})
+		end
+	end
+
+	return newEdges
+end
+
 function Node:drawEdges()
-	if (self._vertices) then
-		local edges = self._edges
+	local edges = self._edges
+
+	if (edges) then
 		for i=1, #edges do
 			DebugDraw:addLine2D(unpack(edges[i]))
 		end
