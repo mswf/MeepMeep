@@ -5,7 +5,7 @@
 	#description {
 		Provides object orientation features for Carbon.
 
-		TODO: migrate advanced attributes to `Allocator` attribute.
+		#TODO: migrate advanced attributes to `Allocator` attribute.
 	}
 ]]
 

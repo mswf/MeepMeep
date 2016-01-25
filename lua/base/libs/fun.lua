@@ -846,7 +846,7 @@ local intersperse_gen = function(param, state)
     end
 end
 
--- TODO: interperse must not add x to the tail
+-- #TODO:40 interperse must not add x to the tail
 local intersperse = function(x, gen, param, state)
     return wrap(intersperse_gen, {x, gen, param}, {0, state})
 end

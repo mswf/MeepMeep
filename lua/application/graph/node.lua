@@ -67,7 +67,7 @@ function Node:_changeSelectableUnits(increment)
 		end
 	end
 
-	-- TODO: sort by priority
+	-- #TODO:70 sort by priority
 	self._selectableUnits = selectableUnits
 	self._currentSelectedIndex = self._currentSelectedIndex	+ (increment or 0)
 

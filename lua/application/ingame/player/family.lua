@@ -23,7 +23,7 @@ Family = class(Family, MovingGridUnit, function(self, data)
 	self.tooltipText = data.familyName
 
 	if (data:isInMainCaravan()) then
-		-- TODO: hide visuals
+		-- #TODO:30 hide visuals
 		-- self:setInitialNode(GlobalIngameState.caravan:getCurrentNode())
 		self:addToCaravan(GlobalIngameState.caravan)
 

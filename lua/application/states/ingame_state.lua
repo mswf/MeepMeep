@@ -153,7 +153,7 @@ function IngameState:enter(transition, args)
 			gridEntity:setPitch(0.25)
 			gridEntity:setScale(1,1,1)
 
-			-- TODO: dangerous, check if this link is smart!!!
+			-- #HACK:0 dangerous, check if this link is smart!!!
 			-- gridEntity.node = nodes[i]
 			-- nodes[i].entity = gridEntity
 			--

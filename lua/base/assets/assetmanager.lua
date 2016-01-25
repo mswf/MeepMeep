@@ -23,7 +23,7 @@ function AssetManager:importShader(path, shaderType)
 		if (Engine.importShader(path, shaderType)) then
 			self._importedShaders[path] = {
 				shaderType = shaderType
-				-- TODO: debug information also?
+				-- #TODO:0 debug information also?
 			}
 		else
 			Log.warning("[AssetLoader] shader import failed: " .. tostring(path))
@@ -37,7 +37,7 @@ function AssetManager:importTexture(path)
 	if (not self._importedTextures[path]) then
 		if (Engine.importTexture(path)) then
 			self._importedTextures[path] = {
-				-- TODO: debug information also?
+				-- #TODO:10 debug information also?
 			}
 		else
 			Log.warning("[AssetLoader] texture import failed: " .. tostring(path))
@@ -52,7 +52,7 @@ function AssetManager:importModel(path, scale)
 		if (Engine.importModel(path)) then
 			self._importedModels[path] = {
 				scale = scale
-				-- TODO: debug information also?
+				-- #TODO:20 debug information also?
 			}
 		else
 			Log.warning("[AssetLoader] model import failed: " .. tostring(path))

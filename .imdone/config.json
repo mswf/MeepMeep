@@ -3,9 +3,11 @@
     "^(node_modules|bower_components|\\.imdone|target|build|dist|logs)[\\/\\\\]?|\\.(git|svn|hg|npmignore)|\\~$|\\.(jpg|png|gif|swp|ttf|otf)$"
   ],
   "watcher": true,
+  "keepEmptyPriority": false,
   "code": {
     "include_lists": [
-      "TODO",
+      "-- #TODO",
+      "#TODO",
       "DOING",
       "DONE",
       "PLANNING",
@@ -22,6 +24,10 @@
   "lists": [
     {
       "name": "TODO",
+      "hidden": false
+    },
+    {
+      "name": "HACK",
       "hidden": false
     }
   ],

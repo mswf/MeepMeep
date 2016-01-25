@@ -84,11 +84,11 @@ function ApplicationData:saveGame(handle)
 
 	-- local saveString = Serialization.dumps(saveData)
 
-	-- TODO: store the saveString using the handle as a key
+	-- #TODO:80 store the saveString using the handle as a key
 end
 
 function ApplicationData:loadGame(handle)
-	-- TODO: load the saveString using the handle as a key
+	-- #TODO:50 load the saveString using the handle as a key
 
 	-- local saveString = [[{"worldData":{},"playerData":{"resourceManager":{"currentResources":{"Wood":0,"Food":0,"Fur":0,"Gold":0,"Water":0}},"families":{}}}]]
 	local saveData = IO.loadTable(handle)
@@ -107,7 +107,7 @@ end
 
 function ApplicationData:saveData()
 	if (self._status == ApplicationData_Status.NoDataLoaded) then
-		-- TODO: serialize everything
+		-- #TODO:60 serialize everything
 		--
 
 		return true
