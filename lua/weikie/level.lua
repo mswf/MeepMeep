@@ -373,7 +373,7 @@ lookupTable[87] = wallTypes.tripleCorner_NE
 lookupTable[213] = wallTypes.tripleCorner_NW
 lookupTable[117] = wallTypes.tripleCorner_SW
 
-lookupTable[11] = wallTypes.cross
+lookupTable[85] = wallTypes.cross
 
 lookupTable[155] = wallTypes.doubleSided_V
 lookupTable[177] = wallTypes.doubleSided_V
