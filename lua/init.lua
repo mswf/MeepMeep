@@ -119,7 +119,7 @@ function Game.update(dt)
 
 	GlobalStateManager:update(dt)
 
-	if Input.keyUp(KeyCode.f) then
+	if Input.keyUp(KeyCode.y) then
 		require "lua/weikie/player"
 		require "lua/weikie/enemy"
 		require "lua/weikie/level"

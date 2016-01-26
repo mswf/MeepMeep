@@ -27,7 +27,7 @@ function Player:pollInput()
 		self:moveRight()
 	end
 
-	if Input.keyDown(KeyCode.r) == true then
+	if Input.keyDown(KeyCode.SPACE) == true then
 		self:shoot()
 	end
 end
