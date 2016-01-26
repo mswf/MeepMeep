@@ -29,7 +29,7 @@ Enum = class(Enum, function(self)
 end)
 
 function Enum:importProjectiles()
-	self:addProjectile("attack_player.png")
+	self:addProjectile("status_frozen_single.png")
 	self:addProjectile("attack_monster_spider.png")
 
 	--model
@@ -109,7 +109,7 @@ end
 
 function Enum:importFloorTiles()
 	self:addFloorTile("empty.png")
-	self:addFloorTile("icy/icy_floor1.png")
+	self:addFloorTile("rocky/rocky_floor.png")
 	self:addFloorTile("icy/icy_floor2.png")
 	self:addFloorTile("icy/icy_floor3.png")
 
