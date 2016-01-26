@@ -4,22 +4,37 @@ Enum = class(Enum, function(self)
 	self.FLOOR_TILES = {}
 	self.ENVIRONMENT_OBJECTS = {}
 	self.CHARACTERS = {}
+	self.PROJECTILES = {}
 
 	self.basePathFloorTiles		= "content/images/textures/tiles/"
 	self.basePathObjectsModel 	= "content/models/"
 	self.basePathObjectsTexture	= "content/images/textures/props/"
 	self.basePathCharacters		= "content/images/characters/"
+	self.basePathProjectiles	= "content/images/effects/"
 	self.characterModel 		= "content/models/special/holder_character.obj"
 
 	self:importFloorTiles()
 	self:importObjects()
 	self:importCharacters()
+	self:importProjectiles()
 end)
 
-function Enum:importCharacters()
-	self:addCharacter("player.png")
-	self:addCharacter("bomb.png")
+function Enum:importProjectiles()
+	self:addProjectile("attack_player.png")
+	self:addProjectile("attack_monster_spider.png")
 
+	--model
+	Engine.importModel(self.characterModel)
+
+	--Import floor textures
+	for i = 1, table.getn(self.PROJECTILES) do
+		Engine.importTexture(self.PROJECTILES[i], true)
+	end
+end
+
+function Enum:importCharacters()
+	self:addCharacter("player_forward.png")
+	self:addCharacter("bomb.png")
 
 	--model
 	Engine.importModel(self.characterModel)
@@ -55,6 +70,10 @@ function Enum:importFloorTiles()
 	for i = 1, table.getn(self.FLOOR_TILES) do
 		Engine.importTexture(self.FLOOR_TILES[i])
 	end
+end
+
+function Enum:addProjectile(texturePath)
+	table.insert(self.PROJECTILES, self.basePathProjectiles .. texturePath)
 end
 
 function Enum:addCharacter(texturePath)
