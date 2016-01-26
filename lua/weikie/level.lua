@@ -21,6 +21,15 @@ Level = class(Level, function(self)
 end)
 
 function Level:loadLevelFromFile(fileName)
+	--cleanup from previous if andysgolf2
+	if self.player ~= nil then
+		self.player:destroy()
+	end
+	for i=1, table.getn(self.enemies) do
+		self.enemies[i]:destroy()
+	end
+
+
 	--require
 	local SLAXML = require "lua/SLAXML-master/slaxdom"
 	--read the file
