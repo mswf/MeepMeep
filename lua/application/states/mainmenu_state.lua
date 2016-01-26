@@ -171,9 +171,3 @@ function MainMenuState:exit(transitionType, args)
 		GlobalData:createGameNew()
 	end
 end
-
---function MainMenuState:enter(transitionType, args)
-	--self._mainMenuUI = MainMenuUI(self.UIManager)
-	--self._optionUI = OptionUI(self.UIManager, {visible = false})
-	--self._testUI = TestUI(self.UIManager, {title = "Test 1"})
---end
