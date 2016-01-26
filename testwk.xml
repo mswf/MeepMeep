@@ -1,0 +1,1619 @@
+<level>
+	<tile x="0" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="2">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="3">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="4">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="5">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="6">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="7">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="8">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="9">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="10">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="11">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="12">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="13">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="0" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="1" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="2">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="3">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="4">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="5">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="6">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="7">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="8">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="9">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="10">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="11">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="12">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="13">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="1" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="2" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="2" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="3" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="3" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="4" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="4" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="5" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="5" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="6" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="6" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="7" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="7" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="8" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="8" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="9" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="7">
+		<floor value="2" />
+		<objects>
+			<character value="1" />
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="12">
+		<floor value="2" />
+		<objects>
+			<character value="2" />
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="9" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="10" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="10" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="11" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="11" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="12" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="12" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="13" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="13" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="14" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="14" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="15" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="15" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="16" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="16" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="17" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="17" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="18" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="2">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="3">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="4">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="5">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="6">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="7">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="8">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="9">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="10">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="11">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="12">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="13">
+		<floor value="2" />
+		<objects>
+		</objects>
+	</tile>
+	<tile x="18" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	
+	<tile x="19" y="0" z="0">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="1">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="2">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="3">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="4">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="5">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="6">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="7">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="8">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="9">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="10">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="11">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="12">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="13">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+	<tile x="19" y="0" z="14">
+		<floor value="2" />
+		<objects>
+			<object value="1" />
+		</objects>
+	</tile>
+</level>

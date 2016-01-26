@@ -72,3 +72,13 @@ function math.smoothstep(edge0, edge1, x)
         x = math.saturate((x - edge0) / (edge1 - edge0))
         return x * x * (3 - 2 * x)
 end
+
+
+-- Normalize two numbers.
+function math.normalize(x,y) local l=(x*x+y*y)^.5 if l==0 then return 0,0,0 else return x/l,y/l,l end end
+ 
+-- Returns 'n' rounded to the nearest 'deci'th (defaulting whole numbers).
+function math.round(n, deci) deci = 10^(deci or 0) return math.floor(n*deci+.5)/deci end
+
+-- Gives a precise random decimal number given a minimum and maximum
+function math.prandom(min, max) return math.random() * (max - min) + min end

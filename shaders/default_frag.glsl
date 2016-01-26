@@ -125,6 +125,11 @@ void main()
 	float intensity = dot(n, light)* lightIntensity;
 
 	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(vec3(intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
+	
+	// "alpha cutout" shader
+	//vec4 tex = texture( colorMap, uv );
+	//if (tex.a <= 0)  discard;
+	//FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor;// * vec4(vec3(intensity), 1) * lightColour;// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 
 //	FragColor = vec4( texture( colorMap, uv ).rgb, 1) * diffuseColor * vec4(dot(n, light), dot(n, light), dot(n, light), 1);// * texture( cubeMap, reflect (-VertexPositionCameraSpace, n) );
 	//FragColor = vec4( n, 1.0); // DEBUGGING NORMALS

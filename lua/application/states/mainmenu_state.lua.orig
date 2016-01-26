@@ -7,6 +7,7 @@ require "lua/application/ui/option_ui"
 
 
 MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
+	self._base.init(self, gameStateManager)
 
 end)
 
@@ -30,12 +31,15 @@ function MainMenuState:__onReload()
 end
 
 function MainMenuState:enter(transitionType, args)
+<<<<<<< HEAD
+=======
 	Engine.importModel("objects/Rabbit/Rabbit.obj")
 	Engine.importModel( "objects/icy_snowman.obj" )
 	Engine.importTexture( "objects/snowman.png", true )
 	Engine.importTexture( "objects/object_group_test/checker_1.png" )
 	Engine.importTexture( "objects/object_group_test/checker_2.png" )
 
+>>>>>>> develop
 	self._mainMenuUI = MainMenuUI(self.UIManager)
 
 	self._optionUI = OptionUI(self.UIManager, {visible = false})
@@ -43,6 +47,14 @@ function MainMenuState:enter(transitionType, args)
 	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	-- self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
+<<<<<<< HEAD
+
+--[[
+	Log.bobn("plsdfff")
+	Log.bobn(Engine.system.contentPath)
+
+=======
+>>>>>>> develop
 	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
 	local rabbit = Entity()
 	local renderer = MeshRenderer()
@@ -51,32 +63,50 @@ function MainMenuState:enter(transitionType, args)
 	rabbit:addComponent(renderer)
 	rabbit:setPosition(0,0,5)
 
+<<<<<<< HEAD
+	rabbit:setPosition(0,0,0)
+--[[
+	rabbit.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+=======
 	local lightEntity = Entity()
 	local light = Light()
-
-	light:setIntensity(1.5)
-
-	light:setColor(249/255,243/255,194/255,1)
+	light:setIntensity(0.1)
+	light:setColor(1,0,1,1)
 	lightEntity:addComponent(light)
+>>>>>>> develop
 
---[[
-	local debugRenderer = DebugRenderer()
-	lightEntity:addComponent(debugRenderer)
-	debugRenderer:setDrawPoints(true)
-	debugRenderer:addLine(0,0,1, 0,0.2,0.7, 0,1,0)
-	debugRenderer:addLine(0,0,1, 0,-0.2,0.7, 1,0,0)
-	debugRenderer:addLine(0,0,1, 0.2,0,0.7, 1,0,0)
-	debugRenderer:addLine(0,0,1, -0.2,0,0.7, 1,0,0)
-	debugRenderer:addLine(0,0,0, 	0,	0,1, 0,0,1)
---]]--
-
-	lightEntity:setPitch(0.496)
-	lightEntity:setYaw(0.9)
-	lightEntity:setRoll(0.032)
+	lightEntity:setPitch(0.547)
+	lightEntity:setYaw(0.337)
+	lightEntity:setRoll(0.895)
 
 	GlobalLight = lightEntity
 
+<<<<<<< HEAD
+	snowman:setPosition(-1,-1,-1)
+=======
 	-- debugEntity(lightEntity)
+
+	-- light.entity.update = function(self, dt)
+	-- 	self:yaw(1)
+	-- end
 
 	--[[
 	for i=1, 10 do
@@ -84,12 +114,21 @@ function MainMenuState:enter(transitionType, args)
 		local snowman = Entity()
 		local renderer = MeshRenderer()
 		renderer:setModel(model)
+>>>>>>> develop
 
 		snowman:addComponent(renderer)
 
 		local snowmanMat = Material();
 		snowmanMat:setDiffuseTexture("objects/snowman.png")
 
+<<<<<<< HEAD
+	rabbit:addChild(snowman)
+
+	local testMat = Material();
+	testMat:setDiffuseTexture("objects/snowman.png");
+	rabbit.meshRenderer:setMaterial(testMat);
+
+=======
 		snowman.meshRenderer:setMaterial(snowmanMat)
 
 		snowman:setPosition(-1,-1,-1)
@@ -102,6 +141,7 @@ function MainMenuState:enter(transitionType, args)
 		rabbit:addChild(snowman)
 	end
 	]]--
+>>>>>>> develop
 
 	local lineEntity = Entity()
 	lineEntity:addComponent(DebugRenderer())
@@ -109,18 +149,44 @@ function MainMenuState:enter(transitionType, args)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
 	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
+	Engine.getModel('lol');
+	Engine.getMaterial('lol');
+
 	local cameraEntity = Entity()
 	local camera = Camera()
 	cameraEntity:addComponent(camera);
 	cameraEntity:setPosition(0,0,0)
-	cameraEntity.onDestroy = function(self)
-		Game.windowResizedSignal:remove(self.camera)
-	end
 
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
-	camera:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
+	camera:setAspectRatio(0.5)
 
+<<<<<<< HEAD
+	cameraEntity.update = function(self, dt)
+		-- Log.steb(dt)
+		if (Input.key(KeyCode.w)) then
+			self:addZ(1*dt)
+		end
+
+		if (Input.key(KeyCode.s)) then
+			self:addZ(-1*dt)
+		end
+
+		if (Input.key(KeyCode.a)) then
+			self:addX(1*dt)
+		end
+
+		if (Input.key(KeyCode.d)) then
+			self:addX(-1*dt)
+		end
+		-- self:yaw(1)
+	end
+
+	EntityDebugUI(self.UIManager, {entity = cameraEntity})
+]]--
+
+	-- EntityDebugUI(self.UIManager, {entity = lineEntity})
+=======
 
 	-- local cameraMoveSpeed = 10
 	-- cameraEntity.update = function(self, dt)
@@ -141,12 +207,11 @@ function MainMenuState:enter(transitionType, args)
 	-- 	end
 	-- end
 
-	cameraEntity:setPosition(10,10,20)
+	cameraEntity:setPosition(10,10,15)
 	cameraEntity:setPitch(0.5);
 	cameraEntity:setRoll(0.5);
 
 	self.camera = cameraEntity
-	-- GlobalCamera = cameraEntity.camera
 	-- debugEntity(cameraEntity)
 
 	-- EntityDebugUI(self.UIManager, {entity = cameraEntity})
@@ -161,8 +226,8 @@ function MainMenuState:enter(transitionType, args)
 end
 
 function MainMenuState:exit(transitionType, args)
-	self.camera:destroy()
-	
+	-- self.camera:destroy()
+
 	if (args.instruction == "NEWGAME") then
 		GlobalData:createGameNew()
 	elseif (args.instruction == "LOADGAME") then
@@ -170,10 +235,5 @@ function MainMenuState:exit(transitionType, args)
 	else
 		GlobalData:createGameNew()
 	end
+>>>>>>> develop
 end
-
---function MainMenuState:enter(transitionType, args)
-	--self._mainMenuUI = MainMenuUI(self.UIManager)
-	--self._optionUI = OptionUI(self.UIManager, {visible = false})
-	--self._testUI = TestUI(self.UIManager, {title = "Test 1"})
---end

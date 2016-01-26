@@ -12,6 +12,10 @@ require "lua/application/logging"
 require "lua/base/base"
 require "lua/application/data/applicationdata"
 require "lua/application/states/applicationstatemanager"
+-- require "lua/weikie/player"
+-- require "lua/weikie/enemy"
+-- require "lua/weikie/level"
+
 
 
 --local Carbon = require("lua/Carbon/init")
@@ -43,19 +47,32 @@ local function toggleFullscreen()
 	else
 		Game.fullScreenMode = 0
 		Engine.window.setSize(1280, 720)
+
+		Engine.window.setPosition(50, 50)
+
 	end
 	Engine.window.setFullscreenMode(Game.fullScreenMode)
 end
 
 function Game.main()
 	-- profiler.start("F")
-	toggleFullscreen()
+ 	toggleFullscreen()
+
+	Engine.importCubeMap(
+			"images/Dusk/negx_custom.png",
+			"images/Dusk/negy_custom.png",
+			"images/Dusk/negz_custom.png",
+			"images/Dusk/posx_custom.png",
+			"images/Dusk/posy_custom.png",
+			"images/Dusk/posz_custom.png",
+			"Dusk"
+	)
+ 
+	Engine.renderer.setSkybox("Dusk")
 
 
 	GlobalUIManager = UIManager()
-
 	GlobalData = ApplicationData()
-
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
 	-- profiler.stop()
@@ -69,9 +86,31 @@ function Game.main()
 		"images/Dusk/posz_custom.png",
 		"Dusk"
 	)
-
+ 
 	Engine.renderer.setSkybox("Dusk")
 
+
+	--Engine.importModel("objects/Rabbit/Rabbit.obj")
+
+	--[[
+	CAMERA_ENTITY = Entity()
+	local camera = Camera()
+	CAMERA_ENTITY:addComponent(camera);
+	CAMERA_ENTITY:setPosition(9,7,1)
+	CAMERA_ENTITY:setRotation(45,0,0)
+	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+	camera:makeActive()
+	camera:setAspectRatio(1.6)
+
+	LEVEL = Level()
+
+	CAMERA_ENTITY.update = function(self, dt)
+		--Game:hackyCameraMovement(dt)
+	end
+	--]]--
+end
+
+function Game:createCamera()
 
 end
 
@@ -84,48 +123,45 @@ function Game.update(dt)
 	Input.update()
 
 	GlobalStateManager:update(dt)
-	GlobalUIManager:update(dt)
+
+	if Input.keyUp(KeyCode.f) then
+
+		local fileName = "testwk.xml"
+		LEVEL:loadLevelFromFile(fileName)
+	end
 end
 
 function Game.onShutdown()
-	Log.steb("Shutting down the game")
 	return true
 end
 
 function Game.onMouseEntered()
-	-- Log.steb("Mouse entered")
 
 	Input.isMouseInWindow = true
 end
 
 function Game.onMouseLeft()
 	Input.isMouseInWindow = false
-	-- Log.steb("Mouse left")
 end
 
 function Game.onMouseGained()
 
-	-- Log.steb("Mouse gained")
 end
 
 function Game.onMouseLost()
-	-- Log.steb("Mouse lost")
 end
 
 
 function Game.onWindowResized(newWidth, newHeight)
-	-- Log.bobn("resized to "..newWidth.."x"..newHeight)
 	Game.windowResizedSignal(newWidth, newHeight)
 end
 
 Game.windowResizedSignal = Game.windowResizedSignal or Signal()
 
 function Game.onFocusLost()
-	-- Log.steb("Focus lost")
 end
 
 function Game.onFocusGained()
-	-- Log.steb("Focus gained")
 
 end
 
@@ -190,4 +226,50 @@ function Game.game()
 
 	local number = math.random(1, #gameTable)
 	Log.steb(gameTable[number])
+end
+
+function Game:hackyCameraMovement(dt)
+	local speed = 5 * dt
+	local rotateSpeed = 40 * dt
+
+	-- speed = 0
+	-- rotateSpeed = 0
+
+	if Input.key(KeyCode.w) == true then
+		CAMERA_ENTITY:addZ(speed)
+	end
+
+	if Input.key(KeyCode.d) == true then
+		CAMERA_ENTITY:addX(-speed)
+	end
+
+	if Input.key(KeyCode.s) == true then
+		CAMERA_ENTITY:addZ(-speed)
+	end
+
+	if Input.key(KeyCode.a) == true then
+		CAMERA_ENTITY:addX(speed)
+	end
+
+	if Input.key(KeyCode.q) == true then
+		CAMERA_ENTITY:yaw(rotateSpeed)
+	end
+
+	if Input.key(KeyCode.e) == true then
+		CAMERA_ENTITY:yaw(-rotateSpeed)
+	end
+
+	if Input.key(KeyCode.z) == true then
+		CAMERA_ENTITY:addY(-speed)
+	end
+
+	if Input.key(KeyCode.x) == true then
+		CAMERA_ENTITY:addY(speed)
+	end
+
+	if Input.keyDown(KeyCode.k) == true then
+		--Log.waka("asd")
+		CAMERA_ENTITY:setPosition(9,7,1)
+		CAMERA_ENTITY:setRotation(45,0,0)
+	end
 end

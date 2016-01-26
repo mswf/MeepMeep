@@ -1,5 +1,5 @@
 Camera = class(Camera, Engine.baseCamera, function(self)
-	-- self:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
+	self:setAspectRatio(Engine.ui.getScreenWidth()/Engine.ui.getScreenHeight())
 	-- self:setProjectionType(self.ProjectionType.ORTHOGRAPHIC)
 	Game.windowResizedSignal:add(self.onWindowResized, self)
 

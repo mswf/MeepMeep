@@ -134,7 +134,7 @@ function Log.waka(text, detail, subject)
 			end
 		end
 	else
-		Log.log(Users.Weikie, "[Weikie]: " .. "chocobo", detail, subject, BG, FG)
+		Log.log(Users.Weikie, "[Weikie]: " .. "nil", detail, subject, BG, FG)
 	end
 end
 
