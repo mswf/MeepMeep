@@ -38,69 +38,27 @@ function Game.crash()
 	noTable["yes"] = 500
 end
 
-function Game.xmlStuff()
-
-
-end
-
 function Game.main()
-	-- profiler.start("F")
 	GlobalUIManager = UIManager()
-
 	GlobalData = ApplicationData()
-
 	GlobalStateManager = ApplicationStateManager()
 	GlobalStateManager:start()
 
-	Engine.importModel("objects/Rabbit/Rabbit.obj")
-	LEVEL = Level()
-	fileName = "testwk.xml"
-	LEVEL:loadLevelFromFile(fileName)
+	--Engine.importModel("objects/Rabbit/Rabbit.obj")
+
 	CAMERA_ENTITY = Entity()
 	local camera = Camera()
 	CAMERA_ENTITY:addComponent(camera);
 	CAMERA_ENTITY:setPosition(0,2,-3)
-
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
 	camera:setAspectRatio(1.6)
 
-	Game.xmlStuff()
+	LEVEL = Level()
 
 	CAMERA_ENTITY.update = function(self, dt)
 		Game:hackyCameraMovement(dt)
 	end
-
-	--
-	-- GLOBTAB = {}
-	-- Debug_FileChangedBroadcaster:register(GLOBTAB, "lua/base/broadcaster",
-	-- 	function(self, params)
-	-- 		Log.steb("woop")
-	-- 		Log.steb(params)
-	-- 	end)
-
-
-    --[[
-    labelA = window.addText("lorum ipsum")
-    labelA:setLabel("oh wow")
-
-    buttonA = window.addButton("do a lua function", function()
-        Log.bobn("yay")
-        window.close()
-    end)
-    buttonA:setLabel("do a thing")
-    buttonA:setCallback(function() Log.bobn("pls") end)
-
-    window = setmetatable({}, {
-        __newindex = function(table, key, value)
-            if (needForEngineMagic(key)) then
-
-            else
-                table[key] = value
-            end
-        end
-    })
-    ]]--
 end
 
 function Game:createCamera()
@@ -112,47 +70,44 @@ function Game.update(dt)
 
 	GlobalStateManager:update(dt)
 
+	if Input.keyDown(KeyCode.f) then
+
+		local fileName = "testwk.xml"
+		LEVEL:loadLevelFromFile(fileName)
+	end
 end
 
 function Game.onShutdown()
-	Log.steb("Shutting down the game")
 	return true
 end
 
 function Game.onMouseEntered()
-	-- Log.steb("Mouse entered")
 
 	Input.isMouseInWindow = true
 end
 
 function Game.onMouseLeft()
 	Input.isMouseInWindow = false
-	-- Log.steb("Mouse left")
 end
 
 function Game.onMouseGained()
 
-	-- Log.steb("Mouse gained")
 end
 
 function Game.onMouseLost()
-	-- Log.steb("Mouse lost")
 end
 
 
 function Game.onWindowResized(newWidth, newHeight)
-	-- Log.bobn("resized to "..newWidth.."x"..newHeight)
 	Game.windowResizedSignal(newWidth, newHeight)
 end
 
 Game.windowResizedSignal = Game.windowResizedSignal or Signal()
 
 function Game.onFocusLost()
-	-- Log.steb("Focus lost")
 end
 
 function Game.onFocusGained()
-	-- Log.steb("Focus gained")
 
 end
 
@@ -198,6 +153,10 @@ end
 function Game:hackyCameraMovement(dt)
 	local speed = 1 * dt
 	local rotateSpeed = 40 * dt
+
+	speed = 0
+	rotateSpeed = 0
+
 	if Input.key(KeyCode.w) == true then
 		CAMERA_ENTITY:addZ(speed)
 	end
@@ -228,5 +187,11 @@ function Game:hackyCameraMovement(dt)
 
 	if Input.key(KeyCode.x) == true then
 		CAMERA_ENTITY:addY(speed)
+	end
+
+	if Input.keyDown(KeyCode.k) == true then
+		--Log.waka("asd")
+		CAMERA_ENTITY:setPosition(9,7,1)
+		CAMERA_ENTITY:setRotation(45,0,0)
 	end
 end

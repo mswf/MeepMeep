@@ -17,7 +17,6 @@ function Character:_loadModel(modelPath)
 end
 
 function Character:setMaterial(texturePath)
-	Log.waka("texture path:" .. texturePath)
 	local material = Material();
 	material:setDiffuseTexture(texturePath);
 	self.meshRenderer:setMaterial(material);
