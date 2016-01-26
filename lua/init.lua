@@ -34,6 +34,18 @@ function Game.crash()
 	noTable["yes"] = 500
 end
 
+Game.fullScreenMode = 0
+
+local function toggleFullscreen()
+	if (Game.fullScreenMode == 0) then
+		Game.fullScreenMode = 1
+	else
+		Game.fullScreenMode = 0
+		Engine.window.setSize(1280, 720)
+	end
+	Engine.window.setFullscreenMode(Game.fullScreenMode)
+end
+
 function Game.main()
 	-- profiler.start("F")
 	GlobalUIManager = UIManager()
@@ -44,20 +56,25 @@ function Game.main()
 	GlobalStateManager:start()
 	-- profiler.stop()
 
+	Engine.importCubeMap(
+		"images/Dusk/negx_custom.png",
+		"images/Dusk/negy_custom.png",
+		"images/Dusk/negz_custom.png",
+		"images/Dusk/posx_custom.png",
+		"images/Dusk/posy_custom.png",
+		"images/Dusk/posz_custom.png",
+		"Dusk"
+	)
+
+	Engine.renderer.setSkybox("Dusk")
+
+
 end
 
-Game.fullScreenMode = 0
 
 function Game.update(dt)
 	if (Input.keyDown(KeyCode.F11)) then
-		if (Game.fullScreenMode == 0) then
-			Engine.window.setPosition(-2000, 100)
-			Game.fullScreenMode = 1
-		else
-			Game.fullScreenMode = 0
-			Engine.window.setSize(1280, 720)
-		end
-		Engine.window.setFullscreenMode(Game.fullScreenMode)
+		toggleFullscreen()
 	end
 
 	Input.update()
@@ -123,7 +140,7 @@ end
 Game.assetManager = Game.assetManager or AssetManager()
 
 function Game.onFileChanged(path)
-	Log.warning("[FileChanged] " .. path)
+	-- Log.warning("[FileChanged] " .. path)
 	return Game.assetManager:onFileChanged(path)
 end
 
