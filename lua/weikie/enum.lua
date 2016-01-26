@@ -8,7 +8,7 @@ Enum = class(Enum, function(self)
 
 	self.basePathFloorTiles		= "content/images/textures/tiles/"
 	self.basePathObjectsModel 	= "content/models/"
-	self.basePathObjectsTexture	= "content/images/textures/props/"
+	self.basePathObjectsTexture	= "content/images/textures/"
 	self.basePathCharacters		= "content/images/characters/"
 	self.basePathProjectiles	= "content/images/effects/"
 	self.characterModel 		= "content/models/special/holder_character.obj"
@@ -46,9 +46,10 @@ function Enum:importCharacters()
 end
 
 function Enum:importObjects()
-	self:addObject("props/cave_rock_big_1.obj", "icy/fountain.png")
-	self:addObject("props/cave_rock_big_2.obj", "icy/snowman.png")
-	self:addObject("props/cave_rock_big_3.obj", "molten/molten_chair.png")
+	self:addObject("tiles/wall_01.obj", "tiles/rocky/rocky_wall.png")
+	self:addObject("props/cave_rock_big_1.obj", "props/icy/fountain.png")
+	self:addObject("props/cave_rock_big_2.obj", "props/icy/snowman.png")
+	self:addObject("props/cave_rock_big_3.obj", "props/molten/molten_chair.png")
 
 	--Import floor textures
 	for i = 1, table.getn(self.ENVIRONMENT_OBJECTS) do

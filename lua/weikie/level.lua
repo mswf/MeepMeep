@@ -118,5 +118,6 @@ function Level:createObject(value, x, y)
 	local obj = ObjectEntity()
 	obj:_loadModel(ENUM.ENVIRONMENT_OBJECTS[value].model)
 	obj:setMaterial(ENUM.ENVIRONMENT_OBJECTS[value].texture)
-	obj:setPosition(x, 0, y)
+	--+1 because pivot point
+	obj:setPosition(x, 0, y+1)
 end
