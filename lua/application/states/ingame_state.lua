@@ -12,11 +12,12 @@ require "lua/application/ingame/player/family"
 require "lua/application/ingame/ingameinput"
 require "lua/application/ingame/cameracontroller"
 
-
-
+require "lua/application/ingame/generation/map_generator"
 
 
 IngameState = class(IngameState, GameState, function(self, gameStateManager)
+
+	self._loaded = false
 
 	GlobalIngameState = self
 end)
@@ -29,96 +30,49 @@ function IngameState:enter(transition, args)
 	self._ingameUI = IngameUI(self.UIManager)
 	-- self._selectionUI = SelectionUI(self.UIManager)
 
-	local lineEntity = Entity()
-	lineEntity:addComponent(DebugRenderer())
+	if (self._loaded == false) then
+		Engine.importModel("objects/world/grid/cairoGrid.obj",2)
+		Engine.importModel("objects/world/grid/tile_water.obj",2)
 
-	DebugDraw = lineEntity.debugRenderer
-	-- DebugDraw:addLine(0,0,0, 1,1,1, .5,.5,.5,1)
-	-- DebugDraw:setBufferSize(4096)
+		Engine.importModel("objects/world/grid/caravan.obj",2)
 
-	local triangleEntity = Entity()
-	triangleEntity:addComponent(DebugRenderer())
-
-	DebugDrawTriangle = triangleEntity.debugRenderer
-
-	local pathEntity = Entity()
-	pathEntity:addComponent(DebugRenderer())
-
-	DebugDrawPath = pathEntity.debugRenderer
-
-	DebugDrawPath:setDrawPoints(true)
-	DebugDrawPath:setPointSize(10.0)
-
-	lineEntity:addChild(triangleEntity)
-	lineEntity:addChild(pathEntity)
+		Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
+		Engine.importTexture("objects/world/grid/caravan_D.png", true)
+		self._loaded = true
+	end
+	self:_createDebugLines()
 
 	local tree = CairoGraph(0,0)
-
-	local GRID_WIDTH, GRID_HEIGHT = 100,100
-	local NODE_COUNT = 2
-
 	tree:setSize(1)
-	tree:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)
-
 	self.graph = tree
+
+	local mapGenerator = MapGenerator(tree)
+
 	-- self.graph:drawGrid()
 
-	Engine.importModel("objects/world/grid/cairoGrid.obj",2)
-	Engine.importModel("objects/world/grid/caravan.obj",2)
-
-	Engine.importTexture("objects/world/grid/grid_texture_D.png", true)
-	Engine.importTexture("objects/world/grid/caravan_D.png", true)
-
-	local gridModel = Engine.getModel("objects/world/grid/cairoGrid.obj");
+	local gridParent = Entity()
+	self._lineEntity:addChild(gridParent)
 
 	local nodes = tree._nodes
+	local nodeCount = #nodes
 
-	Log.steb("Start Generation")
-
-	local currentNode = tree:getNodeByGridPos(math.floor(GRID_WIDTH/2),math.floor(GRID_HEIGHT/2),math.random(1,2))
-
-	local startNode = currentNode
-
-	local T_TYPES = TileTypes
-	local T_TYPES_GRASS = T_TYPES.Grassland
-
-	for i=1, NODE_COUNT do
-
-		currentNode.tileType = T_TYPES_GRASS;
-		local currentNodeNeighbours = currentNode.neighbours
-
-		local nextNode = currentNodeNeighbours[math.random(1, #currentNode.neighbours)]
-		if (nextNode.tileType == T_TYPES_GRASS) then
-			nextNode = currentNodeNeighbours[math.random(1, #currentNode.neighbours)]
-		end
-
-		local prevNode = currentNode
-
-		currentNode = nextNode
+	local tile_land_model = Engine.getModel("objects/world/grid/cairoGrid.obj");
+	local tile_water_model = Engine.getModel("objects/world/grid/tile_water.obj");
 
 
-		for i=1, #prevNode.neighbours do
-			prevNode.neighbours[i].tileType = TileTypes.Grassland;
-
-			for j=1, #prevNode.neighbours[i].neighbours do
-				if (prevNode.neighbours[i].neighbours[j].tileType ~= TileTypes.Grassland) then
-					prevNode.neighbours[i].neighbours[j].tileType = TileTypes.Arid;
-				end
-			end
-		end
-	end
-
-	local gridParent = Entity()
-	lineEntity:addChild(gridParent)
-
-	local nodeCount = GRID_WIDTH * GRID_HEIGHT * 2
-
+	-- nodeCount = 0
 	for i=1, nodeCount do
 		if (nodes[i].tileType == TileTypes.Water) then
 
 		else
 			renderer = MeshRenderer()
-			renderer:setModel(gridModel)
+
+			if (nodes[i].tileType == TileTypes.Water) then
+				renderer:setModel(tile_water_model)
+			else
+				renderer:setModel(tile_land_model)
+
+			end
 
 			local gridMaterial = Material();
 			gridMaterial:setDiffuseTexture("objects/world/grid/grid_texture_D.png")
@@ -169,13 +123,11 @@ function IngameState:enter(transition, args)
 
 	-- debugEntity(lineEntity)
 
-	self.lineEntity = lineEntity
-
 	local caravanData = GlobalData.playerData.playerCaravan
-	caravanData:setPosition(startNode:getGridPosition())
+	caravanData:setPosition(mapGenerator._startNode:getGridPosition())
 	self.caravan = Caravan(caravanData)
 
-	cameraController:setPosition(startNode:getWorldCenter())
+	cameraController:setPosition(mapGenerator._startNode:getWorldCenter())
 
 
 	local familiesData = GlobalData.playerData:getFamilies()
@@ -194,11 +146,11 @@ end
 
 function IngameState:exit(transition, args)
 
-	self.lineEntity:destroy()
+	self._lineEntity:destroy()
 	self.caravan:destroy()
 	self._cameraController:destroy()
 
-	self.lineEntity = nil
+	self._lineEntity = nil
 	self.caravan = nil
 	self._cameraController = nil
 
@@ -216,6 +168,31 @@ function IngameState:exit(transition, args)
 	DebugDraw	=	nil
 	DebugDrawTriangle	=	nil
 	DebugDrawPath	=	nil
+end
+
+function IngameState:_createDebugLines()
+	local lineEntity = Entity()
+	lineEntity:addComponent(DebugRenderer())
+
+	DebugDraw = lineEntity.debugRenderer
+
+	local triangleEntity = Entity()
+	triangleEntity:addComponent(DebugRenderer())
+
+	DebugDrawTriangle = triangleEntity.debugRenderer
+
+	local pathEntity = Entity()
+	pathEntity:addComponent(DebugRenderer())
+
+	DebugDrawPath = pathEntity.debugRenderer
+
+	DebugDrawPath:setDrawPoints(true)
+	DebugDrawPath:setPointSize(10.0)
+
+	lineEntity:addChild(triangleEntity)
+	lineEntity:addChild(pathEntity)
+
+	self._lineEntity = lineEntity
 end
 
 function IngameState:update(dt)

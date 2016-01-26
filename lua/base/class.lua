@@ -43,7 +43,7 @@ class = setmetatable(class or {}, {
 				currentClass = currentClass._base
 			end
 		end
-		
+
 		c.__initializers = initialers
 		c.__initializersCount = #initialers
 
