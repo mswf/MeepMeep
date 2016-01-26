@@ -270,7 +270,7 @@ function CameraController:_setZoomLevel(newZoomLevel)
 	self._basePlate:setY(math_lerp(-28.0, -3.77, newZoomLevel))
 	self._basePlate:setZ(30)
 
-	self._basePlate.camera:setFOV(math_lerp(5.2, 60, newZoomLevel))
+	self._basePlate.camera:setFOV(math_lerp(5.2, 90, newZoomLevel))
 
 	self._basePlate:setPitch(math_lerp(-.12, -0.02, newZoomLevel))
 

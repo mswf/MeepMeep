@@ -38,6 +38,7 @@ Game.fullScreenMode = 0
 
 local function toggleFullscreen()
 	if (Game.fullScreenMode == 0) then
+		Engine.window.setPosition(-2000, 100)
 		Game.fullScreenMode = 1
 	else
 		Game.fullScreenMode = 0
@@ -48,6 +49,9 @@ end
 
 function Game.main()
 	-- profiler.start("F")
+	toggleFullscreen()
+
+
 	GlobalUIManager = UIManager()
 
 	GlobalData = ApplicationData()
