@@ -49,7 +49,8 @@ function Game.main()
 	CAMERA_ENTITY = Entity()
 	local camera = Camera()
 	CAMERA_ENTITY:addComponent(camera);
-	CAMERA_ENTITY:setPosition(0,2,-3)
+	CAMERA_ENTITY:setPosition(9,7,1)
+	CAMERA_ENTITY:setRotation(45,0,0)
 	camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
 	camera:makeActive()
 	camera:setAspectRatio(1.6)
@@ -57,7 +58,7 @@ function Game.main()
 	LEVEL = Level()
 
 	CAMERA_ENTITY.update = function(self, dt)
-		Game:hackyCameraMovement(dt)
+		--Game:hackyCameraMovement(dt)
 	end
 end
 
