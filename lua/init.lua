@@ -12,10 +12,6 @@ require "lua/application/logging"
 require "lua/base/base"
 require "lua/application/data/applicationdata"
 require "lua/application/states/applicationstatemanager"
--- require "lua/weikie/player"
--- require "lua/weikie/enemy"
--- require "lua/weikie/level"
-
 
 
 --local Carbon = require("lua/Carbon/init")
@@ -67,7 +63,7 @@ function Game.main()
 			"images/Dusk/posz_custom.png",
 			"Dusk"
 	)
- 
+
 	Engine.renderer.setSkybox("Dusk")
 
 
@@ -86,7 +82,7 @@ function Game.main()
 		"images/Dusk/posz_custom.png",
 		"Dusk"
 	)
- 
+
 	Engine.renderer.setSkybox("Dusk")
 
 
@@ -102,7 +98,6 @@ function Game.main()
 	camera:makeActive()
 	camera:setAspectRatio(1.6)
 
-	LEVEL = Level()
 
 	CAMERA_ENTITY.update = function(self, dt)
 		--Game:hackyCameraMovement(dt)
@@ -125,6 +120,12 @@ function Game.update(dt)
 	GlobalStateManager:update(dt)
 
 	if Input.keyUp(KeyCode.f) then
+		require "lua/weikie/player"
+		require "lua/weikie/enemy"
+		require "lua/weikie/level"
+
+		LEVEL = Level()
+
 
 		local fileName = "testwk.xml"
 		LEVEL:loadLevelFromFile(fileName)
