@@ -373,10 +373,7 @@ lookupTable[87] = wallTypes.tripleCorner_NE
 lookupTable[213] = wallTypes.tripleCorner_NW
 lookupTable[117] = wallTypes.tripleCorner_SW
 
-lookupTable[117] = wallTypes.cross
-
-lookupTable[117] = wallTypes.cross
-
+lookupTable[11] = wallTypes.cross
 
 lookupTable[155] = wallTypes.doubleSided_V
 lookupTable[177] = wallTypes.doubleSided_V
@@ -536,7 +533,7 @@ function Level:generateGridWithWalls()
 	do -- hardcoded block
 		for x=1, maxX do
 			for y=1,maxY do
-				if (math.random() > 0.8) then
+				if (math.random() > 0.6) then
 					grid[x][y] = {}
 				end
 			end
