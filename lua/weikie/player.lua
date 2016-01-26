@@ -35,6 +35,6 @@ end
 function Player:shoot()
 	local proj = Projectile()
 	proj:setMaterial(ENUM.PROJECTILES[1])
-	proj:setSpeed(self.horizontalSpeed, self.verticalSpeed)
 	proj:setPosition(self:getPosition())
+	proj:setSpeed(self.horizontalSpeed, self.verticalSpeed)
 end

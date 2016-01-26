@@ -11,9 +11,14 @@ Projectile = class(Projectile, Entity, function(self)
 end)
 
 function Projectile:setSpeed(horizontalSpeed, verticalSpeed)
-	local modifier = 1.2
+	horizontalSpeed, verticalSpeed = math.normalize(horizontalSpeed, verticalSpeed)
+
+	local modifier = 10
+
 	self.horizontalSpeed = horizontalSpeed * modifier
 	self.verticalSpeed = verticalSpeed * modifier
+
+	self:update(0.3 / modifier)
 end
 
 function Projectile:update(deltaTime)
