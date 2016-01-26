@@ -39,6 +39,20 @@ function Game.crash()
 end
 
 function Game.main()
+
+	Engine.importCubeMap(
+			"images/Dusk/negx_custom.png",
+			"images/Dusk/negy_custom.png",
+			"images/Dusk/negz_custom.png",
+			"images/Dusk/posx_custom.png",
+			"images/Dusk/posy_custom.png",
+			"images/Dusk/posz_custom.png",
+			"Dusk"
+	)
+
+	Engine.renderer.setSkybox("Dusk")
+
+
 	GlobalUIManager = UIManager()
 	GlobalData = ApplicationData()
 	GlobalStateManager = ApplicationStateManager()
