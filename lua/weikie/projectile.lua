@@ -5,6 +5,9 @@ Projectile = class(Projectile, Entity, function(self)
 	self:_loadModel(ENUM.characterModel)
 	self.horizontalSpeed = 0
 	self.verticalSpeed = 0
+	self.timer = 0
+	local scale = 0.4
+	self:setScale(scale, scale, scale)
 end)
 
 function Projectile:setSpeed(horizontalSpeed, verticalSpeed)
@@ -16,6 +19,11 @@ end
 function Projectile:update(deltaTime)
 	self:addX(self.horizontalSpeed * deltaTime)
 	self:addZ(self.verticalSpeed * deltaTime)
+	self.timer = self.timer + deltaTime
+
+	if self.timer > 5 then
+		self:destroy()
+	end
 end
 
 function Projectile:_loadModel(modelPath)
