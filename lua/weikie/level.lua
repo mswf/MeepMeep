@@ -101,6 +101,24 @@ function Level:createCharacter(value, x, y)
 			--destroy entity
 		end
 		self.player = Player()
+
+
+		local camera_entity = Entity()
+		local camera = Camera()
+		camera_entity:addComponent(camera);
+		camera_entity:setPosition(0,6.5,5.4)
+		camera_entity:setPitch(.137)
+		camera_entity:setYaw(0.5)
+
+		camera:setProjectionType(Camera.ProjectionType.PERSPECTIVE)
+		camera:makeActive()
+		-- camera:setAspectRatio(1.6)
+		camera:setFOV(45)
+		
+		self.player:addChild(camera_entity)
+
+
+		-- CAMERA_ENTITY:setPosition(9,7,1)
 		character = self.player
 	else--if value == 2 then
 		--Should store somewhere honestly, so that it can be cleaned up later
