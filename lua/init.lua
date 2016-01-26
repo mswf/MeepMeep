@@ -71,7 +71,7 @@ function Game.update(dt)
 
 	GlobalStateManager:update(dt)
 
-	if Input.keyDown(KeyCode.f) then
+	if Input.keyUp(KeyCode.f) then
 
 		local fileName = "testwk.xml"
 		LEVEL:loadLevelFromFile(fileName)
@@ -152,11 +152,11 @@ function Game.game()
 end
 
 function Game:hackyCameraMovement(dt)
-	local speed = 1 * dt
+	local speed = 5 * dt
 	local rotateSpeed = 40 * dt
 
-	speed = 0
-	rotateSpeed = 0
+	-- speed = 0
+	-- rotateSpeed = 0
 
 	if Input.key(KeyCode.w) == true then
 		CAMERA_ENTITY:addZ(speed)
