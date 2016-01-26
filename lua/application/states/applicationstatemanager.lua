@@ -14,9 +14,6 @@ createEnum("Transitions",
 
 
 ApplicationStateManager = class(ApplicationStateManager, GameStateManager, function(self)
-	self._base.init(self)
-
-
 
 end)
 

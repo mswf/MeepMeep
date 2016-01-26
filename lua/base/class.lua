@@ -91,7 +91,7 @@ class.__hotReloadClasses = function(self)
 		if (targetClasses[i].__onReload) then
 			local classInstances = targetClasses[i].__instances
 
-			Log.warning("[".. retrieveVariableName(targetClasses[i]) .. "] calling __onReload on its " .. #classInstances .. " instance(s)")
+			Log.warning("[".. retrieveVariableName(targetClasses[i]) .. "] __onReload() on #" .. #classInstances)
 			for i=1, #classInstances do
 				if (classInstances[i]) then
 					classInstances[i]:__onReload()

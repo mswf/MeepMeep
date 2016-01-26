@@ -7,7 +7,6 @@ require "lua/application/ui/option_ui"
 
 
 MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
-	self._base.init(self, gameStateManager)
 
 end)
 

@@ -17,7 +17,6 @@ require "lua/application/ingame/cameracontroller"
 
 
 IngameState = class(IngameState, GameState, function(self, gameStateManager)
-	self._base.init(self, gameStateManager)
 
 	GlobalIngameState = self
 end)
