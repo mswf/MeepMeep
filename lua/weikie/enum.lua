@@ -13,6 +13,15 @@ Enum = class(Enum, function(self)
 	self.basePathProjectiles	= "content/images/effects/"
 	self.characterModel 		= "content/models/special/holder_character.obj"
 
+
+	self._wallObjectBasePath = "content/models/tiles/"
+
+	self._wallObjects = {}
+	self._wallTextures = {}
+	self._wallObjectArray = {}
+
+	self._adjacencyToWall = {}
+
 	self:importFloorTiles()
 	self:importObjects()
 	self:importCharacters()
@@ -46,7 +55,28 @@ function Enum:importCharacters()
 end
 
 function Enum:importObjects()
-	self:addObject("tiles/wall_01.obj", "tiles/rocky/rocky_wall.png")
+	Engine.importTexture("content/images/textures/tiles/rocky/rocky_wall.png", true)
+	Engine.importTexture("content/images/textures/tiles/rocky/rocky_floor.png", true)
+
+	self:_addWallObject("wall_01.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_02.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_03.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_04_fill.obj",			"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_05.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_06.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_07.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_08.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_09.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_10.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_11.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_12.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_13.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_14.obj",					"tiles/rocky/rocky_wall.png")
+	self:_addWallObject("wall_15.obj",					"tiles/rocky/rocky_wall.png")
+
+	self:_addWallObject("cave_floor.obj",					"tiles/rocky/rocky_wall.png")
+
+
 	self:addObject("props/cave_rock_big_1.obj", "props/icy/fountain.png")
 	self:addObject("props/cave_rock_big_2.obj", "props/icy/snowman.png")
 	self:addObject("props/cave_rock_big_3.obj", "props/molten/molten_chair.png")
@@ -56,6 +86,25 @@ function Enum:importObjects()
 		Engine.importTexture(self.ENVIRONMENT_OBJECTS[i].texture)
 		Engine.importModel(self.ENVIRONMENT_OBJECTS[i].model)
 	end
+
+	for path, _ in pairs(self._wallObjects) do
+		Engine.importModel(path)
+	end
+
+	for path, _ in pairs(self._wallTextures) do
+		Engine.importTexture(path)
+	end
+
+end
+
+
+function Enum:_addWallObject(modelPath, texturePath)
+	table.insert(self._wallObjectArray, self._wallObjectBasePath .. modelPath)
+
+	self._wallObjects[self._wallObjectBasePath .. modelPath] = true
+	self._wallTextures[texturePath] = true
+
+
 end
 
 function Enum:importFloorTiles()
@@ -87,6 +136,7 @@ function Enum:addObject(modelPath, texturePath)
 	temp.texture 	= self.basePathObjectsTexture .. texturePath
 	table.insert(self.ENVIRONMENT_OBJECTS, temp)
 end
+
 
 function Enum:addFloorTile(path)
 	table.insert(self.FLOOR_TILES, self.basePathFloorTiles .. path)
