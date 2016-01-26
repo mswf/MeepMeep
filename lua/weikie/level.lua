@@ -114,7 +114,7 @@ function Level:createCharacter(value, x, y)
 		camera:makeActive()
 		-- camera:setAspectRatio(1.6)
 		camera:setFOV(45)
-		
+
 		self.player:addChild(camera_entity)
 
 
@@ -321,7 +321,6 @@ lookupTable[210] = wallTypes.outBend_NE
 lookupTable[216] = wallTypes.outBend_NE
 lookupTable[218] = wallTypes.outBend_NE
 
-
 lookupTable[116] = wallTypes.half_T1_SE
 lookupTable[118] = wallTypes.half_T1_SE
 lookupTable[244] = wallTypes.half_T1_SE
@@ -341,7 +340,6 @@ lookupTable[71] = wallTypes.half_T1_NW
 lookupTable[79] = wallTypes.half_T1_NW
 lookupTable[103] = wallTypes.half_T1_NW
 lookupTable[111] = wallTypes.half_T1_NW
-
 
 lookupTable[84] = wallTypes.T_N
 lookupTable[86] = wallTypes.T_N
@@ -489,7 +487,6 @@ lookupTable[166] = wallTypes.outset_W
 lookupTable[172] = wallTypes.outset_W
 lookupTable[174] = wallTypes.outset_W
 
-
 lookupTable[17] = wallTypes.doubleSided_V
 lookupTable[19] = wallTypes.doubleSided_V
 lookupTable[25] = wallTypes.doubleSided_V
@@ -518,18 +515,6 @@ lookupTable[160] = wallTypes.island
 lookupTable[162] = wallTypes.island
 lookupTable[168] = wallTypes.island
 lookupTable[170] = wallTypes.island
-
-
-
-
-
-local function getWallIndexAndRotationFromCode(wallCode)
-	local index = 4
-	local rotation = 0
-
-
-
-end
 
 function Level:generateGridWithWalls()
 	local maxX, maxY = self._maxX + 2, self._maxY + 2
