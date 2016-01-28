@@ -18,15 +18,23 @@ Level = class(Level, function(self)
 	self:_loadFloor()
 	self.player = nil
 	self.enemies = {}
+	self.objects = {}
 end)
 
 function Level:loadLevelFromFile(fileName)
 	--cleanup from previous if andysgolf2
 	if self.player ~= nil then
 		self.player:destroy()
+		self.player = nil
 	end
 	for i=1, table.getn(self.enemies) do
 		self.enemies[i]:destroy()
+		self.enemies = {}
+	end
+
+	for i=1, table.getn(self.objects) do
+		self.objects[i]:destroy()
+		self.objects = {}
 	end
 
 
@@ -151,6 +159,7 @@ function Level:createObject(value, x, y)
 		table.insert(self._wallObjects, {x, y})
 	else
 		local obj = ObjectEntity()
+		table.insert(self.objects, obj)
 		obj:_loadModel(ENUM.ENVIRONMENT_OBJECTS[value].model)
 		obj:setMaterial(ENUM.ENVIRONMENT_OBJECTS[value].texture)
 		--+1 because pivot point
