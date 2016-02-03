@@ -9,8 +9,8 @@ function IngameUI:_createUI()
 
 	window.x = 10
 	window.y = 10
-	window.height = 400
-	window.width = 300
+	window.height = 250
+	window.width = 220
 	window.resizable = false
 	window.closable = false
 	window.movable = false
@@ -37,6 +37,14 @@ function IngameUI:_createUI()
 
 	saveButton.width = 100
 
+
+	local regenerateButton = window:addButton("Regenerate Level")
+	regenerateButton.onPress = function()
+		GlobalStateManager:doTransition(Transitions.GameToMainMenu)
+		GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+	end
+
+	regenerateButton.width = 100
 
 
 end

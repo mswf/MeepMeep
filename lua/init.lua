@@ -52,7 +52,7 @@ end
 
 function Game.main()
 	-- profiler.start("F")
- 	toggleFullscreen()
+ -- 	toggleFullscreen()
 
 	Engine.importCubeMap(
 			"images/Dusk/negx_custom.png",
@@ -130,6 +130,8 @@ function Game.update(dt)
 		local fileName = "testwk.xml"
 		LEVEL:loadLevelFromFile(fileName)
 	end
+
+	GlobalUIManager:update(dt)
 end
 
 function Game.onShutdown()

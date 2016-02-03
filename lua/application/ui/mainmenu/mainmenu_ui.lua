@@ -8,7 +8,7 @@ function MainMenuUI:_createUI()
 
 	window.title = "Main Menu"
 
-	window.height = 680
+	window.height = 200
 	window.width = 400
 
 	window.x = 60

@@ -20,7 +20,7 @@ function MapGenerator:_runGenerator()
 	-- math.randomseed(1)
 
 	-- 40 x 40 == ocean visible
-	local GRID_WIDTH, GRID_HEIGHT = 40,40
+	local GRID_WIDTH, GRID_HEIGHT = 70,70
 	-- local GRID_WIDTH, GRID_HEIGHT = 200,200
 
 	self._graph:initializeToDimensions(GRID_WIDTH, GRID_HEIGHT)

@@ -7,7 +7,7 @@ require "lua/application/ui/option_ui"
 
 
 MainMenuState = class(MainMenuState, GameState, function(self, gameStateManager)
-
+	GlobalMainMenu = self
 end)
 
 
@@ -43,13 +43,13 @@ function MainMenuState:enter(transitionType, args)
 	-- self._testUI2 = TestUI(self.UIManager, {title = "Test 2"})
 	-- self._testUI = TestUI(self.UIManager, {title = "Test 1"})
 
-	local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
-	local rabbit = Entity()
-	local renderer = MeshRenderer()
-	renderer:setModel(model)
-
-	rabbit:addComponent(renderer)
-	rabbit:setPosition(0,0,5)
+	-- local model = Engine.getModel("objects/Rabbit/Rabbit.obj");
+	-- local rabbit = Entity()
+	-- local renderer = MeshRenderer()
+	-- renderer:setModel(model)
+	--
+	-- rabbit:addComponent(renderer)
+	-- rabbit:setPosition(0,0,5)
 
 	local lightEntity = Entity()
 	local light = Light()
@@ -103,11 +103,11 @@ function MainMenuState:enter(transitionType, args)
 	end
 	]]--
 
-	local lineEntity = Entity()
-	lineEntity:addComponent(DebugRenderer())
-	lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
-	lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
-	lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
+	-- local lineEntity = Entity()
+	-- lineEntity:addComponent(DebugRenderer())
+	-- lineEntity.debugRenderer:addLine(0,0,0, 2,0,0, 1,0,0)
+	-- lineEntity.debugRenderer:addLine(0,0,0, 0,2,0, 0,1,0)
+	-- lineEntity.debugRenderer:addLine(0,0,0, 0,0,2, 0,0,1)
 
 	local cameraEntity = Entity()
 	local camera = Camera()
@@ -157,12 +157,12 @@ function MainMenuState:enter(transitionType, args)
 	-- PREZZY._uiManager = self.UIManager
 	-- PREZZY:_updateMayhem(false)
 
-	GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
+	-- GlobalStateManager:doTransition(Transitions.MainMenuToGame, {instruction = "NEWGAME"})
 end
 
 function MainMenuState:exit(transitionType, args)
 	self.camera:destroy()
-	
+
 	if (args.instruction == "NEWGAME") then
 		GlobalData:createGameNew()
 	elseif (args.instruction == "LOADGAME") then

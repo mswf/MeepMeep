@@ -31,14 +31,16 @@ function PresentationUI:_createUI()
 
 
 	for i=1, #slides do
-		Engine.importTexture( slides[i], false )
+		Engine.importTexture( slides[i], true )
 	end
 
-	local presModel = Engine.getModel("quad")
 	local presEntity = Entity()
 	local renderer = MeshRenderer()
+
+	local presModel = Engine.getModel("quad")
 	renderer:setModel(presModel)
 	presEntity:addComponent(renderer)
+		-- presEntity:setScale(16/9, 1, 1)
 
 	local presMaterial = Material()
 	presMaterial:setDiffuseTexture(slides[self._currentSlide])
@@ -63,8 +65,8 @@ function PresentationUI:_createUI()
 
 	window.width = 122
 	window.height = 40
-	window.y = Engine.ui.getScreenHeight() - 80
-	window.x = 120
+	window.y = Engine.window.getHeight() - 60
+	window.x = 80
 
 	local horizontal = window:addHorizontalLayout()
 
@@ -98,6 +100,11 @@ function PresentationUI:_prevSlide()
 	self:_setSlide(self._currentSlide - 1)
 end
 
+function EntityDebugUI:onWindowResized()
+	self.window.y = Engine.window.getHeight() - 60
+	self.window.x = 80
+end
+
 function PresentationUI:_setSlide(slideIndex)
 	if (slideIndex > 0) and (slideIndex <= #self.slides) then
 		self._currentSlide = slideIndex
@@ -119,15 +126,31 @@ function PresentationUI:_setSlide(slideIndex)
 
 end
 
+function PresentationUI:update(dt)
+	if (not self._isMayhem) then
+		if (Input.keyUp(KeyCode.LEFT)) then
+			self:_prevSlide()
+		end
+		if (Input.keyUp(KeyCode.RIGHT)) then
+			self:_nextSlide()
+		end
+	end
+end
+
 function PresentationUI:_updateMayhem(isMayhem)
 	if (isMayhem == true) then
+		GlobalMainMenu.UIManager:setVisible(true)
+
 		self._uiManager.tweener(6, self.entity, {setZ = -2, setY = 10}):setEasing("inQuad")
 		-- self.entity:setPosition(0,0,10)
 
 		self._uiManager:setVisible(true)
 
-		Engine.playSound("sounds/circus_theme.wav")
+
+		-- Engine.playSound("sounds/circus_theme.wav")
 	else
+		GlobalMainMenu.UIManager:setVisible(false)
+
 		if (self.specialSlides[self._currentSlide]) then
 			self:_nextSlide()
 		end

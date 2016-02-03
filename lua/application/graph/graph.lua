@@ -64,3 +64,8 @@ function Graph.findPath(fromNode, toNode)
 
 	return path
 end
+
+function Graph.findPathNew(fromNode, toNode, comparisonFunction)
+
+
+end
