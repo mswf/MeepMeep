@@ -15,11 +15,6 @@ require "lua/base/material"
 require "lua/base/camera"
 require "lua/base/light"
 
-require "lua/base/parsing/i18n"
-require "lua/base/parsing/parser"
-require "lua/base/parsing/parsingcontext"
-
-
 require "lua/base/utils/queue"
 
 require "lua/base/math/extramath"

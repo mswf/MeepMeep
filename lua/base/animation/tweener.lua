@@ -37,7 +37,7 @@ function Tweener:update(dt)
 end
 
 function Tweener:removeActiveTween(tweenToRemove)
-	local activeTweens = self._activeTweens
+	local activeTweens = self._activeTweens or {}
 
 	local toRemove = {}
 

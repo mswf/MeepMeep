@@ -128,7 +128,7 @@ end
 
 function PresentationUI:update(dt)
 	if (not self._isMayhem) then
-		if (Input.keyUp(KeyCode.LEFT)) then
+		if (Input.keyUp(KeyCode.LEFT) or Input.keyUp(KeyCode.SPACE)) then
 			self:_prevSlide()
 		end
 		if (Input.keyUp(KeyCode.RIGHT)) then
@@ -138,10 +138,16 @@ function PresentationUI:update(dt)
 end
 
 function PresentationUI:_updateMayhem(isMayhem)
+	if (self._tween) then
+		self._uiManager.tweener.removeActiveTween(self._tween)
+		self._tween = nil
+	end
+
+
 	if (isMayhem == true) then
 		GlobalMainMenu.UIManager:setVisible(true)
 
-		self._uiManager.tweener(6, self.entity, {setZ = -2, setY = 10}):setEasing("inQuad")
+		self._tween = self._uiManager.tweener(6, self.entity, {setZ = -2, setY = 10}):setEasing("inQuad")
 		-- self.entity:setPosition(0,0,10)
 
 		self._uiManager:setVisible(true)
@@ -155,7 +161,7 @@ function PresentationUI:_updateMayhem(isMayhem)
 			self:_nextSlide()
 		end
 
-		self._uiManager.tweener(2, self.entity, {setZ = 1, setY = 0}):setEasing("outBounce")
+		self._tween = self._uiManager.tweener(2, self.entity, {setZ = 1, setY = 0}):setEasing("outBounce")
 
 		-- self.entity:setPosition(0,0,-1)
 

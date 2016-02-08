@@ -157,7 +157,7 @@ function MapGenerator:_runGenerator()
 					table.insert(regionNodes, targetNode)
 
 					return findPath(currentNode, targetNode)
-				end, range(6))
+				end, range(2))
 			)
 		)
 	)

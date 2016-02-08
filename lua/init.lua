@@ -52,7 +52,7 @@ end
 
 function Game.main()
 	-- profiler.start("F")
- -- 	toggleFullscreen()
+ 	toggleFullscreen()
 
 	Engine.importCubeMap(
 			"images/Dusk/negx_custom.png",
@@ -73,17 +73,17 @@ function Game.main()
 	GlobalStateManager:start()
 	-- profiler.stop()
 
-	Engine.importCubeMap(
-		"images/Dusk/negx_custom.png",
-		"images/Dusk/negy_custom.png",
-		"images/Dusk/negz_custom.png",
-		"images/Dusk/posx_custom.png",
-		"images/Dusk/posy_custom.png",
-		"images/Dusk/posz_custom.png",
-		"Dusk"
-	)
-
-	Engine.renderer.setSkybox("Dusk")
+	-- Engine.importCubeMap(
+	-- 	"images/Dusk/negx_custom.png",
+	-- 	"images/Dusk/negy_custom.png",
+	-- 	"images/Dusk/negz_custom.png",
+	-- 	"images/Dusk/posx_custom.png",
+	-- 	"images/Dusk/posy_custom.png",
+	-- 	"images/Dusk/posz_custom.png",
+	-- 	"Dusk"
+	-- )
+	--
+	-- Engine.renderer.setSkybox("Dusk")
 
 
 	--Engine.importModel("objects/Rabbit/Rabbit.obj")
@@ -203,9 +203,10 @@ function Game.onDropFile(path)
 		relativePath = string.sub(relativePath, 1, dotPosition-1)
 
 		if (type == "lua") then
-			Sandbox.run(loadfile(path))
-			-- dofile(path)
-			-- require(relativePath)
+			local script = loadfile(path)
+			Sandbox.run(script)
+			Sandbox.storedScripts = Sandbox.storedScripts or {}
+			Sandbox.storedScripts[path] = script
 		end
 	end
 
